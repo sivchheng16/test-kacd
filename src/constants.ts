@@ -4,7 +4,7 @@ export interface Project {
   description: string;
   details: string;
   thumbnail: string;
-  category: 'Residential' | 'Commercial' | 'Retail' | 'Bespoke';
+  category: "Residential" | "Commercial" | "Retail" | "Bespoke";
   tags: string[];
   year: string;
 }
@@ -21,82 +21,109 @@ export interface Game {
 
 export const PROJECTS: Project[] = [
   {
-    id: 'elysian-residence',
-    title: 'Elysian Residence',
-    description: 'A minimalist urban sanctuary defined by raw concrete textures and expansive natural light.',
-    details: 'Located in the heart of the city, this residence utilizes industrial materiality to create a sense of profound silence and retreat from the urban chaos.',
-    thumbnail: '/src/assets/elysian.png',
-    category: 'Residential',
-    tags: ['Minimalism', 'Concrete', 'Urban'],
-    year: '2024'
+    id: "elysian-residence",
+    title: "Elysian Residence",
+    description:
+      "A calm city home built around raw concrete walls and large windows that flood every room with natural light.",
+    details:
+      "Located in central Phnom Penh, this three-bedroom residence uses exposed concrete and warm timber accents to create a quiet retreat from the city. The client wanted a home that felt open but private, and every room was planned to balance those two needs.",
+    thumbnail: "/src/assets/elysian.png",
+    category: "Residential",
+    tags: ["Minimalism", "Concrete", "Urban"],
+    year: "2024",
   },
   {
-    id: 'obsidian-lounge',
-    title: 'Obsidian Lounge',
-    description: 'An atmospheric commercial space exploring the boundaries of darkness and dramatic focal lighting.',
-    details: 'Defined by deep charcoal palettes and velvet textures, the Obsidian Lounge provides an intimate social experience for the avant-garde.',
-    thumbnail: '/src/assets/obsidian.png',
-    category: 'Commercial',
-    tags: ['Atmospheric', 'Luxury', 'Retail'],
-    year: '2023'
+    id: "obsidian-lounge",
+    title: "Obsidian Lounge",
+    description:
+      "A commercial lounge designed around dark materials and focused lighting to create an intimate, dramatic atmosphere.",
+    details:
+      "The client wanted a space that felt different from typical bars and lounges — quieter, more refined. We used deep charcoal stone, dark velvet seating, and a ceiling of directional pendant lights to create distinct pockets of warmth throughout the room.",
+    thumbnail: "/src/assets/obsidian.png",
+    category: "Commercial",
+    tags: ["Atmospheric", "Luxury", "Retail"],
+    year: "2023",
   },
   {
-    id: 'ivory-atelier',
-    title: 'Ivory Atelier',
-    description: 'A bright, multi-functional studio space designed for creative precision and modular flexibility.',
-    details: 'Clean lines and a neutral palette define this fashion atelier, where architectural mezzanine levels create distinct zones for conceptual work.',
-    thumbnail: '/src/assets/ivory.png',
-    category: 'Commercial',
-    tags: ['Bright', 'Modular', 'Studio'],
-    year: '2023'
+    id: "ivory-atelier",
+    title: "Ivory Atelier",
+    description:
+      "A bright, multi-level studio space designed for a fashion label that needed room to create, meet, and display.",
+    details:
+      "The brief called for a flexible workspace that could shift between showroom, workshop, and meeting space without feeling cluttered. We used a mezzanine layout, clean white plaster walls, and modular rails to keep the space adaptable and easy to rearrange.",
+    thumbnail: "/src/assets/ivory.png",
+    category: "Commercial",
+    tags: ["Bright", "Modular", "Studio"],
+    year: "2023",
   },
   {
-    id: 'verdant-villa',
-    title: 'Verdant Villa',
-    description: 'Sustainable tropical architecture that blurs the line between interior sanctuary and nature.',
-    details: 'Utilizing local volcanic stone and bamboo, this villa integrates the surrounding landscape directly into the living experience through open-air transitions.',
-    thumbnail: '/src/assets/verdant.png',
-    category: 'Residential',
-    tags: ['Tropical', 'Sustainable', 'Architecture'],
-    year: '2024'
-  }
+    id: "verdant-villa",
+    title: "Verdant Villa",
+    description:
+      "A tropical villa that opens fully to the surrounding garden, using local stone and bamboo throughout.",
+    details:
+      "Built on a hillside outside of Siem Reap, this home was designed to stay cool naturally and feel connected to the outdoors. Local volcanic stone forms the base structure, while bamboo screens filter the light and provide privacy without closing the space off.",
+    thumbnail: "/src/assets/verdant.png",
+    category: "Residential",
+    tags: ["Tropical", "Sustainable", "Architecture"],
+    year: "2024",
+  },
 ];
 
 export const GAMES: Game[] = [
   {
-    id: "pacman",
-    title: "Pac-Man",
-    description: "The classic arcade game where you eat dots and avoid ghosts.",
-    iframeUrl: "https://macek.github.io/google_pacman/",
-    appImageUrl: "https://github.com/mamedev/mame/releases",
-    thumbnail: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=600",
-    category: "Arcade"
+    id: "TypingCodeGame",
+    title: "Typing Code Game",
+    description:
+      "The classic typing code game. Type the code correctly to keep the game going!",
+    iframeUrl: "https://typing-math-game.vercel.app",
+    appImageUrl:
+      "https://drive.google.com/file/d/1l1rA29APscP38-PhAwd84miuwOQCI2-K/view?usp=sharing",
+    thumbnail: "/src/assets/game-cover/typing-code-game.png",
+    category: "typing",
   },
   {
-    id: "2048",
-    title: "2048",
-    description: "Join the numbers and get to the 2048 tile!",
-    iframeUrl: "https://gabrielecirulli.github.io/2048/",
-    appImageUrl: "https://github.com/gabrielecirulli/2048/releases",
-    thumbnail: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?auto=format&fit=crop&q=80&w=600",
-    category: "Puzzle"
+    id: "TypingMathGame",
+    title: "Typing Math Game",
+    description:
+      "The classic typing math game. Thinking fast and typing the number correctly to keep the game going!",
+    iframeUrl: "https://typing-math-game.vercel.app/",
+    appImageUrl:
+      "https://drive.google.com/file/d/1crkVv9NvpqEmCwA10r-k2Bwr6ouEcj_-/view?usp=sharing",
+    thumbnail: "/src/assets/game-cover/typing-math-game.png",
+    category: "typing",
   },
   {
-    id: "hextris",
-    title: "Hextris",
-    description: "Fast-paced puzzle game inspired by Tetris but on a hexagon.",
-    iframeUrl: "https://hextris.github.io/hextris/",
-    appImageUrl: "https://github.com/Hextris/hextris/releases",
-    thumbnail: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=600",
-    category: "Puzzle"
+    id: "dragon-drop",
+    title: "dragon-drop",
+    description:
+      "A fun and addictive game where you control a dragon to catch falling objects. Test your reflexes and see how long you can survive!",
+    iframeUrl: "https://dragon-drop-iota.vercel.app/",
+    appImageUrl:
+      "https://drive.google.com/file/d/1DHNe44e70h0XjSHZemLClLWw0A2l88uh/view?usp=sharing",
+    thumbnail: "src/assets/game-cover/dragon-drop.png",
+    category: "mouse",
   },
   {
-    id: "sinuous",
-    title: "Sinuous",
-    description: "Avoid the red dots and stay alive as long as possible.",
-    iframeUrl: "https://sinuousgame.com/",
-    appImageUrl: "https://github.com/hakimel/sinuous/releases",
-    thumbnail: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=600",
-    category: "Action"
-  }
+    id: "RobotBrainiac",
+    title: "Robot Brainiac",
+    description:
+      "An action-packed puzzle game where you guide a brilliant robot through challenging brain-teasing challenges. Solve puzzles, navigate obstacles, and push your strategy skills to the limit!",
+    iframeUrl: "https://robot-brainiac.vercel.app/",
+    appImageUrl:
+      "https://drive.google.com/file/d/1fnc-RCf242B9dC5a516VlFERCZ_HVJzi/view?usp=sharing",
+    thumbnail: "src/assets/game-cover/robot-brainiac.png",
+    category: "Action",
+  },
+  {
+    id: "MasterMouse",
+    title: "Master Mouse",
+    description:
+      "A thrilling mouse-controlled game where you navigate a clever mouse through intricate mazes and challenges. Test your reflexes and problem-solving skills!",
+    iframeUrl: "https://master-mouse-v1-1-0.vercel.app/",
+    appImageUrl:
+      "https://drive.google.com/file/d/1lwv8tyf_UsuwLATV6OxoJW1Tewy9GLEg/view?usp=drive_link",
+    thumbnail: "src/assets/game-cover/master-mouse.png",
+    category: "mouse",
+  },
 ];

@@ -4,26 +4,26 @@ import { Home, Library, User, Layout, ArrowRight, Layers, Terminal, Cpu, Zap, Gl
 
 const directory = [
   {
-    title: 'Primary Archives',
+    title: 'Main Pages',
     links: [
-      { name: '01 Home Portal', path: '/', icon: Home, desc: 'Editorial headlines and atmospheric overview.' },
-      { name: '02 Our Portfolio', path: '/library', icon: Library, desc: 'Curated collection of residential and commercial commissions.' },
-      { name: '03 The Collective', path: '/author', icon: User, desc: 'Our philosophy, history, and lead visionary.' },
+      { name: '01 Home', path: '/', icon: Home, desc: 'Start here — an overview of the studio and what we do.' },
+      { name: '02 Portfolio', path: '/library', icon: Library, desc: 'Browse all of our residential and commercial design projects.' },
+      { name: '03 About Us', path: '/author', icon: User, desc: 'Our story, our values, and the team behind the work.' },
     ],
   },
   {
-    title: 'Spatial Disciplines',
+    title: 'Our Services',
     links: [
-      { name: 'Architecture', path: '/#services', icon: Globe, desc: 'Structural refinement and landscape integration.' },
-      { name: 'Interior Design', path: '/#services', icon: Layers, desc: 'Atmospheric curation and material narratives.' },
-      { name: 'Bespoke Objects', path: '/#services', icon: Compass, desc: 'Custom furniture and artisanal fixtures.' },
+      { name: 'Architecture', path: '/#services', icon: Globe, desc: 'Floor plans, structural decisions, and space layout.' },
+      { name: 'Interior Design', path: '/#services', icon: Layers, desc: 'Materials, color, lighting, and the feel of each room.' },
+      { name: 'Custom Furniture', path: '/#services', icon: Compass, desc: 'Furniture designed and built to fit your specific space.' },
     ],
   },
   {
-    title: 'Connection',
+    title: 'Contact',
     links: [
-      { name: 'Inquire', path: '/author#contact', icon: MessageCircle, desc: 'Commence a dialogue regarding your next commission.' },
-      { name: 'Social Narratives', path: '/author#social', icon: Instagram, desc: 'Follow our daily evolution on digital channels.' },
+      { name: 'Send a Message', path: '/author#contact', icon: MessageCircle, desc: 'Tell us about your project and we will get back to you.' },
+      { name: 'Follow Our Work', path: '/author#social', icon: Instagram, desc: 'See behind-the-scenes updates on Instagram and more.' },
     ],
   },
 ];
@@ -35,11 +35,11 @@ export default function Pages() {
     <div className="min-h-screen pt-24 pb-32">
       <section className="px-8 py-20 border-b border-border/20">
         <div className="max-w-7xl mx-auto">
-          <p className="font-sans text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-6">Directory</p>
+          <p className="font-sans text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-6">Site Map</p>
           <h1 className="text-6xl md:text-8xl font-serif font-medium tracking-tight uppercase leading-[0.9]">
-            Keang <span className="text-muted-foreground/20">&</span> Co.
+            SIVCHHENG
             <br />
-            Index.
+            <span className="text-muted-foreground/20">&</span> Co.
           </h1>
         </div>
       </section>

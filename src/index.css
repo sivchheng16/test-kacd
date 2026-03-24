@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,29 +6,31 @@
 
 @layer base {
   :root {
-    --background: 48 30% 98%;
-    /* Bone / Cream #FCFBF7 */
-    --foreground: 0 0% 10%;
-    /* Night Charcoal #1A1A1A */
-    --card: 48 30% 96%;
-    --card-foreground: 0 0% 10%;
-    --popover: 48 30% 98%;
-    --popover-foreground: 0 0% 10%;
-    --primary: 45 61% 53%;
-    /* Gold #D4AF37 */
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 66%;
-    /* Silver #A9A9A9 */
-    --secondary-foreground: 0 0% 10%;
-    --muted: 48 30% 90%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 45 61% 53%;
-    --accent-foreground: 0 0% 98%;
+    --background: 215 40% 88%;
+    /* Mystic Blues - Light Blue #A4C1ED */
+    --foreground: 237 13% 30%;
+    /* Dark Blue #595E87 */
+    --card: 208 26% 89%;
+    /* Light Grayish-Blue #D8E4ED */
+    --card-foreground: 237 13% 30%;
+    --popover: 215 40% 88%;
+    --popover-foreground: 237 13% 30%;
+    --primary: 270 31% 64%;
+    /* Purple #A987C4 */
+    --primary-foreground: 208 26% 95%;
+    --secondary: 208 26% 89%;
+    /* Light Grayish-Blue #D8E4ED */
+    --secondary-foreground: 237 13% 30%;
+    --muted: 215 25% 80%;
+    --muted-foreground: 237 13% 40%;
+    --accent: 270 31% 64%;
+    /* Purple #A987C4 */
+    --accent-foreground: 208 26% 95%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 45 61% 53%;
+    --border: 215 25% 85%;
+    --input: 215 25% 80%;
+    --ring: 270 31% 64%;
     --radius: 0rem;
     /* Sharp edges for luxury feel */
   }
@@ -40,12 +42,33 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    background-color: hsl(var(--background));
+    @apply text-foreground font-sans antialiased;
+    background: linear-gradient(
+      135deg,
+      #a4c1ed 0%,
+      #d8e4ed 25%,
+      #a987c4 50%,
+      #595e87 100%
+    );
+    min-height: 100vh;
+    position: relative;
   }
 
   html {
     scroll-behavior: smooth;
+    background: linear-gradient(
+      135deg,
+      #a4c1ed 0%,
+      #d8e4ed 25%,
+      #a987c4 50%,
+      #595e87 100%
+    );
+  }
+
+  /* Ensure background applies to entire viewport */
+  html,
+  body {
+    background-attachment: fixed;
   }
 }
 
@@ -53,7 +76,7 @@
   .perspective-1000 {
     perspective: 1000px;
   }
-  
+
   .preserve-3d {
     transform-style: preserve-3d;
   }

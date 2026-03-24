@@ -8,6 +8,8 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Library from './pages/Library';
 import GamePortal from './pages/GamePortal';
+import About from './pages/About';
+import Services from './pages/Services';
 import { Project } from './constants';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -34,8 +36,7 @@ function AnimatedRoutes({
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route
-          path="/library"
+        <Route path="/library"
           element={
             <Library
               favorites={favorites}
@@ -46,8 +47,10 @@ function AnimatedRoutes({
             />
           }
         />
-        <Route path="/author" element={<Home />} />
-        <Route path="/pages" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/author" element={<About />} />
+        <Route path="/pages" element={<Services />} />
         <Route path="/vault" element={<GamePortal />} />
       </Routes>
     </AnimatePresence>

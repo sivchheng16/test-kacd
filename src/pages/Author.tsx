@@ -14,9 +14,9 @@ import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const philosophy = [
-  { title: 'Material Honesty', desc: 'Precious metals, raw stone, and reclaimed wood in their purest forms.' },
-  { title: 'Spatial Silence', desc: 'Designing for the absence of noise and the presence of atmosphere.' },
-  { title: 'Luminous Architecture', desc: 'Choreographing natural light to define the passing of time.' },
+  { title: 'Honest Materials', desc: 'We use stone, timber, and metal in their natural form — no decor that pretends to be something it is not.' },
+  { title: 'Quiet Spaces', desc: 'Good design does not shout. We work to remove what is unnecessary so the space can breathe.' },
+  { title: 'Light as a Material', desc: 'We plan every room around how sunlight moves through it from morning to evening.' },
 ];
 
 export default function Author() {
@@ -63,9 +63,9 @@ export default function Author() {
             <div>
               <p className="font-sans text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-6">The Collective</p>
               <h1 className="text-6xl md:text-8xl font-serif font-medium tracking-tight uppercase leading-[0.9]">
-                Keang & Co.
+                SIVCHHENG KHEANG
               </h1>
-              <p className="text-muted-foreground mt-8 text-lg font-serif italic">Architecture & Atmospheric Interiors</p>
+              <p className="text-muted-foreground mt-8 text-lg font-serif italic">Interior Design & Architecture, Phnom Penh</p>
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default function Author() {
             <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase">Our Ethos</p>
             <div className="space-y-10 text-3xl text-foreground font-serif leading-relaxed max-w-2xl">
               <p>
-                We believe that architecture is a medium for emotional resonance. My role is to bridge the gap between structural necessity and spiritual fulfillment.
+                We believe a well-designed space can change how you feel the moment you walk into it. Our job is to understand who you are and what you need — and then build it.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-12 border-t border-border/10">
@@ -96,10 +96,10 @@ export default function Author() {
             <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase">History</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 text-muted-foreground font-serif leading-relaxed text-lg">
               <p>
-                Founded in 2018, Keang & Co. began as a small experimental studio focusing on the interplay of raw materiality and high-precision craftsmanship. Today, we manage a diverse portfolio of luxury residential and avant-garde commercial commissions across Southeast Asia.
+                Founded in 2018, SIVCHHENG KHEANG started as a small studio in Phnom Penh focused on getting the most out of modest spaces. Since then, we have grown into a full interior design practice working on homes, boutique commercial spaces, and bespoke residential commissions across Cambodia and Southeast Asia.
               </p>
               <p>
-                Every commission is approached as a singular work of art. We engage in a deep dialogue with our clients to uncover the subconscious needs of their daily rituals, translating those insights into physical space.
+                We work directly with each client from the first conversation to the final fitting. No two projects are the same, and we keep our process close and personal to make sure every detail is right.
               </p>
             </div>
           </section>
@@ -126,8 +126,8 @@ export default function Author() {
         <aside>
           <div className="sticky top-40 bg-muted/10 border border-border/10 p-12 space-y-12">
             <div>
-              <p className="font-sans text-[10px] font-bold tracking-[0.2em] text-primary uppercase mb-6">Commence</p>
-              <h2 className="text-3xl font-serif font-medium tracking-tight">Project Inquiry.</h2>
+              <p className="font-sans text-[10px] font-bold tracking-[0.2em] text-primary uppercase mb-6">Start Here</p>
+              <h2 className="text-3xl font-serif font-medium tracking-tight">Send Us a Message.</h2>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-8">
@@ -159,7 +159,7 @@ export default function Author() {
                   rows={4}
                   value={formData.message}
                   onChange={e => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="TELL US ABOUT YOUR VISION..."
+                  placeholder="TELL US ABOUT YOUR PROJECT OR IDEA..."
                   className="w-full bg-transparent border-b border-border/20 py-3 text-sm font-serif outline-none focus:border-primary transition-all resize-none placeholder:text-muted-foreground/20"
                 />
               </div>

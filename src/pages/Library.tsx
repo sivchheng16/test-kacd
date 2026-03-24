@@ -6,6 +6,8 @@ import { ProjectCard } from '../components/ProjectComponents';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
+import { useEffect, useRef } from 'react';
 
 const CATEGORIES = ['All', 'Residential', 'Commercial', 'Retail'];
 
@@ -22,6 +24,22 @@ export default function Library({
 }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [isStickyBottom, setIsStickyBottom] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sentinelRef.current) {
+        const rect = sentinelRef.current.getBoundingClientRect();
+        // If the sentinel (original position) top is above the viewport top, sticky bottom
+        setIsStickyBottom(rect.top < 0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const filteredProjects = PROJECTS.filter(project => {
     const matchesSearch =
@@ -43,57 +61,67 @@ export default function Library({
               transition={{ duration: 0.8 }}
             >
               <p className="font-sans text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-6 flex items-center gap-3">
-                <Star className="w-3 h-3 fill-primary" /> Curated Excellence
+                <Star className="w-3 h-3 fill-primary" /> Selected Work
               </p>
               <h1 className="text-6xl md:text-8xl font-serif font-medium tracking-tight uppercase leading-[0.9]">
                 Portfolio.
               </h1>
               <p className="text-muted-foreground mt-8 max-w-lg text-lg font-serif italic leading-relaxed">
-                Exploring the harmony between structure and atmosphere across our latest residential and commercial commissions.
+                A look at our residential and commercial projects — each one planned from scratch for real clients with real needs.
               </p>
             </motion.div>
             <div className="flex flex-col gap-6 text-muted-foreground shrink-0 border-l border-border/20 pl-8">
               <div className="flex items-center gap-4">
                 <Layout className="w-4 h-4 text-primary" />
-                <span className="font-sans text-[10px] font-bold uppercase tracking-widest">Spatial Architecture</span>
+                <span className="font-sans text-[10px] font-bold uppercase tracking-widest">Interior Architecture</span>
               </div>
               <div className="flex items-center gap-4">
                 <Compass className="w-4 h-4 text-primary" />
-                <span className="font-sans text-[10px] font-bold uppercase tracking-widest">Material Narrative</span>
+                <span className="font-sans text-[10px] font-bold uppercase tracking-widest">Custom Furniture</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Toolbar */}
-      <section className="px-8 py-8 border-y border-border/20 sticky top-24 z-30 bg-background/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
-          <div className="flex flex-wrap gap-4">
-            {CATEGORIES.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`font-sans text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2 transition-all duration-300 ${selectedCategory === cat
+      {/* Toolbar Sentinel & Wrapper */}
+      <div ref={sentinelRef} className="h-0" />
+      <div className={cn("relative transition-all duration-2500", isStickyBottom ? "h-[105px]" : "h-auto")}>
+        <section
+          className={cn(
+            "px-8 py-8 border-y border-border/20 z-40 transition-all duration-2500 ease-in-out",
+            isStickyBottom
+              ? "fixed bottom-0 left-0 w-full bg-background/10 backdrop-blur-xl border-t shadow-[0_-10px_40px_rgba(0,0,0,0.1)] translate-y-0"
+              : "relative translate-y-0 bg-transparent border-none"
+          )}
+        >
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
+            <div className="flex flex-wrap gap-4">
+              {CATEGORIES.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`font-sans text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2 transition-all duration-300 ${selectedCategory === cat
                     ? 'text-foreground border-b-2 border-primary'
                     : 'text-muted-foreground hover:text-foreground'
-                  }`}
-              >
-                {cat}
-              </button>
-            ))}
+                    }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+            <div className="relative w-full sm:w-72">
+              <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                placeholder="SEARCH PROJECTS..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                className="pl-8 h-10 bg-transparent border-none border-b border-border/40 rounded-none font-sans text-[10px] uppercase tracking-widest focus-visible:ring-0 focus-visible:border-primary transition-all pb-1"
+              />
+            </div>
           </div>
-          <div className="relative w-full sm:w-72">
-            <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input
-              placeholder="SEARCH PROJECTS..."
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              className="pl-8 h-10 bg-transparent border-none border-b border-border/40 rounded-none font-sans text-[10px] uppercase tracking-widest focus-visible:ring-0 focus-visible:border-primary transition-all pb-1"
-            />
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <div className="max-w-7xl mx-auto px-8 py-20">
         {/* All Projects */}
@@ -113,8 +141,8 @@ export default function Library({
               <div>
                 <h3 className="font-serif text-2xl mb-2">No results found</h3>
                 <p className="text-muted-foreground font-serif italic">
-                  No commissions matching <strong>"{searchQuery}"</strong>
-                  {selectedCategory !== 'All' && <> in <strong>{selectedCategory}</strong></>}.
+                  No projects matching <strong>"{searchQuery}"</strong>
+                  {selectedCategory !== 'All' && <> in <strong>{selectedCategory}</strong></>} were found.
                 </p>
               </div>
               <Button
@@ -122,7 +150,7 @@ export default function Library({
                 className="rounded-none font-sans text-[10px] font-bold tracking-widest uppercase h-12 px-8 mt-4"
                 onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
               >
-                Reset Exploration
+                Reset Filters
               </Button>
             </div>
           ) : (
