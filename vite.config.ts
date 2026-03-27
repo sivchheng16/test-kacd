@@ -13,4 +13,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  preview: {
+    allowedHosts: ["my-portfolio.koompi.cloud", "localhost", "0.0.0.0"],
+  },
 });
