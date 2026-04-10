@@ -34,7 +34,7 @@ export default function Pages() {
       <section className="px-8 py-20 border-b border-border/20">
         <div className="max-w-7xl mx-auto">
           <p className="font-sans text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-6">Site Map</p>
-          <h1 className="text-6xl md:text-8xl font-serif font-medium tracking-tight uppercase leading-[0.9]">
+          <h1 className="text-6xl md:text-8xl font-sans font-medium tracking-tight uppercase leading-[0.9]">
             SIVCHHENG
             <br />
             <span className="text-muted-foreground/20">&</span> Co.
@@ -60,12 +60,12 @@ export default function Pages() {
                       <div className="w-8 h-8 border border-border/20 flex items-center justify-center shrink-0 text-muted-foreground group-hover:border-primary group-hover:text-primary transition-all duration-700">
                         <link.icon className="w-3.5 h-3.5" />
                       </div>
-                      <h3 className="font-serif text-2xl group-hover:text-primary transition-colors duration-500 flex-1">
+                      <h3 className="font-sans text-2xl group-hover:text-primary transition-colors duration-500 flex-1">
                         {link.name}
                       </h3>
                       <ArrowRight className="w-4 h-4 text-muted-foreground/20 -translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-700" />
                     </div>
-                    <p className="text-sm text-muted-foreground font-serif italic leading-relaxed pl-12">
+                    <p className="text-sm text-muted-foreground font-sans italic leading-relaxed pl-12">
                       {link.desc}
                     </p>
                   </Link>

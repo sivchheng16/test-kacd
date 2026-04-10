@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,41 +6,38 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    /* Pure White */
-    --foreground: 215 18% 27%;
-    /* Dark Slate */
+    --background: 222 47% 4%;
+    /* Deep Navy */
+    --foreground: 210 40% 98%;
+    /* Off-white */
     
-    --card: 0 0% 100%;
-    --card-foreground: 215 18% 27%;
+    --card: 222 47% 6%;
+    --card-foreground: 210 40% 98%;
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 18% 27%;
+    --popover: 222 47% 4%;
+    --popover-foreground: 210 40% 98%;
     
-    --primary: 215 18% 27%;
-    /* Dark Slate - Primary Button */
-    --primary-foreground: 0 0% 100%;
+    --primary: 180 100% 50%;
+    /* Vibrant Cyan */
+    --primary-foreground: 222 47% 4%;
     
-    --secondary: 210 40% 96%;
-    /* Light Gray */
-    --secondary-foreground: 215 18% 27%;
+    --secondary: 84 100% 50%;
+    /* Lime Green */
+    --secondary-foreground: 222 47% 4%;
     
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-    /* Grayish Blue */
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
     
-    --accent: 214 31% 94%;
-    /* Light Gray - Accent Button */
-    --accent-foreground: 215 18% 27%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 222 47% 4%;
     
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
     
-    --border: 214 31% 91%;
-    --input: 214 31% 91%;
-    --ring: 215 16% 47%;
-    --radius: 0.375rem;
-    /* Soft rounded edges */
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 180 100% 50%;
+    --radius: 0.5rem;
   }
 }
 
@@ -53,17 +50,12 @@
     @apply text-foreground font-sans antialiased bg-background;
     min-height: 100vh;
     position: relative;
+    overflow-x: hidden;
   }
 
   html {
     scroll-behavior: smooth;
     @apply bg-background;
-  }
-
-  /* Ensure background applies to entire viewport */
-  html,
-  body {
-    background-attachment: auto;
   }
 }
 
@@ -75,4 +67,44 @@
   .preserve-3d {
     transform-style: preserve-3d;
   }
+
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-2xl border border-white/10;
+  }
+
+  .mesh-glow-cyan {
+    background: radial-gradient(circle at 50% 50%, hsla(180, 100%, 50%, 0.15), transparent 70%);
+  }
+
+  .mesh-glow-lime {
+    background: radial-gradient(circle at 50% 50%, hsla(84, 100%, 50%, 0.15), transparent 70%);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-secondary;
+  }
+
+  /* Connective Background Utilities */
+  .bloom-container {
+    @apply absolute inset-0 -z-10 overflow-hidden pointer-events-none;
+  }
+
+  .bloom-orb {
+    @apply absolute rounded-full blur-[120px] opacity-20 transition-all duration-1000;
+  }
+
+  .section-connector {
+    @apply relative border-t border-white/5;
+  }
+
+  .section-connector::before {
+    content: '';
+    @apply absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent;
+  }
+}
+
+/* Custom selection color */
+::selection {
+  background-color: hsla(180, 100%, 50%, 0.2);
+  color: #fff;
 }

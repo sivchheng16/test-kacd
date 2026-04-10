@@ -8,9 +8,9 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                serif: ["Cormorant Garamond", "serif"],
-                sans: ["Montserrat", "system-ui", "sans-serif"],
-                mono: ["Geist Mono", "JetBrains Mono", "monospace"],
+                serif: ["Inter", "serif"],
+                sans: ["Inter", "system-ui", "sans-serif"],
+                mono: ["JetBrains Mono", "monospace"],
             },
             colors: {
                 border: "hsl(var(--border))",

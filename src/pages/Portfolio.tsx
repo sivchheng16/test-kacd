@@ -31,13 +31,12 @@ export default function Portfolio({
     const handleScroll = () => {
       if (sentinelRef.current) {
         const rect = sentinelRef.current.getBoundingClientRect();
-        // If the sentinel (original position) top is above the viewport top, sticky bottom
         setIsStickyBottom(rect.top < 0);
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -50,9 +49,15 @@ export default function Portfolio({
   });
 
   return (
-    <div className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen bg-background text-foreground pt-32 pb-20 relative overflow-hidden">
+      {/* Background Mesh Gradients */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-[10%] left-[5%] w-[45vw] h-[45vw] bg-primary/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[10%] right-[10%] w-[35vw] h-[35vw] bg-secondary/5 blur-[100px] rounded-full" />
+      </div>
+
       {/* Page Header */}
-      <section className="px-8 py-20">
+      <section className="px-8 mb-40 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
             <motion.div
@@ -60,24 +65,33 @@ export default function Portfolio({
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <p className="font-sans text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-6 flex items-center gap-3">
-                <Star className="w-3 h-3 fill-primary" /> Selected Work
-              </p>
-              <h1 className="text-6xl md:text-8xl font-serif font-medium tracking-tight uppercase leading-[0.9]">
-                Projects.
+              <div className="flex items-center gap-4 mb-8">
+                <Star className="w-4 h-4 text-primary animate-pulse" />
+                <p className="font-mono text-[10px] font-bold tracking-[0.4em] text-primary uppercase">
+                  Selected Work
+                </p>
+              </div>
+              <h1 className="text-5xl sm:text-7xl md:text-8xl font-sans font-medium tracking-tighter uppercase leading-[0.85] text-gradient mb-12">
+                Systems. <br />
+                <span className="opacity-50 italic font-light lowercase font-sans text-4xl sm:text-5xl md:text-8xl">design & code.</span>
               </h1>
-              <p className="text-muted-foreground mt-8 max-w-lg text-lg font-serif italic leading-relaxed">
-                A selection of digital projects showcasing my work in web development, mobile apps, and UI/UX design. Each project built with clean code and thoughtful design.
+              <p className="text-xl text-muted-foreground font-sans leading-relaxed max-w-lg italic opacity-80 border-l-2 border-primary/20 pl-8">
+                "A curated archive of high-performance digital systems, ranging from scalable web architectures to intuitive mobile interfaces."
               </p>
             </motion.div>
-            <div className="flex flex-col gap-6 text-muted-foreground shrink-0 border-l border-border/20 pl-8">
-              <div className="flex items-center gap-4">
-                <Layout className="w-4 h-4 text-primary" />
-                <span className="font-sans text-[10px] font-bold uppercase tracking-widest">Frontend & Backend</span>
+            
+            <div className="flex flex-col gap-8 text-muted-foreground shrink-0 glass-panel p-10 rounded-3xl">
+              <div className="flex items-center gap-6">
+                <div className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-primary">
+                  <Layout size={18} />
+                </div>
+                <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Full-Stack Modules</span>
               </div>
-              <div className="flex items-center gap-4">
-                <Compass className="w-4 h-4 text-primary" />
-                <span className="font-sans text-[10px] font-bold uppercase tracking-widest">Mobile & Cross-Platform</span>
+              <div className="flex items-center gap-6">
+                <div className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-secondary">
+                  <Compass size={18} />
+                </div>
+                <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Native Frameworks</span>
               </div>
             </div>
           </div>
@@ -86,75 +100,80 @@ export default function Portfolio({
 
       {/* Toolbar Sentinel & Wrapper */}
       <div ref={sentinelRef} className="h-0" />
-      <div className={cn("relative transition-all duration-2500", isStickyBottom ? "h-[105px]" : "h-auto")}>
+      <div className={cn("relative transition-all duration-1000", isStickyBottom ? "h-[100px]" : "h-auto")}>
         <section
           className={cn(
-            "px-8 py-8 border-y border-border/20 z-40 transition-all duration-2500 ease-in-out",
+            "px-6 md:px-8 py-6 md:py-8 z-40 transition-all duration-700 ease-in-out",
             isStickyBottom
-              ? "fixed bottom-0 left-0 w-full bg-background/10 backdrop-blur-xl border-t shadow-[0_-10px_40px_rgba(0,0,0,0.1)] translate-y-0"
-              : "relative translate-y-0 bg-transparent border-none"
+              ? "fixed bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 w-[94%] md:w-[90%] max-w-6xl glass-panel rounded-3xl md:rounded-[32px] shadow-[0_32px_128px_-16px_rgba(0,0,0,0.5)] translate-y-0"
+              : "relative translate-y-0 bg-transparent"
           )}
         >
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
-            <div className="flex flex-wrap gap-4">
+          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 glass-panel p-1.5 rounded-full w-full lg:w-auto">
               {CATEGORIES.map(cat => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`font-sans text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2 transition-all duration-300 ${selectedCategory === cat
-                    ? 'text-foreground border-b-2 border-primary'
+                  className={`font-mono text-[8px] md:text-[9px] font-bold uppercase tracking-widest px-4 md:px-6 py-2 md:py-2.5 rounded-full transition-all duration-300 flex-1 sm:flex-none ${
+                    selectedCategory === cat
+                    ? 'bg-primary text-background shadow-lg shadow-primary/20'
                     : 'text-muted-foreground hover:text-foreground'
-                    }`}
+                  }`}
                 >
                   {cat}
                 </button>
               ))}
             </div>
-            <div className="relative w-full sm:w-72">
-              <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            
+            <div className="relative w-full sm:w-80 group">
+              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
               <Input
-                placeholder="SEARCH PROJECTS..."
+                placeholder="SEARCH ARCHIVE..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="pl-8 h-10 bg-transparent border-none border-b border-border/40 rounded-none font-sans text-[10px] uppercase tracking-widest focus-visible:ring-0 focus-visible:border-primary transition-all pb-1"
+                className="pl-14 h-12 glass-panel bg-white/5 border-none rounded-2xl font-mono text-[10px] font-bold tracking-widest uppercase focus-visible:ring-1 focus-visible:ring-primary/50 transition-all"
               />
             </div>
           </div>
         </section>
       </div>
 
-      <div className="max-w-7xl mx-auto px-8 py-20">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-20 relative z-10">
         {/* All Projects */}
         <section>
-          <div className="flex items-center justify-between mb-16">
-            <h2 className="font-serif text-2xl font-medium tracking-tight">
-              {selectedCategory === 'All' ? 'All Projects' : selectedCategory}{' '}
-              <span className="text-muted-foreground/40 font-serif text-sm ml-2">({filteredProjects.length})</span>
-            </h2>
+          <div className="flex items-center justify-between mb-24">
+            <div className="flex items-center gap-6">
+              <h2 className="font-sans text-3xl font-medium tracking-tight">
+                {selectedCategory === 'All' ? 'Full Archive' : selectedCategory}
+              </h2>
+              <span className="glass-panel px-4 py-1.5 rounded-full text-primary font-mono text-[10px] font-bold">
+                {filteredProjects.length} NO.
+              </span>
+            </div>
           </div>
 
           {filteredProjects.length === 0 ? (
-            <div className="py-32 flex flex-col items-center justify-center text-center gap-6">
-              <div className="w-20 h-20 border border-border/20 flex items-center justify-center">
-                <SearchX className="w-8 h-8 text-muted-foreground/30" />
-              </div>
-              <div>
-                <h3 className="font-serif text-2xl mb-2">No results found</h3>
-                <p className="text-muted-foreground font-serif italic">
-                  No projects matching <strong>"{searchQuery}"</strong>
-                  {selectedCategory !== 'All' && <> in <strong>{selectedCategory}</strong></>} were found.
-                </p>
-              </div>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="py-40 flex flex-col items-center justify-center text-center glass-panel rounded-[40px]"
+            >
+              <SearchX size={64} className="text-primary/20 mb-8" />
+              <h3 className="font-sans text-3xl mb-4">No systems found</h3>
+              <p className="text-muted-foreground font-sans italic text-lg opacity-60">
+                The query <strong className="text-primary">"{searchQuery}"</strong> returned zero results.
+              </p>
               <Button
                 variant="outline"
-                className="rounded-none font-sans text-[10px] font-bold tracking-widest uppercase h-12 px-8 mt-4"
+                className="mt-12 h-14 px-10 rounded-full glass-panel font-mono text-[10px] font-bold tracking-widest uppercase hover:bg-primary hover:text-background transition-all"
                 onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
               >
-                Reset Filters
+                Reset Archive Query
               </Button>
-            </div>
+            </motion.div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 md:gap-y-32">
               {filteredProjects.map((project, index) => (
                 <ProjectCard
                   key={project.id}
@@ -168,6 +187,16 @@ export default function Portfolio({
             </div>
           )}
         </section>
+      </div>
+
+      {/* Page End Branding */}
+      <div className="container mx-auto px-6 mt-48 pt-20 border-t border-white/5 flex flex-col items-center">
+        <div className="w-12 h-12 glass-panel rounded-2xl flex items-center justify-center text-primary mb-8">
+           <Layout size={20} />
+        </div>
+        <div className="font-mono text-primary text-[10px] font-bold tracking-[1em] uppercase opacity-40">
+          SIVCHHENG KHEANG // 2026
+        </div>
       </div>
     </div>
   );

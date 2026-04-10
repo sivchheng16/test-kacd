@@ -63,114 +63,137 @@ const topicIconMap: Record<string, React.FC<any>> = {
 
 export default function Home() {
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
-  const [textColor, setTextColor] = useState("text-white");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const heroSection = document.querySelector(".hero-section");
-      if (!heroSection) return;
-
-      const rect = heroSection.getBoundingClientRect();
-      const heroHeight = rect.height;
-      const scrollProgress = -rect.top / heroHeight;
-
-      // After scrolling past half the hero section, change text to current color
-      if (scrollProgress > 0.5) {
-        setTextColor("text-white");
-      } else {
-        setTextColor("text-foreground");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
-    <div className="min-h-screen">
-      {/* Hero — minimal, high-impact */}
-      <section className="hero-section relative min-h-screen flex items-center px-8 pt-20 overflow-hidden ">
-        {/* Background video */}
-        {/* <video
-          autoPlay
-          loop
-          muted
-          className="absolute top-0 left-0 w-auto min-h-full max-w-none object-cover z-0"
-        >
-          <source src={video} type="video/mp4" />
-        </video> */}
-
-        {/* Blur overlay in front of video */}
-        <div className="absolute inset-0 backdrop-blur-sm bg-black/10 z-5"></div>
-
-        {/* Color gradient overlay - bottom half with white transition */}
-        <div className="absolute bottom-0 left-0 right-0 h-full bg-gradient-to-t from-background via-background/30 via-30% to-transparent z-5"></div>
-
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-[10%] right-[15%] w-[35vw] h-[35vw] bg-primary/5 blur-[120px] rounded-full" />
-          <div className="absolute bottom-[-10%] left-[-5%] w-[45vw] h-[45vw] bg-primary/5 blur-[150px] rounded-full" />
-          {/* Subtle grid lines */}
-          <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--border)/0.3)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border)/0.3)_1px,transparent_1px)] bg-[size:100px_100px]" />
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Premium Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center p-6 overflow-hidden section-connector">
+        {/* Background Mesh Gradients */}
+        <div className="absolute inset-0 z-0">
+          <motion.div
+            animate={{
+              x: [0, 100, 0],
+              y: [0, -50, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[10%] left-[10%] w-[50vw] h-[50vw] bg-primary/20 blur-[120px] rounded-full"
+          />
+          <motion.div
+            animate={{
+              x: [0, -80, 0],
+              y: [0, 60, 0],
+              scale: [1.2, 1, 1.2],
+            }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute bottom-[10%] right-[10%] w-[60vw] h-[60vw] bg-secondary/10 blur-[150px] rounded-full"
+          />
         </div>
 
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center z-10 ">
-          <div className="relative z-10 ">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <p
-                className={`font-sans text-[10px] font-bold tracking-[0.4em] uppercase mb-8 transition-colors duration-500 ${textColor === "text-primary" ? "text-white" : "text-primary"}`}
-              >
-                Developer & Designer from Phnom Penh
-              </p>
-              <h1
-                className={`text-[10vw] lg:text-[7vw] font-serif font-medium leading-[0.9] tracking-tight mb-12 transition-colors duration-500 ${textColor === "text-primary" ? "text-white" : "text-primary"}`}
-              >
-                BUILDING
-                <br />
-                <span className="text-[8vw] lg:text-[6vw] font-serif font-medium leading-[0.9] tracking-tight">
-                  DIGITAL EXPERIENCES
-                </span>
-              </h1>
-              <div className="flex flex-col sm:flex-row items-start gap-10 max-w-2xl">
-                <p
-                  className={`text-lg font-serif leading-relaxed italic flex-1 transition-colors duration-500 ${textColor === "text-primary" ? "text-white/80" : "text-muted-foreground/80"}`}
-                >
-                  Self-driven developer passionate about creating clean,
-                  functional, and thoughtful experiences. From concept to
-                  deployment.
-                </p>
-                <div className="shrink-0 flex flex-col gap-4">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="rounded-none h-14 px-8 bg-white text-black hover:bg-gray-200 transition-colors duration-500 font-sans text-xs tracking-[0.2em] uppercase"
-                  >
-                    <Link to="#documents">Explore Documents</Link>
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-          {/* <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:block aspect-[4/5] bg-muted overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out border border-border/20"
+        {/* Floating 3D Icons (Animated backgrounds) */}
+        <div className="absolute inset-0 z-10 pointer-events-none perspective-1000">
+          {/* Coding Icon */}
+          <motion.div
+            animate={{
+              y: [0, -30, 0],
+              rotateY: [0, 45, 0],
+              rotateX: [0, 15, 0],
+              opacity: [0.2, 0.4, 0.2]
+            }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[20%] left-[15%] w-32 h-32 flex items-center justify-center text-primary/40 blur-[2px]"
           >
-            <img
-              src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200"
-              alt="Luxury Interior"
-              className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-1000"
-            />
-          </motion.div> */}
+            <Code2 size={120} strokeWidth={1} />
+          </motion.div>
+
+          {/* Gaming Icon */}
+          <motion.div
+            animate={{
+              y: [0, 40, 0],
+              rotateY: [0, -30, 0],
+              rotateZ: [0, 10, 0],
+              opacity: [0.1, 0.3, 0.1]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute bottom-[25%] left-[25%] w-40 h-40 flex items-center justify-center text-secondary/30 blur-[4px]"
+          >
+            <Users size={160} strokeWidth={0.5} />
+          </motion.div>
+
+          {/* Service Icon */}
+          <motion.div
+            animate={{
+              x: [0, 20, 0],
+              y: [0, -50, 0],
+              rotateY: [0, 25, 0],
+              opacity: [0.1, 0.2, 0.1]
+            }}
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute top-[30%] right-[20%] w-36 h-36 flex items-center justify-center text-primary/30 blur-[3px]"
+          >
+            <Zap size={140} strokeWidth={0.5} />
+          </motion.div>
         </div>
+
+        {/* Central Frosted Glass Container */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-20 w-full max-w-4xl p-12 md:p-20 glass-panel rounded-[40px] shadow-[0_32px_128px_-16px_rgba(0,0,0,0.5)] flex flex-col items-center text-center overflow-hidden"
+        >
+          {/* Internal Refraction Glow */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50" />
+          <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-secondary/5 blur-[100px] rounded-full" />
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="flex items-center gap-4 mb-8"
+          >
+            <span className="w-8 h-[1px] bg-primary/50" />
+            <p className="font-mono text-[10px] uppercase tracking-[0.5em] text-primary font-bold">
+              Tech Portfolio 2026
+            </p>
+            <span className="w-8 h-[1px] bg-primary/50" />
+          </motion.div>
+
+          <h1 className="text-[12vw] md:text-[8vw] lg:text-[6vw] font-sans font-medium leading-[0.85] tracking-tight mb-12 text-gradient">
+            APPRENTICE <br />
+            {/* & <span className="italic font-light opacity-10">EXPERT.</span>  */}
+          </h1>
+
+          <p className="text-lg md:text-xl font-sans max-w-2xl leading-relaxed text-foreground/70 mb-16 italic">
+            "Merging technical mastery with creative intuition. We build products that bridge the gap between initial concept and professional excellence."
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-8">
+            <Button
+              asChild
+              className="h-16 px-12 rounded-full bg-primary text-background font-mono text-[11px] font-bold tracking-widest uppercase hover:scale-105 transition-all duration-300 shadow-xl shadow-primary/20"
+            >
+              <Link to="/portfolio">Explore Systems</Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="h-16 px-12 rounded-full border-white/10 hover:bg-white/5 font-mono text-[11px] font-bold tracking-widest uppercase backdrop-blur-sm transition-all duration-300"
+            >
+              <Link to="/about">Our Philosophy</Link>
+            </Button>
+          </div>
+        </motion.div>
+
+        {/* Bottom Connective Bloom (Transition to Learning) */}
+        <div className="absolute -bottom-48 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
       </section>
 
       {/* Learning & Topics Section */}
-      <section className="py-35 px-8 border-t border-border/20 bg-background relative overflow-hidden">
+      <section className="py-35 px-8 section-connector bg-background relative overflow-hidden">
+        {/* Top Connective Bloom */}
+        <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
+
         {/* Subtle Grid Background */}
         <div
           className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -195,17 +218,18 @@ export default function Home() {
             <div className="relative group">
               <div className="flex items-center gap-4 mb-8">
                 <p className="font-sans text-[10px] font-bold tracking-[0.4em] text-primary uppercase">
-                  Library & learning
+                  Library & Learning Course
                 </p>
                 <div className="h-[1px] w-12 bg-primary/20 group-hover:w-20 transition-all duration-700" />
               </div>
-              <h2 className="text-6xl md:text-8xl font-serif font-medium tracking-tighter leading-[0.85]">
+              <h2 className="text-6xl md:text-8xl font-sans font-medium tracking-tighter leading-[0.85]">
                 Programming <br className="hidden md:block" />
-                <span className="text-muted-foreground/20">&</span> <span className="italic font-light text-muted-foreground group-hover:text-primary transition-colors duration-700">Design.</span>
+                {/* <span className="text-muted-foreground/20">&</span> */}
+                <span className="italic font-light text-muted-foreground group-hover:text-primary transition-colors duration-700">Languages</span>
               </h2>
             </div>
-            <p className="text-primary text-lg font-serif max-w-sm">
-              Explore documented lessons and materials on key technologies.
+            <p className="text-primary text-lg font-sans max-w-sm">
+              Explore learn which one is you first programming language
             </p>
           </motion.div>
 
@@ -222,48 +246,47 @@ export default function Home() {
                   viewport={{ once: true, amount: 0.2 }}
                 >
                   <Link to={`/document/${topic.id}`} className="block h-full cursor-pointer group">
-                    <div className="border border-primary/10 bg-white/40 backdrop-blur-md h-full p-8 flex flex-col justify-between group-hover:border-primary/40 group-hover:-translate-y-2 transition-all duration-500 relative overflow-hidden shadow-sm group-hover:shadow-2xl group-hover:shadow-primary/5 space-y-6">
+                    <div className="glass-panel h-full p-8 flex flex-col justify-between group-hover:border-primary/40 group-hover:-translate-y-2 transition-all duration-500 relative overflow-hidden shadow-2xl space-y-6 rounded-[32px]">
                       {/* Dynamic unique gradient based on topic - enhanced hover */}
-                      <div className={`absolute inset-0 bg-gradient-to-tr ${topic.gradient} opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none`} />
-                      <div className={`absolute -inset-20 bg-gradient-to-tr ${topic.gradient} opacity-0 group-hover:opacity-30 blur-3xl transition-opacity duration-1000 p-20 pointer-events-none`} />
+                      <div className={`absolute inset-0 bg-gradient-to-tr ${topic.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none`} />
 
-                      <div className="relative w-24 h-24 border border-border/40 flex items-center justify-center bg-white shrink-0 overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-500 group-hover:scale-105">
-                        <div className={`absolute inset-0 bg-gradient-to-tr ${topic.gradient} opacity-30`} />
-                        <img src={topic.logo} alt={topic.title} className="relative z-10 w-full h-full object-cover p-3 transition-all duration-700 shadow-inner" />
+                      <div className="relative w-20 h-20 glass-panel rounded-2xl flex items-center justify-center p-4 group-hover:scale-105 transition-transform duration-500 overflow-hidden">
+                        <div className={`absolute inset-0 bg-gradient-to-tr ${topic.gradient} opacity-20`} />
+                        <img src={topic.logo} alt={topic.title} className="relative z-10 w-full h-full object-contain  transition-all duration-700" />
                       </div>
 
                       <div className="z-10 flex-1">
                         <div className="flex items-center gap-3 mb-4">
-                          <span className={`${topic.level === "Beginner" ? "bg-green-500/10 text-green-600 border-green-500/20" :
-                            topic.level === "Intermediate" ? "bg-amber-500/10 text-amber-600 border-amber-500/20" :
-                              "bg-cyan-500/10 text-cyan-600 border-cyan-500/20"
-                            } px-2.5 py-1 rounded-full text-[8px] font-bold uppercase tracking-wider flex items-center gap-1.5 border`}>
+                          <span className={`${topic.level === "Beginner" ? "bg-green-500/10 text-green-500 border-green-500/20" :
+                            topic.level === "Intermediate" ? "bg-amber-500/10 text-amber-500 border-amber-500/20" :
+                              "bg-cyan-500/10 text-cyan-500 border-cyan-500/20"
+                            } px-3 py-1 rounded-full text-[8px] font-bold font-mono uppercase tracking-[0.2em] flex items-center gap-1.5 border`}>
                             <span className={`${topic.level === "Beginner" ? "bg-green-500" :
                               topic.level === "Intermediate" ? "bg-amber-500" :
                                 "bg-cyan-500"
-                              } w-1 h-1 rounded-full`} />
+                              } w-1 h-1 rounded-full shadow-[0_0_8px_currentColor]`} />
                             {topic.level}
                           </span>
-                          <span className="text-[9px] font-sans font-medium text-muted-foreground/60 uppercase tracking-widest whitespace-nowrap">
+                          <span className="text-[9px] font-mono font-bold text-muted-foreground/30 uppercase tracking-widest whitespace-nowrap">
                             {lessonCount} Lessons
                           </span>
                         </div>
 
-                        <h3 className="text-3xl font-serif font-medium tracking-tight mb-3 group-hover:text-primary transition-colors duration-500">
+                        <h3 className="text-3xl font-sans font-medium tracking-tight mb-3 group-hover:text-primary transition-colors duration-500 italic">
                           {topic.title}
                         </h3>
-                        <p className="text-sm text-muted-foreground/80 leading-relaxed line-clamp-2 italic">
+                        <p className="text-sm text-muted-foreground/60 leading-relaxed line-clamp-2 italic font-sans">
                           {topic.description}
                         </p>
                       </div>
 
-                      <div className="z-10 pt-4 border-t border-border/10 flex items-center justify-between">
-                        <div className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-primary flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
-                          Explore <ArrowRight className="w-3 h-3 transition-transform" />
+                      <div className="z-10 pt-6 border-t border-white/5 flex items-center justify-between">
+                        <div className="font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-primary flex items-center gap-3 group-hover:gap-6 transition-all duration-300">
+                          EXEC_MODULE <ArrowRight className="w-3 h-3 transition-transform" />
                         </div>
-                        <div className="flex items-center gap-2 text-[9px] font-sans font-bold uppercase tracking-widest text-muted-foreground/40 italic">
-                          <Clock className="w-3 h-3 text-primary/40" />
-                          {lessonCount * 45} MINS EST.
+                        <div className="flex items-center gap-2 text-[9px] font-mono font-bold uppercase tracking-widest text-muted-foreground/20 italic">
+                          <Clock className="w-3 h-3 text-primary/20" />
+                          {lessonCount * 45}M_EST
                         </div>
                       </div>
                     </div>
@@ -273,13 +296,21 @@ export default function Home() {
             })}
           </div>
         </div>
+
+        {/* Bottom Connective Bloom (Transition to Games) */}
+        <div className="absolute -bottom-48 right-0 w-[50vw] h-[50vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
       </section>
 
       {/* Games Highlight — List style */}
       <section
         id="projects"
-        className="py-32 px-8 border-t border-border/20 bg-muted/5"
+        className="py-32 px-8 section-connector bg-muted/5 relative overflow-hidden"
       >
+        {/* Top Connective Bloom */}
+        <div className="absolute -top-48 right-0 w-[50vw] h-[50vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
+
+        {/* Central Connective Bloom (Transition to Vision) */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="flex flex-col md:flex-row justify-between items-baseline mb-20 gap-8"
@@ -290,9 +321,9 @@ export default function Home() {
           >
             <div>
               <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-6">
-                Digital Games Archive
+                Additional Games Archive
               </p>
-              <h2 className="text-6xl font-serif font-medium tracking-tight hover:text-primary transition-colors duration-500 cursor-pointer">
+              <h2 className="text-6xl font-sans font-medium tracking-tight hover:text-primary transition-colors duration-500 cursor-pointer">
                 The Vault Game Portfolio.
               </h2>
             </div>
@@ -332,7 +363,7 @@ export default function Home() {
                       <img src={game.thumbnail} alt={game.title} className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <h3 className="text-3xl font-serif font-medium tracking-tight group-hover:text-primary transition-colors duration-500">
+                      <h3 className="text-3xl font-sans font-medium tracking-tight group-hover:text-primary transition-colors duration-500">
                         {game.title}
                       </h3>
                       <p className="text-xs font-sans tracking-[0.1em] text-muted-foreground uppercase mt-2">
@@ -373,7 +404,7 @@ export default function Home() {
                     >
                       <div className="pb-16  grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 items-center">
                         <div className="space-y-8">
-                          <p className="text-xl text-muted-foreground font-serif leading-relaxed italic">
+                          <p className="text-xl text-muted-foreground font-sans leading-relaxed italic">
                             {game.description}
                           </p>
                           <Button
@@ -409,7 +440,12 @@ export default function Home() {
       </section>
 
       {/* Vision — asymmetric layout */}
-      <section id="about" className="py-32 px-8 border-t border-border/20">
+      <section id="about" className="py-32 px-8 section-connector relative overflow-hidden">
+        {/* Top Connective Bloom */}
+        <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
+
+        {/* Side Connective Bloom (Transition to Services) */}
+        <div className="absolute -bottom-48 -right-24 w-[40vw] h-[40vw] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-24 items-start">
           <motion.div
             className="lg:sticky lg:top-32"
@@ -419,12 +455,12 @@ export default function Home() {
             viewport={{ once: false, amount: 0.5 }}
           >
             <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-6">
-              My Approach
+              Approach
             </p>
-            <h2 className="text-5xl font-serif font-medium tracking-tight leading-[1.1]">
+            <h2 className="text-5xl font-sans font-medium tracking-tight leading-[1.1]">
               Clean Code,
               <br />
-              Thoughtful Design.
+              Understanding flow it work.
             </h2>
           </motion.div>
           <motion.div
@@ -434,7 +470,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: false, amount: 0.5 }}
           >
-            <p className="text-2xl text-muted-foreground font-serif leading-relaxed max-w-2xl hover:text-foreground transition-colors duration-500">
+            <p className="text-2xl text-muted-foreground font-sans leading-relaxed max-w-2xl hover:text-foreground transition-colors duration-500">
               I'm a self-driven developer with hands-on experience across
               frontend, backend, mobile, and UI/UX design. I bring ideas to life
               from concept to deployment, with an obsession for quality and
@@ -453,57 +489,55 @@ export default function Home() {
                 </Link>
               </Button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <motion.div
-                className="space-y-4 p-6 border border-border/20 hover:border-primary/50 transition-all duration-500 group"
-                whileHover={{ y: -5 }}
+                className="space-y-6 p-10 glass-panel rounded-[32px] border-white/5 hover:border-primary/30 transition-all duration-500 group"
+                whileHover={{ y: -5, scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                <h3 className="text-xs font-sans font-bold uppercase tracking-widest text-foreground group-hover:text-primary transition-colors duration-500">
-                  Materials
+                <h3 className="text-[10px] font-mono font-bold uppercase tracking-[0.4em] text-primary group-hover:text-primary transition-colors duration-500">
+                  System Materials
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors duration-500">
-                  We use quality stone, warm wood, and fine textiles that feel
-                  good to touch and look better over time.
+                <p className="text-sm text-muted-foreground leading-relaxed italic font-sans opacity-70 group-hover:opacity-100 transition-colors duration-500">
+                  We use quality code, robust architectures, and refined aesthetics that feel premium and look better over time.
                 </p>
               </motion.div>
               <motion.div
-                className="space-y-4 p-6 border border-border/20 hover:border-primary/50 transition-all duration-500 group"
-                whileHover={{ y: -5 }}
+                className="space-y-6 p-10 glass-panel rounded-[32px] border-white/5 hover:border-primary/30 transition-all duration-500 group"
+                whileHover={{ y: -5, scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                <h3 className="text-xs font-sans font-bold uppercase tracking-widest text-foreground group-hover:text-primary transition-colors duration-500">
-                  Light & Space
+                <h3 className="text-[10px] font-mono font-bold uppercase tracking-[0.4em] text-primary group-hover:text-primary transition-colors duration-500">
+                  Light & Optics
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors duration-500">
-                  We design rooms around natural light — how it enters, moves,
-                  and changes throughout the day.
+                <p className="text-sm text-muted-foreground leading-relaxed italic font-sans opacity-70 group-hover:opacity-100 transition-colors duration-500">
+                  We design interfaces around light and depth — how it reflects, refracts, and moves through digital layers.
                 </p>
               </motion.div>
             </div>
             <Separator className="bg-border/20" />
             <motion.div
-              className="flex items-center gap-8 py-6 group cursor-pointer"
+              className="flex items-center gap-8 py-8 px-10 glass-panel rounded-[32px] border-white/5 group cursor-pointer"
               whileHover={{ x: 10 }}
               transition={{ duration: 0.3 }}
             >
               <motion.div
-                className="w-20 h-20 rounded-none bg-muted overflow-hidden border border-border/20 group-hover:border-primary/50 transition-all duration-500"
+                className="w-20 h-20 rounded-2xl bg-muted overflow-hidden glass-panel p-2 group-hover:border-primary/50 transition-all duration-500"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               >
                 <img
                   src="https://picsum.photos/seed/sivechheng/400/400"
                   alt="Lead Designer"
-                  className="w-full h-full object-cover group-hover:grayscale-0 grayscale transition-all duration-500"
+                  className="w-full h-full object-cover grayscale transition-all duration-700 rounded-xl"
                 />
               </motion.div>
               <div>
-                <h4 className="font-serif text-xl group-hover:text-primary transition-colors duration-500">
+                <h4 className="font-sans text-xl italic group-hover:text-primary transition-colors duration-500">
                   Sivechheng Kheang
                 </h4>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-bold mt-1">
-                  Principal Designer & Founder
+                <p className="text-[9px] font-mono uppercase tracking-[0.4em] text-primary font-bold mt-2">
+                  Technical Lead • Founder
                 </p>
               </div>
             </motion.div>
@@ -514,7 +548,7 @@ export default function Home() {
       {/* Games Highlight — List style */}
       {/* <section
         id="projects"
-        className="py-32 px-8 border-t border-border/20 bg-muted/5"
+        className="py-32 px-8 border-t border-border/20 bg-muted/5 section-connector"
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -528,7 +562,7 @@ export default function Home() {
               <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-6">
                 Digital Games Archive
               </p>
-              <h2 className="text-6xl font-serif font-medium tracking-tight hover:text-primary transition-colors duration-500 cursor-pointer">
+              <h2 className="text-6xl font-sans font-medium tracking-tight hover:text-primary transition-colors duration-500 cursor-pointer">
                 The Vault.
               </h2>
             </div>
@@ -560,7 +594,7 @@ export default function Home() {
                   }
                   className="w-full text-left py-12 grid grid-cols-[80px_1fr_auto] md:grid-cols-[100px_1fr_200px_auto] gap-8 items-center"
                 >
-                  <span className="font-serif text-muted-foreground/30 text-2xl">
+                  <span className="font-sans text-muted-foreground/30 text-2xl">
                     0{index + 1}
                   </span>
                   <div className="flex items-center gap-6">
@@ -568,7 +602,7 @@ export default function Home() {
                       <img src={game.thumbnail} alt={game.title} className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <h3 className="text-3xl font-serif font-medium tracking-tight group-hover:text-primary transition-colors duration-500">
+                      <h3 className="text-3xl font-sans font-medium tracking-tight group-hover:text-primary transition-colors duration-500">
                         {game.title}
                       </h3>
                       <p className="text-xs font-sans tracking-[0.1em] text-muted-foreground uppercase mt-2">
@@ -609,7 +643,7 @@ export default function Home() {
                     >
                       <div className="pb-16 pl-[100px] grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-16">
                         <div className="space-y-8">
-                          <p className="text-xl text-muted-foreground font-serif leading-relaxed italic">
+                          <p className="text-xl text-muted-foreground font-sans leading-relaxed italic">
                             {game.description}
                           </p>
                           <Button
@@ -645,7 +679,12 @@ export default function Home() {
       </section> */}
 
       {/* Services — minimalist cards */}
-      <section className="py-32 px-8 border-t border-border/20">
+      <section className="py-32 px-8 section-connector bg-background relative overflow-hidden">
+        {/* Top Connective Bloom */}
+        <div className="absolute -top-32 -right-24 w-[40vw] h-[40vw] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
+
+        {/* Shared Bottom Bloom (Transition to Contact) */}
+        <div className="absolute -bottom-48 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
             <motion.div
@@ -658,12 +697,12 @@ export default function Home() {
               <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-6">
                 What We Do
               </p>
-              <h2 className="text-5xl font-serif font-medium tracking-tight leading-tight mb-8">
+              <h2 className="text-5xl font-sans font-medium tracking-tight leading-tight mb-8">
                 Full Service,
                 <br />
                 Start to Finish.
               </h2>
-              <p className="text-muted-foreground font-serif italic text-lg mb-12">
+              <p className="text-muted-foreground font-sans italic text-lg mb-12">
                 "From the first floor plan to the last cushion — we handle every
                 step of the design process."
               </p>
@@ -694,7 +733,7 @@ export default function Home() {
               </div>
             </motion.div>
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-border/20 border border-border/20"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/5 border border-white/5"
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -703,25 +742,26 @@ export default function Home() {
               {services.map((service, idx) => (
                 <motion.div
                   key={service.name}
-                  className="bg-background p-10 flex flex-col justify-between hover:bg-muted/5 transition-colors group"
+                  className="bg-background/40 backdrop-blur-xl p-12 flex flex-col justify-between hover:bg-white/5 transition-all duration-500 group relative overflow-hidden"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: idx * 0.1 }}
                   viewport={{ once: false, amount: 0.5 }}
-                  whileHover={{ y: -8 }}
                 >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
                   <motion.div
-                    className="w-12 h-12 border border-border/40 flex items-center justify-center text-muted-foreground group-hover:border-primary group-hover:text-primary transition-all duration-500 mb-12"
+                    className="w-14 h-14 glass-panel rounded-2xl flex items-center justify-center text-muted-foreground group-hover:border-primary group-hover:text-primary transition-all duration-700 mb-16 shadow-lg shadow-black/20"
                     whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.8 }}
                   >
-                    <service.icon className="w-5 h-5" />
+                    <service.icon className="w-6 h-6" />
                   </motion.div>
                   <div>
-                    <h3 className="font-serif text-xl mb-3 group-hover:text-primary transition-colors duration-500">
+                    <h3 className="font-sans text-2xl mb-4 italic group-hover:text-primary transition-colors duration-500">
                       {service.name}
                     </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed group-hover:text-foreground/70 transition-colors duration-500">
+                    <p className="text-[13px] text-muted-foreground leading-relaxed italic opacity-60 group-hover:opacity-100 transition-all duration-500">
                       {service.detail}
                     </p>
                   </div>
@@ -733,7 +773,7 @@ export default function Home() {
       </section>
 
       {/* Contact CTA — atmospheric */}
-      <section className="py-40 px-8 border-t border-border/20 relative overflow-hidden text-center">
+      <section className="py-40 px-8 section-connector relative overflow-hidden text-center">
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-primary/5 blur-[150px] -z-10 rounded-full"
           animate={{ scale: [1, 1.1, 1] }}
@@ -749,32 +789,35 @@ export default function Home() {
           <p className="font-sans text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-10">
             Get in Touch
           </p>
-          <h2 className="text-6xl md:text-8xl font-serif font-medium tracking-tighter mb-16 px-4 hover:text-primary transition-colors duration-500 cursor-pointer">
+          <h2 className="text-6xl md:text-8xl font-sans font-medium tracking-tighter mb-16 px-4 hover:text-primary transition-colors duration-500 cursor-pointer">
             Have a project
             <br />
             in mind?
           </h2>
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center gap-8">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
             >
-              <Button asChild className="rounded-none h-16 px-12 bg-foreground text-background hover:bg-primary transition-colors duration-500 font-sans text-[11px] font-bold tracking-[0.2em] uppercase">
+              <Button asChild className="h-20 px-16 rounded-full bg-primary text-background hover:bg-primary shadow-2xl shadow-primary/20 transition-all duration-500 font-mono text-[11px] font-bold tracking-[0.4em] uppercase">
                 <Link to="/services#contact">
-                  Send a Project Brief
+                  Initialize Project Brief
                 </Link>
               </Button>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
             >
               <Button
                 variant="outline"
-                className="rounded-none h-16 px-12 font-sans text-[11px] font-bold tracking-[0.2em] uppercase hover:border-foreground transition-all duration-500"
+                asChild
+                className="h-20 px-16 rounded-full glass-panel border-white/10 text-foreground font-mono text-[11px] font-bold tracking-[0.4em] uppercase hover:bg-white/5 transition-all duration-500"
               >
                 <Link to="/services">
-                  Find Our Studio
+                  System Studio Locale
                 </Link>
               </Button>
             </motion.div>

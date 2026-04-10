@@ -13,17 +13,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
+import { Terminal, Send, Cpu } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: "NAME_REQUIRED_ERR.",
   }),
   email: z.string().email({
-    message: "Please enter a valid email address.",
+    message: "INVALID_IDENTIFIER_ERR.",
   }),
   message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
+    message: "DETAIL_INSUFFICIENT_ERR.",
   }),
 });
 
@@ -38,97 +39,108 @@ export function ContactForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("Form submitted:", values);
-    toast.success("Message sent successfully! I'll get back to you soon.", {
-      className: "font-sans uppercase text-[10px] tracking-widest font-bold",
+    console.log("Transmission sent:", values);
+    toast.success("TRANSMISSION_SUCCESS: I'll reach out shortly.", {
+      className: "font-mono uppercase text-[10px] tracking-widest font-bold bg-background border-primary/20 text-primary",
     });
     form.reset();
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field, fieldState }) => (
-              <FormItem className="relative flex flex-col group">
-                <FormControl>
-                  <Input
-                    placeholder=" "
-                    {...field}
-                    className={`peer h-14 rounded-none border-0 border-b ${fieldState.error ? 'border-destructive' : 'border-border'
-                      } bg-transparent px-0 text-xl font-serif focus-visible:ring-0 focus-visible:border-b-2 focus-visible:border-primary transition-all duration-300 placeholder:text-transparent`}
-                  />
-                </FormControl>
-                <FormLabel className={`absolute left-0 top-4 text-[10px] font-sans font-bold uppercase tracking-[0.3em]${fieldState.error ? 'text-destructive' : 'text-foreground/30'
-                  } transition-all duration-500 pointer-events-none peer-focus:-top-6 peer-focus:text-[9px] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-[9px] peer-[:not(:placeholder-shown)]:text-primary/60`}>
-                  Full Name
-                </FormLabel>
-                <FormMessage className="text-[10px] uppercase font-sans tracking-widest font-bold mt-2 text-destructive" />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field, fieldState }) => (
-              <FormItem className="relative flex flex-col group">
-                <FormControl>
-                  <Input
-                    placeholder=" "
-                    {...field}
-                    className={`peer h-14 rounded-none border-0 border-b ${fieldState.error ? 'border-destructive' : 'border-border'
-                      } bg-transparent px-0 text-xl font-serif focus-visible:ring-0 focus-visible:border-b-2 focus-visible:border-primary transition-all duration-300 placeholder:text-transparent`}
-                  />
-                </FormControl>
-                <FormLabel className={`absolute left-0 top-4 text-[10px] font-sans font-bold uppercase tracking-[0.3em] ${fieldState.error ? 'text-destructive' : 'text-foreground/30'
-                  } transition-all duration-500 pointer-events-none peer-focus:-top-6 peer-focus:text-[9px] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-[9px] peer-[:not(:placeholder-shown)]:text-primary/60`}>
-                  Email Address
-                </FormLabel>
-                <FormMessage className="text-[10px] uppercase font-sans tracking-widest font-bold mt-2 text-destructive" />
-              </FormItem>
-            )}
-          />
+    <div className="glass-panel p-10 md:p-16 rounded-[48px] border-white/5 relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 p-10 opacity-10">
+        <Cpu size={40} className="text-primary" />
+      </div>
+
+      <div className="flex items-center gap-4 mb-16">
+        <div className="w-10 h-10 glass-panel rounded-xl flex items-center justify-center text-primary">
+          <Terminal size={18} />
         </div>
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field, fieldState }) => (
-            <FormItem className="relative flex flex-col group">
-              <FormControl>
-                <Textarea
-                  placeholder=" "
-                  className={`peer min-h-[160px] rounded-none border-0 border-b ${fieldState.error ? 'border-destructive' : 'border-border'
-                    } bg-transparent px-0 py-4 text-xl font-serif focus-visible:ring-0 focus-visible:border-b-2 focus-visible:border-primary transition-all duration-300 resize-none placeholder:text-transparent leading-relaxed`}
-                  {...field}
-                />
-              </FormControl>
-              <FormLabel className={`absolute left-0 top-4 text-[10px] font-sans font-bold uppercase tracking-[0.3em] ${fieldState.error ? 'text-destructive' : 'text-foreground/30'
-                } transition-all duration-500 pointer-events-none peer-focus:-top-6 peer-focus:text-[9px] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-[9px] peer-[:not(:placeholder-shown)]:text-primary/60`}>
-                Project Detail
-              </FormLabel>
-              <FormMessage className="text-[10px] uppercase font-sans tracking-widest font-bold mt-2 text-destructive" />
-            </FormItem>
-          )}
-        />
-        <div className="flex justify-start pt-8">
-          <motion.div
-            whileHover={{ y: -4 }}
-            whileTap={{ y: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <Button
-              type="submit"
-              className="rounded-none h-20 px-16 bg-foreground text-background hover:bg-primary hover:text-primary-foreground transition-all duration-700 font-sans text-[11px] font-bold tracking-[0.4em] uppercase group overflow-hidden relative shadow-2xl shadow-black/10"
+        <div>
+          <h2 className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-primary mb-1">Inquiry Terminal</h2>
+          <div className="h-[1px] w-12 bg-primary/30" />
+        </div>
+      </div>
+
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field, fieldState }) => (
+                <FormItem className="relative flex flex-col group">
+                  <FormLabel className="font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground/60 mb-3 ml-1 transition-colors group-focus-within:text-primary">
+                    Agent Name
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="GIVEN_NAME"
+                      {...field}
+                      className="h-14 glass-panel bg-white/5 border-none rounded-2xl font-mono text-[11px] font-bold tracking-widest uppercase px-6 focus-visible:ring-1 focus-visible:ring-primary/40 transition-all"
+                    />
+                  </FormControl>
+                  <FormMessage className="font-mono text-[8px] uppercase tracking-widest text-primary/60 mt-2" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field, fieldState }) => (
+                <FormItem className="relative flex flex-col group">
+                  <FormLabel className="font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground/60 mb-3 ml-1 transition-colors group-focus-within:text-primary">
+                    System Email
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="IDENTIFIER@DOMAIN.SYS"
+                      {...field}
+                      className="h-14 glass-panel bg-white/5 border-none rounded-2xl font-mono text-[11px] font-bold tracking-widest uppercase px-6 focus-visible:ring-1 focus-visible:ring-primary/40 transition-all"
+                    />
+                  </FormControl>
+                  <FormMessage className="font-mono text-[8px] uppercase tracking-widest text-primary/60 mt-2" />
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field, fieldState }) => (
+              <FormItem className="relative flex flex-col group">
+                <FormLabel className="font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground/60 mb-3 ml-1 transition-colors group-focus-within:text-primary">
+                  Project Parameters [Brief]
+                </FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="DESCRIBE_YOUR_SYSTEM_OBJECTIVES..."
+                    className="min-h-[180px] glass-panel bg-white/5 border-none rounded-[32px] font-mono text-[11px] font-bold tracking-widest uppercase p-8 focus-visible:ring-1 focus-visible:ring-primary/40 transition-all resize-none leading-relaxed"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="font-mono text-[8px] uppercase tracking-widest text-primary/60 mt-2" />
+              </FormItem>
+            )}
+          />
+          <div className="flex justify-start pt-8">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.4 }}
             >
-              <span className="relative z-10 transition-transform duration-500 group-hover:-translate-y-1">Send Inquiry</span>
-              <div className="absolute inset-x-0 bottom-0 h-1 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
-            </Button>
-          </motion.div>
-        </div>
-      </form>
-    </Form>
+              <Button
+                type="submit"
+                className="h-20 px-16 rounded-full bg-primary text-background hover:bg-primary/90 transition-all duration-700 font-mono text-[11px] font-bold tracking-[0.4em] uppercase shadow-2xl shadow-primary/20 flex items-center gap-4"
+              >
+                <span>Initialize Transmission</span>
+                <Send size={16} />
+              </Button>
+            </motion.div>
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 }

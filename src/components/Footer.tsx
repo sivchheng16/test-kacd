@@ -1,150 +1,125 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import logo from "../../public/logo.png"
 import {
-  Square,
   Instagram,
   Facebook,
   MessageCircle,
   Github,
-  Target,
+  Command,
+  ArrowUpRight
 } from "lucide-react";
-import logo from "../../public/favicon.png"
+import { Button } from "./ui/button";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="py-16 px-8 border-t border-border/10 bg-gradient-to-t from-background/50 to-transparent">
+    <footer className="py-24 px-8 border-t border-white/5 bg-background relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
+
       <motion.div
-        className="max-w-7xl mx-auto"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: false, amount: 0.5 }}
+        className="max-w-7xl mx-auto relative z-10"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1 }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          {/* Logo and Description */}
-          <motion.div
-            className="space-y-4"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 flex items-center justify-center transition-transform duration-700 group-hover:rotate-45">
-                {/* <Square className="w-4 h-4 fill-primary" />
-                 */}
-                <img src={logo} alt="logo" className="w-full h-full object-cover" />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-24">
+          {/* Brand Column */}
+          <div className="md:col-span-2 space-y-10">
+            <Link to="/" className="flex items-center gap-4 group">
+              <div className="w-12 h-12 flex items-center justify-center text-primary group-hover:rotate-12 transition-transform duration-500">
+                {/* <Command size={24} /> */}
+                <img src={logo} alt="logo" className="w-full h-full object-contain" />
               </div>
-              <span className="font-serif text-xl font-bold tracking-wider text-foreground">
-                SIVCHHENG
+              <span className="font-sans text-3xl font-medium tracking-[0.2em] text-foreground">
+                Portfolio
+                {/* <span className="italic font-light opacity-60">Studio.</span> */}
               </span>
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Crafting exceptional interior design experiences that blend
-              functionality, aesthetics, and personal style. Transforming spaces
-              into homes.
+            <p className="text-xl text-muted-foreground font-sans leading-relaxed italic opacity-80 max-w-sm">
+              "Building high-performance digital systems that balance technical mastery with intuitive user design."
             </p>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div
-            className="space-y-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
-              Explore
-            </h3>
-            <div className="space-y-2">
+            <div className="flex gap-4">
               {[
-                { name: "Portfolio", path: "/portfolio" },
+                { icon: Github, href: "https://github.com/sivchheng16" },
+                { icon: MessageCircle, href: "https://t.me/sivchhengkheang" },
+                { icon: Instagram, href: "https://instagram.com/chhe_ng16" }
+              ].map((social, i) => (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 glass-panel rounded-full flex items-center justify-center text-muted-foreground hover:text-primary hover:scale-110 transition-all duration-300"
+                >
+                  <social.icon size={20} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="space-y-8">
+            <h3 className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Systems Map</h3>
+            <div className="space-y-4">
+              {[
+                { name: "Global Home", path: "/" },
+                { name: "The Collective", path: "/about" },
                 { name: "Services", path: "/services" },
-                { name: "About", path: "/about" },
-                { name: "Vault", path: "/vault" },
+                { name: "Archive", path: "/portfolio" },
+                { name: "The Vault", path: "/vault" }
               ].map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className="block text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
+                  className="group flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors font-sans italic text-lg"
                 >
                   {link.name}
+                  <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
                 </Link>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          {/* Social Links */}
-          <motion.div
-            className="space-y-4"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
-              Connect
-            </h3>
-            <div className="flex gap-6">
-              {[
-                {
-                  label: "Instagram",
-                  href: "https://instagram.com/chhe_ng16 ",
-                  icon: Instagram,
-                  target: "_blank",
-                },
-                {
-                  label: "Facebook",
-                  href: "https://facebook.com/chhengcoke",
-                  icon: Facebook,
-                  target: "_blank",
-                },
-                {
-                  label: "Telegram",
-                  href: "https://t.me/sivchhengkheang",
-                  icon: MessageCircle,
-                  target: "_blank",
-                },
-                {
-                  label: "Github",
-                  href: "https://github.com/sivchheng16",
-                  icon: Github,
-                  target: "_blank",
-                },
-              ].map((link) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target={link.target}
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <link.icon className="w-4 h-4 text-primary" />
-                  {link.label}
-                </motion.a>
-              ))}
+          {/* Studio Info */}
+          <div className="space-y-8">
+            <h3 className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Studio Location</h3>
+            <div className="space-y-6">
+              <div className="glass-panel p-6 rounded-2xl border-white/5">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-foreground font-bold mb-2">Phnom Penh, KH</p>
+                <p className="text-sm text-muted-foreground leading-relaxed italic font-sans">
+                  KOOMPI HQ, No. 34-36<br />
+                  St. 200, Phsar Thmei II
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                className="w-full h-14 rounded-full glass-panel border-white/10 font-mono text-[10px] font-bold tracking-widest uppercase hover:bg-primary hover:text-background transition-all"
+              >
+                Inquiry Terminal
+              </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <motion.div
-          className="pt-8 border-t border-border/20 flex flex-col md:flex-row justify-between items-center gap-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <motion.p
-            className="text-xs font-medium uppercase tracking-widest text-muted-foreground/60 hover:text-muted-foreground transition-colors duration-500"
-            whileHover={{ letterSpacing: "0.05em" }}
-          >
-            © 2025 SIVCHHENG KHEANG — As a member apprentice in KOOMPI company,
-            Phnom Penh Cambodia
-          </motion.p>
-          <p className="text-xs text-muted-foreground/40">
-            Crafted with passion and precision
+        {/* Legal & Credits */}
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <p className="font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground/60">
+              © {currentYear} SIVCHHENG KHEANG // ARCHITECTED IN PHNOM PENH
+            </p>
+            <div className="h-4 w-px bg-white/10 hidden md:block" />
+            <p className="font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-primary">
+              MEMBER OF KOOMPI COLLECTIVE
+            </p>
+          </div>
+          <p className="font-sans italic text-sm text-muted-foreground/40">
+            Powered by sovereign code and creative intuition.
           </p>
-        </motion.div>
+        </div>
       </motion.div>
     </footer>
   );

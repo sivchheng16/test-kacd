@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { ArrowLeft, Clock, BookOpen, LayoutTemplate, Paintbrush, Code2, AppWindow } from "lucide-react";
 import { TOPICS } from "../constants";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import Footer from "../components/Footer";
 
 const iconMap: Record<string, React.FC<any>> = {
@@ -23,74 +24,76 @@ export default function TopicDetails() {
 
   if (!topic) {
     return (
-      <div className="min-h-screen pt-32 px-8 flex flex-col items-center justify-center text-center">
-        <h2 className="text-4xl font-serif mb-6">Topic not found</h2>
-        <Button asChild variant="outline" className="rounded-none font-sans text-[10px] font-bold tracking-[0.2em] uppercase">
-          <Link to="/">Return to Home</Link>
+      <div className="min-h-screen bg-background text-foreground pt-32 px-8 flex flex-col items-center justify-center text-center">
+        <h2 className="text-4xl font-sans mb-6">Terminal Error: Topic Not Found</h2>
+        <Button asChild variant="outline" className="h-14 px-10 rounded-full glass-panel font-mono text-[10px] font-bold tracking-widest uppercase">
+          <Link to="/">Reboot to Home</Link>
         </Button>
       </div>
     );
   }
 
-  const IconComponent = iconMap[topic.iconName] || BookOpen;
-
   return (
-    <div className="min-h-screen bg-background text-foreground pt-32 flex flex-col selection:bg-primary/30">
-      <div className="container mx-auto px-6 max-w-5xl flex-1">
+    <div className="min-h-screen bg-background text-foreground pt-32 flex flex-col relative overflow-hidden">
+      {/* Background Mesh Gradients */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-[5%] left-[10%] w-[50vw] h-[50vw] bg-primary/5 blur-[120px] rounded-full" />
+      </div>
+
+      <div className="container mx-auto px-6 max-w-5xl flex-1 relative z-10">
         {/* Navigation & Header */}
-        <div className="mb-16">
-          <Button
-            asChild
-            variant="link"
-            className="p-0 h-auto font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-muted-foreground hover:text-primary mb-12 flex items-center gap-2"
+        <div className="mb-24">
+          <Link 
+            to="/"
+            className="group inline-flex items-center gap-4 font-mono text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-12 hover:gap-6 transition-all"
           >
-            <Link to="/">
-              <ArrowLeft className="w-4 h-4" /> Back to Home
-            </Link>
-          </Button>
+            <ArrowLeft className="w-4 h-4" /> 
+            <span>System Return</span>
+          </Link>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col md:flex-row gap-10 items-start md:items-center justify-between"
+            transition={{ duration: 1 }}
+            className="flex flex-col md:flex-row gap-12 items-start md:items-center justify-between"
           >
-            <div className="flex items-center gap-8">
-              <div className="relative w-24 h-24 border border-border/40 flex items-center justify-center bg-white shrink-0 overflow-hidden shadow-2xl rounded-sm group">
-                <div className={`absolute inset-0 bg-gradient-to-tr ${topic.gradient} opacity-30`} />
-                <img src={topic.logo} alt={topic.title} className="relative z-10 w-full h-full object-cover p-3 shadow-inner" />
+            <div className="flex items-center gap-10">
+              <div className="relative w-28 h-28 glass-panel p-2 rounded-3xl overflow-hidden group">
+                <div className={`absolute inset-0 bg-gradient-to-tr ${topic.gradient} opacity-20`} />
+                <img 
+                  src={topic.logo} 
+                  alt={topic.title} 
+                  className="relative z-10 w-full h-full object-cover rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-1000" 
+                />
               </div>
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className={`${
-                    topic.level === "Beginner" ? "bg-green-500/10 text-green-600 border-green-500/20" :
-                    topic.level === "Intermediate" ? "bg-amber-500/10 text-amber-600 border-amber-500/20" :
-                    "bg-cyan-500/10 text-cyan-600 border-cyan-500/20"
-                  } px-2.5 py-1 rounded-full text-[8px] font-bold uppercase tracking-[0.2em] flex items-center gap-1.5 border`}>
-                    <span className={`${
-                      topic.level === "Beginner" ? "bg-green-500" :
-                      topic.level === "Intermediate" ? "bg-amber-500" :
-                      "bg-cyan-500"
-                    } w-1 h-1 rounded-full`} />
-                    {topic.level} Level
+                <div className="flex items-center gap-4 mb-6">
+                  <span className={cn(
+                    "px-4 py-1.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-widest flex items-center gap-2 border",
+                    topic.level === "Beginner" ? "border-green-500/20 text-green-500 bg-green-500/5" :
+                    topic.level === "Intermediate" ? "border-amber-500/20 text-amber-500 bg-amber-500/5" :
+                    "border-primary/20 text-primary bg-primary/5"
+                  )}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
+                    {topic.level} System
                   </span>
-                  <span className="text-[9px] font-sans font-bold text-muted-foreground/30 uppercase tracking-[0.3em]">
-                    Documented Module
+                  <span className="text-[9px] font-mono font-bold text-muted-foreground/40 uppercase tracking-[0.3em]">
+                    Module: {topic.id}
                   </span>
                 </div>
-                <h1 className="text-6xl md:text-8xl font-serif font-medium tracking-tight leading-[0.8] mb-2 uppercase">
+                <h1 className="text-6xl md:text-8xl font-sans font-medium tracking-tighter leading-[0.8] mb-2 uppercase text-gradient">
                   {topic.title}
                 </h1>
               </div>
             </div>
             
-            <div className="flex flex-col items-end gap-3 text-right">
-              <div className="text-sm font-serif italic text-muted-foreground/60 border-b border-border/20 pb-2">
-                {topic.lessons.length} Lessons in this module
+            <div className="flex flex-col items-end gap-3 text-right glass-panel p-6 rounded-2xl border-white/5">
+              <div className="text-base font-sans italic text-muted-foreground">
+                {topic.lessons.length} Modules in Queue
               </div>
-              <div className="flex items-center gap-3 text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-primary/40">
-                <Clock className="w-3.5 h-3.5" />
-                {topic.lessons.length * 45} Minutes estimated
+              <div className="flex items-center gap-4 text-[10px] font-mono font-bold uppercase tracking-widest text-primary">
+                <Clock className="w-4 h-4" />
+                {topic.lessons.length * 45} MINS RUNTIME
               </div>
             </div>
           </motion.div>
@@ -98,57 +101,61 @@ export default function TopicDetails() {
 
         {/* Description Section */}
         <motion.div 
-          className="mb-20 max-w-2xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-32 max-w-3xl border-l-2 border-primary/20 pl-12"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
         >
-          <p className="text-xl md:text-2xl font-serif leading-relaxed text-muted-foreground hover:text-foreground transition-colors duration-500">
+          <p className="text-2xl md:text-3xl font-sans leading-relaxed text-muted-foreground italic opacity-80">
             {topic.description}
           </p>
         </motion.div>
 
         {/* Lessons List */}
-        <div className="mb-32">
-          <div className="bg-border/20 h-px w-full mb-8"></div>
-          <h2 className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-12">
-            Course Syllabus
-          </h2>
+        <div className="mb-48">
+          <div className="flex items-center gap-6 mb-16">
+            <h2 className="font-mono text-[10px] font-bold tracking-[0.4em] text-primary uppercase">
+              Operational Syllabus
+            </h2>
+            <div className="h-px flex-1 bg-white/5" />
+          </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="space-y-6">
             {topic.lessons.length > 0 ? (
               topic.lessons.map((lesson, idx) => (
                 <motion.div
                   key={lesson.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: idx * 0.1 }}
                   viewport={{ once: true }}
                   className="group relative"
                 >
-                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-500 pointer-events-none" />
-                  <div className="p-8 border border-border/20 group-hover:border-primary/30 transition-colors duration-500 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 md:gap-12 items-center">
-                    <div className="font-serif text-3xl text-muted-foreground/30 group-hover:text-primary/50 transition-colors duration-500 w-12">
-                      0{idx + 1}
+                  <div className="glass-panel p-10 md:p-14 rounded-[40px] hover:border-primary/40 transition-all duration-700 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-10 md:gap-20 items-center">
+                    <div className="font-mono text-5xl font-bold text-primary/10 group-hover:text-primary/30 transition-colors">
+                      {(idx + 1).toString().padStart(2, '0')}
                     </div>
                     <div>
-                      <h3 className="text-2xl font-serif tracking-tight mb-2 group-hover:text-primary transition-colors duration-500">
+                      <h3 className="text-3xl font-sans font-medium mb-4 group-hover:text-primary transition-colors duration-500">
                         {lesson.title}
                       </h3>
-                      <p className="text-muted-foreground font-serif italic">
+                      <p className="text-lg text-muted-foreground font-sans italic opacity-70 group-hover:opacity-100 transition-opacity">
                         {lesson.description}
                       </p>
                     </div>
-                    <div className="flex items-center gap-3 text-xs font-sans uppercase font-bold tracking-widest text-muted-foreground/60 border border-border/20 px-4 py-2 self-start md:self-center shrink-0">
-                      <Clock className="w-3 h-3 text-primary" />
+                    <div className="flex items-center gap-3 px-6 py-3 glass-panel rounded-full text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground group-hover:text-primary transition-colors">
+                      <Clock size={14} className="text-primary/40 group-hover:text-primary transition-colors" />
                       {lesson.duration}
                     </div>
                   </div>
                 </motion.div>
               ))
             ) : (
-              <div className="text-center py-20 border border-border/20 border-dashed text-muted-foreground font-serif italic">
-                Lessons for this topic are currently in development.
+              <div className="text-center py-40 glass-panel rounded-[40px] border-dashed border-white/10">
+                <Code2 size={48} className="text-primary/20 mx-auto mb-8 animate-pulse" />
+                <p className="text-xl text-muted-foreground font-sans italic opacity-60">
+                  System state: Content for this terminal is currently being architected.
+                </p>
               </div>
             )}
           </div>

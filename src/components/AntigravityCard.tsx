@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import gsap from "gsap";
 import { Game } from "../constants";
-import { Play, Download, ExternalLink } from "lucide-react";
+import { Play, Download, ExternalLink, Terminal, Cpu } from "lucide-react";
 
 export function AntigravityCard({
   game,
@@ -19,22 +19,20 @@ export function AntigravityCard({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Entrance Animation: Staggered drop from Y axis
+    // Entrance Animation: Staggered reveal
     gsap.fromTo(
       cardRef.current,
       {
-        y: 100,
+        y: 60,
         opacity: 0,
-        rotateX: 0,
-        rotateZ: 0,
+        scale: 0.95,
       },
       {
         y: 0,
         opacity: 1,
-        rotateX: 0,
-        rotateZ: 0,
+        scale: 1,
         duration: 1.2,
-        delay: index * 0.15,
+        delay: index * 0.1,
         ease: "power4.out",
       },
     );
@@ -42,104 +40,124 @@ export function AntigravityCard({
 
   const handleMouseEnter = () => {
     gsap.to(cardRef.current, {
-      y: -30,
-      rotateX: 0,
-      rotateZ: 0,
-      scale: 1.05,
+      y: -20,
+      scale: 1.02,
       duration: 0.6,
       ease: "power2.out",
-      boxShadow: "0 30px 60px rgba(0,0,0,0.12)",
     });
   };
 
   const handleMouseLeave = () => {
     gsap.to(cardRef.current, {
       y: 0,
-      rotateX: 0,
-      rotateZ: 0,
       scale: 1,
       duration: 0.8,
       ease: "elastic.out(1, 0.75)",
-      boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
     });
   };
 
   return (
     <div
       ref={containerRef}
-      className="relative p-4 flex items-center justify-center min-h-[450px]"
+      className="relative p-2 flex items-center justify-center w-full"
     >
       <div
         ref={cardRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={() => onPlay(game)}
-        className="relative w-full max-w-[300px] aspect-[3/4] bg-white/40 backdrop-blur-xl border border-border/20 rounded-2xl overflow-hidden shadow-xl transition-shadow cursor-pointer group"
+        className="relative w-full glass-panel rounded-[32px] overflow-hidden shadow-2xl transition-all cursor-pointer group border-white/5 flex flex-col h-full"
       >
-        {/* Background Highlight */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-        {/* Play Indicator on Hover */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-20 pointer-events-none">
-          <div className="text-center">
-            <Play className="w-12 h-12 text-white fill-white mx-auto mb-2" />
-            <span className="font-sans text-sm font-bold uppercase tracking-widest text-white">
-              Click to Play
-            </span>
-          </div>
-        </div>
+        {/* Neon Glow Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+        
+        {/* Scanner Line Effect */}
+        <div className="absolute inset-x-0 h-[1px] bg-primary/30 z-20 top-0 group-hover:animate-scan opacity-0 group-hover:opacity-100 pointer-events-none" />
 
         {/* Thumbnail Layer */}
-        <div className="relative h-2/3 overflow-hidden">
+        <div className="relative aspect-video overflow-hidden shrink-0">
           <img
             src={game.thumbnail}
             alt={game.title}
-            className="w-full h-full object-cover transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+            className="w-full h-full object-cover  opacity-60 transition-all duration-1000 group-hover:opacity-100 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+          
+          {/* Module ID */}
+          <div className="absolute top-6 left-6 flex items-center gap-3">
+             <div className="w-8 h-8 glass-panel rounded-lg flex items-center justify-center text-primary backdrop-blur-3xl">
+                <Terminal size={14} />
+             </div>
+             <span className="font-mono text-[9px] font-bold tracking-[0.3em] text-white/40 group-hover:text-primary transition-colors">
+               MOD_00{index + 1}
+             </span>
+          </div>
+
+          {/* Level Indicator */}
+          <div className="absolute bottom-6 right-6 flex items-center gap-2 glass-panel px-3 py-1.5 rounded-full border-white/5">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="font-mono text-[8px] font-bold text-white/50 uppercase tracking-widest">Active</span>
+          </div>
         </div>
 
         {/* Content Layer */}
-        <div className="p-6 relative">
-          <div className="font-sans text-[10px] font-bold uppercase tracking-widest text-primary mb-2">
-            {game.category}
+        <div className="p-6 md:p-8 relative flex-1 flex flex-col justify-between space-y-2">
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+            <Cpu size={12} className="text-primary/60" />
+            <span className="font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-primary/60">
+              {game.category}
+            </span>
           </div>
-          <h3 className="font-serif text-2xl font-medium text-foreground group-hover:text-primary transition-colors">
-            {game.title}
-          </h3>
-          <p className="mt-2 text-xs text-muted-foreground font-sans leading-relaxed line-clamp-2">
-            {game.description}
-          </p>
+          
+            <h3 className="font-sans text-2xl md:text-3xl font-medium text-foreground group-hover:text-primary transition-colors leading-tight">
+              {game.title}
+            </h3>
+          
+            <p className="font-sans text-xs md:text-sm text-muted-foreground/80 leading-relaxed italic mb-8">
+              {game.description}
+            </p>
+          </div>
 
-          <div className="mt-6 flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500">
-            <div  
-              onClick={(e) => {
+          <div className="flex items-center gap-4">
+            <button
+               onClick={(e) => {
                 e.stopPropagation();
                 onPlay(game);
               }}
-              className="flex-1 px-4 py-2 rounded-lg bg-primary text-background font-sans text-[11px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors cursor-pointer"
-              title="Play Game Now"
+              className="flex-1 h-12 glass-panel rounded-full flex items-center justify-center gap-3 text-primary hover:bg-primary hover:text-background transition-all"
             >
-              <Play className="w-4 h-4 fill-current" />
-              <span>Play</span>
-            </div>
+              <Play size={14} className="fill-current" />
+              <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Execute</span>
+            </button>
+            
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onDownload(game.appImageUrl);
               }}
-              className="px-4 py-2 rounded-lg border border-primary/40 text-foreground font-sans text-[11px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-primary/10 hover:border-primary transition-colors"
-              title="Download .appImage"
+              className="w-12 h-12 glass-panel rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-all"
             >
-              <Download className="w-4 h-4" />
-              <span className="hidden sm:inline">Download</span>
+              <Download size={18} />
             </button>
           </div>
         </div>
 
-        {/* Glossy Overlay */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/20 to-transparent border-t border-l border-white/40" />
+        {/* Technical Border Overlay */}
+        <div className="absolute inset-0 border border-white/5 rounded-[32px] pointer-events-none group-hover:border-primary/20 transition-colors duration-1000" />
       </div>
+
+      <style>{`
+        @keyframes scan {
+          0% { top: 0%; opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
+        }
+        .animate-scan {
+          animation: scan 3s linear infinite;
+        }
+      `}</style>
     </div>
   );
 }

@@ -68,248 +68,188 @@ export default function About() {
   };
 
   return (
-    <div className="min-h-screen pt-32 pb-20">
+    <div className="min-h-screen bg-background text-foreground pt-32 pb-20 relative overflow-hidden">
+      {/* Background Mesh Gradients */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-[10%] right-[5%] w-[40vw] h-[40vw] bg-primary/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[20%] left-[10%] w-[30vw] h-[30vw] bg-secondary/5 blur-[100px] rounded-full" />
+      </div>
+
       {/* Hero Section */}
-      <section className="px-8 mb-32">
+      <section className="px-8 mb-40 relative z-10 section-connector">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1 }}
           >
-            <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-6">
-              Developer
-            </p>
-            <h1 className="text-7xl md:text-8xl font-serif font-medium tracking-tighter leading-[0.9] mb-12 uppercase">
-              Sivchheng Kheang
-              <br />
-              Building Digital Experiences.
+            <div className="flex items-center gap-4 mb-8">
+              <span className="w-12 h-[1px] bg-primary" />
+              <p className="font-mono text-[10px] font-bold tracking-[0.4em] text-primary uppercase">
+                Studio Member
+              </p>
+            </div>
+            <h1 className="text-6xl md:text-8xl font-sans font-medium tracking-tighter leading-[0.85] mb-12 uppercase text-gradient">
+              Sivchheng Kheang <br />
+              <span className="opacity-50 italic font-light lowercase font-sans">designing the future.</span>
             </h1>
-            <p className="text-2xl text-muted-foreground font-serif leading-relaxed max-w-2xl italic">
-              "Self-driven developer passionate about creating clean,
-              functional, and thoughtful digital experiences. From concept to
-              deployment, with an obsession for quality."
-            </p>
+            
+            <div className="glass-panel p-10 md:p-16 rounded-[48px] max-w-4xl border-white/5 relative overflow-hidden group">
+               <div className="absolute top-0 right-0 p-8 opacity-5">
+                 <Quote size={80} className="text-primary" />
+               </div>
+               <p className="text-2xl md:text-4xl text-foreground font-sans leading-relaxed italic relative z-10">
+                 "Merging technical precision with creative instinct to build digital environments that define the future."
+               </p>
+               <div className="mt-12 flex items-center gap-6">
+                  <div className="h-px w-12 bg-primary/30" />
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-primary">System Philosophy_v2.0</span>
+               </div>
+            </div>
           </motion.div>
         </div>
+        {/* Bottom Connective Bloom (Transition to Story) */}
+        <div className="absolute -bottom-48 left-[20%] w-[50vw] h-[50vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
       </section>
 
       {/* Founder Story */}
-      <section className="px-8 mb-40">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+      <section className="px-8 mb-48 relative section-connector">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_1.8fr] gap-20 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="aspect-[4/5] bg-muted overflow-hidden border border-border/20"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            className="relative group"
           >
-            <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1200"
-              alt="Sivchheng Kheang"
-              className="w-full h-full object-cover transition-all duration-1000 scale-105 hover:scale-100"
-            />
+            <div className="absolute -inset-4 bg-primary/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            <div className="aspect-[4/5] bg-muted/10 overflow-hidden glass-panel p-4 rounded-[48px] border-white/5 relative z-10 shadow-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1200"
+                alt="Sivchheng Kheang"
+                className="w-full h-full object-cover rounded-[36px] grayscale group-hover:grayscale-0 transition-all duration-1000 ease-in-out scale-105 group-hover:scale-100"
+              />
+              {/* Technical Overlay */}
+              <div className="absolute bottom-10 left-10 right-10 p-6 glass-panel rounded-2xl border-white/10 backdrop-blur-3xl">
+                 <div className="flex justify-between items-center">
+                    <div className="space-y-1">
+                       <p className="font-mono text-[8px] font-bold text-primary uppercase tracking-widest">Biometric Identity</p>
+                       <p className="font-mono text-[10px] font-bold text-white/50 tracking-widest">KHEANG_S_01</p>
+                    </div>
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20">
+                       <CheckCircle2 size={14} className="text-primary" />
+                    </div>
+                 </div>
+              </div>
+            </div>
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="space-y-10"
+            className="space-y-12"
           >
-            <div className="text-primary">
-              <Quote className="w-12 h-12 mb-6" />
+            <div className="inline-flex items-center justify-center w-16 h-16 glass-panel rounded-2xl text-primary">
+              <Quote size={28} strokeWidth={1.5} />
             </div>
-            <h2 className="text-4xl font-serif font-medium">
-              From Concept to Deployment.
-            </h2>
-            <p className="text-lg text-muted-foreground font-serif leading-relaxed italic">
-              I'm a self-driven developer with hands-on experience across
-              frontend, backend and UI/UX design. With a strong
-              foundation in digital products and a commitment to continuous
-              growth, I bring ideas to life through clean code and thoughtful
-              design.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Before I start to work with KOOMPI. I had to learn many things as a member apprentice from the team in KOOMPI. Then I can work directly with stakeholders from the initial concept through
-              final deployment.  Every project is unique, and I approach each
-              with the same dedication to detail and quality. My goal is to
-              understand the problem, create elegant solutions, and build
-              products that people genuinely enjoy using.
-            </p>
-            <div className="pt-8">
-              <div className="flex items-center gap-6">
-                <div>
-                  <h4 className="font-serif text-xl uppercase tracking-wider">
-                    Sivchheng Kheang
-                  </h4>
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-bold mt-1">
-                    Full-Stack Developer & Designer
-                  </p>
-                  <p className="text-[9px] uppercase tracking-[0.2em] text-muted-foreground mt-2">
-                    Phnom Penh, Cambodia
-                  </p>
-                </div>
+            
+            <div className="space-y-8">
+              <h2 className="text-5xl md:text-6xl font-sans font-medium leading-[0.9] tracking-tighter">
+                Architecting <span className="text-primary italic">Seamless</span> <br /> Digital Systems.
+              </h2>
+              <p className="text-xl text-muted-foreground font-sans leading-relaxed italic border-l-2 border-primary/20 pl-10 opacity-80">
+                As a developer with deep roots in Cambodia's technical evolution, I specialize in bridging the gap between sophisticated backend architecture and high-end user design.
+              </p>
+              <p className="text-muted-foreground leading-relaxed text-sm font-sans max-w-xl opacity-60">
+                My journey at KOOMPI as a senior apprentice taught me that technology is only as good as the problem it solves. Today, I work at the intersection of performance and aesthetics, ensuring every line of code contributes to a faster, more beautiful digital world.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-8 pt-6">
+              <div className="h-px flex-1 bg-white/10" />
+              <div className="flex flex-col items-end">
+                <h4 className="font-mono text-xs uppercase tracking-widest text-primary font-bold">
+                  Phnom Penh, KH
+                </h4>
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mt-2">
+                  Established 2018
+                </p>
               </div>
             </div>
           </motion.div>
         </div>
+        {/* Bottom Connective Bloom (Transition to Philosophy) */}
+        <div className="absolute -bottom-48 right-[10%] w-[60vw] h-[60vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-32 px-8 bg-muted/5 border-y border-border/20">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            {philosophyItems.map((item) => (
+      <section className="py-40 px-8 section-connector relative overflow-hidden">
+        {/* Top Connective Bloom */}
+        <div className="absolute -top-48 right-[10%] w-[60vw] h-[60vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-24">
+             <p className="font-mono text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-6">Execution Strategy</p>
+             <h2 className="text-5xl md:text-6xl font-sans font-medium">Core Axioms.</h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {philosophyItems.map((item, idx) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="space-y-6"
+                transition={{ duration: 0.8, delay: idx * 0.1 }}
+                className="glass-panel p-12 rounded-[48px] border-white/5 hover:border-primary/40 transition-all duration-700 group relative overflow-hidden"
               >
-                <div className="w-12 h-12 border border-primary/20 flex items-center justify-center text-primary mb-8">
-                  <item.icon className="w-5 h-5" />
+                <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-10 transition-opacity">
+                  <item.icon size={100} className="text-primary" />
                 </div>
-                <h3 className="text-2xl font-serif font-medium">
+                
+                <div className="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center text-primary mb-12 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(var(--primary),0.2)] transition-all duration-700">
+                  <item.icon className="w-7 h-7" />
+                </div>
+                <h3 className="text-3xl font-sans font-medium mb-6 italic">
                   {item.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed italic font-serif">
+                <p className="text-muted-foreground leading-relaxed italic font-sans opacity-70 group-hover:opacity-100 transition-opacity duration-700">
                   {item.detail}
                 </p>
               </motion.div>
             ))}
           </div>
         </div>
+        {/* Bottom Connective Bloom (Transition to Final Statement) */}
+        <div className="absolute -bottom-48 left-1/2 -translate-x-1/2 w-[70vw] h-[70vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
       </section>
 
-      {/* Ethos & History Section */}
-      <section className="border-t border-border/10 overflow-hidden relative bg-muted/5 py-40">
-        {/* Subtle Background Ornaments */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.2, 1],
-              x: [0, 50, 0],
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-0 right-0 w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px] -mr-20 -mt-20" 
-          />
-          <motion.div 
-            animate={{ 
-              scale: [1.2, 1, 1.2],
-              x: [0, -40, 0],
-            }}
-            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-0 left-0 w-[30%] h-[30%] rounded-full bg-blue-400/5 blur-[100px] -ml-20 -mb-20" 
-          />
-        </div>
-
-        <div className="max-w-5xl mx-auto px-8 relative z-10 space-y-48">
-          {/* Ethos */}
-          <section className="space-y-16">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <p className="font-sans text-[10px] font-bold tracking-[0.4em] text-primary uppercase">Our Ethos</p>
-              <h2 className="text-5xl md:text-7xl lg:text-8xl text-foreground font-serif leading-[0.9] tracking-tighter">
-                We believe a <span className="italic font-light text-primary/60">well-designed</span> space can change how you feel the moment you walk into it.
-              </h2>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 pt-16 border-t border-border/20">
-              {ethos.map((item, idx) => (
-                <motion.div 
-                  key={item.title} 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  viewport={{ once: true }}
-                  className="space-y-6"
-                >
-                  <h3 className="font-sans text-[11px] font-bold uppercase tracking-widest text-foreground">{item.title}</h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed italic font-serif opacity-80">{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </section>
-
-          {/* History */}
-          <section className="space-y-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <p className="font-sans text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-8">History</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 text-muted-foreground font-serif leading-relaxed text-xl italic font-light">
-                <p>
-                  Founded in 2018, SIVCHHENG KHEANG started as a small studio in Phnom Penh focused on getting the most out of modest spaces. Since then, we have grown into a full digital practice working on products, websites, and bespoke interfaces across Cambodia.
-                </p>
-                <p>
-                  We work directly with each partner from the first conversation to the final deployment. No two projects are the same, and we keep our process close and personal to make sure every detail is right.
-                </p>
-              </div>
-            </motion.div>
-          </section>
-
-          {/* Presence */}
-          <section className="space-y-12 pt-16 border-t border-border/20">
-            <motion.div
-               initial={{ opacity: 0 }}
-               whileInView={{ opacity: 1 }}
-               transition={{ duration: 1 }}
-               viewport={{ once: true }}
-               className="flex flex-col md:flex-row md:items-center justify-between gap-12"
-            >
-              <div className="space-y-4">
-                <p className="font-sans text-[10px] font-bold tracking-[0.4em] text-primary uppercase">Presence</p>
-                <p className="text-sm font-serif italic text-muted-foreground">Connecting ideas across the digital landscape.</p>
-              </div>
-              <div className="flex flex-wrap gap-12">
-                {[
-                  { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/koompi/' },
-                  { name: 'LinkedIn', icon: Linkedin, url: '#' },
-                  { name: 'Facebook', icon: MessageCircle, url: 'https://www.facebook.com/koompi' },
-                ].map(link => (
-                  <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 text-muted-foreground hover:text-foreground transition-all">
-                    <link.icon className="w-5 h-5 text-muted-foreground/30 group-hover:text-primary transition-colors" />
-                    <span className="font-sans text-[11px] font-bold thin uppercase tracking-widest group-hover:tracking-[0.2em] transition-all">{link.name}</span>
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-          </section>
-        </div>
-      </section>
-
-      {/* Philosophy Statement */}
-      <section className="py-40 px-8 text-center max-w-5xl mx-auto">
+      {/* Final Statement */}
+      <section className="py-48 px-8 section-connector text-center max-w-5xl mx-auto relative overflow-hidden">
+        {/* Top Connective Bloom */}
+        <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[70vw] h-[70vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="glass-panel py-32 px-12 md:px-20 rounded-[80px] border-white/5 relative overflow-hidden shadow-[0_64px_128px_-16px_rgba(0,0,0,0.5)]"
         >
-          <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-12">
-            My Mission
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
+          <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-primary/5 blur-[150px] rounded-full" />
+          
+          <p className="font-mono text-[10px] font-bold tracking-[0.5em] text-primary uppercase mb-16">
+            Module Mission_v2
           </p>
-          <h2 className="text-5xl md:text-6xl font-serif font-medium tracking-tight mb-20 leading-tight">
-            To build digital experiences that are clean, functional, and
-            delightful — one thoughtful line of code at a time.
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-sans font-medium tracking-tighter mb-20 leading-[0.9] text-gradient">
+            We build digital environments that are <span className="italic">clean</span>, <span className="italic">functional</span>, and <span className="italic">high-performance</span>.
           </h2>
+          
           <Button
             size="lg"
             onClick={() => navigate("/services")}
-            className="rounded-none h-16 px-12 font-sans text-xs tracking-[0.2em] uppercase bg-foreground text-background hover:bg-primary transition-colors"
+            className="h-20 px-16 rounded-full bg-primary text-background font-mono text-[11px] font-bold tracking-[0.4em] uppercase hover:bg-primary shadow-2xl shadow-primary/20 transition-all duration-500"
           >
-            View Our Work <ArrowRight className="ml-4 w-4 h-4" />
+            Execute Exploration <ArrowRight className="ml-4 w-4 h-4" />
           </Button>
         </motion.div>
       </section>

@@ -1,183 +1,162 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { LogIn, LogOut, User as UserIcon, Menu, X, Square } from "lucide-react";
+import { Menu, X, Terminal, Command } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
-import { toast } from "sonner";
-import logo from "../../public/favicon.png"
+import { AnimatePresence, motion } from "motion/react";
+import logo from "../../public/logo.png"
 
 export default function Navbar() {
-  const location = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, signOut } = useAuth();
-  const [scrolled, setScrolled] = React.useState(false);
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const location = useLocation();
 
-
-
-  React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (path: string) =>
-    path === "/"
-      ? location.pathname === "/" || location.pathname === "/home"
-      : location.pathname === path;
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
-    // { name: "Portfolio", path: "/portfolio" },
     { name: "Services", path: "/services" },
-    { name: "Vault", path: "/vault" },
+    { name: "Systems", path: "/portfolio" },
+    { name: "The Vault", path: "/vault" },
   ];
 
   return (
-    <header
+    <nav
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-500 ",
-        scrolled
-          ? "border-b border-border/50 bg-background/80 backdrop-blur-md py-4 shadow-sm"
-          : "bg-background/40 backdrop-blur-sm py-5 border-b border-border/20",
+        "fixed top-0 left-0 right-0 z-[100] transition-all duration-700 h-24 flex items-center border-b",
+        isScrolled
+          ? "bg-background/20 backdrop-blur-3xl border-white/5 py-4"
+          : "bg-transparent border-transparent py-8"
       )}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-betwen gap-12 ">
+      <div className="max-w-7xl mx-auto w-full px-8 flex items-center justify-between">
         {/* Logo */}
-        <Link
-          to="/"
-          className="flex items-center gap-4 shrink-0 group hover:gap-6 transition-all duration-300 "
-        >
-          <div className="w-10 h-10 flex items-center justify-center transition-transform duration-700 group-hover:rotate-45 hover:border-primary/70">
-            {/* <Square className="w-3 h-3 fill-primary group-hover:fill-primary/70" /> */}
-            <img src={`${logo}`} alt="Logo" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex flex-col items-start">
-            <span className="font-serif text-lg font-bold tracking-[0.2em] uppercase text-primary drop-shadow-sm hover:text-primary/80 hover:scale-105 transition-all duration-300">
-              PORTFOLIO
-            </span>
-            <div className="h-[1px] w-12 bg-primary/20 group-hover:w-full transition-all duration-700 " />
-          </div>
+        <Link to="/" className="relative z-[110] group">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex flex-col"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 flex items-center justify-center bg-transparent hover:text-primary group-hover:rotate-12 transition-transform duration-500">
+                {/* <Command size={18} /> */}
+                <img src={logo} alt="logo" className="w-full h-full object-contain" />
+
+              </div>
+              <span className="font-sans text-1xl md:text-3xl font-medium  group-hover:text-primary transition-colors tracking-[0.2em]">
+                Portfolio
+                {/* <span className="italic font-light opacity-60 group-hover:opacity-100 italic transition-all">Studio.</span> */}
+              </span>
+            </div>
+            {/* <span className="font-mono text-[8px] font-bold tracking-[0.5em] text-primary mt-1 opacity-0 group-hover:opacity-100 transition-all pl-11">
+              EST. 2018 // PHNOM PENH
+            </span> */}
+          </motion.div>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-10 flex-1 justify-center">
+        <div className="hidden lg:flex items-center gap-12">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
               className={cn(
-                "relative text-[11px] font-sans font-semibold uppercase tracking-[0.25em] transition-all duration-300 hover:text-primary",
-                isActive(link.path) ? "text-primary font-bold" : "text-muted-foreground",
+                "relative font-mono text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 hover:text-primary py-2",
+                location.pathname === link.path
+                  ? "text-primary after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary"
+                  : "text-foreground/60"
               )}
             >
               {link.name}
-              {isActive(link.path) && (
-                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-primary shadow-sm" />
-              )}
             </Link>
           ))}
-        </nav>
 
-        {/* Auth Controls */}
-        <div className="flex items-center gap-6">
-          {user ? (
-            <div className="flex items-center gap-4">
-              <Avatar className="h-8 w-8 border border-border/50 grayscale hover:grayscale-0 transition-all duration-500">
-                <AvatarImage
-                  src={""}
-                  alt={user.firstName || ""}
-                />
-                <AvatarFallback className="bg-muted text-[10px] font-sans">
-                  {user.firstName?.charAt(0) || "U"}
-                </AvatarFallback>
-              </Avatar>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={signOut}
-                className="h-8 w-8 text-muted-foreground hover:text-primary transition-colors"
-                title="Sign Out"
-              >
-                <LogOut className="h-4 w-4" />
-              </Button>
-            </div>
-          ) : (
-            null
-          )}
+          <div className="h-6 w-px bg-white/10 mx-4" />
 
-          {/* Mobile Menu */}
-          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden h-10 w-10 text-foreground hover:text-primary"
-              >
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-full bg-background/95 backdrop-blur-2xl border-none p-12 flex flex-col justify-between"
-            >
-              <div className="flex flex-col gap-12 text-center w-full mt-20">
-                {navLinks.map((link) => (
+          <Button
+            asChild
+            className="h-11 px-8 rounded-full bg-primary text-background font-mono text-[10px] font-bold tracking-widest uppercase hover:scale-105 transition-all shadow-lg shadow-primary/20"
+          >
+            <Link to="/services#contact">Initiate Project</Link>
+          </Button>
+        </div>
+
+        {/* Mobile menu toggle */}
+        <button
+          className="lg:hidden relative z-[110] p-2 text-foreground"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[105] glass-panel bg-background/90 backdrop-blur-3xl lg:hidden flex flex-col items-center justify-center p-8 text-center"
+          >
+            <div className="space-y-8 md:space-y-12">
+              {navLinks.map((link, idx) => (
+                <motion.div
+                  key={link.path}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * idx }}
+                >
                   <Link
-                    key={link.path}
                     to={link.path}
-                    onClick={() => setMobileOpen(false)}
                     className={cn(
-                      "text-4xl font-serif font-medium tracking-wide transition-all duration-300",
-                      isActive(link.path)
-                        ? "text-primary scale-110"
-                        : "text-muted-foreground hover:text-foreground",
+                      "text-3xl md:text-4xl font-sans font-medium uppercase tracking-tighter block transition-all",
+                      location.pathname === link.path ? "text-primary" : "text-foreground"
                     )}
                   >
                     {link.name}
                   </Link>
-                ))}
-              </div>
+                </motion.div>
+              ))}
 
-              {/* Mobile Auth Actions */}
-              <div className="w-full border-t border-border/10 pt-12 mt-auto">
-                {user ? (
-                  <div className="flex flex-col items-center gap-8">
-                    <div className="flex items-center gap-4">
-                      <Avatar className="h-16 w-16 border-2 border-primary/20 grayscale hover:grayscale-0 transition-all duration-500">
-                        <AvatarImage src={""} alt={user.firstName || ""} />
-                        <AvatarFallback className="bg-muted text-lg font-sans">
-                          {user.firstName?.charAt(0) || "U"}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="text-left">
-                        <p className="text-sm font-serif font-medium">{user.firstName} {user.lastName}</p>
-                        <p className="text-[9px] font-sans uppercase tracking-[0.2em] text-muted-foreground">Studio Member</p>
-                      </div>
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      onClick={() => {
-                        signOut();
-                        setMobileOpen(false);
-                      }}
-                      className="w-full h-16 rounded-none border-[1.5px] border-primary/20 font-sans text-xs font-bold tracking-[0.2em] uppercase hover:bg-primary hover:text-background transition-all duration-500"
-                    >
-                      Sign Out
-                    </Button>
-                  </div>
-                ) : (
-                  null
-                )}
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-      </div>
-    </header>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+                className="pt-12"
+              >
+                <Button
+                  asChild
+                  size="lg"
+                  className="h-16 px-12 rounded-full bg-primary text-background font-mono text-xs font-bold tracking-widest uppercase"
+                >
+                  <Link to="/services#contact">Get in Touch</Link>
+                </Button>
+              </motion.div>
+            </div>
+
+            <div className="absolute bottom-12 left-0 w-full text-center">
+              <p className="font-mono text-[9px] font-bold tracking-[0.4em] text-primary uppercase opacity-40">
+                Sivchheng Kheang Studio // 2026
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 }

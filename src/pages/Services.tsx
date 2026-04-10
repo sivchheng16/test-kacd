@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   Layout,
   Paintbrush,
@@ -14,666 +14,353 @@ import { ContactForm } from "@/components/ContactForm";
 
 const services = [
   {
-    name: "Interior Architecture",
+    name: "System Architecture",
     icon: Layout,
-    description: "Spatial Planning & Structural Harmony",
+    description: "Cloud Scalability & Logic Flow",
     detail:
-      "We lay out every room so it flows well and feels right to live in. This includes structural modifications, floor plan optimization, and ensuring every square inch serves a purpose.",
+      "We engineer robust backend foundations that scale effortlessly. This includes microservices orchestration, database optimization, and ensuring high-availability systems.",
     features: [
-      "Space Planning",
-      "Floor Plan Optimization",
-      "Structural Coordination",
-      "Lighting Integration",
+      "Microservices Design",
+      "API Orchestration",
+      "Database Scalability",
+      "Cloud Integration",
     ],
   },
   {
-    name: "Bespoke Furniture",
+    name: "Custom Modules",
     icon: Paintbrush,
-    description: "Custom Craftsmanship",
+    description: "High-Performance Software",
     detail:
-      "Each piece is made to fit your space, your style, and the way you use it. From custom cabinetry to signature seating, we design furniture that tells your story.",
+      "Every project is uniquely engineered to solve specific technical challenges. From proprietary algorithms to signature interfaces, we build software that drives excellence.",
     features: [
-      "Custom Cabinetry",
-      "Material Selection",
-      "Millwork Design",
-      "Unique Upholstery",
+      "Proprietary Algorithms",
+      "Modular Frontend Components",
+      "Secure Edge Computing",
+      "Legacy Code Refactoring",
     ],
   },
   {
-    name: "Conceptual Design",
+    name: "UI/UX Strategy",
     icon: Compass,
-    description: "Visual Identity & Mood",
+    description: "Visual Identity & User Optics",
     detail:
-      "We choose the shapes, materials, and finishes that give a space its character. Our concepts are mood-driven and focused on the emotional resonance of the environment.",
+      "We define the aesthetics and interactions that give a platform its character. Our strategies are data-driven and focused on the psychological resonance of the interface.",
     features: [
-      "3D Visualization",
-      "Material Boards",
-      "Color Palette Curation",
-      "Mood Branding",
+      "Interactive Prototyping",
+      "Behavioral User Flows",
+      "Design Systems (Tech)",
+      "High-Fidelity Visuals",
     ],
   },
   {
-    name: "Residential Luxury",
+    name: "Enterprise Solutions",
     icon: HomeIcon,
-    description: "Elevated Living Spaces",
+    description: "Digital Transformation",
     detail:
-      "Comfortable homes that look beautiful and feel like they were made for you. We specialize in high-end residential interiors that balance aesthetic with everyday functionality.",
+      "Modernizing large-scale infrastructures for the next generation of tech. We specialize in enterprise-grade transitions that balance legacy stability with modern speed.",
     features: [
-      "Luxury Residences",
-      "Styling & Decor",
-      "Art Curation",
-      "Turnkey Solutions",
+      "Infrastructural Migration",
+      "Security Protocols",
+      "Scalable Dashboards",
+      "Sovereign Tech Stacks",
     ],
   },
 ];
 
+const categories = [
+  {
+    name: "All Team",
+    moments: [
+      { title: "Sivchheng Kheang", role: "Technical Lead", description: "Architecting the technical core and high-performance visions.", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" },
+      { title: "Long Sei", role: "DevOps Engineer", description: "Optimizing cloud orchestration and system deployment cycles.", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400" },
+      { title: "Dara Som", role: "UI/UX Engineer", description: "Refining visual optics and interactive design protocols.", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400" },
+      { title: "Leakhena Tep", role: "Fullstack Developer", description: "Bridging complex logic with intuitive system interfaces.", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400" },
+    ]
+  },
+  {
+    name: "Developers",
+    moments: [
+      { title: "Sivchheng Kheang", role: "Technical Lead", description: "Architecting the technical core and high-performance visions.", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" },
+      { title: "Long Sei", role: "DevOps Engineer", description: "Optimizing cloud orchestration and system deployment cycles.", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400" },
+    ]
+  },
+  {
+    name: "Designers",
+    moments: [
+      { title: "Dara Som", role: "UI/UX Engineer", description: "Refining visual optics and interactive design protocols.", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400" },
+    ]
+  }
+];
+
 const processSteps = [
   {
-    title: "Discovery & Briefing",
+    title: "Discovery & Audit",
     description:
-      "We start by understanding your lifestyle, your needs, and the vision you have for your space.",
+      "We analyze your technical landscape, system bottlenecks, and the vision for your digital infrastructure.",
   },
   {
-    title: "Concept Development",
+    title: "Technical Spiking",
     description:
-      "Translating ideas into visual concepts, material boards, and initial spatial layouts.",
+      "Translating requirements into architectural blueprints, proof-of-concepts, and modular data models.",
   },
   {
-    title: "Detailed Design",
+    title: "Deep Engineering",
     description:
-      "Refining every detail, from technical drawings to final material specifications.",
+      "Refining every detail, from technical unit tests to final high-performance system deployments.",
   },
   {
-    title: "Implementation",
+    title: "Scaling & Support",
     description:
-      "Coordinating with craftsmen and contractors to bring the vision to life with precision.",
+      "Coordinating with devops and teams to ensure system longevity and precision at scale.",
   },
 ];
 
 export default function Services() {
   const [activeCategory, setActiveCategory] = useState("All Team");
 
-  const categories = [
-    {
-      name: "All Team",
-      description: "United in purpose, diverse in talent",
-      moments: [
-        {
-          title: "Sivchheng Kheang",
-          role: "Full-Stack Developer",
-          description: "React, Node.js, TypeScript specialist",
-          image:
-            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Team Member 1",
-          role: "Frontend Developer",
-          description: "UI/UX implementation expert",
-          image:
-            "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Team Member 2",
-          role: "Backend Developer",
-          description: "API development and database management",
-          image:
-            "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Team Member 3",
-          role: "DevOps Engineer",
-          description: "Infrastructure and deployment specialist",
-          image:
-            "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Business Lead",
-          role: "Product Manager",
-          description: "Product strategy and roadmap planning",
-          image:
-            "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Marketing Manager",
-          role: "Growth Specialist",
-          description: "Digital marketing and user acquisition",
-          image:
-            "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Operations Manager",
-          role: "Business Operations",
-          description: "Process optimization and team coordination",
-          image:
-            "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Sales Director",
-          role: "Partnership Development",
-          description: "Client relationships and business development",
-          image:
-            "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Junior Developer",
-          role: "Apprentice Programmer",
-          description: "Learning full-stack development fundamentals",
-          image:
-            "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Design Apprentice",
-          role: "UI/UX Learner",
-          description:
-            "Developing design skills and user experience knowledge",
-          image:
-            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Business Apprentice",
-          role: "Management Trainee",
-          description: "Learning business operations and project management",
-          image:
-            "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Tech Apprentice",
-          role: "IT Support Trainee",
-          description:
-            "Building technical support and system administration skills",
-          image:
-            "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&q=80&w=400",
-        },
-      ],
-    },
-    {
-      name: "Developer",
-      description: "Code, create, and innovate",
-      moments: [
-        {
-          title: "Sivchheng Kheang",
-          role: "Full-Stack Developer",
-          description: "React, Node.js, TypeScript specialist",
-          image:
-            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Team Member 1",
-          role: "Frontend Developer",
-          description: "UI/UX implementation expert",
-          image:
-            "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Team Member 2",
-          role: "Backend Developer",
-          description: "API development and database management",
-          image:
-            "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Team Member 3",
-          role: "DevOps Engineer",
-          description: "Infrastructure and deployment specialist",
-          image:
-            "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400",
-        },
-      ],
-    },
-    {
-      name: "Business",
-      description: "Strategy, growth, and partnerships",
-      moments: [
-        {
-          title: "Business Lead",
-          role: "Product Manager",
-          description: "Product strategy and roadmap planning",
-          image:
-            "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Marketing Manager",
-          role: "Growth Specialist",
-          description: "Digital marketing and user acquisition",
-          image:
-            "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Operations Manager",
-          role: "Business Operations",
-          description: "Process optimization and team coordination",
-          image:
-            "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Sales Director",
-          role: "Partnership Development",
-          description: "Client relationships and business development",
-          image:
-            "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400",
-        },
-      ],
-    },
-    {
-      name: "Apprentice",
-      description: "Learning, growing, and developing",
-      moments: [
-        {
-          title: "Junior Developer",
-          role: "Apprentice Programmer",
-          description: "Learning full-stack development fundamentals",
-          image:
-            "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Design Apprentice",
-          role: "UI/UX Learner",
-          description:
-            "Developing design skills and user experience knowledge",
-          image:
-            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Business Apprentice",
-          role: "Management Trainee",
-          description: "Learning business operations and project management",
-          image:
-            "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&q=80&w=400",
-        },
-        {
-          title: "Tech Apprentice",
-          role: "IT Support Trainee",
-          description:
-            "Building technical support and system administration skills",
-          image:
-            "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&q=80&w=400",
-        },
-      ],
-    },
-  ];
   return (
-    <div className="min-h-screen pt-32 pb-20">
+    <div className="min-h-screen bg-background text-foreground pt-32 pb-20 relative overflow-hidden">
+      {/* Background Mesh Gradients */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-[5%] right-[10%] w-[50vw] h-[50vw] bg-primary/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[10%] left-[5%] w-[40vw] h-[40vw] bg-secondary/5 blur-[150px] rounded-full" />
+      </div>
+
       {/* Hero Section */}
-      <section className="px-8 mb-32">
+      <section className="px-8 mb-40 relative z-10 text-center section-connector">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1 }}
           >
-            <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-6">
-              Our Expertise
-            </p>
-            <h1 className="text-7xl md:text-8xl font-serif font-medium tracking-tighter leading-[0.9] mb-12 uppercase">
-              Services that
-              <br />
-              Define Spaces.
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <span className="w-12 h-[1px] bg-primary" />
+              <p className="font-mono text-[10px] font-bold tracking-[0.4em] text-primary uppercase">
+                Expertise & Systems
+              </p>
+              <span className="w-12 h-[1px] bg-primary" />
+            </div>
+            <h1 className="text-6xl md:text-8xl font-sans font-medium tracking-tighter leading-[0.85] mb-12 uppercase text-gradient">
+              Services that <br />
+              <span className="italic font-light lowercase font-sans opacity-80">define performance.</span>
             </h1>
-            <p className="text-2xl text-muted-foreground font-serif leading-relaxed max-w-2xl italic">
-              "From our studios in Phnom Penh and Singapore, we provide a
-              comprehensive design experience across Southeast Asia — from the
-              initial concept to the final, curated detail."
+            <p className="text-xl md:text-2xl text-muted-foreground font-sans leading-relaxed max-w-3xl mx-auto italic">
+              "From our studios in Phnom Penh, we build high-performance digital architectures that balance technical mastery with intuitive user design."
             </p>
           </motion.div>
         </div>
+        {/* Bottom Connective Bloom (Transition to Grid) */}
+        <div className="absolute -bottom-48 right-[10%] w-[50vw] h-[50vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
       </section>
 
-      {/* Services Detail */}
-      {/* <section className="px-8 mb-40">
-        <div className="max-w-7xl mx-auto space-y-32">
-          {services.map((service, index) => (
+      {/* Services Grid */}
+      <section className="px-8 mb-48 relative z-10 section-connector">
+        {/* Top Connective Bloom */}
+        <div className="absolute -top-48 right-[10%] w-[50vw] h-[50vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+          {services.map((service: any, index: number) => (
             <motion.div
               key={service.name}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-20 items-center ${index % 2 === 1 ? "lg:flex-row-reverse" : ""}`}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              className="glass-panel p-10 md:p-14 rounded-[48px] border-white/5 hover:border-primary/40 transition-all duration-700 group flex flex-col justify-between overflow-hidden relative shadow-2xl"
             >
-              <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                <div className="inline-flex items-center justify-center w-16 h-16 border border-primary/20 bg-primary/5 text-primary mb-10">
-                  <service.icon className="w-6 h-6" />
+              <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
+                <service.icon size={120} className="text-primary" />
+              </div>
+              
+              <div className="relative z-10">
+                <div className="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center text-primary mb-12 group-hover:scale-110 shadow-[0_0_30px_rgba(var(--primary),0.15)] transition-all duration-700">
+                  <service.icon size={32} strokeWidth={1.2} />
                 </div>
-                <h2 className="text-4xl font-serif font-medium mb-6">
-                  {service.name}
-                </h2>
-                <p className="text-xs font-sans font-bold uppercase tracking-widest text-primary mb-6">
-                  {service.description}
-                </p>
-                <p className="text-lg text-muted-foreground font-serif leading-relaxed mb-10 italic">
+                <h2 className="text-3xl font-sans font-medium mb-4 italic">{service.name}</h2>
+                <div className="flex items-center gap-4 mb-8">
+                   <div className="h-px w-6 bg-primary/40" />
+                   <p className="font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-primary">{service.description}</p>
+                </div>
+                <p className="text-muted-foreground font-sans leading-relaxed italic mb-12 opacity-70 group-hover:opacity-100 transition-opacity duration-700">
                   {service.detail}
                 </p>
-                <div className="grid grid-cols-2 gap-4">
-                  {service.features.map((feature) => (
-                    <div key={feature} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-primary" />
-                      <span className="text-[11px] font-sans uppercase tracking-wider text-muted-foreground font-semibold">
-                        {feature}
-                      </span>
-                    </div>
-                  ))}
-                </div>
               </div>
-              <div
-                className={`aspect-[4/5] bg-muted overflow-hidden border border-border/20 ${index % 2 === 1 ? "lg:order-1" : ""}`}
-              >
-                <img
-                  src={`https://images.unsplash.com/photo-${1600000000000 + index * 100000}?auto=format&fit=crop&q=80&w=1200`}
-                  alt={service.name}
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-105 hover:scale-100"
-                />
+              
+              <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-6 mt-auto pt-10 border-t border-white/5">
+                {service.features.map((feature: string) => (
+                  <div key={feature} className="flex items-center gap-3">
+                    <div className="w-1 h-1 rounded-full bg-primary/60 shadow-[0_0_8px_rgba(var(--primary),0.8)]" />
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-widest text-muted-foreground/40 group-hover:text-foreground transition-all">
+                      {feature}
+                    </span>
+                  </div>
+                ))}
               </div>
             </motion.div>
           ))}
         </div>
-      </section> */}
+        {/* Bottom Connective Bloom (Transition to Process) */}
+        <div className="absolute -bottom-48 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
+      </section>
 
       {/* Process Section */}
-      {/* <section className="py-32 px-8 bg-muted/5 border-y border-border/20">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24">
-            <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-6">
-              How We Work
-            </p>
-            <h2 className="text-5xl font-serif font-medium">
-              The Design Journey
-            </h2>
+      <section className="py-48 px-8 relative overflow-hidden section-connector">
+        {/* Top Connective Bloom */}
+        <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
+        <div className="absolute -inset-20 bg-primary/5 blur-[150px] rounded-full opacity-50" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-32">
+            <p className="font-mono text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-6">Execution Lifecycle</p>
+            <h2 className="text-5xl md:text-6xl font-sans font-medium">The Journey.</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border/20 border border-border/20">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {processSteps.map((step, idx) => (
-              <div
+              <motion.div
                 key={step.title}
-                className="bg-background p-12 group hover:bg-muted/5 transition-colors"
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="glass-panel p-12 rounded-[48px] border-white/5 hover:bg-white/5 transition-all duration-700 text-center group flex flex-col items-center"
               >
-                <span className="font-serif text-muted-foreground/30 text-4xl mb-8 block">
+                <span className="font-mono text-primary/20 text-[56px] mb-8 block font-bold leading-none tracking-tighter">
                   0{idx + 1}
                 </span>
-                <h3 className="font-serif text-xl mb-4 group-hover:text-primary transition-colors">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="font-sans text-2xl mb-6 text-foreground italic">{step.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed italic font-sans opacity-60 group-hover:opacity-100 transition-opacity duration-700">
                   {step.description}
                 </p>
-              </div>
+                <div className="mt-10 h-1 w-8 bg-primary/10 group-hover:w-16 transition-all duration-700 overflow-hidden rounded-full">
+                   <div className="h-full w-full bg-primary translate-x-[-100%] group-hover:translate-x-[0%] transition-transform duration-700" />
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section> */}
+        {/* Bottom Connective Bloom (Transition to Partnership) */}
+        <div className="absolute -bottom-48 right-0 w-[50vw] h-[50vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
+      </section>
 
-      {/* KOOMPI Company Section */}
-      <section className="py-32 px-8 bg-gradient-to-br from-background via-muted/5 to-primary/5">
-        <div className="max-w-7xl mx-auto">
+      {/* KOOMPI Partnership */}
+      <section className="py-48 px-8 relative bg-white/[0.02] section-connector">
+        {/* Top Connective Bloom */}
+        <div className="absolute -top-48 right-0 w-[50vw] h-[50vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
           >
-            <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-6">
-              Our Partnership
-            </p>
-            <h2 className="text-5xl font-serif font-medium mb-8">
-              KOOMPI Company
-            </h2>
-            <p className="text-xl text-muted-foreground font-serif leading-relaxed max-w-3xl mx-auto">
-              As a proud member of the KOOMPI team, we bring together innovative
-              technology and creative design to deliver exceptional digital
-              experiences. Our collaborative approach combines cutting-edge
-              development with artistic vision to create solutions that matter.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-3xl font-serif font-medium mb-6">
-                Innovation Through Collaboration
-              </h3>
-              <p className="text-lg text-muted-foreground font-serif leading-relaxed mb-8">
-                At KOOMPI, we believe in the power of interdisciplinary
-                collaboration. Our team combines expertise in software
-                development, UI/UX design, and creative problem-solving to build
-                products that make a real difference in people's lives.
+            <div className="flex items-center gap-4 mb-8">
+              <span className="w-8 h-[1px] bg-secondary" />
+              <p className="font-mono text-[10px] font-bold tracking-[0.4em] text-secondary uppercase">
+                Corporate Synergy
               </p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-sans uppercase tracking-wider text-muted-foreground font-semibold">
-                    Cross-functional Team Collaboration
-                  </span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-sans uppercase tracking-wider text-muted-foreground font-semibold">
-                    Agile Development Methodology
-                  </span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-sans uppercase tracking-wider text-muted-foreground font-semibold">
-                    User-Centered Design Approach
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            // className="aspect-[4/5] bg-muted overflow-hidden border border-border/20"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200"
-                alt="KOOMPI Team Collaboration"
-                className="w-full h-full object-cover hover:grayscale-0 transition-all duration-1000 scale-105 hover:scale-100"
-              />
-            </motion.div>
-          </div>
-
-          {/* Team Work Gallery */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-3xl font-serif font-medium text-center mb-12">
-              Our Recent Work
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+            <h2 className="text-5xl md:text-6xl font-sans font-medium leading-tight mb-8">
+              KOOMPI <span className="text-secondary italic">Ecosystem.</span>
+            </h2>
+            <p className="text-xl text-muted-foreground font-sans leading-relaxed mb-12 italic opacity-80">
+              As a core member of the KOOMPI development team, we leverage sovereign technology and modular architectures to build products that redefine regional standards.
+            </p>
+            
+            <div className="space-y-6">
               {[
-                {
-                  title: "E-Learning Platform",
-                  description: "Interactive learning management system",
-                  image:
-                    "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=800",
-                },
-                {
-                  title: "Mobile App Design",
-                  description: "Cross-platform mobile application",
-                  image:
-                    "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
-                },
-                {
-                  title: "Web Dashboard",
-                  description: "Analytics and data visualization",
-                  image:
-                    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
-                },
-                {
-                  title: "Brand Identity",
-                  description: "Complete visual identity system",
-                  image:
-                    "https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&q=80&w=800",
-                },
-                {
-                  title: "E-commerce Platform",
-                  description: "Full-stack online marketplace",
-                  image:
-                    "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800",
-                },
-                {
-                  title: "UI/UX Redesign",
-                  description: "User experience optimization",
-                  image:
-                    "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&q=80&w=800",
-                },
-              ].map((project, index) => (
-                <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="group cursor-pointer"
-                >
-                  <div className="aspect-[4/5] bg-muted overflow-hidden border border-border/20 mb-4">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
-                    />
-                  </div>
-                  <h4 className="font-serif text-lg font-medium mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    {project.description}
-                  </p>
-                </motion.div>
+                "Sovereign Tech Integration",
+                "Scalable System Architecture",
+                "Community-Driven Design"
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-6 glass-panel py-4 px-8 rounded-2xl max-w-sm">
+                  <CheckCircle2 size={18} className="text-secondary" />
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-foreground/80 font-bold">
+                    {item}
+                  </span>
+                </div>
               ))}
             </div>
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            className="aspect-video glass-panel p-4 rounded-[40px] relative overflow-hidden"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200"
+              alt="Collaboration"
+              className="w-full h-full object-cover rounded-[32px] grayscale hover:grayscale-0 transition-all duration-1000"
+            />
+          </motion.div>
         </div>
+        {/* Bottom Connective Bloom (Transition to Team) */}
+        <div className="absolute -bottom-48 left-[10%] w-[40vw] h-[40vw] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
       </section>
 
-      {/* KOOMPI Office Gallery */}
-      <section className="py-32 px-8">
+      {/* Team Section */}
+      <section className="py-48 px-8 relative z-10 section-connector">
+        {/* Top Connective Bloom */}
+        <div className="absolute -top-48 left-[10%] w-[40vw] h-[40vw] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-6">
-              Our People
-            </p>
-            <h2 className="text-5xl font-serif font-medium mb-8">
-              Meet Our Team
-            </h2>
-            <p className="text-xl text-muted-foreground font-serif leading-relaxed max-w-3xl mx-auto">
-              Get to know the talented individuals who make KOOMPI a place of
-              innovation and excellence. Browse by department or view our
-              complete team to see the diverse skills and expertise that drive
-              our success.
-            </p>
-          </motion.div>
+          <div className="text-center mb-32">
+            <p className="font-mono text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-6">The Collective</p>
+            <h2 className="text-5xl md:text-6xl font-sans font-medium">Studio Team.</h2>
+          </div>
 
-          {/* Category Tabs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="flex justify-center mb-12"
-          >
-            <div className="flex bg-muted/20 border border-border/20 rounded-lg p-1">
-              {categories.map((category) => (
+          <div className="flex justify-center mb-20">
+            <div className="glass-panel p-1.5 rounded-full inline-flex">
+              {categories.map((category: any) => (
                 <button
                   key={category.name}
                   onClick={() => setActiveCategory(category.name)}
-                  className={`px-6 py-3 font-sans text-sm font-semibold uppercase tracking-wider transition-all duration-300 rounded-md ${activeCategory === category.name
-                    ? "bg-primary text-primary-foreground shadow-lg"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                    }`}
+                  className={`px-8 py-3 rounded-full font-mono text-[10px] font-bold uppercase tracking-widest transition-all duration-500 ${
+                    activeCategory === category.name
+                      ? "bg-primary text-background shadow-lg shadow-primary/20"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
                 >
                   {category.name}
                 </button>
               ))}
             </div>
-          </motion.div>
-
-          {/* Active Category Description */}
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="text-center mb-12"
-          >
-            <p className="text-lg text-muted-foreground font-serif italic">
-              {
-                categories.find((cat) => cat.name === activeCategory)
-                  ?.description
-              }
-            </p>
-          </motion.div>
-
-          {/* Gallery Grid */}
-          <div
-            className={`grid gap-6 ${activeCategory === "All Team"
-              ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4"
-              : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-              }`}
-          >
-            {categories
-              .find((cat) => cat.name === activeCategory)
-              ?.moments.map((moment, index) => (
-                <motion.div
-                  key={`${activeCategory}-${moment.title}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="group cursor-pointer"
-                >
-                  <div className="aspect-square bg-muted overflow-hidden border border-border/20 mb-4 relative">
-                    <img
-                      src={moment.image}
-                      alt={moment.title}
-                      className="w-full h-full object-cover group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
-                  </div>
-                  <h4 className="font-serif text-lg font-medium mb-1 group-hover:text-primary transition-colors">
-                    {moment.title}
-                  </h4>
-                  <p className="text-xs font-sans font-semibold uppercase tracking-wider text-primary mb-2">
-                    {moment.role}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {moment.description}
-                  </p>
-                </motion.div>
-              ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="text-center mt-16"
-          >
-            <p className="text-lg text-muted-foreground font-serif italic">
-              "Our greatest strength lies in our people—their passion,
-              creativity, and commitment to excellence drive everything we do at
-              KOOMPI."
-            </p>
-          </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <AnimatePresence mode="popLayout">
+              {categories
+                .find((cat: any) => cat.name === activeCategory)
+                ?.moments.map((moment: any, index: number) => (
+                  <motion.div
+                    key={moment.title}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    className="glass-panel p-4 rounded-[32px] group relative overflow-hidden"
+                  >
+                    <div className="aspect-square rounded-[24px] overflow-hidden mb-6 relative">
+                      <img
+                        src={moment.image}
+                        alt={moment.title}
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                      />
+                      <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                    <h4 className="font-sans text-lg font-medium mb-1">{moment.title}</h4>
+                    <p className="font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-primary mb-2 opacity-80">{moment.role}</p>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed italic opacity-70 group-hover:opacity-100 transition-opacity">
+                      {moment.description}
+                    </p>
+                  </motion.div>
+                ))}
+            </AnimatePresence>
+          </div>
         </div>
+        {/* Bottom Connective Bloom (Transition to Contact) */}
+        <div className="absolute -bottom-48 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
       </section>
 
 
-      <section id="contact" className="py-28 px-5 md:px-5 relative overflow-hidden bg-background">
+      <section id="contact" className="py-28 px-5 md:px-5 relative overflow-hidden bg-background section-connector">
         {/* Subtle Background Ornaments */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
           <motion.div
@@ -700,66 +387,67 @@ export default function Services() {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-muted/10 backdrop-blur-3xl border border-border/30 p-5 md:py-10 md:px-5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] relative overflow-hidden"
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="glass-panel border-white/5 p-6 md:p-10 rounded-[64px] shadow-[0_64px_128px_-16px_rgba(0,0,0,0.5)] relative overflow-hidden"
           >
             {/* Visual Accent */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-[120px] -mr-48 -mt-48 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.05] rounded-full blur-[120px] -mr-48 -mt-48 pointer-events-none" />
 
             <div className="relative z-10">
               {/* SHARED HEADER */}
-              <div className="relative mb-10 max-w-full m-auto justify-center text-center">
+              <div className="relative mb-20 flex flex-col items-center text-center">
                 <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: -20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
-                  className="flex items-center gap-4 mb-8 text-start absolute top-0 left-0 justify-start"
+                  className="flex items-center gap-6 mb-10"
                 >
-                  <div className="w-12 h-[1px] bg-primary" />
-                  <span className="text-[10px] font-sans font-bold uppercase tracking-[0.5em] text-primary">
-                    Contact Us
+                  <div className="w-12 h-px bg-primary/40" />
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-[0.5em] text-primary">
+                    Transmission Node
                   </span>
+                  <div className="w-12 h-px bg-primary/40" />
                 </motion.div>
 
                 <motion.h2
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-4xl md:text-7xl font-serif leading-[0.85] tracking-tight text-foreground"
+                  transition={{ delay: 0.3, duration: 1.2 }}
+                  className="text-5xl md:text-8xl font-sans leading-[0.85] tracking-tight italic"
                 >
-                  Have a project <br />
-                  <span className="italic font-light text-primary/60">in mind?</span>
+                  Have a system <br />
+                  <span className="opacity-40 font-light">requirement?</span>
                 </motion.h2>
               </div>
 
               {/* NESTED CARDS GRID */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                 {/* Description Card */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.5 }}
-                  className="bg-background/40 backdrop-blur-md border border-border/40 p-8 md:p-14 flex flex-col justify-between space-y-12"
+                  className="glass-panel border-white/5 p-10 md:p-16 flex flex-col justify-between space-y-16 rounded-[48px]"
                 >
                   <div className="space-y-12">
-                    <p className="text-xl text-muted-foreground leading-relaxed font-light max-w-md">
-                      Let's collaborate to create something exceptional. We're currently taking on select projects for the upcoming quarter.
+                    <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-sans italic opacity-70">
+                      Collaborate with our Khmer-led technical studio to architect exceptional digital experiences. Currently accepting system audits for Q3 2026.
                     </p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
                       {[
-                        { label: "Phone", value: "+855 969094960" },
-                        { label: "Email", value: "kheangsivechheng@gmail.com" },
-                        { label: "Office", value: "House 04 St. Veng Sreng, Phum Trapeang Thloeng 1, Khan, Phnom Penh", full: true },
+                        { label: "Direct Line", value: "+855 969094960" },
+                        { label: "Secure Mail", value: "kheangsivechheng@gmail.com" },
+                        { label: "Studio HQ", value: "KOOMPI Hub, Phnom Penh, KH", full: true },
                       ].map((item) => (
-                        <div key={item.label} className={`${item.full ? 'sm:col-span-2' : ''} space-y-1`}>
-                          <span className="text-[9px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground/40">
+                        <div key={item.label} className={`${item.full ? 'sm:col-span-2' : ''} space-y-3`}>
+                          <span className="text-[9px] font-mono font-bold uppercase tracking-[0.4em] text-primary/40">
                             {item.label}
                           </span>
-                          <p className="text-md font-sans tracking-tight text-foreground/80">
+                          <p className="text-md font-sans italic tracking-tight text-foreground/80">
                             {item.value}
                           </p>
                         </div>
@@ -767,18 +455,17 @@ export default function Services() {
                     </div>
                   </div>
 
-                  {/* Social links at the bottom of the card */}
-                  <div className="pt-8 border-t border-border/10 space-y-4">
-                    <span className="text-[9px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground/40">
-                      Social Presence
+                  <div className="pt-10 border-t border-white/5 space-y-6">
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-[0.4em] text-primary/40">
+                      Network Identity
                     </span>
-                    <div className="flex flex-wrap gap-6">
-                      {[{ name: 'Facebook', link: 'https://www.facebook.com/koompi' }, { name: 'LinkedIn', link: '#' }, { name: 'Instagram', link: 'https://www.instagram.com/koompi/' }, { name: 'Twitter', link: '#' }].map((social) => (
+                    <div className="flex flex-wrap gap-10">
+                      {[{ name: 'LinkedIn', link: '#' }, { name: 'GitHub', link: '#' }, { name: 'Instagram', link: 'https://www.instagram.com/koompi/' }].map((social) => (
                         <a
                           target="_blank"
                           key={social.name}
                           href={social.link}
-                          className="text-[10px] font-sans font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-all duration-300 underline underline-offset-8 decoration-border/20 hover:decoration-primary"
+                          className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground/40 hover:text-primary transition-all duration-500 hover:scale-105"
                         >
                           {social.name}
                         </a>
@@ -793,7 +480,7 @@ export default function Services() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.6 }}
-                  className="bg-background/60 backdrop-blur-md border border-border/40 p-8 md:p-14 shadow-xl shadow-black/[0.02]"
+                  className="glass-panel border-white/5 p-1 shadow-2xl rounded-[48px]"
                 >
                   <ContactForm />
                 </motion.div>

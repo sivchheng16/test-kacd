@@ -55,27 +55,25 @@ export default function GamePortal() {
   };
 
   return (
-    <div className="min-h-screen bg-background  text-foreground pt-32 pb-20 selection:bg-primary/30">
-      {/* Background Ambience — Matching Home.tsx */}
-      {/* <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute top-[10%] right-[15%] w-[35vw] h-[35vw] bg-primary/5 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[45vw] h-[45vw] bg-primary/5 blur-[150px] rounded-full" /> */}
-      {/* Subtle grid lines */}
-      {/* <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--border)/0.3)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border)/0.3)_1px,transparent_1px)] bg-[size:100px_100px]" />
-      </div> */}
+    <div className="min-h-screen bg-background text-foreground pt-32 pb-20 relative overflow-hidden">
+      {/* Background Mesh Gradients */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-[10%] right-[10%] w-[50vw] h-[50vw] bg-primary/10 blur-[150px] rounded-full" />
+        <div className="absolute bottom-[0%] left-[0%] w-[40vw] h-[40vw] bg-secondary/5 blur-[120px] rounded-full" />
+      </div>
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header Section */}
-        <div className="max-w-4xl mx-auto text-center mb-24">
+        <div className="max-w-4xl mx-auto text-center mb-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="flex items-center justify-center gap-4 mb-6"
+            transition={{ duration: 1 }}
+            className="flex items-center justify-center gap-4 mb-8"
           >
             <span className="w-12 h-[1px] bg-primary/40" />
-            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] text-primary">
-              Digital Games Archive
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-primary">
+              Games Archive
             </span>
             <span className="w-12 h-[1px] bg-primary/40" />
           </motion.div>
@@ -83,50 +81,54 @@ export default function GamePortal() {
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="text-6xl md:text-8xl font-serif font-light tracking-tighter text-foreground mb-8 uppercase"
+            transition={{ duration: 1, delay: 0.2 }}
+            className="text-6xl md:text-8xl font-sans font-medium tracking-tighter text-foreground mb-12 uppercase text-gradient"
           >
-            THE <span className="italic text-primary">VAULT.</span>
+            THE <span className="italic font-bold">VAULT.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="text-muted-foreground font-serif italic text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-muted-foreground font-sans italic text-xl max-w-2xl mx-auto leading-relaxed border-l-2 border-primary/20 pl-8 inline-block text-left"
           >
-            A collection of classic browser games and digital experiments,
-            playable right here in your browser.
+            "A collection of games I've created. There are games that give you extra skills and computer thinking as well as give you a fun game to play."
           </motion.p>
         </div>
 
-        {/* Controls */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-16 border-y border-border/20 py-8">
-          <div className="flex items-center gap-8">
-            <div className="flex items-center gap-3 text-foreground font-sans text-[9px] font-bold uppercase tracking-widest">
-              <Grid3X3 className="w-3 h-3" />
-              <span>Card View</span>
+        {/* Controls - Premium Glass Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="glass-panel p-6 rounded-[32px] mb-20 flex flex-col md:flex-row items-center justify-between gap-8"
+        >
+          <div className="flex items-center gap-10">
+            <div className="flex items-center gap-3 text-primary font-mono text-[10px] font-bold uppercase tracking-widest">
+              <Grid3X3 className="w-4 h-4" />
+              <span>Grid Mode</span>
             </div>
-            <div className="flex items-center gap-3 text-foreground font-sans text-[9px] font-bold uppercase tracking-widest">
-              <Archive className="w-3 h-3" />
-              <span>Play in Browser</span>
+            <div className="flex items-center gap-3 text-foreground/40 font-mono text-[10px] font-bold uppercase tracking-widest hover:text-foreground transition-colors cursor-pointer">
+              <Archive className="w-4 h-4" />
+              <span>Full Archive</span>
             </div>
           </div>
 
-          <div className="relative w-full md:w-96">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/30" />
+          <div className="relative w-full md:w-96 group">
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
             <input
               type="text"
-              placeholder="SEARCH THE ARCHIVE..."
+              placeholder="Search Games..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-card border border-border/40 py-3 pl-12 pr-6 rounded-none font-sans text-[10px] font-bold uppercase tracking-widest text-foreground focus:outline-none focus:border-primary/40 transition-colors"
+              className="w-full glass-panel bg-white/5 border-white/5 py-4 pl-14 pr-8 rounded-2xl font-mono text-[10px] font-bold uppercase tracking-widest text-foreground focus:outline-none focus:border-primary/50 transition-all"
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Isometric Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           <AnimatePresence mode="popLayout">
             {filteredGames.map((game, idx) => (
               <AntigravityCard
@@ -145,20 +147,20 @@ export default function GamePortal() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-40"
+            className="text-center py-40 glass-panel rounded-[40px]"
           >
-            <Cpu className="w-12 h-12 text-muted-foreground/20 mx-auto mb-6 animate-pulse" />
-            <p className="text-muted-foreground font-serif italic text-xl">
-              No games match that search. Try a different keyword.
+            <Cpu size={64} className="text-primary/20 mx-auto mb-8 animate-pulse" />
+            <p className="text-muted-foreground font-sans italic text-2xl">
+              Terminal error: No systems found matching your query.
             </p>
           </motion.div>
         )}
       </div>
 
-      {/* Subtle Footer Logo */}
-      <div className="container mx-auto px-6 mt-40 pt-20 border-t border-border/20 flex flex-col items-center">
-        <Sparkles className="w-6 h-6 text-primary mb-8" />
-        <div className="font-serif text-muted-foreground text-sm tracking-[0.5em] uppercase">
+      {/* Footer Branding */}
+      <div className="container mx-auto px-6 mt-48 pt-20 border-t border-white/5 flex flex-col items-center">
+        <Sparkles className="w-6 h-6 text-primary mb-8 animate-pulse" />
+        <div className="font-mono text-primary text-[10px] font-bold tracking-[1em] uppercase opacity-40">
           SIVCHHENG KHEANG
         </div>
       </div>
@@ -170,54 +172,54 @@ export default function GamePortal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-2xl flex flex-col"
+            className="fixed inset-0 z-[100] bg-background/90 backdrop-blur-[60px] flex flex-col"
           >
             {/* Overlay Header */}
-            <div className="h-15 border-b border-white/10 px-8 flex items-center justify-between bg-black/50 py-1">
-              <div className="flex items-center gap-6">
-                <Terminal className="w-5 h-5 text-primary" />
+            <div className="h-20 glass-panel border-b border-white/5 px-10 flex items-center justify-between">
+              <div className="flex items-center gap-8">
+                <div className="w-12 h-12 glass-panel rounded-xl flex items-center justify-center text-primary">
+                  <Terminal className="w-6 h-6" />
+                </div>
                 <div>
-                  <div className="font-sans text-[10px] font-bold uppercase tracking-widest text-primary">
-                    Active Session: {activeGame.id}
+                  <div className="font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-primary mb-1">
+                    System Active // {activeGame.id}
                   </div>
-                  <div className="font-serif text-lg text-white">
+                  <div className="font-sans text-2xl text-white font-medium">
                     {activeGame.title}
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-6">
                 <Button
                   onClick={() => handleDownload(activeGame.appImageUrl)}
-                  className="flex gap-2 text-[10px] font-sans font-bold uppercase tracking-widest bg-primary text-background hover:bg-primary/90"
+                  className="h-12 px-8 rounded-full bg-primary text-background font-mono text-[10px] font-bold tracking-widest uppercase hover:scale-105 transition-all shadow-lg shadow-primary/20"
                 >
-                  <Download className="w-4 h-4" />
-                  Download .appImage
+                  <Download className="w-4 h-4 mr-3" />
+                  Download AppImage
                 </Button>
                 <button
                   onClick={handleClose}
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+                  className="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-white hover:bg-white/10 transition-colors"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-6 h-6" />
                 </button>
               </div>
             </div>
 
             {/* Frame Container */}
-            <div className="flex-1 relative bg-black flex items-center justify-center">
-              <div className="absolute inset-0 pointer-events-none opacity-20">
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 bg-[length:100%_2px,3px_100%]" />
-              </div>
+            <div className="flex-1 relative flex items-center justify-center">
+              {/* Internal Refraction Glows */}
+              <div className="absolute top-0 left-0 w-full h-full bg-primary/5 blur-[150px] pointer-events-none" />
 
               <motion.div
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
-                className="w-full h-full max-w-6xl aspect-video bg-[#000] border border-white/10 rounded-lg overflow-hidden shadow-[0_0_100px_rgba(212,175,55,0.1)]"
+                initial={{ scale: 0.9, opacity: 0, rotateX: 10 }}
+                animate={{ scale: 1, opacity: 1, rotateX: 0 }}
+                className="w-full h-full max-w-6xl glass-panel p-2 rounded-[40px] overflow-hidden shadow-[0_64px_128px_-16px_rgba(0,0,0,0.8)] relative"
               >
                 <iframe
                   src={activeGame.iframeUrl}
-                  className="w-full h-full border-none"
+                  className="w-full h-full border-none rounded-[32px]"
                   title={activeGame.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -226,27 +228,19 @@ export default function GamePortal() {
             </div>
 
             {/* Overlay Footer */}
-            <div className="h-10 border-t border-white/5 px-8 flex items-center justify-between bg-black/30">
-              <div className="flex items-center gap-6 text-[9px] font-sans font-bold uppercase tracking-[0.2em] text-white/40">
-                <div className="flex items-center gap-2">
-                  <Monitor className="w-3 h-3" />
-                  <span>Best at full screen</span>
+            <div className="h-16 glass-panel border-t border-white/5 px-10 flex items-center justify-between">
+              <div className="flex items-center gap-8 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-white/40">
+                <div className="flex items-center gap-3">
+                  <Monitor className="w-4 h-4" />
+                  <span>Optimal Resolution Mode</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  {/* <span>Running in browser</span> */}
-                  <a href={`${activeGame.iframeUrl}`} target="_blank" rel="noopener noreferrer">
-                    Play in browser
-                  </a>
+                <div className="flex items-center gap-3">
+                  <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+                  <span className="text-secondary">Uptime Verified</span>
                 </div>
               </div>
-              <div className="flex items-center gap-4 text-[9px] font-sans font-bold uppercase tracking-widest text-white/60">
-                <div className="flex items-center gap-2">
-                  <Download className="w-3 h-3" />
-                  <span>Download .appImage for offline play</span>
-                </div>
-                <span className="text-white/20">•</span>
-                <span>Press ESC to exit</span>
+              <div className="flex items-center gap-6 text-[10px] font-mono font-bold uppercase tracking-widest text-white/60 italic font-sans">
+                <span>Press ESC to terminate session</span>
               </div>
             </div>
           </motion.div>
