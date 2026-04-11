@@ -1,4 +1,4 @@
-const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5050').replace(/\/$/, '');
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://disparity-document-active.ngrok-free.dev/').replace(/\/$/, '');
 export async function apiFetch(endpoint: string, options: RequestInit = {}) {
   const token = localStorage.getItem('auth_token');
 

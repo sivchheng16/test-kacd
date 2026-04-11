@@ -90,7 +90,7 @@ export default function App() {
   return (
     <AuthProvider>
       <Router>
-        {/* <AuthGate> */}
+        <AuthGate>
           <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
             <Toaster position="top-center" expand={false} richColors />
             <ScrollToTop />
@@ -109,8 +109,8 @@ export default function App() {
               )}
             </main>
           </div>
-        {/* </AuthGate> */}
+        </AuthGate>
       </Router>
-    </AuthProvider>
+    </AuthProvider >
   );
 }
