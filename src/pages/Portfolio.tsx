@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { useEffect, useRef } from 'react';
+import { useRequireAuth } from '../hooks/useRequireAuth';
 
 const CATEGORIES = ['All', 'Web Development', 'Mobile', 'UI/UX Design'];
 
@@ -26,6 +27,9 @@ export default function Portfolio({
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isStickyBottom, setIsStickyBottom] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const { requireAuth } = useRequireAuth();
+  
+  const protectedToggleFavorite = requireAuth(toggleFavorite);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -179,7 +183,7 @@ export default function Portfolio({
                   project={project}
                   index={index}
                   isFavorite={favorites.includes(project.id)}
-                  onToggleFavorite={toggleFavorite}
+                  onToggleFavorite={protectedToggleFavorite}
                   onViewDetails={setViewingProject}
                 />
               ))}

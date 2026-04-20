@@ -13,9 +13,12 @@ export interface User {
 interface AuthContextType {
   user: User | null;
   loading: boolean;
+  isAuthModalOpen: boolean;
   signIn: (data: any) => Promise<void>;
   signUp: (data: any) => Promise<void>;
   signOut: () => Promise<void>;
+  openAuthModal: (action?: () => void) => void;
+  closeAuthModal: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -23,6 +26,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [pendingAction, setPendingAction] = useState<(() => void) | null>(null);
 
   useEffect(() => {
     const initializeAuth = () => {
@@ -60,6 +65,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('auth_user', JSON.stringify(response.user));
         setUser(response.user);
         toast.success("Welcome back!");
+        
+        // Execute pending action if it exists
+        if (pendingAction) {
+          pendingAction();
+          setPendingAction(null);
+        }
+        setIsAuthModalOpen(false);
       }
     } catch (error: any) {
       toast.error(error.message || "Login failed");
@@ -75,6 +87,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('auth_user', JSON.stringify(response.user));
         setUser(response.user);
         toast.success("Account created successfully!");
+
+        // Execute pending action if it exists
+        if (pendingAction) {
+          pendingAction();
+          setPendingAction(null);
+        }
+        setIsAuthModalOpen(false);
       }
     } catch (error: any) {
       toast.error(error.message || "Registration failed");
@@ -95,8 +114,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const openAuthModal = (action?: () => void) => {
+    if (action) setPendingAction(() => action);
+    setIsAuthModalOpen(true);
+  };
+
+  const closeAuthModal = () => {
+    setIsAuthModalOpen(false);
+    setPendingAction(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      loading, 
+      isAuthModalOpen, 
+      signIn, 
+      signUp, 
+      signOut, 
+      openAuthModal, 
+      closeAuthModal 
+    }}>
       {children}
     </AuthContext.Provider>
   );

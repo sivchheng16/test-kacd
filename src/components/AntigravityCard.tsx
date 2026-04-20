@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import gsap from "gsap";
 import { Game } from "../constants";
 import { Play, Download, ExternalLink, Terminal, Cpu } from "lucide-react";
+import { useRequireAuth } from "../hooks/useRequireAuth";
 
 export function AntigravityCard({
   game,
@@ -17,6 +18,10 @@ export function AntigravityCard({
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { requireAuth } = useRequireAuth();
+  
+  const protectedOnPlay = requireAuth(onPlay);
+  const protectedOnDownload = requireAuth(onDownload);
 
   useEffect(() => {
     // Entrance Animation: Staggered reveal
@@ -65,7 +70,7 @@ export function AntigravityCard({
         ref={cardRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={() => onPlay(game)}
+        onClick={() => protectedOnPlay(game)}
         className="relative w-full glass-panel rounded-[32px] overflow-hidden shadow-2xl transition-all cursor-pointer group border-white/5 flex flex-col h-full"
       >
         {/* Neon Glow Overlay */}
@@ -123,7 +128,7 @@ export function AntigravityCard({
             <button
                onClick={(e) => {
                 e.stopPropagation();
-                onPlay(game);
+                protectedOnPlay(game);
               }}
               className="flex-1 h-12 glass-panel rounded-full flex items-center justify-center gap-3 text-primary hover:bg-primary hover:text-background transition-all"
             >
@@ -134,7 +139,7 @@ export function AntigravityCard({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                onDownload(game.appImageUrl);
+                protectedOnDownload(game.appImageUrl);
               }}
               className="w-12 h-12 glass-panel rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-all"
             >

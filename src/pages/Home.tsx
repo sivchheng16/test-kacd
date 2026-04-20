@@ -18,7 +18,7 @@ import {
   Home as HomeIcon,
   Clock,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -26,6 +26,7 @@ import { Separator } from "@/components/ui/separator";
 import { GAMES, TOPICS } from "../constants";
 import video from "../assets/video/about-me.mp4";
 import Footer from "../components/Footer";
+import { useRequireAuth } from "@/hooks/useRequireAuth";
 
 const services = [
   {
@@ -63,6 +64,8 @@ const topicIconMap: Record<string, React.FC<any>> = {
 
 export default function Home() {
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const { requireAuth } = useRequireAuth();
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -184,17 +187,17 @@ export default function Home() {
 
           <div className="flex flex-wrap justify-center gap-8">
             <Button
-              asChild
+              onClick={requireAuth(() => navigate("/#documents"))}
               className="h-14 md:h-16 px-10 md:px-12 rounded-full bg-primary text-background font-mono text-[11px] font-bold tracking-widest uppercase hover:scale-105 transition-all duration-300 shadow-xl shadow-primary/20"
             >
-              <Link to="/portfolio">Explore Systems</Link>
+              Explore Documents
             </Button>
             <Button
-              asChild
+              onClick={requireAuth(() => navigate("/about"))}
               variant="outline"
               className="h-14 md:h-16 px-10 md:px-12 rounded-full border-white/10 hover:bg-white/5 font-mono text-[11px] font-bold tracking-widest uppercase backdrop-blur-sm transition-all duration-300"
             >
-              <Link to="/about">Our Philosophy</Link>
+              Start Learning
             </Button>
           </div>
         </motion.div>
@@ -204,7 +207,7 @@ export default function Home() {
       </section>
 
       {/* Learning & Topics Section */}
-      <section className="py-35 px-8 section-connector bg-background relative overflow-hidden">
+      <section id="documents" className="py-35 px-8 section-connector bg-background relative overflow-hidden">
         {/* Top Connective Bloom */}
         <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
 
@@ -260,7 +263,10 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: idx * 0.1 }}
                   viewport={{ once: true, amount: 0.1 }}
                 >
-                  <Link to={`/document/${topic.id}`} className="block h-full cursor-pointer group">
+                  <div
+                    onClick={requireAuth(() => navigate(`/document/${topic.id}`))}
+                    className="block h-full cursor-pointer group"
+                  >
                     <div className="glass-panel h-full p-8 flex flex-col justify-between group-hover:border-primary/40 group-hover:-translate-y-2 lg:group-hover:-translate-y-2 transition-all duration-500 relative overflow-hidden shadow-2xl space-y-6 rounded-[32px]">
                       {/* Dynamic unique gradient based on topic - enhanced hover */}
                       <div className={`absolute inset-0 bg-gradient-to-tr ${topic.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none`} />
@@ -305,7 +311,7 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 </motion.div>
               );
             })}
@@ -314,18 +320,18 @@ export default function Home() {
 
         {/* Bottom Connective Bloom (Transition to Games) */}
         <div className="absolute -bottom-48 right-0 w-[50vw] h-[50vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
-      </section>
+      </section >
 
       {/* Games Highlight — List style */}
-      <section
+      < section
         id="projects"
         className="py-32 px-8 section-connector bg-muted/5 relative overflow-hidden"
       >
         {/* Top Connective Bloom */}
-        <div className="absolute -top-48 right-0 w-[50vw] h-[50vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
+        < div className="absolute -top-48 right-0 w-[50vw] h-[50vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
 
         {/* Central Connective Bloom (Transition to Vision) */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
+        < div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="flex flex-col md:flex-row justify-between items-baseline mb-20 gap-8"
@@ -357,14 +363,14 @@ export default function Home() {
 
           <div className="space-y-0">
             {GAMES.map((game, index) => (
-                <motion.div
-                  key={game.id}
-                  layout
-                  className="border-t border-border/20 group hover:border-primary/40 hover:bg-muted/5 transition-all duration-500"
-                  whileHover={{ scale: 1.005 }}
-                  whileTap={{ scale: 0.995 }}
-                  transition={{ duration: 0.3 }}
-                >
+              <motion.div
+                key={game.id}
+                layout
+                className="border-t border-border/20 group hover:border-primary/40 hover:bg-muted/5 transition-all duration-500"
+                whileHover={{ scale: 1.005 }}
+                whileTap={{ scale: 0.995 }}
+                transition={{ duration: 0.3 }}
+              >
                 <button
                   onClick={() =>
                     setExpandedProject(
@@ -453,15 +459,15 @@ export default function Home() {
             <div className="border-t border-border/20" />
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Vision — asymmetric layout */}
-      <section id="about" className="py-32 px-8 section-connector relative overflow-hidden">
+      < section id="about" className="py-32 px-8 section-connector relative overflow-hidden" >
         {/* Top Connective Bloom */}
-        <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
+        < div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
 
         {/* Side Connective Bloom (Transition to Services) */}
-        <div className="absolute -bottom-48 -right-24 w-[40vw] h-[40vw] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
+        < div className="absolute -bottom-48 -right-24 w-[40vw] h-[40vw] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-24 items-start">
           <motion.div
             className="lg:sticky lg:top-32"
@@ -559,7 +565,7 @@ export default function Home() {
             </motion.div>
           </motion.div>
         </div>
-      </section>
+      </section >
 
       {/* Games Highlight — List style */}
       {/* <section
@@ -843,6 +849,6 @@ export default function Home() {
 
       {/* Social / Info Footer Minimal */}
       <Footer />
-    </div>
+    </div >
   );
 }

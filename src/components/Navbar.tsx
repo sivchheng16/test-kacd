@@ -6,11 +6,12 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import logo from "../../public/logo.png"
+import { LogOut } from "lucide-react";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, signOut } = useAuth();
+  const { user, signOut, openAuthModal } = useAuth();
   const location = useLocation();
 
   useEffect(() => {
@@ -58,63 +59,87 @@ export default function Navbar() {
             : "bg-transparent border-transparent py-8"
         )}
       >
-      {/* <div className="max-w-[1440px] mx-auto w-full px-8 md:px-12 flex items-center justify-between"> */}
-      <div className="max-w-full mx-auto w-full px-8 md:px-12 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="relative z-[110] group shrink-0">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex flex-col"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center bg-transparent hover:text-primary group-hover:rotate-12 transition-transform duration-500">
-                <img src={logo} alt="logo" className="w-full h-full object-contain" />
-              </div>
-              <span className="font-sans text-xl md:text-3xl font-medium tracking-[0.2em] group-hover:text-primary transition-colors">
-                Portfolio
-              </span>
-            </div>
-          </motion.div>
-        </Link>
-
-        {/* Desktop Nav - Centered */}
-        <div className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={cn(
-                "relative font-mono text-[9px] font-bold uppercase tracking-[0.3em] transition-all duration-300 hover:text-primary py-2",
-                location.pathname === link.path
-                  ? "text-primary after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary"
-                  : "text-foreground/60"
-              )}
+        {/* <div className="max-w-[1440px] mx-auto w-full px-8 md:px-12 flex items-center justify-between"> */}
+        <div className="max-w-full mx-auto w-full px-8 md:px-12 flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="relative z-[110] group shrink-0">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex flex-col"
             >
-              {link.name}
-            </Link>
-          ))}
-        </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 flex items-center justify-center bg-transparent hover:text-primary group-hover:rotate-12 transition-transform duration-500">
+                  <img src={logo} alt="logo" className="w-full h-full object-contain" />
+                </div>
+                <span className="font-sans text-xl md:text-3xl font-medium tracking-[0.2em] group-hover:text-primary transition-colors">
+                  Portfolio
+                </span>
+              </div>
+            </motion.div>
+          </Link>
 
-        {/* Call to Action - Right */}
-        <div className="hidden lg:flex items-center">
-          <Button
+          {/* Desktop Nav - Centered */}
+          <div className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  "relative font-mono text-[9px] font-bold uppercase tracking-[0.3em] transition-all duration-300 hover:text-primary py-2",
+                  location.pathname === link.path
+                    ? "text-primary after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary"
+                    : "text-foreground/60"
+                )}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Call to Action - Right */}
+          <div className="hidden lg:flex items-center gap-6">
+            {user ? (
+              <div className="flex items-center gap-4">
+                {/* <span className="font-mono text-md font-bold uppercase tracking-widest text-primary/60">
+                {user.firstName} {user.lastName}
+              </span> */}
+                <Button
+                  onClick={() => signOut()}
+                  variant="outline"
+                  className="relative h-11 px-7 rounded-full border-white/10 hover:bg-white/5 font-mono text-[10px] font-bold tracking-widest uppercase transition-all gap-3 flex-row items-center"
+                >
+
+                  <LogOut size={16} />
+                  {user.firstName} {user.lastName}
+                </Button>
+              </div>
+            ) : (
+              <Button
+                onClick={() => openAuthModal()}
+                variant="outline"
+                className="h-11 px-8 rounded-full border-white/10 hover:bg-white/5 font-mono text-[10px] font-bold tracking-widest uppercase transition-all"
+              >
+                Sign In
+              </Button>
+            )}
+            {/* <Button
             asChild
             className="h-11 px-8 rounded-full bg-primary text-background font-mono text-[10px] font-bold tracking-widest uppercase hover:scale-105 transition-all shadow-lg shadow-primary/20"
           >
             <Link to="/services#contact">Initiate Project</Link>
-          </Button>
-        </div>
+          </Button> */}
+          </div>
 
-        {/* Mobile menu toggle */}
-        <button
-          className="lg:hidden relative z-[110] p-2 text-foreground"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-    </nav>
+          {/* Mobile menu toggle */}
+          <button
+            className="lg:hidden relative z-[110] p-2 text-foreground"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </nav>
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
@@ -126,7 +151,7 @@ export default function Navbar() {
             className="fixed inset-0 z-[9999] bg-background flex flex-col items-center justify-center p-8 text-center overscroll-none touch-none"
             data-lenis-prevent
           >
-            <motion.div 
+            <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -138,7 +163,7 @@ export default function Navbar() {
                   key={link.path}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ 
+                  transition={{
                     delay: 0.2 + 0.1 * idx,
                     duration: 0.6,
                     ease: [0.22, 1, 0.36, 1]
@@ -161,8 +186,38 @@ export default function Navbar() {
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: 0.6 + 0.1 * navLinks.length }}
-                className="pt-8"
+                className="pt-8 flex flex-col gap-4"
               >
+                {user ? (
+                  <>
+                    <p className="font-mono text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-2">
+                      Account: {user.firstName}
+                    </p>
+                    <Button
+                      onClick={() => {
+                        signOut();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      variant="outline"
+                      size="lg"
+                      className="h-14 sm:h-16 px-10 sm:px-12 rounded-full border-white/10 font-mono text-xs font-bold tracking-widest uppercase"
+                    >
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      openAuthModal();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    variant="outline"
+                    size="lg"
+                    className="h-14 sm:h-16 px-10 sm:px-12 rounded-full border-white/10 font-mono text-xs font-bold tracking-widest uppercase"
+                  >
+                    Sign In
+                  </Button>
+                )}
                 <Button
                   onClick={() => setIsMobileMenuOpen(false)}
                   asChild
@@ -174,7 +229,7 @@ export default function Navbar() {
               </motion.div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}

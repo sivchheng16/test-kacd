@@ -14,11 +14,13 @@ import {
   Download,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRequireAuth } from "../hooks/useRequireAuth";
 
 export default function GamePortal() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredGames, setFilteredGames] = useState<Game[]>(GAMES);
   const [activeGame, setActiveGame] = useState<Game | null>(null);
+  const { requireAuth } = useRequireAuth();
 
   useEffect(() => {
     setFilteredGames(
@@ -40,19 +42,19 @@ export default function GamePortal() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeGame]);
 
-  const handlePlay = (game: Game) => {
+  const handlePlay = requireAuth((game: Game) => {
     setActiveGame(game);
     document.body.style.overflow = "hidden";
-  };
+  });
 
   const handleClose = () => {
     setActiveGame(null);
     document.body.style.overflow = "auto";
   };
 
-  const handleDownload = (url: string) => {
+  const handleDownload = requireAuth((url: string) => {
     window.open(url, "_blank");
-  };
+  });
 
   return (
     <div className="min-h-screen bg-background text-foreground pt-32 pb-20 relative overflow-hidden">

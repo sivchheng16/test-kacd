@@ -14,7 +14,7 @@ import TopicDetails from './pages/TopicDetails';
 import { Project } from './constants';
 import ProjectModal from './components/ProjectModal';
 import ScrollToTop from './components/ScrollToTop';
-import AuthGate from './components/AuthGate';
+import AuthModal from './components/AuthModal';
 
 
 function AnimatedRoutes({
@@ -90,8 +90,8 @@ export default function App() {
   return (
     <AuthProvider>
       <Router>
-        <AuthGate>
-          <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
+        <AuthModal />
+        <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
             <Toaster position="top-center" expand={false} richColors />
             <ScrollToTop />
             <Navbar />
@@ -109,7 +109,6 @@ export default function App() {
               )}
             </main>
           </div>
-        </AuthGate>
       </Router>
     </AuthProvider >
   );
