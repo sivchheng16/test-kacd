@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { authApi } from '../lib/api';
 import { toast } from 'sonner';
+import { formatStudentDate } from '../lib/dateUtils';
 
 export interface User {
   id?: string;
@@ -8,6 +9,8 @@ export interface User {
   lastName: string;
   email: string;
   role?: string;
+  updatedAt?: string;
+  lastLogin?: string;
 }
 
 interface AuthContextType {
@@ -60,10 +63,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signIn = async (data: any) => {
     try {
       const response = await authApi.signIn(data);
-      if (response.token && response.user) {
+      if (response.token && response.students) {
         localStorage.setItem('auth_token', response.token);
-        localStorage.setItem('auth_user', JSON.stringify(response.user));
-        setUser(response.user);
+        localStorage.setItem('auth_user', JSON.stringify(response.students));
+        setUser(response.students);
         toast.success("Welcome back!");
         
         // Execute pending action if it exists
@@ -82,10 +85,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signUp = async (data: any) => {
     try {
       const response = await authApi.signUp(data);
-      if (response.token && response.user) {
+      if (response.token && response.students) {
         localStorage.setItem('auth_token', response.token);
-        localStorage.setItem('auth_user', JSON.stringify(response.user));
-        setUser(response.user);
+        localStorage.setItem('auth_user', JSON.stringify(response.students));
+        setUser(response.students);
         toast.success("Account created successfully!");
 
         // Execute pending action if it exists

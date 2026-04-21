@@ -175,7 +175,18 @@ export const TOPICS: Topic[] = [
     lessons: [
       { id: "html-1", title: "Introduction to HTML", description: "Learn the basic structure of an HTML document.", duration: "30 mins" },
       { id: "html-2", title: "HTML Elements and Tags", description: "Deep dive into paragraphs, headings, and formatting.", duration: "45 mins" },
-      { id: "html-3", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" }
+      { id: "html-3", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" },
+      { id: "html-4", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" },
+      { id: "html-5", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" },
+      { id: "html-6", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" },
+      { id: "html-7", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" },
+      { id: "html-8", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" },
+      { id: "html-9", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" },
+      { id: "html-10", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" },
+      { id: "html-11", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" },
+      { id: "html-12", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" },
+      { id: "html-13", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" },
+      { id: "html-14", title: "Forms and Input", description: "Learn how to build interactive forms for users.", duration: "1 hr" }
     ]
   },
   {

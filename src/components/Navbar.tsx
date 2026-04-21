@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Terminal, Command } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { formatStudentDate } from "../lib/dateUtils";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
@@ -107,11 +108,17 @@ export default function Navbar() {
                 <Button
                   onClick={() => signOut()}
                   variant="outline"
-                  className="relative h-11 px-7 rounded-full border-white/10 hover:bg-white/5 font-mono text-[10px] font-bold tracking-widest uppercase transition-all gap-3 flex-row items-center"
+                  className="relative h-11 px-7 rounded-full border-white/10 hover:bg-white/5 font-mono text-[10px] font-bold tracking-widest uppercase transition-all gap-3 flex flex-col items-center justify-center py-2"
                 >
-
-                  <LogOut size={16} />
-                  {user.firstName} {user.lastName}
+                  <div className="flex items-center gap-2">
+                    <LogOut size={14} />
+                    {user.firstName} {user.lastName}
+                  </div>
+                  {user.updatedAt && (
+                    <span className="text-[7px] text-primary/60 lowercase tracking-normal">
+                      active: {formatStudentDate(user.updatedAt)}
+                    </span>
+                  )}
                 </Button>
               </div>
             ) : (

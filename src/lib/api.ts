@@ -50,5 +50,5 @@ export const authApi = {
     method: 'POST',
   }),
   // Mock function to check session if needed, or we can just rely on the stored user
-  getProfile: () => apiFetch('/api/auth/profile').catch(() => null),
+  getProfile: () => apiFetch('/api/students/profile').catch(() => null),
 };
