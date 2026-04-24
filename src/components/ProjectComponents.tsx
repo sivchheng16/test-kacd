@@ -117,7 +117,7 @@ export function ProjectCard({
         <div className="absolute inset-x-0 h-[1px] bg-primary/30 z-20 top-0 group-hover:animate-scan opacity-0 group-hover:opacity-100 pointer-events-none" />
       </div>
 
-      <div className="mt-10 space-y-6">
+      <div className="mt-6 md:mt-10 space-y-6">
         <div className="flex items-center gap-6">
            <span className="font-mono text-primary/40 text-lg">
              0{index + 1}

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRequireAuth } from "../hooks/useRequireAuth";
+import NavbarMobile from "@/components/NavbarMobile";
 
 export default function GamePortal() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -57,7 +58,8 @@ export default function GamePortal() {
   });
 
   return (
-    <div className="min-h-screen bg-background text-foreground pt-32 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground pt-32 pb-12 md:pb-20 relative overflow-hidden">
+      <NavbarMobile />
       {/* Background Mesh Gradients */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-[10%] right-[10%] w-[50vw] h-[50vw] bg-primary/10 blur-[150px] rounded-full" />
@@ -66,7 +68,7 @@ export default function GamePortal() {
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header Section */}
-        <div className="max-w-4xl mx-auto text-center mb-32">
+        <div className="max-w-4xl mx-auto text-center mb-20 md:mb-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -84,7 +86,7 @@ export default function GamePortal() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-6xl md:text-8xl font-sans font-medium tracking-tighter text-foreground mb-12 uppercase text-gradient"
+            className="text-5xl md:text-8xl font-sans font-medium tracking-tighter text-foreground mb-8 md:mb-12 uppercase text-gradient"
           >
             THE <span className="italic font-bold">VAULT.</span>
           </motion.h1>
@@ -93,7 +95,7 @@ export default function GamePortal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="text-muted-foreground font-sans italic text-xl max-w-2xl mx-auto leading-relaxed border-l-2 border-primary/20 pl-8 inline-block text-left"
+            className="text-lg md:text-xl text-muted-foreground font-sans italic max-w-2xl mx-auto leading-relaxed border-l-2 border-primary/20 pl-6 md:pl-8 inline-block text-left"
           >
             "A collection of games I've created. There are games that give you extra skills and computer thinking as well as give you a fun game to play."
           </motion.p>
@@ -104,7 +106,7 @@ export default function GamePortal() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="glass-panel p-6 rounded-[32px] mb-20 flex flex-col md:flex-row items-center justify-between gap-8"
+          className="glass-panel p-6 md:p-8 rounded-[32px] mb-12 md:mb-20 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8"
         >
           <div className="flex items-center gap-10">
             <div className="flex items-center gap-3 text-primary font-mono text-[10px] font-bold uppercase tracking-widest">
@@ -130,7 +132,7 @@ export default function GamePortal() {
         </motion.div>
 
         {/* Isometric Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
           <AnimatePresence mode="popLayout">
             {filteredGames.map((game, idx) => (
               <AntigravityCard
@@ -160,7 +162,7 @@ export default function GamePortal() {
       </div>
 
       {/* Footer Branding */}
-      <div className="container mx-auto px-6 mt-48 pt-20 border-t border-white/5 flex flex-col items-center">
+      <div className="container mx-auto px-6 mt-20 md:mt-48 pt-20 border-t border-white/5 flex flex-col items-center">
         <Sparkles className="w-6 h-6 text-primary mb-8 animate-pulse" />
         <div className="font-mono text-primary text-[10px] font-bold tracking-[1em] uppercase opacity-40">
           SIVCHHENG KHEANG

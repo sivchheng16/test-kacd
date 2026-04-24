@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ContactForm } from "@/components/ContactForm";
 import { categories } from "@/constants";
+import NavbarMobile from "@/components/NavbarMobile";
 
 const services = [
   {
@@ -125,6 +126,7 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-background text-foreground pt-32 relative overflow-hidden">
+      <NavbarMobile />
       {/* Background Mesh Gradients */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-[5%] right-[10%] w-[50vw] h-[50vw] bg-primary/5 blur-[120px] rounded-full opacity-40" />
@@ -132,8 +134,8 @@ export default function Services() {
       </div>
 
       {/* Hero Section */}
-      <section className="px-8 relative z-10 text-center">
-        <div className="max-w-7xl h-[calc(100vh-8rem)] mx-auto flex flex-col items-center justify-center relative">
+      <section className="px-6 md:px-8 relative z-10 text-center">
+        <div className="max-w-7xl min-h-[70vh] md:h-[calc(100vh-8rem)] mx-auto flex flex-col items-center justify-center relative py-20 md:py-0">
 
           {/* Technical Keyword Tokens */}
           <motion.div
@@ -184,7 +186,7 @@ export default function Services() {
               <div className="w-12 h-px bg-primary/30" />
             </div>
 
-            <h1 className="text-4xl xs:text-5xl md:text-9xl font-sans font-medium tracking-tighter leading-[0.8] mb-14 uppercase flex flex-wrap justify-center overflow-hidden">
+            <h1 className="text-5xl sm:text-7xl md:text-9xl font-sans font-medium tracking-tighter leading-[1.1] md:leading-[0.8] mb-10 md:mb-14 uppercase flex flex-wrap justify-center overflow-hidden">
               {"Modules".split("").map((char, index) => (
                 <motion.span
                   key={index}
@@ -195,29 +197,31 @@ export default function Services() {
                     delay: 0.5 + index * 0.05,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="inline-block text-gradient"
+                  className="inline-block text-gradient pb-2"
                 >
                   {char}
                 </motion.span>
               ))}
               <br className="w-full" />
-              <div className="flex flex-wrap justify-center w-full">
-                <span className="italic font-light lowercase opacity-40 mr-4">that define</span>
-                {"Performance.".split("").map((char, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ y: "100%" }}
-                    animate={{ y: 0 }}
-                    transition={{
-                      duration: 0.8,
-                      delay: 1.2 + index * 0.05,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="inline-block text-gradient"
-                  >
-                    {char}
-                  </motion.span>
-                ))}
+              <div className="flex flex-wrap justify-center w-full gap-x-4">
+                <span className="italic font-light lowercase opacity-40">that define</span>
+                <div className="flex">
+                  {"Performance.".split("").map((char, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ y: "100%" }}
+                      animate={{ y: 0 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: 1.2 + index * 0.05,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      className="inline-block text-gradient pb-2"
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </div>
               </div>
             </h1>
 
@@ -249,7 +253,7 @@ export default function Services() {
       </section>
 
       {/* Services Grid */}
-      <section className="px-8 py-24 md:py-48 relative z-10 section-connector">
+      <section className="px-6 md:px-8 py-20 md:py-32 relative z-10 section-connector">
         {/* Top Connective Bloom */}
         <div className="absolute -top-48 right-[10%] w-[50vw] h-[50vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-10">
@@ -261,12 +265,12 @@ export default function Services() {
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true, amount: 0.1 }}
-              className="glass-panel group relative rounded-[48px] border-white/5 hover:border-primary/40 transition-all duration-700 overflow-hidden min-h-[480px] flex flex-col"
+              className="glass-panel group relative rounded-[32px] md:rounded-[48px] border-white/5 hover:border-primary/40 transition-all duration-700 overflow-hidden min-h-[400px] md:min-h-[480px] flex flex-col"
             >
               {/* Background Accent */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] -mr-32 -mt-32 group-hover:bg-primary/10 transition-colors duration-700" />
 
-              <div className="p-12 flex flex-col h-full relative z-10">
+              <div className="p-8 md:p-12 flex flex-col h-full relative z-10">
                 {/* Header Area */}
                 <div className="flex items-start justify-between mb-12">
                   <div className="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 shadow-[0_0_30px_rgba(var(--primary),0.1)] transition-all duration-700">
@@ -280,7 +284,7 @@ export default function Services() {
 
                 {/* Content Area */}
                 <div className="space-y-6">
-                  <h2 className="text-4xl font-sans font-medium tracking-tight italic">{service.name}</h2>
+                  <h2 className="text-3xl md:text-4xl font-sans font-medium tracking-tight italic">{service.name}</h2>
                   <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary/60">{service.description}</p>
 
                   <p className="text-muted-foreground font-sans leading-relaxed italic opacity-80 max-w-sm">
@@ -308,7 +312,7 @@ export default function Services() {
                     </div>
 
                     {/* Features Grid */}
-                    <div className="grid grid-cols-2 gap-y-4 gap-x-6 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-700 transform translate-y-0 sm:translate-y-4 sm:group-hover:translate-y-0">
+                    <div className="grid grid-cols-1 xs:grid-cols-2 gap-y-4 gap-x-6 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-700 transform translate-y-0 sm:translate-y-4 sm:group-hover:translate-y-0">
                       {service.features.map((feature: string) => (
                         <div key={feature} className="flex items-center gap-3">
                           <div className="w-1 h-1 rounded-full bg-primary/40" />
@@ -332,7 +336,7 @@ export default function Services() {
       </section>
 
       {/* Process Section */}
-      <section className="py-48 px-8 relative overflow-hidden section-connector">
+      <section className="py-20 md:py-32 px-6 md:px-8 relative overflow-hidden section-connector">
         {/* Top Connective Bloom */}
         <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
         <div className="absolute -inset-20 bg-primary/5 blur-[150px] rounded-full opacity-50" />
@@ -341,7 +345,7 @@ export default function Services() {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-40">
             <p className="font-mono text-[10px] font-bold tracking-[0.5em] text-primary uppercase mb-8">Execution Lifecycle</p>
-            <h2 className="text-6xl md:text-8xl font-sans font-medium tracking-tighter">The <span className="italic font-light opacity-40">Journey.</span></h2>
+            <h2 className="text-4xl md:text-8xl font-sans font-medium tracking-tighter">The <span className="italic font-light opacity-40">Journey.</span></h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-8 relative">
@@ -383,7 +387,7 @@ export default function Services() {
       </section>
 
       {/* KOOMPI Partnership */}
-      <section className="py-48 px-8 relative bg-white/[0.02] section-connector">
+      <section className="py-20 md:py-32 px-6 md:px-8 relative bg-white/[0.02] section-connector">
         {/* Top Connective Bloom */}
         <div className="absolute -top-48 right-0 w-[50vw] h-[50vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
@@ -439,7 +443,7 @@ export default function Services() {
       </section>
 
       {/* Team Section */}
-      <section className="py-48 px-8 relative z-10 section-connector">
+      <section className="py-20 md:py-32 px-6 md:px-8 relative z-10 section-connector">
         {/* Top Connective Bloom */}
         <div className="absolute -top-48 left-[10%] w-[40vw] h-[40vw] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto">
@@ -501,7 +505,7 @@ export default function Services() {
       </section>
 
 
-      <section className="pt-28 sm:px-5 md:px-5 relative overflow-hidden bg-background section-connector">
+      <section className="py-20 md:py-28 px-4 md:px-5 relative overflow-hidden bg-background section-connector">
         {/* Subtle Background Ornaments */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
           <motion.div
@@ -529,7 +533,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="glass-panel border-white/5 p-6 md:p-10 rounded-[64px] shadow-[0_64px_128px_-16px_rgba(0,0,0,0.5)] relative overflow-hidden"
+            className="glass-panel border-white/5 p-6 md:p-10 rounded-[32px] md:rounded-[64px] shadow-[0_64px_128px_-16px_rgba(0,0,0,0.5)] relative overflow-hidden"
           >
             {/* Visual Accent */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.05] rounded-full blur-[120px] -mr-48 -mt-48 pointer-events-none" />
@@ -556,7 +560,7 @@ export default function Services() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3, duration: 1.2 }}
-                  className="text-5xl md:text-8xl font-sans leading-[0.85] tracking-tight italic"
+                  className="text-4xl md:text-8xl font-sans leading-[0.95] md:leading-[0.85] tracking-tight italic"
                 >
                   Have a system <br />
                   <span className="opacity-40 font-light">requirement?</span>
@@ -571,7 +575,7 @@ export default function Services() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.5 }}
-                  className="glass-panel border-white/5 p-10 md:p-16 flex flex-col justify-between space-y-16 rounded-[48px]"
+                  className="glass-panel border-white/5 p-8 md:p-16 flex flex-col justify-between space-y-12 md:space-y-16 rounded-[32px] md:rounded-[48px]"
                 >
                   <div className="space-y-12">
                     <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-sans italic opacity-70">
@@ -621,7 +625,7 @@ export default function Services() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.6 }}
-                  className="glass-panel border-white/5 p-1 shadow-2xl rounded-[48px]"
+                  className="glass-panel border-white/5 p-1 shadow-2xl rounded-[32px] md:rounded-[48px]"
                 >
                   <ContactForm />
                 </motion.div>

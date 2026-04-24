@@ -9,6 +9,9 @@ import { Project } from './constants';
 import ProjectModal from './components/ProjectModal';
 import ScrollToTop from './components/ScrollToTop';
 import AuthModal from './components/AuthModal';
+import { LayoutProvider, useLayout } from './context/LayoutContext';
+import { cn } from './lib/utils';
+import NavbarMobile from './components/NavbarMobile';
 
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home'));
@@ -17,6 +20,7 @@ const GamePortal = lazy(() => import('./pages/GamePortal'));
 const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
 const TopicDetails = lazy(() => import('./pages/TopicDetails'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Loading Fallback Component
 const PageLoader = () => (
@@ -61,6 +65,7 @@ function AnimatedRoutes({
           <Route path="/vault" element={<GamePortal />} />
           <Route path="/document/:topicId" element={<TopicDetails />} />
           <Route path="/document/:topicId/:moduleId" element={<TopicDetails />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </AnimatePresence>
@@ -106,29 +111,47 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <Router>
-        <AuthModal />
-        <div className="flex min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
-          <Toaster position="top-center" expand={false} richColors />
-          <ScrollToTop />
-          
-          <Sidebar />
-
-          <main className="flex-1 lg:pl-[280px] w-full min-h-screen">
-            <AnimatedRoutes
+      <LayoutProvider>
+          <Router>
+            <AppContent
               favorites={favorites}
               toggleFavorite={toggleFavorite}
               setViewingProject={setViewingProject}
+              viewingProject={viewingProject}
             />
-            {viewingProject && (
-              <ProjectModal
-                project={viewingProject}
-                onClose={() => setViewingProject(null)}
-              />
-            )}
-          </main>
-        </div>
-      </Router>
+          </Router>
+      </LayoutProvider>
     </AuthProvider >
+  );
+}
+
+function AppContent({ favorites, toggleFavorite, setViewingProject, viewingProject }: any) {
+  const { isSidebarCollapsed } = useLayout();
+
+  return (
+    <div className="flex min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
+      <Toaster position="top-center" expand={false} richColors />
+      <ScrollToTop />
+      <AuthModal />
+
+      <Sidebar />
+
+      <main className={cn(
+        "flex-1 w-full min-h-screen transition-all duration-500 ease-in-out",
+        isSidebarCollapsed ? "lg:pl-[80px]" : "lg:pl-[280px]"
+      )}>
+        <AnimatedRoutes
+          favorites={favorites}
+          toggleFavorite={toggleFavorite}
+          setViewingProject={setViewingProject}
+        />
+        {viewingProject && (
+          <ProjectModal
+            project={viewingProject}
+            onClose={() => setViewingProject(null)}
+          />
+        )}
+      </main>
+    </div>
   );
 }

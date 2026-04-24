@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import logo from "../../public/logo.png"
+import logo from "../../public/koompi-white.png"
 import {
   Instagram,
   Facebook,

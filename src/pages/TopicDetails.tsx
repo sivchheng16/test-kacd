@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowLeft, Clock, Menu, ChevronRight, ChevronLeft } from "lucide-react";
+import { ArrowLeft, Clock, Menu, ChevronRight, ChevronLeft, ShieldAlert } from "lucide-react";
 import { TOPICS } from "../constants";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -16,6 +16,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import NavbarMobile from "@/components/NavbarMobile";
 
 export default function TopicDetails() {
   const { topicId, moduleId } = useParams<{ topicId: string; moduleId: string }>();
@@ -24,12 +25,15 @@ export default function TopicDetails() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const topic = TOPICS.find((t) => t.id === topicId);
 
+  // Validate lesson/moduleId
+  const moduleIdInvalid = moduleId && topic && !topic.lessons.some(l => l.id === moduleId);
+
   // Determine active lesson: from URL param, or default to first lesson
   const activeLessonId = moduleId
     ? (topic?.lessons.find((l) => l.id === moduleId)?.id ?? topic?.lessons[0]?.id ?? null)
     : (topic?.lessons[0]?.id ?? null);
 
-  // Auto-redirect to first module if no moduleId in URL
+  // Auto-redirect to first module if no moduleId in URL and topic valid
   useEffect(() => {
     if (topic && !moduleId && topic.lessons.length > 0) {
       navigate(`/document/${topicId}/${topic.lessons[0].id}`, { replace: true });
@@ -44,26 +48,59 @@ export default function TopicDetails() {
     }
   }, [topicId, moduleId]);
 
-  if (!topic) {
+  if (!topic || moduleIdInvalid) {
     return (
-      <div className="min-h-screen bg-background text-foreground pt-32 px-8 flex flex-col items-center justify-center text-center">
-        <h2 className="text-4xl font-sans mb-6">System Error: Topic Not Found</h2>
-        <Button asChild variant="outline" className="h-14 px-10 rounded-full glass-panel font-mono text-[10px] font-bold tracking-widest uppercase">
-          <Link to="/">Reboot to Home</Link>
-        </Button>
+      <div className="min-h-screen bg-[#050505] text-[#00ffcc] font-mono flex items-center justify-center p-6 relative overflow-hidden">
+        <NavbarMobile />
+        <div className="absolute inset-0 pointer-events-none opacity-10 z-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]" />
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-2xl text-center space-y-12 relative z-10"
+        >
+          <div className="space-y-6">
+            <div className="flex justify-center mb-8">
+              <div className="w-20 h-20 rounded-full glass-panel border-red-500/20 flex items-center justify-center text-red-500 shadow-[0_0_40px_rgba(239,68,68,0.2)]">
+                <ShieldAlert size={40} />
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-center justify-center gap-4 text-red-500 uppercase tracking-[0.5em] text-[10px] font-bold">
+                <span className="w-8 h-[1px] bg-red-500" />
+                {!topic ? "TOPIC_RESOLUTION_FAILED" : "MODULE_ADDRESS_INVALID"}
+                <span className="w-8 h-[1px] bg-red-500" />
+              </div>
+              <h1 className="text-5xl md:text-7xl font-sans font-medium tracking-tighter text-white uppercase italic">
+                {!topic ? "Topic" : "Module"} <span className="text-red-500 italic">Undefined.</span>
+              </h1>
+              <p className="text-white/40 text-lg max-w-lg mx-auto font-sans italic leading-relaxed">
+                {!topic 
+                  ? "The specified system directory could not be reached. The topic ID provided is not recognized by the central registry."
+                  : "The specified module coordinate does not exist within this topic's architecture. Return to a valid lesson."}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex justify-center gap-6">
+            <Button asChild className="h-14 px-10 rounded-full bg-primary text-background font-bold tracking-widest uppercase hover:scale-105 transition-all shadow-xl shadow-primary/20">
+              <Link to="/">Reboot to Home</Link>
+            </Button>
+            {moduleIdInvalid && (
+               <Button 
+                variant="outline"
+                className="h-14 px-10 rounded-full border-white/10 hover:bg-white/5 font-bold tracking-widest uppercase"
+                onClick={() => navigate(`/document/${topicId}`)}
+               >
+                 First Lesson
+               </Button>
+            )}
+          </div>
+        </motion.div>
       </div>
     );
   }
-  if (!topic.lessons) {
-    return (
-      <div className="min-h-screen bg-background text-foreground pt-32 px-8 flex flex-col items-center justify-center text-center">
-        <h2 className="text-4xl font-sans mb-6">System Error: Lesson Not Found</h2>
-        <Button asChild variant="outline" className="h-14 px-10 rounded-full glass-panel font-mono text-[10px] font-bold tracking-widest uppercase">
-          <Link to="/">Reboot to Home</Link>
-        </Button>
-      </div>
-    );
-  }
+
 
   const activeLesson = topic.lessons.find((l) => l.id === activeLessonId) || topic.lessons[0];
   const ActiveLessonComponent = activeLessonId ? lessonRegistry[activeLessonId] : null;

@@ -11,6 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import NavbarMobile from "@/components/NavbarMobile";
 
 const philosophyItems = [
   {
@@ -69,7 +70,8 @@ export default function About() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground pt-32 relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground pt-32 relative overflow-hidden ">
+      <NavbarMobile />
       {/* Background Mesh Gradients */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-[10%] right-[5%] w-[40vw] h-[40vw] bg-primary/5 blur-[120px] rounded-full" />
@@ -77,7 +79,7 @@ export default function About() {
       </div>
 
       {/* Hero Section */}
-      <section className="px-8 mb-40 relative z-10 section-connector">
+      <section className="px-6 md:px-8 mb-20 md:mb-32 relative z-10 section-connector">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -90,22 +92,22 @@ export default function About() {
                 System Overview
               </p>
             </div>
-            <h1 className="text-6xl md:text-8xl font-sans font-medium tracking-tighter leading-[0.85] mb-12 uppercase text-gradient">
+            <h1 className="text-5xl md:text-8xl font-sans font-medium tracking-tighter leading-[0.95] md:leading-[0.85] mb-8 md:mb-12 uppercase text-gradient">
               KOOMPI OS <br />
-              <span className="opacity-50 italic font-light lowercase font-sans">designing the future of education.</span>
+              <span className="opacity-50 italic font-light lowercase font-sans text-3xl md:text-5xl lg:text-7xl">designing the future of education.</span>
             </h1>
-            
-            <div className="glass-panel p-10 md:p-16 rounded-[48px] max-w-4xl border-white/5 relative overflow-hidden group">
-               <div className="absolute top-0 right-0 p-8 opacity-5">
-                 <Quote size={80} className="text-primary" />
-               </div>
-               <p className="text-2xl md:text-4xl text-foreground font-sans leading-relaxed italic relative z-10">
-                 "Merging technical precision with creative instinct to build digital environments that define the future."
-               </p>
-               <div className="mt-12 flex items-center gap-6">
-                  <div className="h-px w-12 bg-primary/30" />
-                  <span className="font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-primary">System Philosophy_v2.0</span>
-               </div>
+
+            <div className="glass-panel p-8 md:p-16 rounded-[32px] md:rounded-[48px] max-w-4xl border-white/5 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-8 opacity-5">
+                <Quote size={80} className="text-primary" />
+              </div>
+              <p className="text-xl md:text-4xl text-foreground font-sans leading-relaxed italic relative z-10">
+                "Merging technical precision with creative instinct to build digital environments that define the future."
+              </p>
+              <div className="mt-8 md:mt-12 flex items-center gap-6">
+                <div className="h-px w-12 bg-primary/30" />
+                <span className="font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-primary">System Philosophy_v2.0</span>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -114,7 +116,7 @@ export default function About() {
       </section>
 
       {/* Founder Story */}
-      <section className="px-8 mb-48 relative section-connector">
+      <section className="px-6 md:px-8 mb-20 md:mb-32 relative section-connector">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_1.8fr] gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -131,15 +133,15 @@ export default function About() {
               />
               {/* Technical Overlay */}
               <div className="absolute bottom-10 left-10 right-10 p-6 glass-panel rounded-2xl border-white/10 backdrop-blur-3xl">
-                 <div className="flex justify-between items-center">
-                    <div className="space-y-1">
-                       <p className="font-mono text-[8px] font-bold text-primary uppercase tracking-widest">System Build</p>
-                       <p className="font-mono text-[10px] font-bold text-white/50 tracking-widest">KOOMPI_OS_v2.0</p>
-                    </div>
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20">
-                       <ShieldCheck size={14} className="text-primary" />
-                    </div>
-                 </div>
+                <div className="flex justify-between items-center">
+                  <div className="space-y-1">
+                    <p className="font-mono text-[8px] font-bold text-primary uppercase tracking-widest">System Build</p>
+                    <p className="font-mono text-[10px] font-bold text-white/50 tracking-widest">KOOMPI_OS_v2.0</p>
+                  </div>
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20">
+                    <ShieldCheck size={14} className="text-primary" />
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -153,9 +155,9 @@ export default function About() {
             <div className="inline-flex items-center justify-center w-16 h-16 glass-panel rounded-2xl text-primary">
               <Quote size={28} strokeWidth={1.5} />
             </div>
-            
+
             <div className="space-y-8">
-              <h2 className="text-5xl md:text-6xl font-sans font-medium leading-[0.9] tracking-tighter">
+              <h2 className="text-4xl md:text-6xl font-sans font-medium leading-[0.95] md:leading-[0.9] tracking-tighter">
                 Architecting <span className="text-primary italic">Seamless</span> <br /> Digital Systems.
               </h2>
               <p className="text-xl text-muted-foreground font-sans leading-relaxed italic border-l-2 border-primary/20 pl-10 opacity-80">
@@ -184,15 +186,15 @@ export default function About() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-40 px-8 section-connector relative overflow-hidden">
+      <section className="py-20 md:py-32 px-6 md:px-8 section-connector relative overflow-hidden">
         {/* Top Connective Bloom */}
         <div className="absolute -top-48 right-[10%] w-[60vw] h-[60vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-24">
-             <p className="font-mono text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-6">Execution Strategy</p>
-             <h2 className="text-5xl md:text-6xl font-sans font-medium">Core Axioms.</h2>
+            <p className="font-mono text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-6">Execution Strategy</p>
+            <h2 className="text-4xl md:text-6xl font-sans font-medium">Core Axioms.</h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -202,12 +204,12 @@ export default function About() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="glass-panel p-12 rounded-[48px] border-white/5 hover:border-primary/40 transition-all duration-700 group relative overflow-hidden"
+                className="glass-panel p-8 md:p-12 rounded-[32px] md:rounded-[48px] border-white/5 hover:border-primary/40 transition-all duration-700 group relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-10 transition-opacity">
                   <item.icon size={100} className="text-primary" />
                 </div>
-                
+
                 <div className="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center text-primary mb-12 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(var(--primary),0.2)] transition-all duration-700">
                   <item.icon className="w-7 h-7" />
                 </div>
@@ -226,33 +228,37 @@ export default function About() {
       </section>
 
       {/* Final Statement */}
-      <section className="py-48 px-8 section-connector text-center max-w-5xl mx-auto relative overflow-hidden">
-        {/* Top Connective Bloom */}
-        <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[70vw] h-[70vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="glass-panel py-32 px-12 md:px-20 rounded-[80px] border-white/5 relative overflow-hidden shadow-[0_64px_128px_-16px_rgba(0,0,0,0.5)]"
-        >
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
-          <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-primary/5 blur-[150px] rounded-full" />
-          
-          <p className="font-mono text-[10px] font-bold tracking-[0.5em] text-primary uppercase mb-16">
-            Module Mission_v2
-          </p>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-sans font-medium tracking-tighter mb-20 leading-[0.9] text-gradient">
-            We build digital environments that are <span className="italic">clean</span>, <span className="italic">functional</span>, and <span className="italic">high-performance</span>.
-          </h2>
-          
-          <Button
-            size="lg"
-            onClick={() => navigate("/services")}
-            className="h-20 px-16 rounded-full bg-primary text-background font-mono text-[11px] font-bold tracking-[0.4em] uppercase hover:bg-primary shadow-2xl shadow-primary/20 transition-all duration-500"
+      <section className="py-28 px-8 section-connector text-center relative overflow-hidden">
+        <div className="flex items-center justify-center max-w-5xl mx-auto" >
+
+          {/* Top Connective Bloom */}
+          <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[70vw] h-[70vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="glass-panel py-20 px-8 md:py-32 md:px-20 rounded-[48px] md:rounded-[80px] border-white/5 relative overflow-hidden shadow-[0_64px_128px_-16px_rgba(0,0,0,0.5)]"
           >
-            Execute Exploration <ArrowRight className="ml-4 w-4 h-4" />
-          </Button>
-        </motion.div>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
+            <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-primary/5 blur-[150px] rounded-full" />
+
+            <p className="font-mono text-[10px] font-bold tracking-[0.5em] text-primary uppercase mb-16">
+              Module Mission_v2
+            </p>
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-sans font-medium tracking-tighter mb-20 leading-[0.9] text-gradient">
+              We build digital environments that are <span className="italic">clean</span>, <span className="italic">functional</span>, and <span className="italic">high-performance</span>.
+            </h2>
+
+            <Button
+              size="lg"
+              onClick={() => navigate("/services")}
+              className="h-20 px-16 rounded-full bg-primary text-background font-mono text-[11px] font-bold tracking-[0.4em] uppercase hover:bg-primary shadow-2xl shadow-primary/20 transition-all duration-500"
+            >
+              Execute Exploration <ArrowRight className="ml-4 w-4 h-4" />
+            </Button>
+          </motion.div>
+        </div>
+
       </section>
     </div>
   );

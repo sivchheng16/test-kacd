@@ -9,6 +9,7 @@ import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { useEffect, useRef } from 'react';
 import { useRequireAuth } from '../hooks/useRequireAuth';
+import NavbarMobile from '@/components/NavbarMobile';
 
 const CATEGORIES = ['All', 'Web Development', 'Mobile', 'UI/UX Design'];
 
@@ -54,6 +55,7 @@ export default function Portfolio({
 
   return (
     <div className="min-h-screen bg-background text-foreground pt-32 relative overflow-hidden mb-48">
+           <NavbarMobile />
       {/* Background Mesh Gradients */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-[10%] left-[5%] w-[45vw] h-[45vw] bg-primary/5 blur-[120px] rounded-full" />
@@ -61,7 +63,7 @@ export default function Portfolio({
       </div>
 
       {/* Page Header */}
-      <section className="px-8 mb-40 relative z-10">
+      <section className="px-6 md:px-8 mb-20 md:mb-32 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
             <motion.div
@@ -75,9 +77,9 @@ export default function Portfolio({
                   System Features
                 </p>
               </div>
-              <h1 className="text-5xl sm:text-7xl md:text-8xl font-sans font-medium tracking-tighter uppercase leading-[0.85] text-gradient mb-12">
+              <h1 className="text-5xl md:text-8xl font-sans font-medium tracking-tighter uppercase leading-[0.9] md:leading-[0.85] text-gradient mb-8 md:mb-12">
                 Features. <br />
-                <span className="opacity-50 italic font-light lowercase font-sans text-4xl sm:text-5xl md:text-8xl">os & apps.</span>
+                <span className="opacity-50 italic font-light lowercase font-sans text-3xl md:text-7xl lg:text-8xl">os & apps.</span>
               </h1>
               <p className="text-xl text-muted-foreground font-sans leading-relaxed max-w-lg italic opacity-80 border-l-2 border-primary/20 pl-8">
                 "A curated archive of KOOMPI OS official applications and core system features developed for our users."
@@ -142,10 +144,10 @@ export default function Portfolio({
         </section>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-20 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-32 relative z-10">
         {/* All Projects */}
-        <section>
-          <div className="flex items-center justify-between mb-24">
+        <section className="mt-12 md:mt-0">
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-16 md:mb-24 gap-6">
             <div className="flex items-center gap-6">
               <h2 className="font-sans text-3xl font-medium tracking-tight">
                 {selectedCategory === 'All' ? 'Full Archive' : selectedCategory}
@@ -176,7 +178,7 @@ export default function Portfolio({
               </Button>
             </motion.div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 md:gap-y-32">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 md:gap-y-32">
               {filteredProjects.map((project, index) => (
                 <ProjectCard
                   key={project.id}

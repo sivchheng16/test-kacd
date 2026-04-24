@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "motion/react";
 import logo from "../../public/koompi-white.png"
 import { LogOut } from "lucide-react";
 
-export default function Navbar() {
+export default function NavbarMobile() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, signOut, openAuthModal } = useAuth();
@@ -54,96 +54,23 @@ export default function Navbar() {
     <>
       <nav
         className={cn(
-          "fixed top-0 left-0 right-0 z-[100] transition-all duration-700 h-24 flex items-center border-b",
+          "lg:hidden fixed top-0 left-0 right-0 z-[100] transition-all duration-700 h-16 w-full flex items-center border-b",
           isScrolled
-            ? "bg-background/20 backdrop-blur-3xl border-white/5 py-4"
-            : "bg-transparent border-transparent py-8"
+            ? "bg-background/20 backdrop-blur-3xl border-white/5"
+            : "bg-transparent backdrop-blur-xl border-transparent"
         )}
       >
-        {/* <div className="max-w-[1440px] mx-auto w-full px-8 md:px-12 flex items-center justify-between"> */}
-        <div className="max-w-full mx-auto w-full px-8 md:px-12 flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="relative z-[110] group shrink-0">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex flex-col"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 flex items-center justify-center bg-transparent hover:text-primary group-hover:rotate-12 transition-transform duration-500">
-                  <img src={logo} alt="logo" className="w-full h-full object-contain" />
-                </div>
-                <span className="font-sans text-xl md:text-3xl font-medium tracking-[0.2em] group-hover:text-primary transition-colors">
-                  Portfolio
-                </span>
-              </div>
-            </motion.div>
+        {/* Mobile menu toggle */}
+        <div className="relative lg:hidden flex items-center justify-between w-full px-8">
+          <button
+            className="lg:hidden relative p-2 text-foreground"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+          <Link to="/" className="absolute  left-1/2 -translate-x-1/2 group shrink-0 items-center justify-center">
+            <img src={logo} alt="Logo" className="w-12 h-12" />
           </Link>
-
-          {/* Desktop Nav - Centered */}
-          <div className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  "relative font-mono text-[11px] font-bold uppercase tracking-[0.3em] transition-all duration-300 hover:text-primary py-2",
-                  location.pathname === link.path
-                    ? "text-primary after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary"
-                    : "text-foreground/80"
-                )}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Call to Action - Right */}
-          <div className="hidden lg:flex items-center gap-6">
-            {user ? (
-              <div className="flex items-center gap-4">
-                <Button
-                  onClick={() => signOut()}
-                  variant="outline"
-                  className="relative h-11 px-7 rounded-full border-white/10 hover:bg-white/5 font-mono text-[10px] font-bold tracking-widest uppercase transition-all gap-3 flex flex-col items-center justify-center py-2"
-                >
-                  <div className="flex items-center gap-2">
-                    <LogOut size={14} className="text-primary/60" />
-                    <span>{user.firstName} {user.lastName}</span>
-                  </div>
-                  {user.updatedAt && (
-                    <span className="text-[7px] text-primary/40 lowercase tracking-normal -mt-0.5">
-                      active: {formatStudentDate(user.updatedAt)}
-                    </span>
-                  )}
-                </Button>
-              </div>
-            ) : (
-              <Button
-                onClick={() => openAuthModal()}
-                variant="outline"
-                className="h-11 px-8 rounded-full border-white/10 hover:bg-white/5 font-mono text-[10px] font-bold tracking-widest uppercase transition-all shadow-lg shadow-black/20"
-              >
-                Sign In
-              </Button>
-            )}
-            <Button
-              asChild
-              className="h-11 px-8 rounded-full bg-primary text-background font-mono text-[10px] font-bold tracking-widest uppercase hover:scale-105 transition-all shadow-lg shadow-primary/20"
-            >
-              <Link to="/services#contact">Initiate Project</Link>
-            </Button>
-          </div>
-
-          {/* Mobile menu toggle */}
-          <div className="lg:hidden z-[1010] fixed top-0 inset-0 flex items-center justify-between">
-            <button
-              className="lg:hidden relative z-[110] p-2 text-foreground"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
         </div>
       </nav>
       {/* Mobile Menu Overlay */}
@@ -154,7 +81,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed right-0 top-24 h-full w-full z-[9999] bg-background flex flex-col  p-8 overscroll-none touch-none"
+            className="fixed right-0 top-16 h-full w-full z-[9999] bg-background/20 backdrop-blur-xl flex flex-col  p-8 overscroll-none touch-none "
             data-lenis-prevent
           >
 
@@ -239,7 +166,7 @@ export default function Navbar() {
               </motion.div>
             </motion.div>
 
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
@@ -248,7 +175,7 @@ export default function Navbar() {
               <p className="font-mono text-[9px] font-bold tracking-[0.4em] text-primary uppercase opacity-40">
                 Sivchheng Kheang Studio // 2026
               </p>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         )}
       </AnimatePresence>

@@ -27,6 +27,7 @@ import { GAMES, TOPICS } from "../constants";
 import video from "../assets/video/about-me.mp4";
 import Footer from "../components/Footer";
 import { useRequireAuth } from "@/hooks/useRequireAuth";
+import NavbarMobile from "@/components/NavbarMobile";
 
 const services = [
   {
@@ -69,8 +70,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <NavbarMobile />
+
       {/* Premium Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center p-4 md:p-6 overflow-hidden section-connector">
+      <section className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center p-6 lg:p-8 overflow-hidden section-connector">
         {/* Background Mesh Gradients */}
         <div className="absolute inset-0 z-0">
           <motion.div
@@ -143,7 +146,7 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-20 w-full max-w-4xl p-12 md:p-20 glass-panel rounded-[40px] shadow-[0_32px_128px_-16px_rgba(0,0,0,0.5)] flex flex-col items-center text-center overflow-hidden"
+          className="relative z-20 w-full max-w-4xl p-8 md:p-20 glass-panel rounded-[40px] shadow-[0_32px_128px_-16px_rgba(0,0,0,0.5)] flex flex-col items-center text-center overflow-hidden"
         >
           {/* Internal Refraction Glow */}
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50" />
@@ -162,7 +165,7 @@ export default function Home() {
             <span className="w-8 h-[1px] bg-primary/50" />
           </motion.div>
 
-          <h1 className="text-[11vw] md:text-[8vw] lg:text-[6vw] font-sans font-medium leading-[0.85] tracking-tighter mb-12 text-gradient flex flex-wrap justify-center overflow-hidden whitespace-nowrap">
+          <h1 className="text-5xl sm:text-6xl md:text-[8vw] lg:text-[6vw] font-sans font-medium leading-[0.95] md:leading-[0.85] tracking-tighter mb-10 md:mb-12 text-gradient flex flex-wrap justify-center overflow-hidden">
             {"KOOMPI".split("").map((char, index) => (
               <motion.span
                 key={index}
@@ -185,9 +188,12 @@ export default function Home() {
             "Empowering the next generation of Linux users and developers. KOOMPI OS provides a seamless gateway to mastering technology through interactive modules and core system insights."
           </p>
 
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="flex flex-col sm:flex-row justify-center gap-6 md:gap-8">
               <Button
-                onClick={requireAuth(() => navigate("/#documents"))}
+                onClick={requireAuth(() => {
+                  const el = document.getElementById("documents");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                })}
                 className="h-14 md:h-16 px-10 md:px-12 rounded-full bg-primary text-background font-mono text-[11px] font-bold tracking-widest uppercase hover:scale-105 transition-all duration-300 shadow-xl shadow-primary/20"
               >
                 System Modules
@@ -207,7 +213,7 @@ export default function Home() {
       </section>
 
       {/* Learning & Topics Section */}
-      <section id="documents" className="py-35 px-8 section-connector bg-background relative overflow-hidden">
+      <section id="documents" className="py-20 md:py-32 px-8 section-connector bg-background relative overflow-hidden">
         {/* Top Connective Bloom */}
         <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
 
@@ -239,10 +245,16 @@ export default function Home() {
                 </p>
                 <div className="h-[1px] w-12 bg-primary/20 group-hover:w-20 transition-all duration-700" />
               </div>
-              <h2 className="text-6xl md:text-8xl font-sans font-medium tracking-tighter leading-[0.85]">
+              <h2 
+                className="text-5xl md:text-8xl font-sans font-medium tracking-tighter leading-[0.9] md:leading-[0.85] cursor-pointer group/title"
+                onClick={requireAuth(() => {
+                  const el = document.getElementById("documents");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                })}
+              >
                 Programming <br className="hidden md:block" />
                 {/* <span className="text-muted-foreground/20">&</span> */}
-                <span className="italic font-light text-muted-foreground group-hover:text-primary transition-colors duration-700">Languages</span>
+                <span className="italic font-light text-muted-foreground group-hover/title:text-primary transition-colors duration-700">Languages</span>
               </h2>
             </div>
             <p className="text-primary text-lg font-sans max-w-sm">
@@ -263,9 +275,9 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: idx * 0.1 }}
                   viewport={{ once: true, amount: 0.1 }}
                 >
-                  <div
+                  <button
                     onClick={requireAuth(() => navigate(`/document/${topic.id}`))}
-                    className="block h-full cursor-pointer group"
+                    className="w-full text-left bg-transparent border-none p-0 block h-full cursor-pointer group outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-[32px]"
                   >
                     <div className="glass-panel h-full p-8 flex flex-col justify-between group-hover:border-primary/40 group-hover:-translate-y-2 lg:group-hover:-translate-y-2 transition-all duration-500 relative overflow-hidden shadow-2xl space-y-6 rounded-[32px]">
                       {/* Dynamic unique gradient based on topic - enhanced hover */}
@@ -310,9 +322,9 @@ export default function Home() {
                           {lessonCount * 45}M_EST
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </motion.div>
+                      </div>
+                    </button>
+                  </motion.div>
               );
             })}
           </div>
@@ -325,7 +337,7 @@ export default function Home() {
       {/* Games Highlight — List style */}
       < section
         id="projects"
-        className="py-32 px-8 section-connector bg-muted/5 relative overflow-hidden"
+        className="py-20 md:py-32 px-8 section-connector bg-muted/5 relative overflow-hidden"
       >
         {/* Top Connective Bloom */}
         < div className="absolute -top-48 right-0 w-[50vw] h-[50vw] bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
@@ -344,7 +356,10 @@ export default function Home() {
               <p className="font-sans text-[10px] font-bold tracking-[0.3em] text-primary uppercase mb-6">
                 Additional Games Archive
               </p>
-              <h2 className="text-6xl font-sans font-medium tracking-tight hover:text-primary transition-colors duration-500 cursor-pointer">
+              <h2 
+                onClick={() => navigate("/vault")}
+                className="text-6xl font-sans font-medium tracking-tight hover:text-primary transition-colors duration-500 cursor-pointer"
+              >
                 The Vault Game Portfolio.
               </h2>
             </div>
@@ -462,7 +477,7 @@ export default function Home() {
       </section >
 
       {/* Vision — asymmetric layout */}
-      < section id="about" className="py-32 px-8 section-connector relative overflow-hidden" >
+      <section id="about" className="py-20 md:py-32 px-8 section-connector relative overflow-hidden" >
         {/* Top Connective Bloom */}
         < div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
 
@@ -700,7 +715,7 @@ export default function Home() {
       </section> */}
 
       {/* Services — minimalist cards */}
-      <section className="py-32 px-8 section-connector bg-background relative overflow-hidden">
+      <section className="py-20 md:py-32 px-8 section-connector bg-background relative overflow-hidden">
         {/* Top Connective Bloom */}
         <div className="absolute -top-32 -right-24 w-[40vw] h-[40vw] bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
 
