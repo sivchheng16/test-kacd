@@ -268,6 +268,134 @@ app.post("/api/credits/request", extractUserId, async (req, res) => {
   }
 });
 
+// ── AI Generation ─────────────────────────────────────────────────────────────
+app.post("/api/courses/generate/outline", extractUserId, async (req, res) => {
+  const { title, description, level, num_modules } = req.body;
+  if (!title || !description || !level || !num_modules) {
+    return res.status(400).json({ error: "missing_fields" });
+  }
+  const n = Math.min(Math.max(parseInt(num_modules) || 5, 3), 8);
+
+  const { data: credits } = await supabase
+    .from("user_credits")
+    .select("credits_remaining")
+    .eq("user_id", req.userId)
+    .maybeSingle();
+  if (!credits || credits.credits_remaining < 10) {
+    return res.status(403).json({ error: "insufficient_credits" });
+  }
+
+  try {
+    const response = await ai.chat.completions.create({
+      model: AI_MODEL,
+      max_tokens: 1024,
+      tools: [{
+        type: "function",
+        function: {
+          name: "set_outline",
+          description: "Set the course module outline",
+          parameters: {
+            type: "object",
+            required: ["modules"],
+            properties: {
+              modules: {
+                type: "array",
+                items: {
+                  type: "object",
+                  required: ["order", "title", "description", "duration"],
+                  properties: {
+                    order:       { type: "number" },
+                    title:       { type: "string" },
+                    description: { type: "string" },
+                    duration:    { type: "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }],
+      tool_choice: "required",
+      messages: [{
+        role: "user",
+        content: `Create a ${level} course outline titled "${title}".\nDescription: ${description}\nGenerate exactly ${n} modules. Be specific and practical.`
+      }]
+    });
+
+    const toolCall = response.choices[0]?.message?.tool_calls?.[0];
+    if (!toolCall) return res.status(500).json({ error: "generation_failed" });
+
+    const parsed = JSON.parse(toolCall.function.arguments);
+    const modules = parsed.modules.slice(0, n);
+    res.json({ modules });
+  } catch (err) {
+    console.error("outline generation error:", err);
+    res.status(500).json({ error: "generation_failed" });
+  }
+});
+
+app.post("/api/courses/generate/module", extractUserId, async (req, res) => {
+  const { course_title, course_level, module_title, module_description } = req.body;
+  if (!course_title || !course_level || !module_title) {
+    return res.status(400).json({ error: "missing_fields" });
+  }
+
+  try {
+    const response = await ai.chat.completions.create({
+      model: AI_MODEL,
+      max_tokens: 4096,
+      tools: [{
+        type: "function",
+        function: {
+          name: "set_module_content",
+          description: "Set the full content blocks for this lesson module",
+          parameters: {
+            type: "object",
+            required: ["blocks"],
+            properties: {
+              blocks: {
+                type: "array",
+                items: {
+                  type: "object",
+                  required: ["type"],
+                  properties: {
+                    type:     { type: "string", enum: ["heading","paragraph","code","callout","list","quiz"] },
+                    level:    { type: "number" },
+                    text:     { type: "string" },
+                    language: { type: "string" },
+                    code:     { type: "string" },
+                    variant:  { type: "string", enum: ["info","tip","warning"] },
+                    ordered:  { type: "boolean" },
+                    items:    { type: "array", items: { type: "string" } },
+                    question: { type: "string" },
+                    options:  { type: "array", items: { type: "string" } },
+                    answer:   { type: "number" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }],
+      tool_choice: "required",
+      messages: [{
+        role: "user",
+        content: `Write the lesson content for module "${module_title}" in a ${course_level} course on "${course_title}".\nModule goal: ${module_description ?? module_title}\nInclude: a heading, clear explanations, code examples where relevant, a tip callout, and end with one quiz question. Max 10 blocks total.`
+      }]
+    });
+
+    const toolCall = response.choices[0]?.message?.tool_calls?.[0];
+    if (!toolCall) return res.status(500).json({ error: "generation_failed" });
+
+    const parsed = JSON.parse(toolCall.function.arguments);
+    const blocks = parsed.blocks.slice(0, 10);
+    res.json({ blocks });
+  } catch (err) {
+    console.error("module generation error:", err);
+    res.status(500).json({ error: "generation_failed" });
+  }
+});
+
 // ── Static SPA (production only) ─────────────────────────────────────────────
 if (!isDev) {
   const dist = path.join(__dirname, "dist");
