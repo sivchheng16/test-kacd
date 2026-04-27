@@ -40,13 +40,37 @@ const KID_TOKEN_URL = "https://oauth.koompi.org/v1/oauth/token";
 const KID_USERINFO_URL = "https://oauth.koompi.org/v1/oauth/userinfo";
 
 // ── Supabase client ──────────────────────────────────────────────────────────
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_ANON_KEY
-);
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_ANON_KEY;
+
+let supabase;
+if (supabaseUrl && supabaseKey) {
+  supabase = createClient(supabaseUrl, supabaseKey);
+} else {
+  console.error("CRITICAL: Supabase environment variables are missing!");
+  // Create a dummy client that throws helpful errors
+  supabase = {
+    from: () => ({
+      select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ error: new Error("Supabase not configured") }) }) }),
+      upsert: () => Promise.resolve({ error: new Error("Supabase not configured") }),
+    })
+  };
+}
 
 const app = express();
 app.use(express.json());
+
+// ── Health Check ──────────────────────────────────────────────────────────────
+app.get("/api/ping", (req, res) => {
+  res.json({ 
+    pong: true, 
+    env: { 
+      hasSupabase: !!supabaseUrl, 
+      hasClientSecret: !!process.env.KID_CLIENT_SECRET,
+      nodeEnv: process.env.NODE_ENV
+    } 
+  });
+});
 
 // ── Auth middleware ───────────────────────────────────────────────────────────
 function extractUserId(req, res, next) {

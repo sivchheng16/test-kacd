@@ -38,8 +38,14 @@ export default function AuthCallback() {
         });
 
         if (!res.ok) {
-          const err = await res.json().catch(() => ({}));
-          throw new Error(err.error_description ?? err.error ?? "Exchange failed");
+          let detail = "Exchange failed";
+          try {
+            const err = await res.json();
+            detail = err.error_description ?? err.error ?? detail;
+          } catch {
+            detail = `Server returned ${res.status} ${res.statusText}`;
+          }
+          throw new Error(detail);
         }
 
         const data = await res.json();
