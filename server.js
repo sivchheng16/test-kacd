@@ -828,13 +828,17 @@ app.get("/api/admin/audit-log", extractUserId, requireAdmin, async (req, res) =>
 });
 
 // ── Static SPA (production only) ─────────────────────────────────────────────
-if (!isDev) {
+if (!isDev && process.env.VERCEL !== "1") {
   const dist = path.join(__dirname, "dist");
   app.use(express.static(dist, { maxAge: "30d" }));
   app.get("*", (_req, res) => res.sendFile(path.join(dist, "index.html")));
 }
 
-createServer(app).listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT} [${isDev ? "dev proxy" : "production"}]`);
-  console.log(`Supabase: ${process.env.SUPABASE_URL ?? "NOT SET"}`);
-});
+if (process.env.VERCEL !== "1") {
+  createServer(app).listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT} [${isDev ? "dev proxy" : "production"}]`);
+    console.log(`Supabase: ${process.env.SUPABASE_URL ?? "NOT SET"}`);
+  });
+}
+
+export default app;
