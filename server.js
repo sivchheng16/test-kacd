@@ -73,21 +73,26 @@ app.get("/api/ping", (req, res) => {
 });
 
 // ── Auth middleware ───────────────────────────────────────────────────────────
-function extractUserId(req, res, next) {
+async function extractUserId(req, res, next) {
   const token = req.headers.authorization?.replace("Bearer ", "");
   if (!token) return res.status(401).json({ error: "missing_token" });
   try {
     const payload = JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
     req.userId = payload.sub || payload._id || payload.id;
     req.userPayload = payload;
-    // Fire-and-forget: keep user row fresh with latest profile data
-    supabase.from("users").upsert({
-      user_id: req.userId,
-      email: payload.email ?? null,
-      fullname: payload.fullname ?? payload.name ?? null,
-      wallet_address: payload.wallet_address ?? null,
-      last_seen_at: new Date().toISOString(),
-    }, { onConflict: "user_id" }).then(() => {});
+    // Ensure user record exists before proceeding (so foreign keys in other tables work)
+    try {
+      await supabase.from("users").upsert({
+        user_id: req.userId,
+        email: payload.email ?? null,
+        fullname: payload.fullname ?? payload.name ?? null,
+        wallet_address: payload.wallet_address ?? null,
+        last_seen_at: new Date().toISOString(),
+      }, { onConflict: "user_id" });
+    } catch (e) {
+      console.error("User sync failed:", e);
+      // We still proceed, but the next DB calls might fail if they rely on this user record.
+    }
     next();
   } catch {
     res.status(401).json({ error: "invalid_token" });
@@ -146,9 +151,9 @@ app.post("/api/auth/exchange", async (req, res) => {
 
 // ── Progress API ─────────────────────────────────────────────────────────────
 
-// GET /api/progress/:userId
-app.get("/api/progress/:userId", extractUserId, async (req, res) => {
-  const { userId } = req.params;
+// GET /api/progress
+app.get("/api/progress", extractUserId, async (req, res) => {
+  const userId = req.userId;
 
   try {
     const [{ data: records, error: err1 }, { data: lastViewed, error: err2 }] = await Promise.all([
@@ -166,8 +171,8 @@ app.get("/api/progress/:userId", extractUserId, async (req, res) => {
 
     res.json({ completed, lastViewed: lastViewed ?? null });
   } catch (err) {
-    console.error("GET /api/progress error:", err);
-    res.status(500).json({ error: "internal_error" });
+    console.error("GET /api/progress error:", JSON.stringify(err, null, 2));
+    res.status(500).json({ error: "internal_error", details: err.message || err });
   }
 });
 
@@ -179,36 +184,42 @@ app.post("/api/progress/complete", extractUserId, async (req, res) => {
   const userId = req.userId;
 
   try {
-    const { data: existing } = await supabase
-      .from("lesson_progress")
-      .select("completed_at")
-      .eq("user_id", userId)
-      .eq("lesson_id", lessonId)
-      .maybeSingle();
+    let existingAt = null;
+    let existingChallengePassed = false;
+    try {
+      const { data: existing } = await supabase
+        .from("lesson_progress")
+        .select("completed_at, challenge_passed")
+        .eq("user_id", userId)
+        .eq("lesson_id", lessonId)
+        .maybeSingle();
+      existingAt = existing?.completed_at ?? null;
+      existingChallengePassed = existing?.challenge_passed ?? false;
+    } catch (e) {
+      console.warn("Failed to fetch existing progress:", e);
+    }
 
     const now = new Date().toISOString();
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("lesson_progress")
       .upsert(
         {
           user_id: userId,
           lesson_id: lessonId,
           topic_id: topicId,
-          challenge_passed: challengePassed ?? false,
-          completed_at: existing?.completed_at ?? now,
-          attempts: (existing?.attempts ?? 0) + 1,
+          completed_at: existingAt ?? now,
           updated_at: now,
+          // Once challenge_passed is true, never reset it to false
+          challenge_passed: existingChallengePassed || (challengePassed ?? false),
         },
         { onConflict: "user_id,lesson_id" }
-      )
-      .select()
-      .single();
+      );
 
     if (error) throw error;
-    res.json({ ok: true, progress: data });
+    res.json({ ok: true });
   } catch (err) {
-    console.error("POST /api/progress/complete error:", err);
-    res.status(500).json({ error: "internal_error" });
+    console.error("POST /api/progress/complete error:", JSON.stringify(err, null, 2));
+    res.status(500).json({ error: "internal_error", details: err.message || err });
   }
 });
 
@@ -220,25 +231,23 @@ app.post("/api/progress/viewed", extractUserId, async (req, res) => {
   const userId = req.userId;
 
   try {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("last_viewed")
       .upsert(
         {
           user_id: userId,
           lesson_id: lessonId,
           topic_id: topicId,
-          viewed_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
         },
         { onConflict: "user_id" }
-      )
-      .select()
-      .single();
+      );
 
     if (error) throw error;
-    res.json({ ok: true, lastViewed: data });
+    res.json({ ok: true });
   } catch (err) {
-    console.error("POST /api/progress/viewed error:", err);
-    res.status(500).json({ error: "internal_error" });
+    console.error("POST /api/progress/viewed error:", JSON.stringify(err, null, 2));
+    res.status(500).json({ error: "internal_error", details: err.message || err });
   }
 });
 
@@ -849,6 +858,15 @@ app.get("/api/admin/audit-log", extractUserId, requireAdmin, async (req, res) =>
     console.error("GET /api/admin/audit-log error:", err);
     res.status(500).json({ error: "internal_error" });
   }
+});
+
+// ── Global Error Handler ─────────────────────────────────────────────────────
+app.use((err, req, res, next) => {
+  console.error("Unhandled Server Error:", err);
+  res.status(500).json({ 
+    error: "internal_server_error", 
+    message: isDev ? err.message : "An unexpected error occurred"
+  });
 });
 
 // ── Static SPA (production only) ─────────────────────────────────────────────

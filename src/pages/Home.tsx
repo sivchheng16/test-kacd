@@ -69,7 +69,7 @@ export default function Home() {
       {user && (
         <div className="bg-white border-b border-border px-6 py-3 flex items-center justify-between gap-4 flex-wrap">
           <p className="text-sm font-sans text-muted-foreground">
-            Welcome back, <span className="text-foreground font-medium">{user.fullname.split(" ")[0]}</span>.
+            Welcome back, <span className="text-foreground font-medium">{user.fullname}</span>.
           </p>
           <Link
             to="/dashboard"

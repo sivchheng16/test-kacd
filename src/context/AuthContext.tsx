@@ -36,6 +36,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const url = await auth.createLoginUrl({ scope: ["profile.basic", "profile.contact"] });
       window.location.href = url;
     } catch (err) {
+      console.error("KID Login Error:", err);
       toast.error("Could not reach KOOMPI ID. Please try again.");
     }
   };

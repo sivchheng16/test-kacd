@@ -28,7 +28,7 @@ function UserDropdown({ user, logout }: { user: NonNullable<ReturnType<typeof us
         <div className="w-7 h-7 rounded-full bg-primary/15 flex items-center justify-center text-primary text-xs font-semibold">
           {user.fullname?.[0] ?? "?"}
         </div>
-        <span>{user.fullname?.split(" ")[0]}</span>
+        <span>{user.fullname}</span>
       </button>
 
       <AnimatePresence>

@@ -41,9 +41,9 @@ export default function AuthCallback() {
           let detail = "Exchange failed";
           try {
             const err = await res.json();
-            detail = err.error_description ?? err.error ?? detail;
+            detail = err.error_description ?? err.error ?? err.message ?? detail;
           } catch {
-            detail = `Server returned ${res.status} ${res.statusText}`;
+            detail = `Server returned ${res.status} ${res.statusText}. Is the backend server running?`;
           }
           throw new Error(detail);
         }

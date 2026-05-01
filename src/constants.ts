@@ -185,28 +185,7 @@ export const TOPICS: Topic[] = [
     ],
   },
 
-  // ── 01 Git & GitHub ────────────────────────────────────────────────────────
-  {
-    id: "git",
-    title: "Git & GitHub",
-    description: "Version control from day one. Learn to track changes, collaborate via pull requests, and never lose work again.",
-    iconName: "GitBranch",
-    logo: "/program-logo/git.png",
-    gradient: "from-orange-400/20 to-orange-100/5",
-    textgradient: "bg-gradient-to-br from-orange-400 to-red-500 bg-clip-text text-transparent inline-block",
-    level: "Beginner",
-    lessons: [
-      { id: "git-readme", title: "Introduction", description: "Why version control matters and what Git gives you.", duration: "10 mins" },
-      { id: "git-module01introductiongit", title: "Introduction to Git", description: "What version control is, how Git thinks about history, and your first repository.", duration: "30 mins" },
-      { id: "git-module02basiccommands", title: "Daily Git Workflow", description: "init, add, commit, status, log — the commands you will type every single day.", duration: "45 mins" },
-      { id: "git-module03githubremotes", title: "GitHub & Remotes", description: "Push, pull, clone — synchronise your work with the cloud and share it with the world.", duration: "50 mins" },
-      { id: "git-module04collaboration", title: "Branches & Pull Requests", description: "Branch, merge, open PRs, and resolve conflicts like a team player.", duration: "1 hr" },
-      { id: "git-module05advancedgit", title: "Advanced Git", description: "Rebase, stash, cherry-pick, bisect, and the commands that save you when things go wrong.", duration: "1 hr" },
-      { id: "git-module06gitworkflows", title: "Git Workflows", description: "Trunk-based development, Git Flow, conventional commits, and PR best practices used in real teams.", duration: "45 mins" },
-    ],
-  },
-
-  // ── 02 HTML ────────────────────────────────────────────────────────────────
+  // ── 01 HTML ────────────────────────────────────────────────────────────────
   {
     id: "html",
     title: "HTML",
@@ -229,7 +208,7 @@ export const TOPICS: Topic[] = [
     ],
   },
 
-  // ── 03 CSS ─────────────────────────────────────────────────────────────────
+  // ── 02 CSS ─────────────────────────────────────────────────────────────────
   {
     id: "css",
     title: "CSS",
@@ -253,7 +232,7 @@ export const TOPICS: Topic[] = [
     ],
   },
 
-  // ── 04 JavaScript ──────────────────────────────────────────────────────────
+  // ── 03 JavaScript ──────────────────────────────────────────────────────────
   {
     id: "javascript",
     title: "JavaScript",
@@ -276,7 +255,7 @@ export const TOPICS: Topic[] = [
     ],
   },
 
-  // ── 05 JS Advanced ─────────────────────────────────────────────────────────
+  // ── 04 JS Advanced ─────────────────────────────────────────────────────────
   {
     id: "javascript-advanced",
     title: "JS Advanced",
@@ -298,13 +277,34 @@ export const TOPICS: Topic[] = [
     ],
   },
 
+  // ── 05 Git & GitHub ────────────────────────────────────────────────────────
+  {
+    id: "git",
+    title: "Git & GitHub",
+    description: "Version control from day one. Learn to track changes, collaborate via pull requests, and never lose work again.",
+    iconName: "GitBranch",
+    logo: "/program-logo/git.png",
+    gradient: "from-orange-400/20 to-orange-100/5",
+    textgradient: "bg-gradient-to-br from-orange-400 to-red-500 bg-clip-text text-transparent inline-block",
+    level: "Beginner",
+    lessons: [
+      { id: "git-readme", title: "Introduction", description: "Why version control matters and what Git gives you.", duration: "10 mins" },
+      { id: "git-module01introductiongit", title: "Introduction to Git", description: "What version control is, how Git thinks about history, and your first repository.", duration: "30 mins" },
+      { id: "git-module02basiccommands", title: "Daily Git Workflow", description: "init, add, commit, status, log — the commands you will type every single day.", duration: "45 mins" },
+      { id: "git-module03githubremotes", title: "GitHub & Remotes", description: "Push, pull, clone — synchronise your work with the cloud and share it with the world.", duration: "50 mins" },
+      { id: "git-module04collaboration", title: "Branches & Pull Requests", description: "Branch, merge, open PRs, and resolve conflicts like a team player.", duration: "1 hr" },
+      { id: "git-module05advancedgit", title: "Advanced Git", description: "Rebase, stash, cherry-pick, bisect, and the commands that save you when things go wrong.", duration: "1 hr" },
+      { id: "git-module06gitworkflows", title: "Git Workflows", description: "Trunk-based development, Git Flow, conventional commits, and PR best practices used in real teams.", duration: "45 mins" },
+    ],
+  },
+
   // ── 06 TypeScript ──────────────────────────────────────────────────────────
   {
     id: "typescript",
     title: "TypeScript",
     description: "JavaScript with superpowers. Add types, catch bugs before runtime, write self-documenting code, and work confidently in large codebases.",
     iconName: "ShieldCheck",
-    logo: "/program-logo/javascript.png",
+    logo: "/program-logo/typescript.jpeg",
     gradient: "from-blue-600/20 to-blue-300/5",
     textgradient: "bg-gradient-to-br from-blue-500 to-blue-800 bg-clip-text text-transparent inline-block",
     level: "Intermediate",
@@ -370,7 +370,7 @@ export const TOPICS: Topic[] = [
     title: "Backend",
     description: "Build the server side. Design REST APIs, handle auth, connect databases, manage files, and understand what happens between the request and the response.",
     iconName: "Server",
-    logo: "/program-logo/coding.png",
+    logo: "/program-logo/backend.jpeg",
     gradient: "from-violet-500/20 to-violet-200/5",
     textgradient: "bg-gradient-to-br from-violet-400 to-purple-700 bg-clip-text text-transparent inline-block",
     level: "Advanced",
@@ -391,7 +391,7 @@ export const TOPICS: Topic[] = [
     title: "Databases",
     description: "Store things properly. Learn relational vs document databases, write SQL, design schemas, use Supabase in production, and think about data at scale.",
     iconName: "Database",
-    logo: "/program-logo/coding.png",
+    logo: "/program-logo/database.png",
     gradient: "from-emerald-500/20 to-emerald-200/5",
     textgradient: "bg-gradient-to-br from-emerald-400 to-green-700 bg-clip-text text-transparent inline-block",
     level: "Advanced",
@@ -411,7 +411,7 @@ export const TOPICS: Topic[] = [
     title: "Testing",
     description: "Untested code is a liability. Learn unit, integration, and end-to-end testing so you can ship with confidence and never break things twice.",
     iconName: "FlaskConical",
-    logo: "/program-logo/coding.png",
+    logo: "/program-logo/testing.png",
     gradient: "from-pink-500/20 to-pink-200/5",
     textgradient: "bg-gradient-to-br from-pink-400 to-rose-600 bg-clip-text text-transparent inline-block",
     level: "Advanced",
@@ -430,7 +430,7 @@ export const TOPICS: Topic[] = [
     title: "Shipping & Ops",
     description: "Get it to users. Containerise with Docker, automate deployments with GitHub Actions, manage secrets, monitor production, and keep things running.",
     iconName: "Rocket",
-    logo: "/program-logo/linux.png",
+    logo: "/program-logo/devops.jpeg",
     gradient: "from-sky-500/20 to-sky-200/5",
     textgradient: "bg-gradient-to-br from-sky-400 to-cyan-600 bg-clip-text text-transparent inline-block",
     level: "Advanced",
@@ -463,48 +463,48 @@ export const TOPICS: Topic[] = [
   },
 ];
 
-export const categories = [
-  {
-    name: "All Team",
-    moments: [
-      // { title: "Rithy THOUL", role: "Promoter && Connection", description: "CEO of KOOMPI", image: "../public/team/rithy-thul.png" },
-      // { title: "Brilliant PHAL", role: "OS Lead", description: "OS Lead", image: "../public/team/brilliant.jpg" },
-      // { title: "Vuthy SAN", role: "Developer", description: "Web Apps Dev Lead", image: "../public/team/vuthy.jpg" },
-      // { title: "Raksme VEN", role: "Bussiness ", description: "Finance & Vendor Relation", image: "../public/team/raksme.jpg" },
-      // { title: "Sukunthy CHAN", role: "Bussiness ", description: "Finance & Vendor Relation", image: "../public/team/sukunthy.png" },
-      // { title: "Sela THOL", role: "Bussiness", description: "Media and Communicaiton Manager", image: "../public/team/sela.jpg" },
-      // { title: "Theara THEN", role: "Developer & Bussiness", description: "Developer & Social Marketing & Sales", image: "../public/team/theara.jpg" },
-      // { title: "Thith THIN", role: "Developer", description: "Fulll Stack Developer", image: "../public/team/thith.jpg" },
-      // { title: "Hangsea HONG", role: "DevOps", description: "OS Developer", image: "../public/team/hangsea.jpg" },
-      // { title: "Sokunsamnang SAM AN", role: "Developer", description: "Network Devs & Mobile Application ", image: "../public/team/samnang.jpg" },
-      // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
-      // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
-      // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
-      // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
-      // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
-      // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
-    ]
-  },
-  {
-    name: "Developers",
-    moments: [
-      { title: "Sivchheng Kheang", role: "Technical Lead", description: "Architecting the technical core and high-performance visions.", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" },
-      { title: "Long Sei", role: "DevOps Engineer", description: "Optimizing cloud orchestration and system deployment cycles.", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400" },
-    ]
-  },
-  {
-    name: "Designers",
-    moments: [
-      { title: "Dara Som", role: "UI/UX Engineer", description: "Refining visual optics and interactive design protocols.", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400" },
-    ]
-  },
-  {
-    name: "Apprentice",
-    moments: [
-      { title: "Sivchheng Kheang", role: "Apprentice", description: "Developer & Learning Full Stack Developer", image: "/team/sivchheng.jpg" },
-      { title: "Keochheang THON", role: "Apprentice", description: "Designer", image: "/team/keochheang.jpg" },
-      { title: "Narith CHOM", role: "Apprentice", description: "Developer", image: "/team/narith.jpg" },
-      { title: "Sisuykong Sao ", role: "Apprentice", description: "Developer", image: "/team/sisuykong.jpg" },
-    ]
-  }
-];
+// export const categories = [
+//   {
+//     name: "All Team",
+//     moments: [
+//       // { title: "Rithy THOUL", role: "Promoter && Connection", description: "CEO of KOOMPI", image: "../public/team/rithy-thul.png" },
+//       // { title: "Brilliant PHAL", role: "OS Lead", description: "OS Lead", image: "../public/team/brilliant.jpg" },
+//       // { title: "Vuthy SAN", role: "Developer", description: "Web Apps Dev Lead", image: "../public/team/vuthy.jpg" },
+//       // { title: "Raksme VEN", role: "Bussiness ", description: "Finance & Vendor Relation", image: "../public/team/raksme.jpg" },
+//       // { title: "Sukunthy CHAN", role: "Bussiness ", description: "Finance & Vendor Relation", image: "../public/team/sukunthy.png" },
+//       // { title: "Sela THOL", role: "Bussiness", description: "Media and Communicaiton Manager", image: "../public/team/sela.jpg" },
+//       // { title: "Theara THEN", role: "Developer & Bussiness", description: "Developer & Social Marketing & Sales", image: "../public/team/theara.jpg" },
+//       // { title: "Thith THIN", role: "Developer", description: "Fulll Stack Developer", image: "../public/team/thith.jpg" },
+//       // { title: "Hangsea HONG", role: "DevOps", description: "OS Developer", image: "../public/team/hangsea.jpg" },
+//       // { title: "Sokunsamnang SAM AN", role: "Developer", description: "Network Devs & Mobile Application ", image: "../public/team/samnang.jpg" },
+//       // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
+//       // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
+//       // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
+//       // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
+//       // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
+//       // { title: "", role: "", description: "", image: "../public/team/raksme.jpg" },
+//     ]
+//   },
+//   {
+//     name: "Developers",
+//     moments: [
+//       { title: "Sivchheng Kheang", role: "Technical Lead", description: "Architecting the technical core and high-performance visions.", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" },
+//       { title: "Long Sei", role: "DevOps Engineer", description: "Optimizing cloud orchestration and system deployment cycles.", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400" },
+//     ]
+//   },
+//   {
+//     name: "Designers",
+//     moments: [
+//       { title: "Dara Som", role: "UI/UX Engineer", description: "Refining visual optics and interactive design protocols.", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400" },
+//     ]
+//   },
+//   {
+//     name: "Apprentice",
+//     moments: [
+//       { title: "Sivchheng Kheang", role: "Apprentice", description: "Developer & Learning Full Stack Developer", image: "/team/sivchheng.jpg" },
+//       { title: "Keochheang THON", role: "Apprentice", description: "Designer", image: "/team/keochheang.jpg" },
+//       { title: "Narith CHOM", role: "Apprentice", description: "Developer", image: "/team/narith.jpg" },
+//       { title: "Sisuykong Sao ", role: "Apprentice", description: "Developer", image: "/team/sisuykong.jpg" },
+//     ]
+//   }
+// ];

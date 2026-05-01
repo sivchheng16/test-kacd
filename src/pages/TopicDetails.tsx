@@ -35,9 +35,29 @@ export default function TopicDetails() {
   // Auto-redirect to first module if no moduleId in URL and topic valid
   useEffect(() => {
     if (topic && !moduleId && topic.lessons.length > 0) {
-      navigate(`/document/${topicId}/${topic.lessons[0].id}`, { replace: true });
+      // Find last viewed lesson in THIS topic from progress
+      const topicLessons = topic.lessons.map(l => l.id);
+      
+      // 1. Check if global lastViewed is for this topic
+      const lastViewed = progress.lastViewed;
+      if (lastViewed && lastViewed.topicId === topicId && topicLessons.includes(lastViewed.lessonId)) {
+        navigate(`/document/${topicId}/${lastViewed.lessonId}`, { replace: true });
+        return;
+      }
+
+      // 2. Otherwise, find the most recently updated lesson in this topic
+      const completedInTopic = Object.values(progress.completed)
+        .filter(r => r.topicId === topicId && topicLessons.includes(r.lessonId))
+        .sort((a, b) => new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime());
+
+      if (completedInTopic.length > 0) {
+        navigate(`/document/${topicId}/${completedInTopic[0].lessonId}`, { replace: true });
+      } else {
+        // 3. Default to first lesson
+        navigate(`/document/${topicId}/${topic.lessons[0].id}`, { replace: true });
+      }
     }
-  }, [topicId, moduleId, topic, navigate]);
+  }, [topicId, moduleId, topic, navigate, progress]);
 
   // Reset scroll after exit animation starts
   useEffect(() => {

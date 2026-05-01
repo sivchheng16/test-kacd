@@ -107,7 +107,7 @@ export default function Dashboard() {
               </p>
               <h1 className="text-4xl md:text-5xl font-serif font-normal text-foreground tracking-tight">
                 Welcome back,{" "}
-                <span className="text-primary italic">{user.fullname.split(" ")[0]}.</span>
+                <span className="text-primary italic">{user.username?.slice(0, -3)}{" "}{user.fullname}</span>
               </h1>
             </>
           ) : (
