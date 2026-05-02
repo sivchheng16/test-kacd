@@ -1,3 +1,4 @@
+import { CodeBlock } from "@/components/ui/CodeBlock";  
 import React from "react";
 
 export default function Module07Auth() {
@@ -12,57 +13,80 @@ export default function Module07Auth() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#installing-authjs" className="text-primary hover:underline">→ Installing Auth.js</a></li>
+          <li><a href="#authts-config" className="text-primary hover:underline">→ auth.ts Config</a></li>
+          <li><a href="#route-handler" className="text-primary hover:underline">→ Route Handler</a></li>
+          <li><a href="#reading-the-session" className="text-primary hover:underline">→ Reading the Session</a></li>
+          <li><a href="#protecting-routes-with-middleware" className="text-primary hover:underline">→ Protecting Routes with Middleware</a></li>
+          <li><a href="#callbacks" className="text-primary hover:underline">→ Callbacks</a></li>
+          <li><a href="#database-sessions" className="text-primary hover:underline">→ Database Sessions</a></li>
+          <li><a href="#sign-in-sign-out-buttons" className="text-primary hover:underline">→ Sign In / Sign Out Buttons</a></li>
+        </ul>
+      </section>
+
       {/* Installing */}
-      <section className="space-y-6">
+      <section id="installing-authjs" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Installing Auth.js</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Auth.js v5 is the current major version (still in beta at time of writing, but stable for production use). It ships as <code className="bg-stone-100 px-1 rounded text-xs font-mono">next-auth@beta</code>.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`npm install next-auth@beta`}</pre>
+        <CodeBlock language="bash">
+          {`npm install next-auth@beta`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           You also need a secret — a random string used to sign session tokens. Generate one and add it to your environment:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`# .env.local
+        <CodeBlock language="javascript">
+          {`# .env.local
 AUTH_SECRET=your-random-secret-here   # openssl rand -base64 32
 AUTH_GITHUB_ID=your-github-oauth-app-id
-AUTH_GITHUB_SECRET=your-github-oauth-app-secret`}</pre>
+AUTH_GITHUB_SECRET=your-github-oauth-app-secret`}
+        </CodeBlock>
       </section>
 
       {/* Config */}
-      <section className="space-y-6">
+      <section id="authts-config" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">auth.ts Config</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Create an <code className="bg-stone-100 px-1 rounded text-xs font-mono">auth.ts</code> file at the project root. It exports four named values — <code className="bg-stone-100 px-1 rounded text-xs font-mono">handlers</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">auth</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">signIn</code>, and <code className="bg-stone-100 px-1 rounded text-xs font-mono">signOut</code> — that you use throughout your app.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// auth.ts
+        <CodeBlock language="javascript">
+          {`// auth.ts
 import NextAuth from 'next-auth';
 import GitHub from 'next-auth/providers/github';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [GitHub],
-});`}</pre>
+});`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Providers are pre-built OAuth integrations. Auth.js ships with dozens: GitHub, Google, Discord, Twitter, and more. You can also configure credentials-based (email + password) auth.
         </p>
       </section>
 
       {/* Route handler */}
-      <section className="space-y-6">
+      <section id="route-handler" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Route Handler</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Auth.js needs a catch-all route handler to process OAuth callbacks, sign-in/sign-out requests, and session checks. Create this file exactly as shown — the path is significant.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// app/api/auth/[...nextauth]/route.ts
+        <CodeBlock language="javascript">
+          {`// app/api/auth/[...nextauth]/route.ts
 import { handlers } from '@/auth';
 
-export const { GET, POST } = handlers;`}</pre>
+export const { GET, POST } = handlers;`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Auth.js will now handle <code className="bg-stone-100 px-1 rounded text-xs font-mono">/api/auth/signin</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">/api/auth/callback/github</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">/api/auth/signout</code>, and related endpoints automatically.
         </p>
       </section>
 
       {/* Reading the session */}
-      <section className="space-y-6">
+      <section id="reading-the-session" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Reading the Session</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           How you read the session depends on where you are in the component tree.
@@ -70,7 +94,8 @@ export const { GET, POST } = handlers;`}</pre>
         <div className="space-y-4">
           <div>
             <p className="text-sm font-semibold text-foreground mb-2">Server Components — use <code className="bg-stone-100 px-1 rounded text-xs font-mono">auth()</code></p>
-            <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// app/dashboard/page.tsx
+            <CodeBlock language="javascript">
+          {`// app/dashboard/page.tsx
 import { auth } from '@/auth';
 
 export default async function DashboardPage() {
@@ -81,11 +106,13 @@ export default async function DashboardPage() {
   }
 
   return <p>Welcome, {session.user?.name}!</p>;
-}`}</pre>
+}`}
+        </CodeBlock>
           </div>
           <div>
             <p className="text-sm font-semibold text-foreground mb-2">Client Components — use <code className="bg-stone-100 px-1 rounded text-xs font-mono">useSession()</code></p>
-            <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`'use client';
+            <CodeBlock language="json">
+          {`'use client';
 import { useSession } from 'next-auth/react';
 
 export function UserMenu() {
@@ -95,7 +122,8 @@ export function UserMenu() {
   if (!session) return <a href="/api/auth/signin">Sign in</a>;
 
   return <span>{session.user?.name}</span>;
-}`}</pre>
+}`}
+        </CodeBlock>
           </div>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
@@ -104,29 +132,32 @@ export function UserMenu() {
       </section>
 
       {/* Middleware */}
-      <section className="space-y-6">
+      <section id="protecting-routes-with-middleware" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Protecting Routes with Middleware</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The most efficient way to protect pages is middleware — it runs at the edge before the page renders, so unauthenticated users never reach the page component.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// middleware.ts  (project root)
+        <CodeBlock language="javascript">
+          {`// middleware.ts  (project root)
 export { auth as middleware } from './auth';
 
 export const config = {
   matcher: ['/dashboard/:path*', '/settings/:path*'],
-};`}</pre>
+};`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Auth.js will redirect unauthenticated visitors to the sign-in page. The <code className="bg-stone-100 px-1 rounded text-xs font-mono">matcher</code> controls which routes are protected — unmatched routes are public.
         </p>
       </section>
 
       {/* Callbacks */}
-      <section className="space-y-6">
+      <section id="callbacks" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Callbacks</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Callbacks let you customise what ends up in the token and session. This is how you add a user ID, role, or custom field from your database to every session.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// auth.ts
+        <CodeBlock language="javascript">
+          {`// auth.ts
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [GitHub],
   callbacks: {
@@ -145,41 +176,48 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
   },
-});`}</pre>
+});`}
+        </CodeBlock>
         <div className="px-4 py-3 rounded-xl bg-amber-50 border border-amber-200 text-sm text-amber-800">
           Extend the TypeScript types too — add <code className="bg-amber-100 px-1 rounded text-xs font-mono">declare module 'next-auth'</code> with your extra fields, otherwise TypeScript will complain about <code className="bg-amber-100 px-1 rounded text-xs font-mono">session.user.id</code> not existing.
         </div>
       </section>
 
       {/* Database sessions */}
-      <section className="space-y-6">
+      <section id="database-sessions" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Database Sessions</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           By default Auth.js stores session data in a JWT cookie — no database required. For apps where you need to revoke sessions or store more user data, switch to database sessions using an adapter.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`npm install @auth/prisma-adapter
+        <CodeBlock language="bash">
+          {`npm install @auth/prisma-adapter
 # or
-npm install @auth/supabase-adapter`}</pre>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`import { PrismaAdapter } from '@auth/prisma-adapter';
+npm install @auth/supabase-adapter`}
+        </CodeBlock>
+        <CodeBlock language="javascript">
+          {`import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/lib/prisma';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [GitHub],
   session: { strategy: 'database' },
-});`}</pre>
+});`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Auth.js will create and manage <code className="bg-stone-100 px-1 rounded text-xs font-mono">User</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">Account</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">Session</code>, and <code className="bg-stone-100 px-1 rounded text-xs font-mono">VerificationToken</code> tables in your database automatically.
         </p>
       </section>
 
       {/* Sign in/out buttons */}
-      <section className="space-y-6">
+      <section id="sign-in-sign-out-buttons" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Sign In / Sign Out Buttons</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           In Server Components, call <code className="bg-stone-100 px-1 rounded text-xs font-mono">signIn()</code> and <code className="bg-stone-100 px-1 rounded text-xs font-mono">signOut()</code> directly inside a server action.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`import { signIn, signOut, auth } from '@/auth';
+        <CodeBlock language="javascript">
+          {`import { signIn, signOut, auth } from '@/auth';
 
 export default async function AuthButtons() {
   const session = await auth();
@@ -197,7 +235,8 @@ export default async function AuthButtons() {
       <button type="submit">Sign in with GitHub</button>
     </form>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           In Client Components, redirect to <code className="bg-stone-100 px-1 rounded text-xs font-mono">/api/auth/signin</code> or call <code className="bg-stone-100 px-1 rounded text-xs font-mono">signIn()</code> / <code className="bg-stone-100 px-1 rounded text-xs font-mono">signOut()</code> from <code className="bg-stone-100 px-1 rounded text-xs font-mono">next-auth/react</code>.
         </p>

@@ -9,13 +9,12 @@ export default function Introduction() {
       <div>
         <div>
           <Typography variant="h1">Introduction: JavaScript Advanced</Typography>
+          <Typography variant="lead">
+            Mastering modern ES6+ features, asynchronous programming, and external APIs.
+          </Typography>
         </div>
       </div>
-      <div>
-        <div>
-          <Typography variant="h2">Track 04: JavaScript Advanced</Typography>
-        </div>
-      </div>
+      
       <div>
         <div>
           <Typography variant="h2">Level Overview</Typography>

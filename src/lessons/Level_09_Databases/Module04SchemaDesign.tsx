@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module04SchemaDesign() {
   return (
@@ -13,8 +14,23 @@ export default function Module04SchemaDesign() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#normalisation" className="text-primary hover:underline">→ Normalisation</a></li>
+          <li><a href="#one-to-many-relationships" className="text-primary hover:underline">→ One-to-many relationships</a></li>
+          <li><a href="#many-to-many-relationships" className="text-primary hover:underline">→ Many-to-many relationships</a></li>
+          <li><a href="#choosing-primary-keys-uuid-vs-serial" className="text-primary hover:underline">→ Choosing primary keys: UUID vs serial</a></li>
+          <li><a href="#indexes" className="text-primary hover:underline">→ Indexes</a></li>
+          <li><a href="#timestamps-on-everything" className="text-primary hover:underline">→ Timestamps on everything</a></li>
+          <li><a href="#soft-delete" className="text-primary hover:underline">→ Soft delete</a></li>
+          <li><a href="#schema-smells-to-avoid" className="text-primary hover:underline">→ Schema smells to avoid</a></li>
+        </ul>
+      </section>
+
       {/* ── Normalisation ────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="normalisation" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Normalisation — store each fact once</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The core principle of relational design: every piece of information should
@@ -24,18 +40,18 @@ export default function Module04SchemaDesign() {
         <div className="space-y-3">
           <div className="rounded-xl border border-red-200 bg-red-50 px-5 py-4 space-y-2">
             <p className="text-sm font-semibold text-red-800">Bad — author name repeated in every post</p>
-            <pre className="font-mono text-xs text-red-700 leading-relaxed overflow-x-auto">
-{`posts: id | title           | author_name | author_email
+            <CodeBlock language="javascript">
+          {`posts: id | title           | author_name | author_email
       ----+-----------------+-------------+-----------------
        1  | My first post   | Alice       | alice@example.com
        2  | Another post    | Alice       | alice@example.com`}
-            </pre>
+        </CodeBlock>
             <p className="text-xs text-red-700">Change Alice's email → you must update every post row.</p>
           </div>
           <div className="rounded-xl border border-green-200 bg-green-50 px-5 py-4 space-y-2">
             <p className="text-sm font-semibold text-green-800">Good — author data lives once in users</p>
-            <pre className="font-mono text-xs text-green-700 leading-relaxed overflow-x-auto">
-{`users: id | name  | email
+            <CodeBlock language="javascript">
+          {`users: id | name  | email
       ----+-------+-----------------
        1  | Alice | alice@example.com
 
@@ -43,21 +59,21 @@ posts: id | user_id | title
       ----+---------+---------------
        1  |    1    | My first post
        2  |    1    | Another post`}
-            </pre>
+        </CodeBlock>
           </div>
         </div>
       </section>
 
       {/* ── 1-to-many ────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="one-to-many-relationships" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">One-to-many relationships</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A user has many posts. A post belongs to one user. The foreign key goes on
           the "many" side — <code className="text-foreground font-mono">posts.user_id</code> references
           <code className="text-foreground font-mono"> users.id</code>.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`CREATE TABLE posts (
+        <CodeBlock language="sql">
+          {`CREATE TABLE posts (
   id      UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   title   TEXT NOT NULL
@@ -65,7 +81,7 @@ posts: id | user_id | title
 
 -- Index the foreign key or every JOIN will scan the table
 CREATE INDEX posts_user_id_idx ON posts(user_id);`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           <code className="text-foreground font-mono">ON DELETE CASCADE</code> means: when a
           user is deleted, all their posts are automatically deleted too. Other options
@@ -76,14 +92,14 @@ CREATE INDEX posts_user_id_idx ON posts(user_id);`}
       </section>
 
       {/* ── Many-to-many ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="many-to-many-relationships" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Many-to-many relationships</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A post can have many tags. A tag can belong to many posts. There is no single
           foreign key that can model this — you need a <strong className="text-foreground">join table</strong>.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`CREATE TABLE tags (
+        <CodeBlock language="sql">
+          {`CREATE TABLE tags (
   id   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL UNIQUE
 );
@@ -99,7 +115,7 @@ SELECT tags.name
 FROM   post_tags
 JOIN   tags ON tags.id = post_tags.tag_id
 WHERE  post_tags.post_id = $1;`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           The composite primary key on <code className="text-foreground font-mono">(post_id, tag_id)</code>{" "}
           prevents the same tag from being added to the same post twice.
@@ -107,7 +123,7 @@ WHERE  post_tags.post_id = $1;`}
       </section>
 
       {/* ── Primary keys ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="choosing-primary-keys-uuid-vs-serial" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Choosing primary keys: UUID vs serial</h2>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">
@@ -142,15 +158,15 @@ WHERE  post_tags.post_id = $1;`}
       </section>
 
       {/* ── Indexes ──────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="indexes" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Indexes</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           An index is a separate data structure that maps column values to row locations.
           Reads on indexed columns go from O(n) to O(log n). The trade-off: each index
           slows down writes slightly and uses storage.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`-- Index every foreign key (PostgreSQL does NOT do this automatically)
+        <CodeBlock language="javascript">
+          {`-- Index every foreign key (PostgreSQL does NOT do this automatically)
 CREATE INDEX posts_user_id_idx ON posts(user_id);
 
 -- Index columns you filter on frequently
@@ -159,7 +175,7 @@ CREATE UNIQUE INDEX users_username_idx ON users(username);
 
 -- Index timestamps you order by
 CREATE INDEX posts_created_at_idx ON posts(created_at DESC);`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           A rule of thumb: index foreign keys, email, username, and any timestamp
           column that appears in an <code className="text-foreground font-mono">ORDER BY</code>.
@@ -168,10 +184,10 @@ CREATE INDEX posts_created_at_idx ON posts(created_at DESC);`}
       </section>
 
       {/* ── Timestamps ───────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="timestamps-on-everything" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Timestamps on everything</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`CREATE TABLE posts (
+        <CodeBlock language="sql">
+          {`CREATE TABLE posts (
   id         UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
   -- ... other columns ...
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -190,7 +206,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER posts_updated_at
   BEFORE UPDATE ON posts
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           You will always want to know when something was created and last changed.
           Add these columns to every table, even if you cannot think of a use for them
@@ -199,7 +215,7 @@ CREATE TRIGGER posts_updated_at
       </section>
 
       {/* ── Soft delete ──────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="soft-delete" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Soft delete</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Instead of <code className="text-foreground font-mono">DELETE FROM posts WHERE id = $1</code>,
@@ -207,8 +223,8 @@ CREATE TRIGGER posts_updated_at
           The row stays in the database — you can undo deletions, audit history, and
           avoid orphaned foreign keys.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`-- Add to table
+        <CodeBlock language="sql">
+          {`-- Add to table
 ALTER TABLE posts ADD COLUMN deleted_at TIMESTAMPTZ;
 
 -- Soft delete a post
@@ -219,11 +235,11 @@ SELECT * FROM posts WHERE deleted_at IS NULL;
 
 -- Restore
 UPDATE posts SET deleted_at = NULL WHERE id = $1;`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── Schema smells ────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="schema-smells-to-avoid" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Schema smells to avoid</h2>
         <div className="space-y-4">
           {[

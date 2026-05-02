@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const CHALLENGE_STARTER = `// Define a Product type or interface below.
 // It must have: name (string), price (number), description? (optional string)
@@ -56,16 +57,31 @@ export default function Module02TypesInterfaces() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#type-aliases" className="text-primary hover:underline">→ Type aliases</a></li>
+          <li><a href="#interface" className="text-primary hover:underline">→ interface</a></li>
+          <li><a href="#readonly-properties" className="text-primary hover:underline">→ readonly properties</a></li>
+          <li><a href="#union-types" className="text-primary hover:underline">→ Union types</a></li>
+          <li><a href="#intersection-types" className="text-primary hover:underline">→ Intersection types</a></li>
+          <li><a href="#type-vs-interface" className="text-primary hover:underline">→ type vs interface</a></li>
+          <li><a href="#literal-types" className="text-primary hover:underline">→ Literal types</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. type aliases ──────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="type-aliases" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Type aliases</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A <strong className="text-foreground">type alias</strong> gives any type a name.
           You use the <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">type</code> keyword,
           followed by the name, an equals sign, and the shape:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`type User = {
+        <CodeBlock language="json">
+          {`type User = {
   name: string;
   age: number;
   email?: string;   // optional — may be undefined
@@ -73,7 +89,7 @@ export default function Module02TypesInterfaces() {
 
 const alice: User = { name: "Alice", age: 28 };
 const bob: User   = { name: "Bob",   age: 32, email: "bob@example.com" };`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Now every variable declared as <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">User</code> must
           match that shape. Miss a required field or add an unknown one, and TypeScript
@@ -82,15 +98,15 @@ const bob: User   = { name: "Bob",   age: 32, email: "bob@example.com" };`}
       </section>
 
       {/* ── 3. interface ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="interface" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">interface</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">interface</code> describes
           an object shape and can be <em>extended</em> — another interface can inherit
           all its properties and add more:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`interface User {
+        <CodeBlock language="json">
+          {`interface User {
   name: string;
   age: number;
   email?: string;
@@ -107,7 +123,7 @@ const superuser: Admin = {
   role: "superadmin",
   permissions: ["read", "write", "delete"],
 };`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">Admin</code> automatically
           includes <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">name</code>,{" "}
@@ -119,14 +135,14 @@ const superuser: Admin = {
       </section>
 
       {/* ── 4. readonly ──────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="readonly-properties" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">readonly properties</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Mark a property <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">readonly</code> and
           TypeScript prevents any reassignment after the object is created:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`interface Post {
+        <CodeBlock language="json">
+          {`interface Post {
   readonly id: string;
   title: string;
   body: string;
@@ -136,7 +152,7 @@ const post: Post = { id: "abc123", title: "Hello", body: "World" };
 
 post.title = "Updated title";  // ✓ allowed
 post.id    = "xyz999";         // ✗ Error: Cannot assign to 'id' — it is read-only`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           This is useful for IDs, creation timestamps, and anything that should
           never change once set.
@@ -144,14 +160,14 @@ post.id    = "xyz999";         // ✗ Error: Cannot assign to 'id' — it is rea
       </section>
 
       {/* ── 5. Union types ───────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="union-types" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Union types</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A union type says a value can be <em>one of several</em> allowed types.
           Literal unions are especially powerful for status fields and direction values:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`type Status = "active" | "inactive" | "pending";
+        <CodeBlock language="json">
+          {`type Status = "active" | "inactive" | "pending";
 
 let userStatus: Status = "active";
 userStatus = "pending";   // ✓ ok
@@ -167,19 +183,19 @@ function printId(id: ID) {
 printId(101);          // ✓
 printId("abc-42");     // ✓
 printId(true);         // ✗ Error`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── 6. Intersection types ────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="intersection-types" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Intersection types</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Where unions mean "either / or", intersections mean "all of the above".
           Use <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">&amp;</code> to combine
           two shapes into one:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`type Person = { name: string; age: number };
+        <CodeBlock language="json">
+          {`type Person = { name: string; age: number };
 type Employee = { company: string; salary: number };
 
 type Staff = Person & Employee;
@@ -190,7 +206,7 @@ const dev: Staff = {
   company: "KOOMPI",
   salary: 1200,
 };`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">Staff</code> requires
           every field from both <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">Person</code> and{" "}
@@ -200,7 +216,7 @@ const dev: Staff = {
       </section>
 
       {/* ── 7. type vs interface ─────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="type-vs-interface" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">type vs interface — which to use</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Both work for object shapes. The practical guidance:
@@ -229,15 +245,15 @@ const dev: Staff = {
       </section>
 
       {/* ── 8. Literal types ─────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="literal-types" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Literal types</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A <strong className="text-foreground">literal type</strong> constrains a variable to
           an exact value. TypeScript narrows the type to that specific string, number,
           or boolean:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`const direction: "left" | "right" | "up" | "down" = "left";
+        <CodeBlock language="json">
+          {`const direction: "left" | "right" | "up" | "down" = "left";
 
 type Theme = "light" | "dark" | "system";
 let currentTheme: Theme = "dark";
@@ -245,7 +261,7 @@ let currentTheme: Theme = "dark";
 // TypeScript checks assignments at compile time:
 currentTheme = "light";   // ✓
 currentTheme = "pink";    // ✗ Error: '"pink"' is not assignable to type 'Theme'`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Literal types eliminate entire categories of runtime bugs — a mistyped
           string like <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">"Dark"</code> (capital D)
@@ -254,7 +270,7 @@ currentTheme = "pink";    // ✗ Error: '"pink"' is not assignable to type 'Them
       </section>
 
       {/* ── 9. Challenge ─────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

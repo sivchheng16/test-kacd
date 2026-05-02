@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 // Open-Meteo — free, no API key, Phnom Penh coords
 const API_URL =
@@ -83,8 +84,20 @@ export default function Module05ProjectWeather() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-you-will-build" className="text-primary hover:underline">→ What You Will Build</a></li>
+          <li><a href="#the-open-meteo-api" className="text-primary hover:underline">→ The Open-Meteo API</a></li>
+          <li><a href="#build-steps" className="text-primary hover:underline">→ Build Steps</a></li>
+          <li><a href="#try-it-build-it" className="text-primary hover:underline">→ Try it / Build it</a></li>
+          <li><a href="#take-it-further" className="text-primary hover:underline">→ Take It Further</a></li>
+        </ul>
+      </section>
+
       {/* What you will build */}
-      <section className="space-y-4">
+      <section id="what-you-will-build" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">What You Will Build</h2>
         <p className="text-base text-muted-foreground">
           A small web page with latitude/longitude inputs. When the user clicks Go, you fetch
@@ -116,7 +129,7 @@ export default function Module05ProjectWeather() {
       </section>
 
       {/* The API */}
-      <section className="space-y-4">
+      <section id="the-open-meteo-api" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">The Open-Meteo API</h2>
         <p className="text-base text-muted-foreground">
           Open-Meteo is a free, open-source weather API. The endpoint below returns current
@@ -127,14 +140,17 @@ export default function Module05ProjectWeather() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Phnom Penh — try it in your browser
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`${API_URL}`}</pre>
+          <CodeBlock language="javascript">
+          {`${API_URL}`}
+        </CodeBlock>
         </div>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Response shape
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`{
+          <CodeBlock language="json">
+          {`{
   "latitude": 11.5625,
   "longitude": 104.9375,
   "current_weather": {
@@ -144,12 +160,13 @@ export default function Module05ProjectWeather() {
     "weathercode": 3,
     "time": "2025-04-24T12:00"
   }
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Build steps */}
-      <section className="space-y-4">
+      <section id="build-steps" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Build Steps</h2>
 
         <ol className="space-y-3 text-sm text-muted-foreground list-decimal list-inside">
@@ -163,7 +180,7 @@ export default function Module05ProjectWeather() {
       </section>
 
       {/* Playground */}
-      <section className="space-y-4">
+      <section id="try-it-build-it" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Try it / Build it</h2>
         <p className="text-base text-muted-foreground">
           A working starter is provided below. Click <strong>Go</strong> in the preview to see
@@ -180,7 +197,7 @@ export default function Module05ProjectWeather() {
       </section>
 
       {/* Extensions */}
-      <section className="space-y-4">
+      <section id="take-it-further" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Take It Further</h2>
         <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
           <li>Add a loading spinner while the request is in-flight.</li>

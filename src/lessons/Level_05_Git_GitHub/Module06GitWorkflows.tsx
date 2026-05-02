@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module06GitWorkflows() {
   return (
@@ -15,6 +16,21 @@ export default function Module06GitWorkflows() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#trunk-based-development" className="text-primary hover:underline">→ Trunk-Based Development</a></li>
+          <li><a href="#git-flow" className="text-primary hover:underline">→ Git Flow</a></li>
+          <li><a href="#feature-branch-workflow" className="text-primary hover:underline">→ Feature Branch Workflow</a></li>
+          <li><a href="#conventional-commits" className="text-primary hover:underline">→ Conventional Commits</a></li>
+          <li><a href="#writing-good-pull-requests" className="text-primary hover:underline">→ Writing good pull requests</a></li>
+          <li><a href="#code-review-etiquette" className="text-primary hover:underline">→ Code review etiquette</a></li>
+          <li><a href="#which-workflow-should-you-use" className="text-primary hover:underline">→ Which workflow should you use?</a></li>
+          <li><a href="#key-takeaways" className="text-primary hover:underline">→ Key takeaways</a></li>
+        </ul>
+      </section>
+
       {/* ── 1. Hook ────────────────────────────────────────── */}
       <section>
         <p className="text-xl md:text-2xl text-foreground leading-relaxed font-serif">
@@ -26,7 +42,7 @@ export default function Module06GitWorkflows() {
       </section>
 
       {/* ── 2. Trunk-Based Development ─────────────────────── */}
-      <section className="space-y-5">
+      <section id="trunk-based-development" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Trunk-Based Development</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Everyone commits directly to <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">main</code> (the "trunk"),
@@ -53,7 +69,7 @@ export default function Module06GitWorkflows() {
       </section>
 
       {/* ── 3. Git Flow ────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="git-flow" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Git Flow</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Git Flow adds structure for projects that ship discrete, versioned releases — think mobile apps or open-source libraries.
@@ -76,7 +92,7 @@ export default function Module06GitWorkflows() {
       </section>
 
       {/* ── 4. Feature Branch Workflow ─────────────────────── */}
-      <section className="space-y-5">
+      <section id="feature-branch-workflow" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Feature Branch Workflow</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           One branch per feature or bug fix, opened as a PR against <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">main</code>.
@@ -96,7 +112,7 @@ export default function Module06GitWorkflows() {
       </section>
 
       {/* ── 5. Conventional Commits ────────────────────────── */}
-      <section className="space-y-5">
+      <section id="conventional-commits" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Conventional Commits</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A lightweight convention for commit message prefixes. Every commit starts with a type,
@@ -140,7 +156,7 @@ export default function Module06GitWorkflows() {
       </section>
 
       {/* ── 6. Writing Good PRs ────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="writing-good-pull-requests" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Writing good pull requests</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A PR is a communication tool as much as a code delivery mechanism.
@@ -178,7 +194,8 @@ export default function Module06GitWorkflows() {
         </ul>
         <div className="rounded-xl bg-stone-50 border border-border px-6 py-5 text-sm text-foreground leading-relaxed">
           <p className="font-semibold mb-3">PR body template</p>
-          <pre className="font-mono text-muted-foreground whitespace-pre-wrap text-xs leading-loose">{`## Why
+          <CodeBlock language="javascript">
+          {`## Why
 Closes #312. The settings page had no dark-mode option; users
 had to rely on the OS system preference.
 
@@ -190,12 +207,13 @@ had to rely on the OS system preference.
 ## How to test
 1. Open /settings
 2. Toggle the switch — page should switch theme immediately
-3. Refresh — preference should persist`}</pre>
+3. Refresh — preference should persist`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* ── 7. Code Review Etiquette ───────────────────────── */}
-      <section className="space-y-5">
+      <section id="code-review-etiquette" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Code review etiquette</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Code review is a conversation, not a judgement. Both sides have responsibilities.
@@ -224,7 +242,7 @@ had to rely on the OS system preference.
       </section>
 
       {/* ── 8. Which Workflow to Choose ────────────────────── */}
-      <section className="space-y-5">
+      <section id="which-workflow-should-you-use" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Which workflow should you use?</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           There is no universally correct answer — it depends on team size, release cadence, and infrastructure maturity.
@@ -267,7 +285,7 @@ had to rely on the OS system preference.
       </section>
 
       {/* ── 9. Summary ─────────────────────────────────────── */}
-      <section className="rounded-2xl bg-stone-50 border border-border px-6 py-6 space-y-3">
+      <section id="key-takeaways" className="rounded-2xl bg-stone-50 border border-border px-6 py-6 space-y-3">
         <h2 className="text-lg font-semibold text-foreground">Key takeaways</h2>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2"><span className="text-primary shrink-0">·</span>Trunk-Based keeps the branch graph simple but demands feature flags and fast CI.</li>

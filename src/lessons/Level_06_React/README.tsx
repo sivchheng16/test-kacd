@@ -8,13 +8,12 @@ export default function Introduction() {
       <div>
         <div>
           <Typography variant="h1">Introduction: React</Typography>
+          <Typography variant="lead">
+            Building complex, interactive user interfaces with components, state, and modern hooks.
+          </Typography>
         </div>
       </div>
-      <div>
-        <div>
-          <Typography variant="h2">Track 06: React Fundamentals</Typography>
-        </div>
-      </div>
+      
       <div>
         <div>
           <Typography variant="h2">Level Overview</Typography>

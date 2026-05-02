@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module01Debugging() {
   return (
@@ -13,8 +14,24 @@ export default function Module01Debugging() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#read-the-error-message-first" className="text-primary hover:underline">→ Read the error message first</a></li>
+          <li><a href="#reproduce-it-reliably" className="text-primary hover:underline">→ Reproduce it reliably</a></li>
+          <li><a href="#the-scientific-method" className="text-primary hover:underline">→ The scientific method</a></li>
+          <li><a href="#isolate-the-problem" className="text-primary hover:underline">→ Isolate the problem</a></li>
+          <li><a href="#browser-devtools" className="text-primary hover:underline">→ Browser DevTools</a></li>
+          <li><a href="#consolelog-is-valid" className="text-primary hover:underline">→ console.log is valid</a></li>
+          <li><a href="#the-debugger-statement" className="text-primary hover:underline">→ The debugger statement</a></li>
+          <li><a href="#common-bug-patterns" className="text-primary hover:underline">→ Common bug patterns</a></li>
+          <li><a href="#when-to-ask-for-help" className="text-primary hover:underline">→ When to ask for help</a></li>
+        </ul>
+      </section>
+
       {/* Read the error */}
-      <section className="space-y-5">
+      <section id="read-the-error-message-first" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Read the error message first</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           This sounds obvious. Most developers do not do it. They see red text, panic,
@@ -26,10 +43,12 @@ export default function Module01Debugging() {
           names and line numbers. The actual bug is almost always one of the top three
           frames — usually the first one that is your code rather than a library.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`TypeError: Cannot read properties of undefined (reading 'map')
-    at UserList (UserList.tsx:14:18)    ← your code, line 14
+        <CodeBlock language="javascript">
+          {`TypeError: Cannot read properties of undefined (reading 'map')
+    at UserList (UserList.tsx:14:18)    //  your code, line 14
     at renderWithHooks (react-dom.js)
-    at commitRoot (react-dom.js)`}</pre>
+    at commitRoot (react-dom.js)`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           This error tells you everything: <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">users</code> is{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">undefined</code> on line 14 of UserList.tsx.
@@ -39,7 +58,7 @@ export default function Module01Debugging() {
       </section>
 
       {/* Reproduce */}
-      <section className="space-y-5">
+      <section id="reproduce-it-reliably" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Reproduce it reliably</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           If you cannot reproduce the bug consistently, you cannot fix it — you can only
@@ -58,7 +77,7 @@ export default function Module01Debugging() {
       </section>
 
       {/* Scientific method */}
-      <section className="space-y-5">
+      <section id="the-scientific-method" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">The scientific method</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Good debugging follows the same structure as science. Not intuition — method.
@@ -85,7 +104,7 @@ export default function Module01Debugging() {
       </section>
 
       {/* Isolate */}
-      <section className="space-y-5">
+      <section id="isolate-the-problem" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Isolate the problem</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           When you cannot find the bug, make the reproduction smaller. Comment out code.
@@ -104,7 +123,7 @@ export default function Module01Debugging() {
       </section>
 
       {/* DevTools */}
-      <section className="space-y-5">
+      <section id="browser-devtools" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Browser DevTools</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           DevTools is your most powerful debugging environment. Use it, not just as a
@@ -131,7 +150,7 @@ export default function Module01Debugging() {
       </section>
 
       {/* console.log */}
-      <section className="space-y-5">
+      <section id="consolelog-is-valid" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">console.log is valid</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           There is a certain developer who sneers at console.log and insists on using the
@@ -144,7 +163,8 @@ export default function Module01Debugging() {
           the output is wrong, scan the logs from top to bottom. The first log where
           the value looks wrong is where the bug is.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`async function loadUser(id) {
+        <CodeBlock language="json">
+          {`async function loadUser(id) {
   console.log("loadUser called with id:", id);
 
   const res = await fetch(\`/api/users/\${id}\`);
@@ -157,14 +177,15 @@ export default function Module01Debugging() {
   console.log("formatted user:", user);
 
   return user;
-}`}</pre>
+}`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Log early. Log often. Remove them when you are done.
         </p>
       </section>
 
       {/* debugger statement */}
-      <section className="space-y-5">
+      <section id="the-debugger-statement" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">The debugger statement</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           If you open DevTools and add <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">debugger;</code>{" "}
@@ -172,15 +193,17 @@ export default function Module01Debugging() {
           breakpoint manually. Useful when you cannot easily find the file in Sources, or
           when you want to pause inside a callback or async function.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`function processOrder(order) {
-  debugger; // ← execution pauses here in DevTools
+        <CodeBlock language="javascript">
+          {`function processOrder(order) {
+  debugger; // //  execution pauses here in DevTools
   const total = order.items.reduce((sum, item) => sum + item.price, 0);
   return total;
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* Common patterns */}
-      <section className="space-y-5">
+      <section id="common-bug-patterns" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Common bug patterns</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Most bugs are not novel. Once you have seen these patterns, you recognize them
@@ -225,7 +248,7 @@ export default function Module01Debugging() {
       </section>
 
       {/* Asking for help */}
-      <section className="space-y-5">
+      <section id="when-to-ask-for-help" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">When to ask for help</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           After 20–30 minutes of genuine effort. Not 5 minutes of Googling and giving up,

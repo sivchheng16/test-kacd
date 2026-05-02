@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module06DOMManipulation() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -28,18 +29,29 @@ export default function Module06DOMManipulation() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#selecting-elements" className="text-primary hover:underline">→ Selecting elements</a></li>
+          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
+          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Concept */}
-      <section className="space-y-6">
+      <section id="selecting-elements" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Selecting elements</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`// By CSS selector — most flexible, returns the first match
+        <CodeBlock language="javascript">
+          {`// By CSS selector — most flexible, returns the first match
 const title = document.querySelector("h1");
 const btn   = document.querySelector("#submit-btn");
 const cards = document.querySelectorAll(".card"); // returns all matches
 
 // By ID — fastest for single elements
 const heading = document.getElementById("main-title");`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Reading and writing content</h2>
         <div className="overflow-x-auto">
@@ -71,27 +83,27 @@ const heading = document.getElementById("main-title");`}
           </table>
         </div>
 
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const p = document.querySelector("#message");
+        <CodeBlock language="javascript">
+          {`const p = document.querySelector("#message");
 p.textContent = "Updated by JavaScript!"; // set text`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Event listeners</h2>
         <p className="text-muted-foreground leading-relaxed">
           An event listener watches for something to happen (a click, a keypress,
           a scroll) and runs a function when it does.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const btn = document.querySelector("#my-btn");
+        <CodeBlock language="javascript">
+          {`const btn = document.querySelector("#my-btn");
 
 btn.addEventListener("click", () => {
   document.querySelector("#output").textContent = "Button clicked!";
 });`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Changing styles and classes</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const box = document.querySelector(".card");
+        <CodeBlock language="javascript">
+          {`const box = document.querySelector(".card");
 
 // Inline style
 box.style.backgroundColor = "#fef9c3"; // yellow highlight
@@ -100,11 +112,11 @@ box.style.backgroundColor = "#fef9c3"; // yellow highlight
 box.classList.add("highlighted");
 box.classList.remove("highlighted");
 box.classList.toggle("highlighted"); // add if absent, remove if present`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* Example */}
-      <section className="space-y-4">
+      <section id="live-example" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Live example — like button</h2>
         <p className="text-sm text-muted-foreground">
           Click the heart button and watch the counter update. Study how the event
@@ -136,7 +148,7 @@ btn.addEventListener("click", () => {
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="try-it-yourself" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Add a second button that resets the counter back to 0. You'll need a
@@ -167,7 +179,7 @@ document.querySelector("#add-btn").addEventListener("click", () => {
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Your HTML must have a <code className="font-mono bg-stone-100 px-1 rounded">&lt;button&gt;</code> and a{" "}

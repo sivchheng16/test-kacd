@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module03StateEvents() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -28,19 +29,30 @@ export default function Module03StateEvents() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#usestate" className="text-primary hover:underline">→ useState</a></li>
+          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
+          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Concept */}
-      <section className="space-y-6">
+      <section id="usestate" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">useState — the basics</h2>
         <p className="text-muted-foreground leading-relaxed">
           <code className="font-mono bg-stone-100 px-1 rounded">useState</code> is a Hook that
           adds state to a function component. It returns a pair: the current value and a setter
           function. Call the setter, React re-renders, the new value appears.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const [count, setCount] = React.useState(0);
+        <CodeBlock language="javascript">
+          {`const [count, setCount] = React.useState(0);
 //     ↑              ↑              ↑
 //  current value   setter      initial value`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Handling events</h2>
         <p className="text-muted-foreground leading-relaxed">
@@ -89,7 +101,7 @@ export default function Module03StateEvents() {
       </section>
 
       {/* Example */}
-      <section className="space-y-4">
+      <section id="live-example" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Live example — a toggle</h2>
         <p className="text-sm text-muted-foreground">
           Click the button and watch the text change. The component re-renders each time
@@ -130,7 +142,7 @@ function App() {
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="try-it-yourself" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Extend the counter below to also have a <strong>Reset</strong> button that sets the
@@ -173,7 +185,7 @@ function App() {
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Build a counter with a <strong>+</strong> button and a <strong>−</strong> button using{" "}

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_IDENTITY = `// Generic identity function — works for any type
 function identity<T>(value: T): T {
@@ -149,8 +150,22 @@ export default function Module04GenericsAdvanced() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#generic-functions" className="text-primary hover:underline">→ Generic functions</a></li>
+          <li><a href="#generic-constraints" className="text-primary hover:underline">→ Generic constraints</a></li>
+          <li><a href="#generic-interfaces" className="text-primary hover:underline">→ Generic interfaces</a></li>
+          <li><a href="#utility-types" className="text-primary hover:underline">→ Utility types</a></li>
+          <li><a href="#mapped-types-brief" className="text-primary hover:underline">→ Mapped types (brief)</a></li>
+          <li><a href="#when-to-reach-for-generics" className="text-primary hover:underline">→ When to reach for generics</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 1. Generic functions ────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="generic-functions" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Generic functions</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A <strong className="text-foreground">type parameter</strong> (written{" "}
@@ -164,13 +179,15 @@ export default function Module04GenericsAdvanced() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             identity.ts
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`function identity<T>(value: T): T {
+          <CodeBlock language="json">
+          {`function identity<T>(value: T): T {
   return value;
 }
 
 identity<string>("hello"); // return type: string
 identity(42);              // TypeScript infers T as number
-identity([1, 2, 3]);       // T inferred as number[]`}</pre>
+identity([1, 2, 3]);       // T inferred as number[]`}
+        </CodeBlock>
         </div>
 
         <p className="text-base text-muted-foreground leading-relaxed">
@@ -185,7 +202,7 @@ identity([1, 2, 3]);       // T inferred as number[]`}</pre>
       </section>
 
       {/* ── 2. Generic constraints ──────────────────────────── */}
-      <section className="space-y-5">
+      <section id="generic-constraints" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Generic constraints</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           By default{" "}
@@ -199,14 +216,16 @@ identity([1, 2, 3]);       // T inferred as number[]`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             getLength.ts
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`function getLength<T extends { length: number }>(item: T): number {
+          <CodeBlock language="json">
+          {`function getLength<T extends { length: number }>(item: T): number {
   return item.length;
 }
 
 getLength("hello");         // 5  — strings have .length
 getLength([1, 2, 3]);       // 3  — arrays have .length
 getLength({ length: 99 });  // 99 — plain objects work too
-getLength(42);              // Error: number has no .length`}</pre>
+getLength(42);              // Error: number has no .length`}
+        </CodeBlock>
         </div>
 
         <p className="text-base text-muted-foreground leading-relaxed">
@@ -221,7 +240,7 @@ getLength(42);              // Error: number has no .length`}</pre>
       </section>
 
       {/* ── 3. Generic interfaces ───────────────────────────── */}
-      <section className="space-y-5">
+      <section id="generic-interfaces" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Generic interfaces</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Interfaces can also carry type parameters. This is how you describe a shape where the
@@ -233,7 +252,8 @@ getLength(42);              // Error: number has no .length`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             api.ts
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`interface ApiResponse<T> {
+          <CodeBlock language="javascript">
+          {`interface ApiResponse<T> {
   data: T;
   status: number;
   message: string;
@@ -242,14 +262,15 @@ getLength(42);              // Error: number has no .length`}</pre>
 // Reuse the same wrapper for any data shape
 type UserResponse = ApiResponse<User>;        // data is User
 type PostListResponse = ApiResponse<Post[]>;  // data is Post[]
-type StringResponse = ApiResponse<string>;    // data is string`}</pre>
+type StringResponse = ApiResponse<string>;    // data is string`}
+        </CodeBlock>
         </div>
 
         <CodePlayground mode="js" starter={{ js: EXPLORE_INTERFACES }} height="320px" />
       </section>
 
       {/* ── 4. Utility types ────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="utility-types" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Utility types — built-in generics</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           TypeScript ships with a library of generic types that transform existing interfaces.
@@ -276,7 +297,8 @@ type StringResponse = ApiResponse<string>;    // data is string`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             utility-types.ts
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`interface User {
+          <CodeBlock language="json">
+          {`interface User {
   id: number;
   name: string;
   email: string;
@@ -287,14 +309,15 @@ type UserUpdate  = Partial<User>;                  // all optional
 type PublicUser  = Pick<User, "id" | "name">;      // only id & name
 type SafeUser    = Omit<User, "password">;          // no password
 type ScoreMap    = Record<string, number>;          // { [key: string]: number }
-type FrozenUser  = Readonly<User>;                  // immutable`}</pre>
+type FrozenUser  = Readonly<User>;                  // immutable`}
+        </CodeBlock>
         </div>
 
         <CodePlayground mode="js" starter={{ js: EXPLORE_UTILITY }} height="320px" />
       </section>
 
       {/* ── 5. Mapped types ─────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="mapped-types-brief" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Mapped types (brief)</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The utility types above are all implemented using a feature called{" "}
@@ -308,14 +331,16 @@ type FrozenUser  = Readonly<User>;                  // immutable`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             mapped.ts
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// Reimplementing Partial from scratch
+          <CodeBlock language="javascript">
+          {`// Reimplementing Partial from scratch
 type Optional<T> = { [K in keyof T]?: T[K] }
 
 // Reimplementing Readonly from scratch
 type Immutable<T> = { readonly [K in keyof T]: T[K] }
 
 // Make all values nullable
-type Nullable<T> = { [K in keyof T]: T[K] | null }`}</pre>
+type Nullable<T> = { [K in keyof T]: T[K] | null }`}
+        </CodeBlock>
         </div>
 
         <p className="text-base text-muted-foreground leading-relaxed">
@@ -327,7 +352,7 @@ type Nullable<T> = { [K in keyof T]: T[K] | null }`}</pre>
       </section>
 
       {/* ── 6. When to use generics ─────────────────────────── */}
-      <section className="space-y-4">
+      <section id="when-to-reach-for-generics" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">When to reach for generics</h2>
         <ul className="space-y-3">
           {[
@@ -357,7 +382,7 @@ type Nullable<T> = { [K in keyof T]: T[K] | null }`}</pre>
       </section>
 
       {/* ── Challenge ───────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
         <p className="text-base text-muted-foreground">
           Write a generic{" "}

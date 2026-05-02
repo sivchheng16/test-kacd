@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 
@@ -8,30 +9,30 @@ const EXPLORE_HTML = `<h1>Cambodia Through My Lens</h1>
 
 <!-- Basic image with src and alt -->
 <img
-  src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Angkor_Wat%2C_Angkor%2C_Cambodia.jpg/1280px-Angkor_Wat%2C_Angkor%2C_Cambodia.jpg"
+  src="../../../public/angkor-wat.jpeg"
   alt="Angkor Wat temple at sunrise, reflected in the moat"
-  width="640"
-  height="427"
+  width="120"
+  height="80"
 >
 
 <!-- figure + figcaption adds a visible caption -->
 <figure>
   <img
-    src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Phnom_Penh_City_Hall_2.jpg/1280px-Phnom_Penh_City_Hall_2.jpg"
+    src="../../../public/phnom-penh.jpeg"
     alt="Phnom Penh City Hall with palm trees in front"
-    width="640"
-    height="427"
+    width="120"
+    height="80"
   >
   <figcaption>Phnom Penh City Hall — Cambodia's capital city.</figcaption>
 </figure>
 
 <!-- Linking an image -->
-<a href="https://koompi.com">
+<a href="https://koompi.com" target="_blank">
   <img
-    src="https://koompi.com/logo.png"
+    src="https://koompi.com/assets/KoompiBlackLogo-259c65d2.png"
     alt="KOOMPI — visit our website"
-    width="120"
-    height="40"
+    width="80"
+    height="80"
   >
 </a>`;
 
@@ -96,8 +97,23 @@ export default function Module05ImagesMedia() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#the-img-element" className="text-primary hover:underline">→ The img element</a></li>
+          <li><a href="#images-annotated" className="text-primary hover:underline">→ Images, annotated</a></li>
+          <li><a href="#audio-and-video" className="text-primary hover:underline">→ Audio and Video</a></li>
+          <li><a href="#project-folder-structure" className="text-primary hover:underline">→ Project Folder Structure</a></li>
+          <li><a href="#using-local-files" className="text-primary hover:underline">→ Using Local Files</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Concept ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="the-img-element" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">The img element</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Images are added with{" "}
@@ -125,17 +141,13 @@ export default function Module05ImagesMedia() {
       </section>
 
       {/* ── 3. Example ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="images-annotated" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Images, annotated</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Four common patterns you will use on almost every project:
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            index.html
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`<!-- 1. Basic image — src and alt are always required -->
+        <CodeBlock language="html" title="index.html">
+          {`<!-- 1. Basic image — src and alt are always required -->
 <img src="images/koompi-e13.jpg" alt="KOOMPI E13 laptop open on a desk">
 
 <!-- 2. With dimensions — reserves space, prevents layout shift -->
@@ -167,8 +179,7 @@ export default function Module05ImagesMedia() {
 
 <!-- 5. Decorative image — alt="" tells screen readers to skip it -->
 <img src="images/divider.png" alt="">`}
-          </pre>
-        </div>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <code className="text-primary font-mono shrink-0">src</code>
@@ -191,19 +202,84 @@ export default function Module05ImagesMedia() {
             empty alt for purely decorative images — screen readers skip them
           </li>
         </ul>
+      </section>
 
-        <div className="rounded-xl bg-amber-50 border border-amber-200 px-5 py-4 text-sm text-amber-900 leading-relaxed">
-          <strong>A note on video and audio:</strong> HTML also has{" "}
-          <code className="bg-amber-100 px-1 py-0.5 rounded text-xs font-mono">&lt;video src="clip.mp4" controls&gt;&lt;/video&gt;</code>{" "}
-          and{" "}
-          <code className="bg-amber-100 px-1 py-0.5 rounded text-xs font-mono">&lt;audio src="song.mp3" controls&gt;&lt;/audio&gt;</code>.
-          The <code className="bg-amber-100 px-1 py-0.5 rounded text-xs font-mono">controls</code> attribute adds the browser's built-in
-          play/pause bar. You will explore these more in a later module.
+      {/* ── 3.5 Audio and Video ────────────────────────────── */}
+      <section id="audio-and-video" className="space-y-5">
+        <h2 className="text-2xl font-serif text-foreground">Audio and Video</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          HTML5 brought native support for embedding rich media using the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;audio&gt;</code> and <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;video&gt;</code> tags. Like images, they use a <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">src</code> attribute. Unlike images, they have both an opening and closing tag, allowing you to provide fallback text inside them if the browser doesn't support the media.
+        </p>
+        <CodeBlock language="html" title="media.html">
+          {`<!-- Video with controls, playing automatically, muted -->
+<video src="videos/koompi-intro.mp4" width="640" controls autoplay muted>
+  Your browser does not support the video tag.
+</video>
+
+<!-- Audio player with controls -->
+<audio src="audio/podcast-ep1.mp3" controls>
+  Your browser does not support the audio element.
+</audio>`}
+        </CodeBlock>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          Adding the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">controls</code> attribute is crucial—it provides the browser's default play, pause, and volume buttons. Without it, the user can't interact with the media.
+        </p>
+      </section>
+
+      {/* ── 3.6 Project Folder Structure ───────────────────── */}
+      <section id="project-folder-structure" className="space-y-5">
+        <h2 className="text-2xl font-serif text-foreground">Project Folder Structure</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          Before linking to local media, it is important to understand how to organize your files. As your website grows, keeping all files in one folder gets messy. Best practice is to create dedicated subfolders for your assets, like an <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">images</code> or <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">videos</code> folder.
+        </p>
+        <div className="p-4 rounded-xl bg-stone-100 border border-border font-mono text-sm whitespace-pre">
+          {`my-website/
+├── index.html
+├── about.html
+├── images/
+│   ├── logo.png
+│   └── hero-banner.jpg
+└── videos/
+    └── intro.mp4`}
+        </div>
+        <div className="p-4 rounded-xl bg-amber-50/50 border border-amber-200 text-amber-900 space-y-2 text-sm">
+          <p className="font-semibold">⚠️ Important Reminders:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Exact Name:</strong> File names are case-sensitive. <code className="text-sm bg-amber-100 px-1 py-0.5 rounded">Logo.PNG</code> is different from <code className="text-sm bg-amber-100 px-1 py-0.5 rounded">logo.png</code>.</li>
+            <li><strong>File Extension:</strong> Always include the correct extension (.jpg, .png, .mp4).</li>
+            <li><strong>No Spaces:</strong> Avoid spaces in file names. Use hyphens (<code className="text-sm bg-amber-100 px-1 py-0.5 rounded">hero-banner.jpg</code>) or underscores (<code className="text-sm bg-amber-100 px-1 py-0.5 rounded">hero_banner.jpg</code>) instead.</li>
+          </ul>
         </div>
       </section>
 
+      {/* ── 3.7 Using Local Files (Relative Paths) ─────────── */}
+      <section id="using-local-files" className="space-y-5">
+        <h2 className="text-2xl font-serif text-foreground">Using Local Files</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          While you can link to images and videos hosted on other websites using full URLs (like <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">https://example.com/image.jpg</code>), you will mostly use files stored within your project folder.
+        </p>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          To do this, you use a <strong>relative path</strong> in the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">src</code> attribute. A relative path tells the browser where to find the file <em>relative</em> to the current HTML document.
+        </p>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          If the image is in the exact same folder as the HTML file, you just write the file name. However, since we organize assets into folders, you must include the folder name followed by a forward slash <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">/</code> before the file name. If your HTML file is inside a folder and you need to go <em>up</em> a directory to reach the images folder, you use <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">../</code>.
+        </p>
+        <CodeBlock language="html" title="index.html">
+          {`<!-- 1. File is in the SAME folder (less common for images) -->
+<img src="my-photo.jpg" alt="A photo I took">
+
+<!-- 2. File is in an 'images' subfolder (best practice) -->
+<img src="images/logo.png" alt="Company Logo">
+<video src="videos/intro.mp4" controls></video>
+
+<!-- 3. HTML is in a subfolder, and we must go UP one level to reach 'images' -->
+<!-- Use ../ to mean "go up one folder" -->
+<img src="../images/hero-banner.jpg" alt="Hero Banner">`}
+        </CodeBlock>
+      </section>
+
       {/* ── 4. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -221,8 +297,25 @@ export default function Module05ImagesMedia() {
         />
       </section>
 
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Here is what we covered about images and media:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>The <code>&lt;img&gt;</code> tag embeds images. It is a void element (no closing tag).</li>
+            <li>The <code>src</code> attribute points to the image file, and <code>alt</code> provides alternative text for accessibility and broken links.</li>
+            <li>Always specify <code>width</code> and <code>height</code> to prevent page layout jumps.</li>
+            <li>Use <code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code> to group an image with a caption.</li>
+            <li>Embed video and audio using <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code>, remembering to add the <code>controls</code> attribute for user interaction.</li>
+            <li>You can use local files by placing them in your project folder and using relative paths in the <code>src</code> attribute (e.g., <code>src="images/photo.jpg"</code>).</li>
+          </ul>
+        </div>
+      </section>
+
+
       {/* ── 5. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

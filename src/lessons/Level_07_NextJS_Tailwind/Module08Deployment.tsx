@@ -1,3 +1,4 @@
+import { CodeBlock } from "@/components/ui/CodeBlock";
 import React from "react";
 
 export default function Module08Deployment() {
@@ -12,8 +13,23 @@ export default function Module08Deployment() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#deploying-to-vercel" className="text-primary hover:underline">→ Deploying to Vercel</a></li>
+          <li><a href="#environment-variables" className="text-primary hover:underline">→ Environment Variables</a></li>
+          <li><a href="#preview-deployments" className="text-primary hover:underline">→ Preview Deployments</a></li>
+          <li><a href="#understanding-build-output" className="text-primary hover:underline">→ Understanding Build Output</a></li>
+          <li><a href="#nextconfigts-essentials" className="text-primary hover:underline">→ next.config.ts Essentials</a></li>
+          <li><a href="#ci-with-github-actions" className="text-primary hover:underline">→ CI with GitHub Actions</a></li>
+          <li><a href="#other-hosting-options" className="text-primary hover:underline">→ Other Hosting Options</a></li>
+          <li><a href="#pre-launch-checklist" className="text-primary hover:underline">→ Pre-Launch Checklist</a></li>
+        </ul>
+      </section>
+
       {/* Vercel */}
-      <section className="space-y-6">
+      <section id="deploying-to-vercel" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Deploying to Vercel</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Vercel is the easiest path — it is built by the same team as Next.js and understands the framework natively. Import your GitHub repository and every push to <code className="bg-stone-100 px-1 rounded text-xs font-mono">main</code> triggers a production deploy automatically.
@@ -30,49 +46,55 @@ export default function Module08Deployment() {
       </section>
 
       {/* Environment variables */}
-      <section className="space-y-6">
+      <section id="environment-variables" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Environment Variables</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Add secrets in your Vercel project: <span className="font-medium text-foreground">Project → Settings → Environment Variables</span>. Choose which environments (Production, Preview, Development) each variable applies to.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`# .env.local  (local dev — git-ignored)
+        <CodeBlock language="javascript">
+          {`# .env.local  (local dev — git-ignored)
 DATABASE_URL=postgresql://localhost/myapp
 AUTH_SECRET=dev-secret
 
 # Variables without NEXT_PUBLIC_ are server-only
 # Variables with NEXT_PUBLIC_ are bundled into the browser
-NEXT_PUBLIC_API_URL=https://api.myapp.com`}</pre>
+NEXT_PUBLIC_API_URL=https://api.myapp.com`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Never commit <code className="bg-stone-100 px-1 rounded text-xs font-mono">.env.local</code> to git. Check that <code className="bg-stone-100 px-1 rounded text-xs font-mono">.gitignore</code> includes it — <code className="bg-stone-100 px-1 rounded text-xs font-mono">create-next-app</code> adds it by default.
         </p>
       </section>
 
       {/* Preview deployments */}
-      <section className="space-y-6">
+      <section id="preview-deployments" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Preview Deployments</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Every pull request on Vercel gets its own unique URL — a full deploy of that branch. Share it with designers or stakeholders for review before merging. You are reviewing the code in production conditions, with real environment variables (from the Preview environment), not mocked data.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">Preview URL pattern</div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`my-app-git-feat-new-nav-username.vercel.app`}</pre>
+          <CodeBlock language="javascript">
+          {`my-app-git-feat-new-nav-username.vercel.app`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Build output */}
-      <section className="space-y-6">
+      <section id="understanding-build-output" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Understanding Build Output</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Run <code className="bg-stone-100 px-1 rounded text-xs font-mono">next build</code> locally before deploying. The output table shows each route, its size, and its render strategy.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`Route (app)                     Size     First Load JS
+        <CodeBlock language="javascript">
+          {`Route (app)                     Size     First Load JS
 ┌ ○ /                           5.2 kB        92 kB
 ├ ○ /about                      1.1 kB        88 kB
 ├ ƒ /dashboard                  3.4 kB        90 kB
 ├ ● /blog/[slug]                2.8 kB        89 kB
 └ ○ /api/posts                  0 B           0 B
 
-○  Static   ● SSG with params   ƒ  Dynamic`}</pre>
+○  Static   ● SSG with params   ƒ  Dynamic`}
+        </CodeBlock>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">
             <thead className="bg-stone-50 border-b border-border">
@@ -98,13 +120,15 @@ NEXT_PUBLIC_API_URL=https://api.myapp.com`}</pre>
       </section>
 
       {/* next.config.ts */}
-      <section className="space-y-6">
+      <section id="nextconfigts-essentials" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">next.config.ts Essentials</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The two most common production settings are <code className="bg-stone-100 px-1 rounded text-xs font-mono">images.remotePatterns</code> (allow external image domains through the <code className="bg-stone-100 px-1 rounded text-xs font-mono">{"<Image>"}</code> component) and enabling server actions.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// next.config.ts
+        <CodeBlock language="javascript">
+          {`// next.config.ts
 import type { NextConfig } from 'next';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const nextConfig: NextConfig = {
   images: {
@@ -126,16 +150,18 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;`}</pre>
+export default nextConfig;`}
+        </CodeBlock>
       </section>
 
       {/* GitHub Actions CI */}
-      <section className="space-y-6">
+      <section id="ci-with-github-actions" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">CI with GitHub Actions</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Run your test suite and build check on every push before Vercel deploys. If the build fails here, the deploy never happens.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`# .github/workflows/ci.yml
+        <CodeBlock language="bash">
+          {`# .github/workflows/ci.yml
 on: [push]
 
 jobs:
@@ -149,14 +175,15 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm test -- --run
-      - run: npm run build`}</pre>
+      - run: npm run build`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Vercel integrates with GitHub: if the GitHub Actions check fails, the pull request shows a red status and the Vercel deploy is blocked from merging until it passes.
         </p>
       </section>
 
       {/* Other hosting */}
-      <section className="space-y-6">
+      <section id="other-hosting-options" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Other Hosting Options</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Vercel is the default, but not the only option. Use alternatives when you need more control, lower cost at scale, or your company policy requires self-hosting.
@@ -191,7 +218,7 @@ jobs:
       </section>
 
       {/* Pre-launch checklist */}
-      <section className="space-y-6">
+      <section id="pre-launch-checklist" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Pre-Launch Checklist</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Before going public, run through these quickly:

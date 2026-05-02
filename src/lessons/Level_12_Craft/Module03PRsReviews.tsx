@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module03PRsReviews() {
   return (
@@ -14,8 +15,21 @@ export default function Module03PRsReviews() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#keep-them-small" className="text-primary hover:underline">→ Keep them small</a></li>
+          <li><a href="#one-pr-per-logical-change" className="text-primary hover:underline">→ One PR per logical change</a></li>
+          <li><a href="#write-a-real-description" className="text-primary hover:underline">→ Write a real description</a></li>
+          <li><a href="#link-the-issue-annotate-the-complex-parts" className="text-primary hover:underline">→ Link the issue. Annotate the complex parts.</a></li>
+          <li><a href="#giving-good-reviews" className="text-primary hover:underline">→ Giving good reviews</a></li>
+          <li><a href="#being-reviewed" className="text-primary hover:underline">→ Being reviewed</a></li>
+        </ul>
+      </section>
+
       {/* Writing good PRs: size */}
-      <section className="space-y-5">
+      <section id="keep-them-small" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Keep them small</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           There is an informal rule that teams discover for themselves: PRs under 400 lines
@@ -35,7 +49,7 @@ export default function Module03PRsReviews() {
       </section>
 
       {/* One logical change */}
-      <section className="space-y-5">
+      <section id="one-pr-per-logical-change" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">One PR per logical change</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Do not mix refactoring with features. Do not mix a bug fix with an unrelated
@@ -51,7 +65,7 @@ export default function Module03PRsReviews() {
       </section>
 
       {/* Write a description */}
-      <section className="space-y-5">
+      <section id="write-a-real-description" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Write a real description</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The code shows <em>what</em> changed. The description explains <em>why</em>.
@@ -71,7 +85,8 @@ export default function Module03PRsReviews() {
             </div>
           ))}
         </div>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`## What
+        <CodeBlock language="javascript">
+          {`## What
 Add optimistic updates to the lesson progress indicator.
 
 ## Why
@@ -88,11 +103,12 @@ responds instantly and rolls back if the API call fails.
 ## Tradeoffs
 We are now managing two sources of truth (local + server) for
 progress state. This is a known tradeoff for speed.
-Closes #142`}</pre>
+Closes #142`}
+        </CodeBlock>
       </section>
 
       {/* Link and annotate */}
-      <section className="space-y-5">
+      <section id="link-the-issue-annotate-the-complex-parts" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Link the issue. Annotate the complex parts.</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Always link the issue or ticket the PR addresses. "Closes #142" or "Fixes #88"
@@ -107,7 +123,7 @@ Closes #142`}</pre>
       </section>
 
       {/* Giving reviews */}
-      <section className="space-y-6">
+      <section id="giving-good-reviews" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Giving good reviews</h2>
 
         <div className="space-y-5">
@@ -138,12 +154,14 @@ Closes #142`}</pre>
               do not care about. Use <strong className="text-foreground">blocking:</strong> (or no prefix)
               for things that must change. The author should never have to guess which is which.
             </p>
-            <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed mt-2">{`// Blocking — must fix before merge
+            <CodeBlock language="javascript">
+          {`// Blocking — must fix before merge
 This will throw if data is undefined on first render.
 Add a loading guard: if (!data) return null;
 
 // Non-blocking suggestion
-nit: could use optional chaining here for brevity — user?.profile?.name`}</pre>
+nit: could use optional chaining here for brevity — user?.profile?.name`}
+        </CodeBlock>
           </div>
 
           <div>
@@ -169,7 +187,7 @@ nit: could use optional chaining here for brevity — user?.profile?.name`}</pre
       </section>
 
       {/* Being reviewed */}
-      <section className="space-y-6">
+      <section id="being-reviewed" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Being reviewed</h2>
 
         <div className="space-y-5">

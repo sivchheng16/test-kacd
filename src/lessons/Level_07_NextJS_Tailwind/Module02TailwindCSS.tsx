@@ -4,6 +4,7 @@ import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module02TailwindCSS() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -27,13 +28,24 @@ export default function Module02TailwindCSS() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#why-utility-first" className="text-primary hover:underline">→ Why Utility-First?</a></li>
+          <li><a href="#essential-class-categories" className="text-primary hover:underline">→ Essential Class Categories</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try It</a></li>
+        </ul>
+      </section>
+
       {/* Why Tailwind */}
-      <section className="space-y-6">
+      <section id="why-utility-first" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Why Utility-First?</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">Traditional CSS</div>
-            <pre className="px-4 py-4 text-xs font-mono leading-relaxed text-foreground overflow-x-auto bg-white">{`/* styles.css */
+            <CodeBlock language="json">
+          {`/* styles.css */
 .card {
   background: white;
   border-radius: 8px;
@@ -42,11 +54,13 @@ export default function Module02TailwindCSS() {
 }
 
 /* HTML */
-<div class="card">Hello</div>`}</pre>
+<div class="card">Hello</div>`}
+        </CodeBlock>
           </div>
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">Tailwind CSS</div>
-            <pre className="px-4 py-4 text-xs font-mono leading-relaxed text-foreground overflow-x-auto bg-white">{`{/* No CSS file needed */}
+            <CodeBlock language="javascript">
+          {`{/* No CSS file needed */}
 
 <div className="
   bg-white
@@ -55,7 +69,8 @@ export default function Module02TailwindCSS() {
   p-6
 ">
   Hello
-</div>`}</pre>
+</div>`}
+        </CodeBlock>
           </div>
         </div>
 
@@ -86,7 +101,7 @@ export default function Module02TailwindCSS() {
       </section>
 
       {/* Core categories */}
-      <section className="space-y-6">
+      <section id="essential-class-categories" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Essential Class Categories</h2>
 
         <div className="space-y-4">
@@ -95,17 +110,20 @@ export default function Module02TailwindCSS() {
             The scale runs 1 = 4px, 2 = 8px, 4 = 16px, 6 = 24px, 8 = 32px. Prefix with axis: <code className="bg-stone-100 px-1 rounded text-xs font-mono">px-</code> (horizontal), <code className="bg-stone-100 px-1 rounded text-xs font-mono">py-</code> (vertical), <code className="bg-stone-100 px-1 rounded text-xs font-mono">pt-</code>/<code className="bg-stone-100 px-1 rounded text-xs font-mono">pb-</code>/<code className="bg-stone-100 px-1 rounded text-xs font-mono">pl-</code>/<code className="bg-stone-100 px-1 rounded text-xs font-mono">pr-</code>.
           </p>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
-            <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`<div class="p-6">        /* 24px all sides */
+            <CodeBlock language="javascript">
+          {`<div class="p-6">        /* 24px all sides */
 <div class="px-4 py-2">  /* 16px left/right, 8px top/bottom */
 <div class="mt-8 mb-4">  /* 32px top margin, 16px bottom */
-<div class="mx-auto">    /* center horizontally */`}</pre>
+<div class="mx-auto">    /* center horizontally */`}
+        </CodeBlock>
           </div>
         </div>
 
         <div className="space-y-4">
           <h3 className="text-base font-semibold text-foreground">Layout — flex, grid</h3>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
-            <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`/* Flexbox */
+            <CodeBlock language="json">
+          {`/* Flexbox */
 <div class="flex items-center justify-between gap-4">
   <span>Left</span>
   <span>Right</span>
@@ -116,18 +134,21 @@ export default function Module02TailwindCSS() {
   <div>Card 1</div>
   <div>Card 2</div>
   <div>Card 3</div>
-</div>`}</pre>
+</div>`}
+        </CodeBlock>
           </div>
         </div>
 
         <div className="space-y-4">
           <h3 className="text-base font-semibold text-foreground">Typography — text-, font-</h3>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
-            <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`<h1 class="text-3xl font-bold text-gray-900">Heading</h1>
+            <CodeBlock language="javascript">
+          {`<h1 class="text-3xl font-bold text-gray-900">Heading</h1>
 <p  class="text-sm text-gray-600 leading-relaxed">Body text</p>
 <span class="text-xs font-mono text-blue-600 uppercase tracking-wide">
   Badge
-</span>`}</pre>
+</span>`}
+        </CodeBlock>
           </div>
         </div>
 
@@ -137,25 +158,29 @@ export default function Module02TailwindCSS() {
             Each color has shades 50–950. Use the shade after the color name: <code className="bg-stone-100 px-1 rounded text-xs font-mono">bg-blue-500</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">text-red-700</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">border-green-300</code>.
           </p>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
-            <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`<button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
+            <CodeBlock language="json">
+          {`<button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
   Primary
 </button>
 <button class="border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg transition">
   Outline
-</button>`}</pre>
+</button>`}
+        </CodeBlock>
           </div>
         </div>
 
         <div className="space-y-4">
           <h3 className="text-base font-semibold text-foreground">Borders and Rounded — border, rounded-</h3>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
-            <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`rounded-sm   /* 2px */
+            <CodeBlock language="javascript">
+          {`rounded-sm   /* 2px */
 rounded      /* 4px */
 rounded-md   /* 6px */
 rounded-lg   /* 8px */
 rounded-xl   /* 12px */
 rounded-2xl  /* 16px */
-rounded-full /* 9999px — circle or pill */`}</pre>
+rounded-full /* 9999px — circle or pill */`}
+        </CodeBlock>
           </div>
         </div>
 
@@ -194,7 +219,7 @@ rounded-full /* 9999px — circle or pill */`}</pre>
       </section>
 
       {/* Try it */}
-      <section className="space-y-6">
+      <section id="try-it" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Try It — Build a Card</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The playground below loads Tailwind from CDN. Edit the HTML and use Tailwind classes to style a card. Your card must use <code className="bg-stone-100 px-1 rounded text-xs font-mono">p-</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">rounded-</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">bg-</code>, and <code className="bg-stone-100 px-1 rounded text-xs font-mono">text-</code> classes to unlock the next lesson.

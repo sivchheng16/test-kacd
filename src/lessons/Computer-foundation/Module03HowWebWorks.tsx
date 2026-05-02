@@ -12,8 +12,23 @@ export default function Module03HowWebWorks() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#the-internet-vs-the-web" className="text-primary hover:underline">→ The Internet vs The Web</a></li>
+          <li><a href="#ip-addresses-amp-dns" className="text-primary hover:underline">→ IP Addresses &amp; DNS</a></li>
+          <li><a href="#http-amp-https" className="text-primary hover:underline">→ HTTP &amp; HTTPS</a></li>
+          <li><a href="#the-request-response-cycle" className="text-primary hover:underline">→ The Request-Response Cycle</a></li>
+          <li><a href="#clients-amp-servers" className="text-primary hover:underline">→ Clients &amp; Servers</a></li>
+          <li><a href="#http-methods" className="text-primary hover:underline">→ HTTP Methods</a></li>
+          <li><a href="#http-status-codes" className="text-primary hover:underline">→ HTTP Status Codes</a></li>
+          <li><a href="#what-you-now-know" className="text-primary hover:underline">→ What you now know</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Internet vs Web ──────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="the-internet-vs-the-web" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">The Internet vs The Web</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           People use these words interchangeably, but they are two different things.
@@ -37,7 +52,7 @@ export default function Module03HowWebWorks() {
       </section>
 
       {/* ── 3. IP Addresses & DNS ───────────────────────────── */}
-      <section className="space-y-6">
+      <section id="ip-addresses-amp-dns" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">IP Addresses &amp; DNS</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Every device on the internet has a unique numerical address called an <strong className="text-foreground">IP address</strong> — like a home address for your computer. For example, one of Google's servers sits at <code className="text-xs bg-stone-100 px-1.5 py-0.5 rounded">142.250.80.46</code>.
@@ -53,7 +68,7 @@ export default function Module03HowWebWorks() {
       </section>
 
       {/* ── 4. HTTP & HTTPS ─────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="http-amp-https" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">HTTP &amp; HTTPS</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           <strong className="text-foreground">HTTP</strong> (HyperText Transfer Protocol) is the language browsers and servers use to talk to each other. The browser sends a <em>request</em>; the server sends a <em>response</em>. That's the entire conversation, every time.
@@ -64,7 +79,7 @@ export default function Module03HowWebWorks() {
       </section>
 
       {/* ── 5. Request-Response Cycle ───────────────────────── */}
-      <section className="space-y-6">
+      <section id="the-request-response-cycle" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">The Request-Response Cycle</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Every page load follows the same sequence. Here is what happens the moment you press Enter:
@@ -120,7 +135,7 @@ export default function Module03HowWebWorks() {
       </section>
 
       {/* ── 6. Clients & Servers ────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="clients-amp-servers" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Clients &amp; Servers</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="rounded-xl border border-border bg-stone-50 p-5 space-y-2">
@@ -141,7 +156,7 @@ export default function Module03HowWebWorks() {
       </section>
 
       {/* ── 7. HTTP Methods ─────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="http-methods" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">HTTP Methods</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Every HTTP request includes a <em>method</em> that tells the server what the client wants to do.
@@ -174,7 +189,7 @@ export default function Module03HowWebWorks() {
       </section>
 
       {/* ── 8. Status Codes ─────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="http-status-codes" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">HTTP Status Codes</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Every response comes with a three-digit number that summarises what happened.
@@ -198,7 +213,7 @@ export default function Module03HowWebWorks() {
       </section>
 
       {/* ── 9. Summary ──────────────────────────────────────── */}
-      <section className="rounded-2xl border border-border bg-stone-50 px-6 py-6 space-y-3">
+      <section id="what-you-now-know" className="rounded-2xl border border-border bg-stone-50 px-6 py-6 space-y-3">
         <h2 className="text-base font-semibold text-foreground">What you now know</h2>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2"><span className="text-primary shrink-0">→</span> The internet is the physical network; the web is a service that runs on it.</li>

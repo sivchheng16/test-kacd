@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module03LinuxTerminal() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -22,8 +23,22 @@ export default function Module03LinuxTerminal() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-is-the-terminal" className="text-primary hover:underline">→ What Is the Terminal?</a></li>
+          <li><a href="#the-file-system-tree" className="text-primary hover:underline">→ The File System Tree</a></li>
+          <li><a href="#navigation-commands" className="text-primary hover:underline">→ Navigation Commands</a></li>
+          <li><a href="#creating-files-and-directories" className="text-primary hover:underline">→ Creating Files and Directories</a></li>
+          <li><a href="#work-faster" className="text-primary hover:underline">→ Work Faster</a></li>
+          <li><a href="#quick-reference" className="text-primary hover:underline">→ Quick Reference</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* What is the terminal */}
-      <section className="space-y-6">
+      <section id="what-is-the-terminal" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">What Is the Terminal?</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The <strong>terminal</strong> (also called the <strong>shell</strong> or <strong>command line</strong>) is a text interface to your operating system. You type a command, press Enter, and the shell executes it. On KOOMPI Linux the default shell is <strong>bash</strong>.
@@ -73,28 +88,30 @@ export default function Module03LinuxTerminal() {
       </section>
 
       {/* File system tree */}
-      <section className="space-y-6">
+      <section id="the-file-system-tree" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">The File System Tree</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Linux organizes everything in a single tree starting at <code className="bg-stone-100 px-1 rounded text-xs font-mono">/</code> (root). Your personal files live in <code className="bg-stone-100 px-1 rounded text-xs font-mono">/home/your-username/</code>, abbreviated as <code className="bg-stone-100 px-1 rounded text-xs font-mono">~</code>.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">Linux directory structure</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`/                      ← root — the very top
-├── home/              ← all user home folders
-│   └── student/       ← your home (~)
+          <CodeBlock language="javascript">
+          {`/                      //  root — the very top
+├── home/              //  all user home folders
+│   └── student/       //  your home (~)
 │       ├── Documents/
 │       ├── Downloads/
 │       ├── Desktop/
-│       └── projects/  ← where we will put our code
-├── etc/               ← system configuration files
-├── usr/               ← installed programs
-└── var/               ← logs, temporary data`}</pre>
+│       └── projects/  //  where we will put our code
+├── etc/               //  system configuration files
+├── usr/               //  installed programs
+└── var/               //  logs, temporary data`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Navigation commands */}
-      <section className="space-y-6">
+      <section id="navigation-commands" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Navigation Commands</h2>
 
         <div className="space-y-4">
@@ -169,7 +186,7 @@ export default function Module03LinuxTerminal() {
       </section>
 
       {/* Creating files and dirs */}
-      <section className="space-y-6">
+      <section id="creating-files-and-directories" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Creating Files and Directories</h2>
 
         <div className="space-y-4">
@@ -236,7 +253,7 @@ export default function Module03LinuxTerminal() {
       </section>
 
       {/* Speed tips */}
-      <section className="space-y-6">
+      <section id="work-faster" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Work Faster</h2>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">
@@ -274,7 +291,7 @@ export default function Module03LinuxTerminal() {
       </section>
 
       {/* Quick reference */}
-      <section className="space-y-4">
+      <section id="quick-reference" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Quick Reference</h2>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">
@@ -309,7 +326,7 @@ export default function Module03LinuxTerminal() {
       </section>
 
       {/* Knowledge check */}
-      <section className="space-y-6">
+      <section id="knowledge-check" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Knowledge Check</h2>
         <p className="text-sm text-muted-foreground">
           Which command shows what directory you are currently in?

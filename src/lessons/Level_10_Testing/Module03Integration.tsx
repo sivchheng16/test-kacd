@@ -1,3 +1,4 @@
+import { CodeBlock } from "@/components/ui/CodeBlock";
 import React from "react";
 
 export default function Module03Integration() {
@@ -13,8 +14,20 @@ export default function Module03Integration() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-integration-tests-check" className="text-primary hover:underline">→ What integration tests check</a></li>
+          <li><a href="#testing-express-apis-with-supertest" className="text-primary hover:underline">→ Testing Express APIs with supertest</a></li>
+          <li><a href="#real-database-vs-mocked-database" className="text-primary hover:underline">→ Real database vs mocked database</a></li>
+          <li><a href="#test-database-setup-seed-clean-repeat" className="text-primary hover:underline">→ Test database setup: seed, clean, repeat</a></li>
+          <li><a href="#testing-auth-flows-within-the-api" className="text-primary hover:underline">→ Testing auth flows within the API</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. What integration tests check ───────────────── */}
-      <section className="space-y-6">
+      <section id="what-integration-tests-check" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What integration tests check</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           An integration test exercises multiple modules working together — usually a whole
@@ -28,14 +41,17 @@ export default function Module03Integration() {
       </section>
 
       {/* ── 3. supertest ───────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="testing-express-apis-with-supertest" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Testing Express APIs with supertest</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           <strong className="text-foreground">supertest</strong> lets you send HTTP requests to your Express app in tests without
           starting a real server. It handles the server lifecycle for you.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`npm install -D supertest @types/supertest`}</pre>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`import request from 'supertest';
+        <CodeBlock language="bash">
+          {`npm install -D supertest @types/supertest`}
+        </CodeBlock>
+        <CodeBlock language="javascript">
+          {`import request from 'supertest';
 import { app } from '../src/app'; // your Express app, not app.listen()
 
 test('POST /users creates a user', async () => {
@@ -52,23 +68,26 @@ test('GET /users/:id returns 404 for unknown user', async () => {
   const res = await request(app).get('/users/999999');
   expect(res.status).toBe(404);
   expect(res.body.error).toBe('User not found');
-});`}</pre>
+});`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           The key is exporting your app without calling{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">app.listen()</code>. Keep the listen call
           in a separate entry point so tests can import the app directly.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// src/app.ts — exported for tests
+        <CodeBlock language="javascript">
+          {`// src/app.ts — exported for tests
 export const app = express();
 app.use('/users', usersRouter);
 
 // src/server.ts — entry point, not imported in tests
 import { app } from './app';
-app.listen(3000);`}</pre>
+app.listen(3000);`}
+        </CodeBlock>
       </section>
 
       {/* ── 4. Real vs mocked database ─────────────────────── */}
-      <section className="space-y-6">
+      <section id="real-database-vs-mocked-database" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Real database vs mocked database — tradeoffs</h2>
         <div className="space-y-3">
           <div className="rounded-xl border border-border px-5 py-4">
@@ -96,15 +115,18 @@ app.listen(3000);`}</pre>
       </section>
 
       {/* ── 5. Test database setup ─────────────────────────── */}
-      <section className="space-y-6">
+      <section id="test-database-setup-seed-clean-repeat" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Test database setup: seed, clean, repeat</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Use a separate database for tests — never run tests against your development or
           production database. Set the connection string via an environment variable.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`# .env.test
-DATABASE_URL=postgres://localhost:5432/myapp_test`}</pre>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// vitest.config.ts
+        <CodeBlock language="javascript">
+          {`# .env.test
+DATABASE_URL=postgres://localhost:5432/myapp_test`}
+        </CodeBlock>
+        <CodeBlock language="javascript">
+          {`// vitest.config.ts
 export default defineConfig({
   test: {
     globals: true,
@@ -112,9 +134,12 @@ export default defineConfig({
     setupFiles: ['./tests/setup.ts'],
     env: loadEnv('test', process.cwd(), ''),
   },
-});`}</pre>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// tests/setup.ts
+});`}
+        </CodeBlock>
+        <CodeBlock language="javascript">
+          {`// tests/setup.ts
 import { db } from '../src/db';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 beforeEach(async () => {
   // seed baseline data
@@ -132,18 +157,20 @@ afterEach(async () => {
 
 afterAll(async () => {
   await db.end();
-});`}</pre>
+});`}
+        </CodeBlock>
       </section>
 
       {/* ── 6. Testing auth flows ──────────────────────────── */}
-      <section className="space-y-6">
+      <section id="testing-auth-flows-within-the-api" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Testing auth flows within the API</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Auth flows — login, token validation, protected routes — are high-value integration
           test targets. Test the full cycle: register, log in, use the token, call a
           protected endpoint, verify the response.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`describe('auth flow', () => {
+        <CodeBlock language="json">
+          {`describe('auth flow', () => {
   it('issues a token on successful login', async () => {
     // seed a user first
     await db.query(
@@ -174,7 +201,8 @@ afterAll(async () => {
     expect(res.status).toBe(200);
     expect(res.body.email).toBe('a@b.com');
   });
-});`}</pre>
+});`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Extract helper functions like <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">loginAndGetToken</code> into
           a shared test utilities file. Tests should read like specs, not setup scripts.

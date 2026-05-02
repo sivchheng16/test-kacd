@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module07TestingBasics() {
   return (
@@ -13,8 +14,25 @@ export default function Module07TestingBasics() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-is-a-test" className="text-primary hover:underline">→ What is a test?</a></li>
+          <li><a href="#why-write-tests" className="text-primary hover:underline">→ Why write tests?</a></li>
+          <li><a href="#meet-vitest" className="text-primary hover:underline">→ Meet Vitest</a></li>
+          <li><a href="#your-first-test" className="text-primary hover:underline">→ Your first test</a></li>
+          <li><a href="#common-matchers" className="text-primary hover:underline">→ Common matchers</a></li>
+          <li><a href="#arrange" className="text-primary hover:underline">→ Arrange</a></li>
+          <li><a href="#what-to-test" className="text-primary hover:underline">→ What to test</a></li>
+          <li><a href="#running-tests" className="text-primary hover:underline">→ Running tests</a></li>
+          <li><a href="#test-file-conventions" className="text-primary hover:underline">→ Test file conventions</a></li>
+          <li><a href="#key-takeaways" className="text-primary hover:underline">→ Key takeaways</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. What is a test? ─────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="what-is-a-test" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What is a test?</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A test is just code that <strong className="text-foreground">calls your code</strong> and checks
@@ -29,7 +47,7 @@ export default function Module07TestingBasics() {
       </section>
 
       {/* ── 3. Why write tests? ────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="why-write-tests" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Why write tests?</h2>
         <ul className="space-y-3 text-base text-muted-foreground">
           <li className="flex gap-3">
@@ -52,7 +70,7 @@ export default function Module07TestingBasics() {
       </section>
 
       {/* ── 4. Vitest ──────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="meet-vitest" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Meet Vitest</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           <strong className="text-foreground">Vitest</strong> is the modern test runner built for Vite projects.
@@ -62,52 +80,43 @@ export default function Module07TestingBasics() {
         <p className="text-base text-muted-foreground leading-relaxed">
           Install it as a dev dependency and add a script to <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">package.json</code>:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`npm install --save-dev vitest`}
-        </pre>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// package.json
+        <CodeBlock language="bash">
+          {`npm install --save-dev vitest`}
+        </CodeBlock>
+        <CodeBlock language="json">
+          {`// package.json
 {
   "scripts": {
     "test": "vitest"
   }
 }`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           That is the entire setup. No config file needed for a basic project.
         </p>
       </section>
 
       {/* ── 5. Your first test ─────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="your-first-test" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Your first test</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Start with a pure function — something that takes inputs and returns an output with no side effects.
           Create two files side by side:
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            math.js
-          </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`export function add(a, b) {
+        <CodeBlock language="javascript" title="math.js">
+          {`export function add(a, b) {
   return a + b;
 }`}
-          </pre>
-        </div>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            math.test.js
-          </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`import { test, expect } from 'vitest';
+        </CodeBlock>
+        <CodeBlock language="javascript" title="math.test.js">
+          {`import { test, expect } from 'vitest';
 import { add } from './math.js';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 test('adds two numbers', () => {
   expect(add(2, 3)).toBe(5);
 });`}
-          </pre>
-        </div>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Run <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">npm test</code> and Vitest finds
           any file matching <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">*.test.js</code> or{" "}
@@ -117,20 +126,20 @@ test('adds two numbers', () => {
       </section>
 
       {/* ── 6. Common matchers ─────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="common-matchers" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Common matchers</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A <strong className="text-foreground">matcher</strong> is the method chained after{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">expect(value)</code>.
           Each one checks the value in a different way:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`expect(add(2, 3)).toBe(5);            // strict equality (===)
+        <CodeBlock language="javascript">
+          {`expect(add(2, 3)).toBe(5);            // strict equality (===)
 expect(getUser()).toEqual({ id: 1 });  // deep equality (objects/arrays)
 expect(isLoggedIn()).toBeTruthy();     // any truthy value
 expect(items).toContain('milk');       // array or string includes value
 expect(() => divide(1, 0)).toThrow(); // function must throw`}
-        </pre>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2"><code className="text-primary font-mono shrink-0">toBe</code> uses <code className="bg-stone-100 px-1 rounded">===</code> — use it for primitives (numbers, strings, booleans)</li>
           <li className="flex gap-2"><code className="text-primary font-mono shrink-0">toEqual</code> recursively compares — use it for objects and arrays</li>
@@ -139,14 +148,14 @@ expect(() => divide(1, 0)).toThrow(); // function must throw`}
       </section>
 
       {/* ── 7. Arrange-Act-Assert ──────────────────────────── */}
-      <section className="space-y-6">
+      <section id="arrange" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Arrange — Act — Assert</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Every test, no matter how simple, follows the same three-step structure. Making it explicit keeps
           tests readable even months later:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`test('returns 0 for negative discount input', () => {
+        <CodeBlock language="javascript">
+          {`test('returns 0 for negative discount input', () => {
   // Arrange — set up inputs and any state
   const input = -1;
 
@@ -156,7 +165,7 @@ expect(() => divide(1, 0)).toThrow(); // function must throw`}
   // Assert — verify the output
   expect(result).toBe(0);
 });`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Each test should cover <strong className="text-foreground">one behaviour</strong>. If you find
           yourself writing "and" in the test name — "calculates total <em>and</em> applies discount" — split
@@ -165,7 +174,7 @@ expect(() => divide(1, 0)).toThrow(); // function must throw`}
       </section>
 
       {/* ── 8. What to test ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="what-to-test" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What to test — and what to skip</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="rounded-xl bg-green-50 border border-green-200 px-5 py-4 space-y-2">
@@ -194,12 +203,12 @@ expect(() => divide(1, 0)).toThrow(); // function must throw`}
       </section>
 
       {/* ── 9. Running tests ───────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="running-tests" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Running tests</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`npm test              # watch mode — re-runs on every file save
+        <CodeBlock language="javascript">
+          {`npm test              # watch mode — re-runs on every file save
 npm test -- --run     # run once and exit (for CI)`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           In watch mode Vitest only re-runs the tests affected by the file you just changed, so feedback
           is near-instant even in large projects. The terminal output shows a green checkmark for each
@@ -208,22 +217,22 @@ npm test -- --run     # run once and exit (for CI)`}
       </section>
 
       {/* ── 10. File conventions ───────────────────────────── */}
-      <section className="space-y-6">
+      <section id="test-file-conventions" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Test file conventions</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           By convention, test files live <strong className="text-foreground">next to the source file</strong> they test.
           Vitest picks up any file that matches <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">**/*.test.{"{js,ts}"}</code> or{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">**/*.spec.{"{js,ts}"}</code>:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`src/
+        <CodeBlock language="javascript">
+          {`src/
   utils/
-    math.js          ← source
-    math.test.js     ← tests for math.js
+    math.js          //  source
+    math.test.js     //  tests for math.js
   checkout/
     discount.js
     discount.spec.js`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Keeping tests alongside source (rather than in a separate <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">__tests__</code> folder)
           means you always know which file a test belongs to, and moving a module also moves its tests.
@@ -231,7 +240,7 @@ npm test -- --run     # run once and exit (for CI)`}
       </section>
 
       {/* ── Summary ────────────────────────────────────────── */}
-      <section className="rounded-2xl bg-stone-50 border border-border px-6 py-6 space-y-3">
+      <section id="key-takeaways" className="rounded-2xl bg-stone-50 border border-border px-6 py-6 space-y-3">
         <h2 className="text-lg font-semibold text-foreground">Key takeaways</h2>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2"><span className="text-primary font-bold shrink-0">1.</span> A test calls your function and asserts the output — nothing more.</li>

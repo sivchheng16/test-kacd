@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module04Functions() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -28,17 +29,28 @@ export default function Module04Functions() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#function-declaration" className="text-primary hover:underline">→ Function declaration</a></li>
+          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
+          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Concept */}
-      <section className="space-y-6">
+      <section id="function-declaration" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Function declaration</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`function greet(name) {
+        <CodeBlock language="javascript">
+          {`function greet(name) {
   return "Hello, " + name + "!";
 }
 
 const message = greet("Sokha");
 document.write(message); // Hello, Sokha!`}
-        </pre>
+        </CodeBlock>
         <p className="text-muted-foreground text-sm">
           The function is <em>declared</em> once and <em>called</em> as many times as you need.
           The <code className="font-mono bg-stone-100 px-1 rounded">return</code> keyword sends
@@ -49,8 +61,8 @@ document.write(message); // Hello, Sokha!`}
         <p className="text-muted-foreground leading-relaxed">
           Modern JavaScript uses arrow functions — shorter syntax, same idea:
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`// Classic function
+        <CodeBlock language="javascript">
+          {`// Classic function
 function add(a, b) {
   return a + b;
 }
@@ -64,7 +76,7 @@ const add = (a, b) => {
 const addShort = (a, b) => a + b;
 
 document.write(addShort(3, 4)); // 7`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Parameters vs arguments</h2>
         <div className="grid grid-cols-2 gap-4 text-sm">
@@ -83,17 +95,17 @@ document.write(addShort(3, 4)); // 7`}
         </div>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Default parameters</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const greet = (name = "friend") => \`Hello, \${name}!\`;
+        <CodeBlock language="javascript">
+          {`const greet = (name = "friend") => \`Hello, \${name}!\`;
 
 document.write(greet("Bopha")); // Hello, Bopha!
 document.write("<br>");
 document.write(greet());        // Hello, friend!`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Scope — where variables live</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const city = "Phnom Penh"; // global — visible everywhere
+        <CodeBlock language="javascript">
+          {`const city = "Phnom Penh"; // global — visible everywhere
 
 function showCity() {
   const district = "Chamkarmon"; // local — only inside here
@@ -102,11 +114,11 @@ function showCity() {
 
 showCity();
 // document.write(district); // Error — district is local to the function`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* Example */}
-      <section className="space-y-4">
+      <section id="live-example" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Live example — fare calculator function</h2>
         <p className="text-sm text-muted-foreground">
           The function takes a distance, applies the rate, and returns the fare.
@@ -127,7 +139,7 @@ document.write("15 km (premium 3500/km): " + calcFare(15, 3500) + " ៛");`,
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="try-it-yourself" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Write an arrow function called <code className="font-mono bg-stone-100 px-1 rounded">square</code> that takes
@@ -149,7 +161,7 @@ document.write(square(7));          // should be 49`,
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Write an arrow function called <code className="font-mono bg-stone-100 px-1 rounded">greet</code> that accepts

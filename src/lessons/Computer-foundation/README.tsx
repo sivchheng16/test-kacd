@@ -26,6 +26,9 @@ export default function Introduction() {
           </Typography>
           <Typography variant="h3">Modules in this Level:</Typography>
           <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
+            <li>What is Software?</li>
+            <li>Development Setup</li>
+            <li>How the Web Works</li>
             <li>Linux Terminal Fundamentals</li>
             <li>File Management & Organization</li>
           </ul>
@@ -66,11 +69,26 @@ export default function Introduction() {
               </TableRow>
               <TableRow>
                 <TableCell>02</TableCell>
+                <TableCell>What is Software?</TableCell>
+                <TableCell>Hardware vs Software, system layers</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>03</TableCell>
+                <TableCell>Development Setup</TableCell>
+                <TableCell>VS Code, browsers, environment configuration</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>04</TableCell>
+                <TableCell>How the Web Works</TableCell>
+                <TableCell>Clients, servers, requests, HTTP</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>05</TableCell>
                 <TableCell>Linux Terminal</TableCell>
                 <TableCell>CLI, Navigation, File Operations, Shortcuts</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>03</TableCell>
+                <TableCell>06</TableCell>
                 <TableCell>File Management</TableCell>
                 <TableCell>Organization, Naming Conventions, Workspace Setup</TableCell>
               </TableRow>

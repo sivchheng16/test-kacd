@@ -1,10 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 
 const EXPLORE_HTML = `<!-- Try editing this full page structure -->
+<body>
 <header>
   <h1>KOOMPI Academy</h1>
   <nav>
@@ -20,6 +22,7 @@ const EXPLORE_HTML = `<!-- Try editing this full page structure -->
     <p>This is the main content area. Only one &lt;main&gt; per page.</p>
   </section>
 
+
   <aside>
     <p>Sidebar: related links or notes go here.</p>
   </aside>
@@ -27,12 +30,11 @@ const EXPLORE_HTML = `<!-- Try editing this full page structure -->
 
 <footer>
   <p>&copy; 2025 KOOMPI. All rights reserved.</p>
-</footer>`;
+</footer>
+</body>
+`;
 
-const CHALLENGE_STARTER = `<!-- Build the three core sections of a page.
-     Add a <header> with an <h1> inside it,
-     a <main> with a <p> inside it,
-     and a <footer>. -->
+const CHALLENGE_STARTER = `<!-- Build the three core sections of a page. Add a <header> with an <h1> inside it, a <main> with a <p> inside it, and a <footer>. -->
 `;
 
 function parseHtml(raw: string): Document {
@@ -90,9 +92,22 @@ export default function Module02DocumentStructure() {
           and the footer. Structure is the contract between you and the browser.
         </p>
       </section>
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#the-skeleton-every-page-shares" className="text-primary hover:underline">→ The skeleton every page shares</a></li>
+          <li><a href="#the-invisible-head" className="text-primary hover:underline">→ The invisible head (Metadata)</a></li>
+          <li><a href="#project-folder-structure" className="text-primary hover:underline">→ Project Folder Structure</a></li>
+          <li><a href="#a-full-page-annotated" className="text-primary hover:underline">→ A full page, annotated</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
 
       {/* ── 2. Concept ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="the-skeleton-every-page-shares" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">The skeleton every page shares</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Every HTML page starts with a{" "}
@@ -124,26 +139,69 @@ export default function Module02DocumentStructure() {
         </div>
       </section>
 
+      {/* ── 2.5 The Head ───────────────────────────────────── */}
+      <section id="the-invisible-head" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">The invisible head (Metadata)</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          While the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;body&gt;</code> contains everything the user sees, the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;head&gt;</code> is just as important. It contains metadata—information <em>about</em> the page that the browser and search engines need to know.
+        </p>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          Nothing inside the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;head&gt;</code> is drawn on the canvas of the web page, with one exception: the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;title&gt;</code>, which appears in the browser tab.
+        </p>
+        <div className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-2 text-sm font-mono text-foreground leading-relaxed">
+          <div><span className="text-[#c2622d]">&lt;title&gt;</span> — The text shown in the browser tab and search engine results.</div>
+          <div><span className="text-[#c2622d]">&lt;meta charset="UTF-8"&gt;</span> — Ensures all characters (like emojis or Khmer script) display correctly.</div>
+          <div><span className="text-[#c2622d]">&lt;meta name="viewport" ...&gt;</span> — Tells mobile devices to scale the page correctly.</div>
+          <div><span className="text-[#c2622d]">&lt;link&gt;</span> — Used to connect an external CSS stylesheet or a favicon.</div>
+          <div><span className="text-[#c2622d]">&lt;script&gt;</span> — Used to attach JavaScript files to make the page interactive.</div>
+        </div>
+      </section>
+
+      {/* ── 2.6 Project Folder Structure ───────────────────── */}
+      <section id="project-folder-structure" className="space-y-5">
+        <h2 className="text-2xl font-serif text-foreground">Project Folder Structure</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          Before building a full page, it is important to understand how to organize your files. As your website grows, keeping all files in one folder gets messy. Best practice is to create dedicated subfolders for your assets, like an <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">images</code> or <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">css</code> folder.
+        </p>
+        <div className="p-4 rounded-xl bg-stone-100 border border-border font-mono text-sm whitespace-pre">
+{`my-website/
+├── index.html
+├── about.html
+├── images/
+│   └── logo.png
+└── css/
+    └── style.css`}
+        </div>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          When linking to files in a subfolder, you include the folder name in the path, followed by a forward slash <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">/</code>, and then the exact file name.
+        </p>
+        <div className="p-4 rounded-xl bg-amber-50/50 border border-amber-200 text-amber-900 space-y-2 text-sm">
+          <p className="font-semibold">⚠️ Important Reminders:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Exact Name:</strong> File names are case-sensitive. <code className="text-sm bg-amber-100 px-1 py-0.5 rounded">Logo.PNG</code> is different from <code className="text-sm bg-amber-100 px-1 py-0.5 rounded">logo.png</code>.</li>
+            <li><strong>File Extension:</strong> Always include the correct extension (.jpg, .png, .html).</li>
+            <li><strong>No Spaces:</strong> Avoid spaces in file names. Use hyphens (<code className="text-sm bg-amber-100 px-1 py-0.5 rounded">about-us.html</code>) or underscores (<code className="text-sm bg-amber-100 px-1 py-0.5 rounded">about_us.html</code>) instead.</li>
+          </ul>
+        </div>
+      </section>
+
       {/* ── 3. Example ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="a-full-page-annotated" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">A full page, annotated</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
-          Read through this once before you touch any code. Notice where each element lives and why.
+          Here is a complete, working HTML document. This is what you will type every time you start a new project.
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            index.html
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`<!DOCTYPE html>              ← always the very first line
-<html lang="en">             ← "en" tells screen readers the language
+
+        <CodeBlock language="html" title="index.html">
+          {`<!DOCTYPE html>              <!-- always the very first line -->
+<html lang="en">             <!-- "en" tells screen readers the language -->
 <head>
-  <meta charset="UTF-8">    ← supports all characters including Khmer
-  <title>My Portfolio</title>  ← text in the browser tab
+  <meta charset="UTF-8">    <!-- supports all characters including Khmer -->
+  <title>My Portfolio</title>  <!-- text in the browser tab -->
 </head>
 <body>
 
-  <header>                  ← top of the page
+  <header>                   <!-- top of the page -->
     <h1>Sokha's Portfolio</h1>
     <nav>
       <a href="index.html">Home</a>
@@ -151,7 +209,7 @@ export default function Module02DocumentStructure() {
     </nav>
   </header>
 
-  <main>                    ← one per page — the core content
+  <main>                     <!-- one per page — the core content -->
     <section>
       <h2>Projects</h2>
       <article>
@@ -165,14 +223,14 @@ export default function Module02DocumentStructure() {
     </aside>
   </main>
 
-  <footer>                  ← bottom of the page
+  <footer>                   <!-- bottom of the page -->
     <p>&copy; 2025 Sokha. All rights reserved.</p>
   </footer>
 
 </body>
 </html>`}
-          </pre>
-        </div>
+        </CodeBlock>
+
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <span className="text-primary font-mono shrink-0">DOCTYPE</span>
@@ -194,7 +252,7 @@ export default function Module02DocumentStructure() {
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -213,8 +271,23 @@ export default function Module02DocumentStructure() {
         />
       </section>
 
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>You have learned the fundamental structure of every HTML page:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>The <code>&lt;!DOCTYPE html&gt;</code> tells the browser to use modern HTML5.</li>
+            <li>The <code>&lt;html&gt;</code> tag wraps everything, splitting into <code>&lt;head&gt;</code> (metadata) and <code>&lt;body&gt;</code> (visible content).</li>
+            <li>Inside the body, you use semantic tags like <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code> instead of plain wrappers.</li>
+            <li>Organize your project with dedicated subfolders (e.g., <code>images/</code>) to keep your workspace tidy, and use proper file naming conventions.</li>
+            <li>This semantic structure makes your website accessible to screen readers and understandable to search engines.</li>
+          </ul>
+        </div>
+      </section>
+
       {/* ── 5. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

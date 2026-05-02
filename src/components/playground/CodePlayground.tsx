@@ -288,7 +288,7 @@ export function CodePlayground({
             <iframe
               key={previewDoc.length > 0 ? "loaded" : "empty"}
               srcDoc={previewDoc}
-              sandbox="allow-scripts"
+              sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"
               className="w-full h-full border-0"
               title="Preview"
             />

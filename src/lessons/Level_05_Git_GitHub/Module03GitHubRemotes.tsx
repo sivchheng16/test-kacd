@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const OPTIONS = [
   "git connect origin <url>",
@@ -34,8 +35,24 @@ export default function Module03GitHubRemotes() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#setting-up-github" className="text-primary hover:underline">→ Setting Up GitHub</a></li>
+          <li><a href="#creating-a-remote-repo" className="text-primary hover:underline">→ Creating a Remote Repo</a></li>
+          <li><a href="#linking-local-to-remote" className="text-primary hover:underline">→ Linking Local to Remote</a></li>
+          <li><a href="#git-push" className="text-primary hover:underline">→ git push</a></li>
+          <li><a href="#git-clone" className="text-primary hover:underline">→ git clone</a></li>
+          <li><a href="#git-pull" className="text-primary hover:underline">→ git pull</a></li>
+          <li><a href="#typical-daily-workflow" className="text-primary hover:underline">→ Typical Daily Workflow</a></li>
+          <li><a href="#quick-reference" className="text-primary hover:underline">→ Quick Reference</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* GitHub account */}
-      <section className="space-y-4">
+      <section id="setting-up-github" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Setting Up GitHub</h2>
         <ol className="space-y-2 text-sm text-muted-foreground list-decimal list-inside">
           <li>Go to <strong>github.com</strong> and create a free account.</li>
@@ -49,7 +66,8 @@ export default function Module03GitHubRemotes() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal — SSH key setup (one-time)
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Generate a key pair
+          <CodeBlock language="json">
+          {`# Generate a key pair
 ssh-keygen -t ed25519 -C "you@example.com"
 # Press Enter three times to accept defaults
 
@@ -60,12 +78,13 @@ cat ~/.ssh/id_ed25519.pub
 
 # Test the connection
 ssh -T git@github.com
-# "Hi username! You've successfully authenticated."`}</pre>
+# "Hi username! You've successfully authenticated."`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Create a repo on GitHub */}
-      <section className="space-y-4">
+      <section id="creating-a-remote-repo" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Creating a Remote Repo</h2>
         <ol className="space-y-2 text-sm text-muted-foreground list-decimal list-inside">
           <li>Click the <strong>+</strong> icon in the top-right corner of GitHub → <em>New repository</em>.</li>
@@ -75,7 +94,7 @@ ssh -T git@github.com
       </section>
 
       {/* git remote add */}
-      <section className="space-y-4">
+      <section id="linking-local-to-remote" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Linking Local to Remote</h2>
         <p className="text-base text-muted-foreground">
           A <em>remote</em> is a named URL. The conventional name for the main remote is{" "}
@@ -86,7 +105,8 @@ ssh -T git@github.com
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Add the remote (replace with your actual URL)
+          <CodeBlock language="javascript">
+          {`# Add the remote (replace with your actual URL)
 git remote add origin git@github.com:yourname/my-project.git
 
 # Verify it was added
@@ -95,12 +115,13 @@ git remote -v
 # origin  git@github.com:yourname/my-project.git (push)
 
 # Change the URL later if needed
-git remote set-url origin git@github.com:yourname/new-name.git`}</pre>
+git remote set-url origin git@github.com:yourname/new-name.git`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* git push */}
-      <section className="space-y-4">
+      <section id="git-push" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git push — Uploading Commits</h2>
         <p className="text-base text-muted-foreground">
           Push sends your local commits to the remote repository.
@@ -110,19 +131,21 @@ git remote set-url origin git@github.com:yourname/new-name.git`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# First push — -u sets the upstream so future pushes are just "git push"
+          <CodeBlock language="javascript">
+          {`# First push — -u sets the upstream so future pushes are just "git push"
 git push -u origin main
 
 # All subsequent pushes
 git push
 
 # Push a specific branch
-git push origin feature/navbar`}</pre>
+git push origin feature/navbar`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* git clone */}
-      <section className="space-y-4">
+      <section id="git-clone" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git clone — Downloading a Repo</h2>
         <p className="text-base text-muted-foreground">
           Clone copies an entire repository — all files, history, and branches — to your machine.
@@ -133,7 +156,8 @@ git push origin feature/navbar`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Clone via SSH (recommended — no password prompts)
+          <CodeBlock language="javascript">
+          {`# Clone via SSH (recommended — no password prompts)
 git clone git@github.com:username/repo.git
 
 # Clone via HTTPS
@@ -144,12 +168,13 @@ git clone git@github.com:username/repo.git my-folder
 
 # After cloning, enter the directory and start working
 cd repo
-git log --oneline`}</pre>
+git log --oneline`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* git pull */}
-      <section className="space-y-4">
+      <section id="git-pull" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git pull — Getting Updates</h2>
         <p className="text-base text-muted-foreground">
           Pull fetches the latest commits from the remote and merges them into your current
@@ -160,7 +185,8 @@ git log --oneline`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Fetch + merge in one step
+          <CodeBlock language="javascript">
+          {`# Fetch + merge in one step
 git pull
 
 # Fetch without merging (inspect first)
@@ -168,28 +194,31 @@ git fetch origin
 git log origin/main..HEAD    # see what's different
 
 # Pull and rebase instead of merge (cleaner history)
-git pull --rebase`}</pre>
+git pull --rebase`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Typical workflow */}
-      <section className="space-y-4">
+      <section id="typical-daily-workflow" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Typical Daily Workflow</h2>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Start of each work session
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`git pull                         # get team's latest changes
+          <CodeBlock language="javascript">
+          {`git pull                         # get team's latest changes
 # ... edit files ...
 git add .                        # stage your changes
 git commit -m "Add feature X"   # save snapshot
-git push                         # share with team`}</pre>
+git push                         # share with team`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Quick reference */}
-      <section className="space-y-4">
+      <section id="quick-reference" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Quick Reference</h2>
         <div className="rounded-2xl border border-border overflow-hidden">
           <table className="w-full text-sm">
@@ -220,7 +249,7 @@ git push                         # share with team`}</pre>
       </section>
 
       {/* Knowledge check */}
-      <section className="space-y-4">
+      <section id="knowledge-check" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Knowledge Check</h2>
         <p className="text-base text-muted-foreground">
           Which command links your local repository to a GitHub remote?

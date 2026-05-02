@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module07StateManagement() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -28,8 +29,23 @@ export default function Module07StateManagement() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#the-problem-with-prop-drilling" className="text-primary hover:underline">→ The problem with prop drilling</a></li>
+          <li><a href="#usecontext" className="text-primary hover:underline">→ useContext</a></li>
+          <li><a href="#usereducer" className="text-primary hover:underline">→ useReducer</a></li>
+          <li><a href="#context-usereducer" className="text-primary hover:underline">→ Context + useReducer</a></li>
+          <li><a href="#zustand" className="text-primary hover:underline">→ Zustand</a></li>
+          <li><a href="#when-to-use-what" className="text-primary hover:underline">→ When to use what</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Prop drilling */}
-      <section className="space-y-6">
+      <section id="the-problem-with-prop-drilling" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">The problem with prop drilling</h2>
         <p className="text-muted-foreground leading-relaxed">
           Prop drilling happens when a parent passes data down through intermediate components
@@ -38,8 +54,8 @@ export default function Module07StateManagement() {
           <code className="font-mono bg-stone-100 px-1 rounded">user</code>, but it must accept
           and re-pass it to reach <code className="font-mono bg-stone-100 px-1 rounded">Profile</code>.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`function App() {
+        <CodeBlock language="json">
+          {`function App() {
   const user = { name: "Dara" };
   return <Layout user={user} />;
 }
@@ -55,7 +71,7 @@ function Middle({ user }) {
 function Profile({ user }) {
   return <p>Hello, {user.name}</p>; // finally used here
 }`}
-        </pre>
+        </CodeBlock>
         <p className="text-muted-foreground leading-relaxed">
           With 5 levels this becomes unmaintainable. Adding a new field to{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">user</code> means touching every
@@ -64,7 +80,7 @@ function Profile({ user }) {
       </section>
 
       {/* useContext */}
-      <section className="space-y-6">
+      <section id="usecontext" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">useContext — skip the middle</h2>
         <p className="text-muted-foreground leading-relaxed">
           <code className="font-mono bg-stone-100 px-1 rounded">createContext</code> creates a
@@ -73,8 +89,8 @@ function Profile({ user }) {
           <code className="font-mono bg-stone-100 px-1 rounded">useContext</code> — no props
           needed in between.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const ThemeContext = React.createContext('light');
+        <CodeBlock language="json">
+          {`const ThemeContext = React.createContext('light');
 
 function App() {
   return (
@@ -92,7 +108,7 @@ function Profile() {
   const theme = React.useContext(ThemeContext); // 'dark'
   return <p>Theme: {theme}</p>;
 }`}
-        </pre>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           {[
             "createContext(defaultValue) — the default is used when there's no Provider above.",
@@ -108,7 +124,7 @@ function Profile() {
       </section>
 
       {/* useReducer */}
-      <section className="space-y-6">
+      <section id="usereducer" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">useReducer — complex local state</h2>
         <p className="text-muted-foreground leading-relaxed">
           When state has multiple related fields or multiple ways to change,{" "}
@@ -117,8 +133,8 @@ function Profile() {
           You describe <em>what happened</em> (an action) and a pure reducer function decides
           the new state.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`function reducer(state, action) {
+        <CodeBlock language="javascript">
+          {`function reducer(state, action) {
   switch (action.type) {
     case 'increment': return { count: state.count + 1 };
     case 'decrement': return { count: state.count - 1 };
@@ -139,7 +155,7 @@ function Counter() {
     </>
   );
 }`}
-        </pre>
+        </CodeBlock>
         <p className="text-muted-foreground leading-relaxed">
           The reducer is a plain function — easy to test in isolation, no React needed.
           Actions are plain objects, so you can log them, replay them, and reason about
@@ -148,7 +164,7 @@ function Counter() {
       </section>
 
       {/* Context + useReducer */}
-      <section className="space-y-6">
+      <section id="context-usereducer" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Context + useReducer — global state without a library</h2>
         <p className="text-muted-foreground leading-relaxed">
           Combine the two patterns and you get a lightweight global store. Put{" "}
@@ -156,8 +172,8 @@ function Counter() {
           <code className="font-mono bg-stone-100 px-1 rounded">dispatch</code> into context so
           any component can read state or trigger updates.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const StoreContext = React.createContext(null);
+        <CodeBlock language="javascript">
+          {`const StoreContext = React.createContext(null);
 
 function StoreProvider({ children }) {
   const [state, dispatch] = React.useReducer(reducer, { count: 0 });
@@ -177,7 +193,7 @@ function AnyChild() {
     </button>
   );
 }`}
-        </pre>
+        </CodeBlock>
         <p className="text-muted-foreground leading-relaxed">
           This pattern works well for small-to-medium apps. For very large apps with
           frequent updates, consider a dedicated library — context re-renders all consumers
@@ -186,7 +202,7 @@ function AnyChild() {
       </section>
 
       {/* Zustand */}
-      <section className="space-y-6">
+      <section id="zustand" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Zustand — when you outgrow Context</h2>
         <p className="text-muted-foreground leading-relaxed">
           <a
@@ -201,8 +217,8 @@ function AnyChild() {
           re-render when the specific slice of state they subscribe to changes.
           The API is tiny — you describe a store in one function call.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`import { create } from 'zustand';
+        <CodeBlock language="javascript">
+          {`import { create } from 'zustand';
 
 const useStore = create((set) => ({
   count: 0,
@@ -215,7 +231,7 @@ function Counter() {
   const increment = useStore((s) => s.increment);
   return <button onClick={increment}>{count}</button>;
 }`}
-        </pre>
+        </CodeBlock>
         <p className="text-sm text-muted-foreground">
           Zustand can't run in the playground (it's an npm package), but the pattern
           is straightforward to add to a real Vite or Next.js project:{" "}
@@ -224,7 +240,7 @@ function Counter() {
       </section>
 
       {/* When to use what */}
-      <section className="space-y-4">
+      <section id="when-to-use-what" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">When to use what</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse">
@@ -253,7 +269,7 @@ function Counter() {
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Try it — theme switcher with Context</h2>
         <p className="text-sm text-muted-foreground">
           A light/dark toggle wired through Context. The{" "}
@@ -341,7 +357,7 @@ function App() {
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Build a counter using{" "}

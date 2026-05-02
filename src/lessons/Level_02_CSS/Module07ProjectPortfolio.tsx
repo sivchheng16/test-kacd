@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_STARTER = {
   html: `<div class="card">
@@ -234,8 +235,19 @@ export default function Module07ProjectPortfolio() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-the-card-must-include" className="text-primary hover:underline">→ What the card must include</a></li>
+          <li><a href="#reference-card" className="text-primary hover:underline">→ Reference card</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Concept ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="what-the-card-must-include" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What the card must include</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           This capstone brings together every technique from this track.
@@ -282,18 +294,14 @@ export default function Module07ProjectPortfolio() {
       </section>
 
       {/* ── 3. Example ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="reference-card" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Reference card — fully annotated</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A complete working card using everything from this track. Read the
           comments — they map each rule back to the lesson that introduced it.
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            styles.css (annotated)
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`/* ── Module 03: Google Font + typography ── */
+        <CodeBlock language="javascript" title="styles.css (annotated)">
+          {`/* ── Module 03: Google Font + typography ── */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 body {
@@ -334,12 +342,11 @@ body {
     flex-direction: column;           /* stack on phones */
   }
 }`}
-          </pre>
-        </div>
+        </CodeBlock>
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -357,7 +364,7 @@ body {
       </section>
 
       {/* ── 5. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge — build your own card</h2>
           <p className="text-base text-muted-foreground mt-1">

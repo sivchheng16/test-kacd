@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module05Deployment() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -22,8 +23,20 @@ export default function Module05Deployment() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#step-1" className="text-primary hover:underline">→ Step 1</a></li>
+          <li><a href="#deploy-to-vercel" className="text-primary hover:underline">→ Deploy to Vercel</a></li>
+          <li><a href="#environment-variables" className="text-primary hover:underline">→ Environment Variables</a></li>
+          <li><a href="#docker-option" className="text-primary hover:underline">→ Docker Option</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* Build first */}
-      <section className="space-y-6">
+      <section id="step-1" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Step 1 — Build Locally First</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Always run a production build locally before deploying. It catches TypeScript errors, missing environment variables, and bundle-size surprises that the dev server hides.
@@ -46,7 +59,7 @@ export default function Module05Deployment() {
       </section>
 
       {/* Vercel */}
-      <section className="space-y-6">
+      <section id="deploy-to-vercel" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Deploy to Vercel</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Vercel is built by the same team as Next.js. It detects your framework automatically, runs the build, and deploys to a global edge network. The free Hobby tier is enough for personal projects.
@@ -90,16 +103,18 @@ export default function Module05Deployment() {
       </section>
 
       {/* Env vars */}
-      <section className="space-y-6">
+      <section id="environment-variables" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Environment Variables</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Never hardcode secrets. Store them in <code className="bg-stone-100 px-1 rounded text-xs font-mono">.env.local</code> locally (git-ignored) and set them in the Vercel dashboard for production.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">.env.local  ← never commit this file</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`DATABASE_URL=postgresql://localhost/myapp
+          <CodeBlock language="javascript">
+          {`DATABASE_URL=postgresql://localhost/myapp
 API_SECRET_KEY=super-secret-value
-NEXT_PUBLIC_API_URL=https://api.myapp.com`}</pre>
+NEXT_PUBLIC_API_URL=https://api.myapp.com`}
+        </CodeBlock>
         </div>
 
         <div className="overflow-x-auto rounded-xl border border-border">
@@ -128,11 +143,13 @@ NEXT_PUBLIC_API_URL=https://api.myapp.com`}</pre>
 
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">Using env vars in code</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`// Server Component or API route — server-only var
+          <CodeBlock language="javascript">
+          {`// Server Component or API route — server-only var
 const db = process.env.DATABASE_URL;
 
 // Client Component — must have NEXT_PUBLIC_ prefix
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;`}</pre>
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;`}
+        </CodeBlock>
         </div>
 
         <p className="text-sm text-muted-foreground">
@@ -141,22 +158,25 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;`}</pre>
       </section>
 
       {/* Docker */}
-      <section className="space-y-6">
+      <section id="docker-option" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Docker Option</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           For self-hosted deployments on a VPS or Kubernetes cluster, Next.js supports a standalone output mode. Enable it in <code className="bg-stone-100 px-1 rounded text-xs font-mono">next.config.js</code> and use this Dockerfile:
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">next.config.js</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`/** @type {import('next').NextConfig} */
+          <CodeBlock language="javascript">
+          {`/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone', // produces a self-contained build
 };
-module.exports = nextConfig;`}</pre>
+module.exports = nextConfig;`}
+        </CodeBlock>
         </div>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">Dockerfile</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`FROM node:20-alpine AS builder
+          <CodeBlock language="bash">
+          {`FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -170,7 +190,8 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 EXPOSE 3000
-CMD ["node", "server.js"]`}</pre>
+CMD ["node", "server.js"]`}
+        </CodeBlock>
         </div>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">Terminal</div>
@@ -182,7 +203,7 @@ CMD ["node", "server.js"]`}</pre>
       </section>
 
       {/* Knowledge check */}
-      <section className="space-y-6">
+      <section id="knowledge-check" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Knowledge Check</h2>
         <p className="text-sm text-muted-foreground">
           Which command builds a Next.js app for production?

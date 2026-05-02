@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const QUESTIONS = [
   {
@@ -87,8 +88,17 @@ export default function Module05ReactRouter() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#setting-up-routes" className="text-primary hover:underline">→ Setting up routes</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge check</a></li>
+        </ul>
+      </section>
+
       {/* Concept */}
-      <section className="space-y-6">
+      <section id="setting-up-routes" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Setting up routes</h2>
         <p className="text-muted-foreground leading-relaxed">
           Wrap your app in <code className="font-mono bg-stone-100 px-1 rounded">BrowserRouter</code>,
@@ -96,8 +106,8 @@ export default function Module05ReactRouter() {
           <code className="font-mono bg-stone-100 px-1 rounded">Route</code> elements inside a{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">Routes</code> block.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`// main.jsx
+        <CodeBlock language="javascript">
+          {`// main.jsx
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -119,11 +129,11 @@ function App() {
     </Routes>
   );
 }`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Navigating between pages</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`// Link — declarative navigation (replaces <a href>)
+        <CodeBlock language="json">
+          {`// Link — declarative navigation (replaces <a href>)
 import { Link } from 'react-router-dom';
 
 <Link to="/about">About</Link>
@@ -150,7 +160,7 @@ function LoginForm() {
     navigate('/dashboard');   // redirect after success
   };
 }`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Dynamic routes &amp; useParams</h2>
         <p className="text-muted-foreground leading-relaxed">
@@ -158,8 +168,8 @@ function LoginForm() {
           segment. The component can read it with{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">useParams()</code>.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`// Route definition
+        <CodeBlock language="json">
+          {`// Route definition
 <Route path="/users/:userId" element={<UserProfile />} />
 
 // Inside UserProfile
@@ -170,12 +180,13 @@ function UserProfile() {
   // fetch /api/users/userId ...
   return <h1>User {userId}</h1>;
 }`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Nested routes with Outlet</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`// Layout.jsx — shared shell for nested routes
+        <CodeBlock language="javascript">
+          {`// Layout.jsx — shared shell for nested routes
 import { Outlet, Link } from 'react-router-dom';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 function Layout() {
   return (
@@ -198,11 +209,11 @@ function Layout() {
     <Route path="about" element={<About />} />
   </Route>
 </Routes>`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* Knowledge Check */}
-      <section className="space-y-8">
+      <section id="knowledge-check" className="space-y-8">
         <div className="space-y-2">
           <h2 className="text-xl font-semibold text-foreground">Knowledge check</h2>
           <p className="text-sm text-muted-foreground">

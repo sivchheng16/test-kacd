@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module04AuthJWT() {
   return (
@@ -13,8 +14,22 @@ export default function Module04AuthJWT() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#password-hashing-with-bcrypt" className="text-primary hover:underline">→ Password hashing with bcrypt</a></li>
+          <li><a href="#jwt-structure" className="text-primary hover:underline">→ JWT structure</a></li>
+          <li><a href="#signing-a-token" className="text-primary hover:underline">→ Signing a token</a></li>
+          <li><a href="#verifying-a-token" className="text-primary hover:underline">→ Verifying a token</a></li>
+          <li><a href="#auth-middleware" className="text-primary hover:underline">→ Auth middleware</a></li>
+          <li><a href="#refresh-tokens" className="text-primary hover:underline">→ Refresh tokens</a></li>
+          <li><a href="#what-not-to-do" className="text-primary hover:underline">→ What NOT to do</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Password hashing with bcrypt ───────────────────── */}
-      <section className="space-y-6">
+      <section id="password-hashing-with-bcrypt" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Password hashing with bcrypt</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A <strong className="text-foreground">hash</strong> is a one-way transformation: easy to compute forward,
@@ -22,7 +37,8 @@ export default function Module04AuthJWT() {
           intentionally slow (making brute-force attacks expensive) and automatically salts the hash
           (preventing precomputed rainbow-table attacks).
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`import bcrypt from 'bcrypt';
+        <CodeBlock language="javascript">
+          {`import bcrypt from 'bcrypt';
 
 // On registration — hash before saving
 const hash = await bcrypt.hash(password, 10);
@@ -30,7 +46,8 @@ const hash = await bcrypt.hash(password, 10);
 
 // On login — compare submitted password to stored hash
 const match = await bcrypt.compare(submittedPassword, storedHash);
-if (!match) return res.status(401).json({ error: 'Invalid credentials' });`}</pre>
+if (!match) return res.status(401).json({ error: 'Invalid credentials' });`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           The second argument to <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">bcrypt.hash</code> is the
           <strong className="text-foreground"> cost factor</strong> (also called salt rounds). 10 is a safe default —
@@ -40,15 +57,17 @@ if (!match) return res.status(401).json({ error: 'Invalid credentials' });`}</pr
       </section>
 
       {/* ── 3. JWT structure ──────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="jwt-structure" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">JWT structure</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A <strong className="text-foreground">JSON Web Token</strong> (JWT) is a compact, self-contained token with
           three base64url-encoded parts separated by dots:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9   ← Header
-.eyJ1c2VySWQiOjQyLCJpYXQiOjE2MzI3NjQ3MjB9  ← Payload
-.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c  ← Signature`}</pre>
+        <CodeBlock language="javascript">
+          {`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9   //  Header
+.eyJ1c2VySWQiOjQyLCJpYXQiOjE2MzI3NjQ3MjB9  //  Payload
+.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c  //  Signature`}
+        </CodeBlock>
         <ul className="space-y-3 text-base text-muted-foreground">
           <li>
             <strong className="text-foreground">Header</strong> — algorithm (HS256) and token type.
@@ -72,12 +91,13 @@ if (!match) return res.status(401).json({ error: 'Invalid credentials' });`}</pr
       </section>
 
       {/* ── 4. Signing a token ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="signing-a-token" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Signing a token</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Install <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">npm install jsonwebtoken</code> then sign a token after a successful login:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`import jwt from 'jsonwebtoken';
+        <CodeBlock language="javascript">
+          {`import jwt from 'jsonwebtoken';
 
 const SECRET = process.env.JWT_SECRET;   // long random string — keep it secret
 
@@ -87,7 +107,8 @@ const token = jwt.sign(
   { expiresIn: '7d' }                       // token expires in 7 days
 );
 
-res.json({ token });`}</pre>
+res.json({ token });`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           The secret must be a long, random string stored in an environment variable —
           never hardcoded in source code.
@@ -95,30 +116,33 @@ res.json({ token });`}</pre>
       </section>
 
       {/* ── 5. Verifying a token ──────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="verifying-a-token" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Verifying a token</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">jwt.verify</code> checks the signature
           and expiry simultaneously. It throws if either is invalid, so always wrap it in try/catch.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`try {
+        <CodeBlock language="javascript">
+          {`try {
   const payload = jwt.verify(token, SECRET);
   // payload.userId, payload.email are now available
 } catch (err) {
   // JsonWebTokenError — signature invalid
   // TokenExpiredError — token has expired
   res.status(401).json({ error: 'Invalid or expired token' });
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* ── 6. Auth middleware ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="auth-middleware" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Auth middleware</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Rather than duplicating token verification in every route, extract it into a middleware function
           and attach the verified payload to <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">req.user</code>:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`function requireAuth(req, res, next) {
+        <CodeBlock language="javascript">
+          {`function requireAuth(req, res, next) {
   const token = req.headers.authorization?.replace('Bearer ', '');
   if (!token) return res.status(401).json({ error: 'Unauthorized' });
   try {
@@ -137,11 +161,12 @@ app.get('/api/v1/me', requireAuth, (req, res) => {
 app.post('/api/v1/posts', requireAuth, async (req, res) => {
   const post = await createPost({ ...req.body, authorId: req.user.userId });
   res.status(201).json({ data: post });
-});`}</pre>
+});`}
+        </CodeBlock>
       </section>
 
       {/* ── 7. Refresh tokens ─────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="refresh-tokens" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Refresh tokens</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Short-lived access tokens (15 minutes to 1 hour) limit the damage when one is stolen — it expires soon
@@ -158,7 +183,7 @@ app.post('/api/v1/posts', requireAuth, async (req, res) => {
       </section>
 
       {/* ── 8. What NOT to do ─────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="what-not-to-do" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What NOT to do</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The most common JWT mistake is storing the token in

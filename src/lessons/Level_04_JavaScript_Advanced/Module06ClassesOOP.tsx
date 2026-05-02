@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_CLASS = `class Animal {
   constructor(name, sound) {
@@ -146,8 +147,23 @@ export default function Module06ClassesOOP() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#you-already-know-object-literals" className="text-primary hover:underline">→ You already know object literals</a></li>
+          <li><a href="#the-class-blueprint" className="text-primary hover:underline">→ The class blueprint</a></li>
+          <li><a href="#inheritance-with-extends" className="text-primary hover:underline">→ Inheritance with extends</a></li>
+          <li><a href="#private-fields-with" className="text-primary hover:underline">→ Private fields with #</a></li>
+          <li><a href="#static-methods-amp-properties" className="text-primary hover:underline">→ Static methods &amp; properties</a></li>
+          <li><a href="#the-this-problem-in-callbacks" className="text-primary hover:underline">→ The this problem in callbacks</a></li>
+          <li><a href="#when-to-use-classes" className="text-primary hover:underline">→ When to use classes</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Object literals recap */}
-      <section className="space-y-4">
+      <section id="you-already-know-object-literals" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">You already know object literals</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A plain object bundles related values and functions under one name. You have been writing
@@ -157,14 +173,16 @@ export default function Module06ClassesOOP() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Object literal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`const user = {
+          <CodeBlock language="json">
+          {`const user = {
   name: "Alice",
   greet() {
     return \`Hi, I'm \${this.name}\`;
   },
 };
 
-console.log(user.greet()); // "Hi, I'm Alice"`}</pre>
+console.log(user.greet()); // "Hi, I'm Alice"`}
+        </CodeBlock>
         </div>
         <p className="text-base text-muted-foreground leading-relaxed">
           Object literals work well for one-off values. But when you need to create <em>many</em>{" "}
@@ -174,7 +192,7 @@ console.log(user.greet()); // "Hi, I'm Alice"`}</pre>
       </section>
 
       {/* Class syntax */}
-      <section className="space-y-4">
+      <section id="the-class-blueprint" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">The class blueprint</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A class defines the constructor (runs once when you call <code className="font-mono text-sm">new</code>)
@@ -184,7 +202,8 @@ console.log(user.greet()); // "Hi, I'm Alice"`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Basic class
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`class Animal {
+          <CodeBlock language="javascript">
+          {`class Animal {
   constructor(name, sound) {   // runs on new Animal(...)
     this.name = name;          // instance properties
     this.sound = sound;
@@ -199,7 +218,8 @@ const dog = new Animal("Rex", "Woof");
 const cat = new Animal("Luna", "Meow");
 
 dog.speak(); // "Rex says Woof"
-cat.speak(); // "Luna says Meow"`}</pre>
+cat.speak(); // "Luna says Meow"`}
+        </CodeBlock>
         </div>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
@@ -219,7 +239,7 @@ cat.speak(); // "Luna says Meow"`}</pre>
       </section>
 
       {/* Inheritance */}
-      <section className="space-y-4">
+      <section id="inheritance-with-extends" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Inheritance with <code className="font-mono">extends</code></h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A subclass inherits every method from its parent and can add or override its own.
@@ -230,7 +250,8 @@ cat.speak(); // "Luna says Meow"`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             extends + super
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`class Dog extends Animal {
+          <CodeBlock language="javascript">
+          {`class Dog extends Animal {
   constructor(name) {
     super(name, "Woof"); // sets this.name and this.sound via Animal
   }
@@ -242,13 +263,14 @@ cat.speak(); // "Luna says Meow"`}</pre>
 
 const rex = new Dog("Rex");
 rex.speak();        // inherited → "Rex says Woof"
-rex.fetch("ball");  // own method → "Rex fetches the ball!"`}</pre>
+rex.fetch("ball");  // own method → "Rex fetches the ball!"`}
+        </CodeBlock>
         </div>
         <CodePlayground mode="js" starter={{ js: EXPLORE_INHERITANCE }} height="300px" />
       </section>
 
       {/* Private fields */}
-      <section className="space-y-4">
+      <section id="private-fields-with" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Private fields with <code className="font-mono">#</code></h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Prefix a field name with <code className="font-mono text-sm">#</code> and it becomes
@@ -264,7 +286,7 @@ rex.fetch("ball");  // own method → "Rex fetches the ball!"`}</pre>
       </section>
 
       {/* Static methods */}
-      <section className="space-y-4">
+      <section id="static-methods-amp-properties" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Static methods &amp; properties</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A <code className="font-mono text-sm">static</code> member belongs to the class itself,
@@ -275,7 +297,7 @@ rex.fetch("ball");  // own method → "Rex fetches the ball!"`}</pre>
       </section>
 
       {/* The this problem */}
-      <section className="space-y-4">
+      <section id="the-this-problem-in-callbacks" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">The <code className="font-mono">this</code> problem in callbacks</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Inside a regular method, <code className="font-mono text-sm">this</code> is the instance.
@@ -286,7 +308,8 @@ rex.fetch("ball");  // own method → "Rex fetches the ball!"`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Lost this — and the fix
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`class Timer {
+          <CodeBlock language="javascript">
+          {`class Timer {
   constructor(label) {
     this.label = label;
   }
@@ -306,7 +329,8 @@ rex.fetch("ball");  // own method → "Rex fetches the ball!"`}</pre>
   }
 }
 
-new Timer("Pomodoro").startFixed(); // "Pomodoro"`}</pre>
+new Timer("Pomodoro").startFixed(); // "Pomodoro"`}
+        </CodeBlock>
         </div>
         <p className="text-sm text-muted-foreground">
           Arrow functions do not have their own <code className="font-mono text-sm">this</code> — they inherit it
@@ -315,7 +339,7 @@ new Timer("Pomodoro").startFixed(); // "Pomodoro"`}</pre>
       </section>
 
       {/* When to use */}
-      <section className="space-y-4">
+      <section id="when-to-use-classes" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">When to use classes</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="rounded-2xl border border-border px-5 py-4 space-y-2">
@@ -344,7 +368,7 @@ new Timer("Pomodoro").startFixed(); // "Pomodoro"`}</pre>
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

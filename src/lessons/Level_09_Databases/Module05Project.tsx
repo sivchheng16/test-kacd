@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module05Project() {
   return (
@@ -14,8 +15,22 @@ export default function Module05Project() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#step-1" className="text-primary hover:underline">→ Step 1</a></li>
+          <li><a href="#step-2" className="text-primary hover:underline">→ Step 2</a></li>
+          <li><a href="#step-3" className="text-primary hover:underline">→ Step 3</a></li>
+          <li><a href="#step-4" className="text-primary hover:underline">→ Step 4</a></li>
+          <li><a href="#step-5" className="text-primary hover:underline">→ Step 5</a></li>
+          <li><a href="#stretch-challenges" className="text-primary hover:underline">→ Stretch challenges</a></li>
+          <li><a href="#what-you-just-built" className="text-primary hover:underline">→ What you just built</a></li>
+        </ul>
+      </section>
+
       {/* ── Requirements ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="step-1" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Step 1 — Requirements</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Before touching SQL, write down what the platform needs to do:
@@ -39,7 +54,7 @@ export default function Module05Project() {
       </section>
 
       {/* ── Entity list ──────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="step-2" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Step 2 — Entities and relationships</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Read the requirements and underline the nouns — those become your tables.
@@ -73,14 +88,14 @@ export default function Module05Project() {
       </section>
 
       {/* ── CREATE TABLE SQL ─────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="step-3" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Step 3 — CREATE TABLE SQL</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Paste this into the Supabase SQL editor and run it. The order matters —
           referenced tables must exist before the referencing table.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`-- 1. Users (Supabase Auth handles auth.users; extend with a profile table)
+        <CodeBlock language="sql">
+          {`-- 1. Users (Supabase Auth handles auth.users; extend with a profile table)
 CREATE TABLE public.profiles (
   id         UUID        PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
   username   TEXT        NOT NULL UNIQUE,
@@ -115,9 +130,9 @@ CREATE TABLE public.post_tags (
   tag_id  UUID NOT NULL REFERENCES public.tags(id)  ON DELETE CASCADE,
   PRIMARY KEY (post_id, tag_id)
 );`}
-        </pre>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`-- Indexes
+        </CodeBlock>
+        <CodeBlock language="javascript">
+          {`-- Indexes
 CREATE INDEX posts_user_id_idx     ON public.posts(user_id);
 CREATE INDEX posts_created_at_idx  ON public.posts(created_at DESC);
 CREATE INDEX post_tags_tag_id_idx  ON public.post_tags(tag_id);
@@ -138,14 +153,14 @@ CREATE TRIGGER profiles_updated_at
 CREATE TRIGGER posts_updated_at
   BEFORE UPDATE ON public.posts
   FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── RLS policies ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="step-4" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Step 4 — Row Level Security policies</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`-- Enable RLS on all public tables
+        <CodeBlock language="sql">
+          {`-- Enable RLS on all public tables
 ALTER TABLE public.profiles  ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.posts     ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.tags      ENABLE ROW LEVEL SECURITY;
@@ -193,11 +208,11 @@ CREATE POLICY "post_tags: owner insert"
   WITH CHECK (
     auth.uid() = (SELECT user_id FROM public.posts WHERE id = post_id)
   );`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── Query examples ───────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="step-5" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Step 5 — Query examples</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           With the schema in place, these are the queries the frontend will use most.
@@ -205,8 +220,8 @@ CREATE POLICY "post_tags: owner insert"
 
         <div className="space-y-2">
           <p className="text-sm font-semibold text-foreground">Homepage: published posts with author and tags</p>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`const { data: posts } = await supabase
+          <CodeBlock language="javascript">
+          {`const { data: posts } = await supabase
   .from('posts')
   .select(\`
     id, title, body, published_at, created_at,
@@ -217,46 +232,46 @@ CREATE POLICY "post_tags: owner insert"
   .is('deleted_at', null)
   .order('created_at', { ascending: false })
   .limit(20);`}
-          </pre>
+        </CodeBlock>
         </div>
 
         <div className="space-y-2">
           <p className="text-sm font-semibold text-foreground">Author dashboard: own posts including drafts</p>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`const { data: myPosts } = await supabase
+          <CodeBlock language="javascript">
+          {`const { data: myPosts } = await supabase
   .from('posts')
   .select('id, title, published, created_at, updated_at')
   .eq('user_id', user.id)
   .is('deleted_at', null)
   .order('updated_at', { ascending: false });`}
-          </pre>
+        </CodeBlock>
         </div>
 
         <div className="space-y-2">
           <p className="text-sm font-semibold text-foreground">Publish a post</p>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`const { error } = await supabase
+          <CodeBlock language="javascript">
+          {`const { error } = await supabase
   .from('posts')
   .update({ published: true, published_at: new Date().toISOString() })
   .eq('id', postId)
   .eq('user_id', user.id); // RLS double-checks this`}
-          </pre>
+        </CodeBlock>
         </div>
 
         <div className="space-y-2">
           <p className="text-sm font-semibold text-foreground">Soft delete a post</p>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`const { error } = await supabase
+          <CodeBlock language="javascript">
+          {`const { error } = await supabase
   .from('posts')
   .update({ deleted_at: new Date().toISOString() })
   .eq('id', postId)
   .eq('user_id', user.id);`}
-          </pre>
+        </CodeBlock>
         </div>
       </section>
 
       {/* ── Stretch challenges ───────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="stretch-challenges" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Stretch challenges</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The core schema works. These extensions will test your understanding of
@@ -290,7 +305,7 @@ CREATE POLICY "post_tags: owner insert"
       </section>
 
       {/* ── Closing ──────────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="what-you-just-built" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">What you just built</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           You went from a plain-English requirement list to a production-ready PostgreSQL

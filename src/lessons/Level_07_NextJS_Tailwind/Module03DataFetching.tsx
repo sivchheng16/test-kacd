@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module03DataFetching() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -22,15 +23,28 @@ export default function Module03DataFetching() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#fetching-in-a-server-component" className="text-primary hover:underline">→ Fetching in a Server Component</a></li>
+          <li><a href="#caching-strategies" className="text-primary hover:underline">→ Caching Strategies</a></li>
+          <li><a href="#loading-and-error-states" className="text-primary hover:underline">→ Loading and Error States</a></li>
+          <li><a href="#dynamic-routes-data" className="text-primary hover:underline">→ Dynamic Routes + Data</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* Basic fetch */}
-      <section className="space-y-6">
+      <section id="fetching-in-a-server-component" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Fetching in a Server Component</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Because Server Components run on the server, you can mark the component <code className="bg-stone-100 px-1 rounded text-xs font-mono">async</code> and <code className="bg-stone-100 px-1 rounded text-xs font-mono">await</code> the data directly. The HTML delivered to the browser already contains the fetched content.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">app/products/page.tsx</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`async function getProducts() {
+          <CodeBlock language="json">
+          {`async function getProducts() {
   const res = await fetch('https://fakestoreapi.com/products');
   if (!res.ok) throw new Error('Failed to fetch');
   return res.json();
@@ -49,12 +63,13 @@ export default async function ProductsPage() {
       ))}
     </div>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Rendering strategies */}
-      <section className="space-y-6">
+      <section id="caching-strategies" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Caching Strategies</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The fetch cache option controls when Next.js re-fetches data. Three common patterns:
@@ -63,22 +78,28 @@ export default async function ProductsPage() {
         <div className="space-y-4">
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-foreground">Static (SSG) — default, fastest</div>
-            <pre className="px-4 py-3 text-xs font-mono text-muted-foreground bg-white overflow-x-auto">{`// No cache option = cached forever (until next build)
-const res = await fetch('https://api.example.com/data');`}</pre>
+            <CodeBlock language="javascript">
+          {`// No cache option = cached forever (until next build)
+const res = await fetch('https://api.example.com/data');`}
+        </CodeBlock>
           </div>
 
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-foreground">Dynamic (SSR) — fresh every request</div>
-            <pre className="px-4 py-3 text-xs font-mono text-muted-foreground bg-white overflow-x-auto">{`const res = await fetch('https://api.example.com/data', {
+            <CodeBlock language="javascript">
+          {`const res = await fetch('https://api.example.com/data', {
   cache: 'no-store', // never cache — always fetch fresh
-});`}</pre>
+});`}
+        </CodeBlock>
           </div>
 
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-foreground">Incremental (ISR) — revalidate every N seconds</div>
-            <pre className="px-4 py-3 text-xs font-mono text-muted-foreground bg-white overflow-x-auto">{`const res = await fetch('https://api.example.com/data', {
+            <CodeBlock language="javascript">
+          {`const res = await fetch('https://api.example.com/data', {
   next: { revalidate: 60 }, // serve cache, refresh in background every 60s
-});`}</pre>
+});`}
+        </CodeBlock>
           </div>
         </div>
 
@@ -109,7 +130,7 @@ const res = await fetch('https://api.example.com/data');`}</pre>
       </section>
 
       {/* Loading and error */}
-      <section className="space-y-6">
+      <section id="loading-and-error-states" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Loading and Error States</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Next.js uses special files alongside your <code className="bg-stone-100 px-1 rounded text-xs font-mono">page.tsx</code> to handle loading and errors automatically. They wrap the route segment and activate while the async page resolves.
@@ -118,7 +139,8 @@ const res = await fetch('https://api.example.com/data');`}</pre>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">app/products/loading.tsx</div>
-            <pre className="px-4 py-4 text-xs font-mono leading-relaxed text-foreground overflow-x-auto bg-white">{`export default function Loading() {
+            <CodeBlock language="javascript">
+          {`export default function Loading() {
   return (
     <div className="grid grid-cols-3 gap-6 p-8">
       {[1, 2, 3].map(i => (
@@ -128,11 +150,13 @@ const res = await fetch('https://api.example.com/data');`}</pre>
       ))}
     </div>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
           </div>
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">app/products/error.tsx</div>
-            <pre className="px-4 py-4 text-xs font-mono leading-relaxed text-foreground overflow-x-auto bg-white">{`'use client'; // error files must be client
+            <CodeBlock language="json">
+          {`'use client'; // error files must be client
 
 export default function Error({
   error,
@@ -147,20 +171,22 @@ export default function Error({
       <button onClick={reset}>Try again</button>
     </div>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
           </div>
         </div>
       </section>
 
       {/* Dynamic routes with data */}
-      <section className="space-y-6">
+      <section id="dynamic-routes-data" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Dynamic Routes + Data</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           A folder named <code className="bg-stone-100 px-1 rounded text-xs font-mono">[id]</code> creates a dynamic segment. The <code className="bg-stone-100 px-1 rounded text-xs font-mono">params</code> prop receives the actual value from the URL.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">app/products/[id]/page.tsx</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`import { notFound } from 'next/navigation';
+          <CodeBlock language="json">
+          {`import { notFound } from 'next/navigation';
 
 async function getProduct(id: string) {
   const res = await fetch(\`https://fakestoreapi.com/products/\${id}\`);
@@ -188,12 +214,13 @@ export default async function ProductPage({
       <p className="text-3xl font-bold text-blue-600 mt-4">\${product.price}</p>
     </div>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Knowledge check */}
-      <section className="space-y-6">
+      <section id="knowledge-check" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Knowledge Check</h2>
         <p className="text-sm text-muted-foreground">
           In Next.js Server Components, what does <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">{"{ cache: 'no-store' }"}</code> in a fetch call do?

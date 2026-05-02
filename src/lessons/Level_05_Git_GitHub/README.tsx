@@ -8,13 +8,12 @@ export default function Introduction() {
       <div>
         <div>
           <Typography variant="h1">Introduction: Git & GitHub</Typography>
+          <Typography variant="lead">
+            Professional version control for tracking code history and collaborating with teams.
+          </Typography>
         </div>
       </div>
-      <div>
-        <div>
-          <Typography variant="h2">Track 05: Git &amp; GitHub</Typography>
-        </div>
-      </div>
+    
       <div>
         <div>
           <Typography variant="h2">Level Overview</Typography>

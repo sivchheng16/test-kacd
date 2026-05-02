@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module02CICD() {
   return (
@@ -13,8 +14,22 @@ export default function Module02CICD() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#ci-and-cd-defined" className="text-primary hover:underline">→ CI and CD defined</a></li>
+          <li><a href="#github-actions-anatomy" className="text-primary hover:underline">→ GitHub Actions anatomy</a></li>
+          <li><a href="#a-complete-ci-workflow-for-nodejs" className="text-primary hover:underline">→ A complete CI workflow for Node.js</a></li>
+          <li><a href="#using-secrets-in-github-actions" className="text-primary hover:underline">→ Using secrets in GitHub Actions</a></li>
+          <li><a href="#deploy-step-after-tests-pass" className="text-primary hover:underline">→ Deploy step after tests pass</a></li>
+          <li><a href="#branch-protection-require-ci-to-pass-before-merging" className="text-primary hover:underline">→ Branch protection: require CI to pass before merging</a></li>
+          <li><a href="#status-badges-in-readme" className="text-primary hover:underline">→ Status badges in README</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. CI and CD defined ───────────────────────────── */}
-      <section className="space-y-6">
+      <section id="ci-and-cd-defined" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">CI and CD defined</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           <strong className="text-foreground">Continuous Integration (CI)</strong> means every push to any branch
@@ -29,7 +44,7 @@ export default function Module02CICD() {
       </section>
 
       {/* ── 3. GitHub Actions anatomy ──────────────────────── */}
-      <section className="space-y-6">
+      <section id="github-actions-anatomy" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">GitHub Actions anatomy</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A GitHub Actions <strong className="text-foreground">workflow</strong> is a YAML file in{" "}
@@ -43,9 +58,10 @@ export default function Module02CICD() {
       </section>
 
       {/* ── 4. A complete CI workflow ──────────────────────── */}
-      <section className="space-y-6">
+      <section id="a-complete-ci-workflow-for-nodejs" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">A complete CI workflow for Node.js</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`# .github/workflows/ci.yml
+        <CodeBlock language="bash">
+          {`# .github/workflows/ci.yml
 name: CI
 
 on:
@@ -70,7 +86,8 @@ jobs:
 
       - run: npm test -- --run   # run tests once, don't watch
 
-      - run: npm run build    # verify it compiles`}</pre>
+      - run: npm run build    # verify it compiles`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           The <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">cache: 'npm'</code> option caches
           the npm cache between runs, cutting install time from 30 seconds to 5 seconds on
@@ -79,7 +96,7 @@ jobs:
       </section>
 
       {/* ── 5. Secrets ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="using-secrets-in-github-actions" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Using secrets in GitHub Actions</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Never put API keys, deploy tokens, or passwords in your workflow file. Store
@@ -95,7 +112,7 @@ jobs:
       </section>
 
       {/* ── 6. Deploy step ─────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="deploy-step-after-tests-pass" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Deploy step after tests pass</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Add a deploy job that depends on the test job. It only runs when the test job
@@ -105,7 +122,7 @@ jobs:
       </section>
 
       {/* ── 7. Branch protection ───────────────────────────── */}
-      <section className="space-y-6">
+      <section id="branch-protection-require-ci-to-pass-before-merging" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Branch protection: require CI to pass before merging</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Branch protection rules prevent merging a pull request if CI is failing.
@@ -123,16 +140,18 @@ jobs:
       </section>
 
       {/* ── 8. Status badges ───────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="status-badges-in-readme" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Status badges in README</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Add a badge to your README that shows the current CI status. It's a quick signal
           to anyone visiting the repo: green means the main branch is healthy.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`<!-- in README.md -->
+        <CodeBlock language="javascript">
+          {`<!-- in README.md -->
 ![CI](https://github.com/your-org/your-repo/actions/workflows/ci.yml/badge.svg)
 
-<!-- renders as a live badge: passing | failing -->`}</pre>
+<!-- renders as a live badge: passing | failing -->`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Get the exact URL from Actions → select your workflow → the three-dot menu → "Create status badge".
         </p>

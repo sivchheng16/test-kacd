@@ -1,5 +1,6 @@
 import React from "react";
 import { CheckCircle2, Lightbulb } from "lucide-react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module05Project() {
   return (
@@ -19,8 +20,22 @@ export default function Module05Project() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#step-1" className="text-primary hover:underline">→ Step 1</a></li>
+          <li><a href="#step-2" className="text-primary hover:underline">→ Step 2</a></li>
+          <li><a href="#step-3" className="text-primary hover:underline">→ Step 3</a></li>
+          <li><a href="#step-4" className="text-primary hover:underline">→ Step 4</a></li>
+          <li><a href="#complete-file" className="text-primary hover:underline">→ Complete file</a></li>
+          <li><a href="#what-you-built" className="text-primary hover:underline">→ What you built</a></li>
+          <li><a href="#stretch-challenges" className="text-primary hover:underline">→ Stretch challenges</a></li>
+        </ul>
+      </section>
+
       {/* ── Step 1: Define the shape ────────────────────────── */}
-      <section className="space-y-5">
+      <section id="step-1" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Step 1 — Define the data shape</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Before writing a single fetch call, describe what the API returns. An interface forces you
@@ -32,7 +47,8 @@ export default function Module05Project() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             types.ts
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// Each field matches exactly what JSONPlaceholder returns.
+          <CodeBlock language="javascript">
+          {`// Each field matches exactly what JSONPlaceholder returns.
 // Writing this first means TypeScript can catch a misspelled
 // property name anywhere in the codebase.
 interface Post {
@@ -40,7 +56,8 @@ interface Post {
   title: string;
   body: string;
   userId: number;
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
 
         <p className="text-base text-muted-foreground leading-relaxed">
@@ -51,7 +68,7 @@ interface Post {
       </section>
 
       {/* ── Step 2: Generic fetch wrapper ───────────────────── */}
-      <section className="space-y-5">
+      <section id="step-2" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Step 2 — Generic fetch wrapper</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The native <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">fetch</code> API
@@ -65,7 +82,8 @@ interface Post {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             fetchJSON.ts
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// T is the expected response shape — callers supply it.
+          <CodeBlock language="javascript">
+          {`// T is the expected response shape — callers supply it.
 // No \`any\` anywhere: the return type is always Promise<T>.
 async function fetchJSON<T>(url: string): Promise<T> {
   const res = await fetch(url);
@@ -78,7 +96,8 @@ async function fetchJSON<T>(url: string): Promise<T> {
   // The cast to Promise<T> is intentional and documented —
   // this is the single place where we accept the runtime contract.
   return res.json() as Promise<T>;
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
 
         <ul className="space-y-2 text-sm text-muted-foreground">
@@ -98,7 +117,7 @@ async function fetchJSON<T>(url: string): Promise<T> {
       </section>
 
       {/* ── Step 3: Typed API object ────────────────────────── */}
-      <section className="space-y-5">
+      <section id="step-3" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Step 3 — Typed API object</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Group all endpoint functions into one{" "}
@@ -112,7 +131,8 @@ async function fetchJSON<T>(url: string): Promise<T> {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             api.ts
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`const api = {
+          <CodeBlock language="json">
+          {`const api = {
   // Returns Post[] — TypeScript knows every element is a Post
   getPosts: () =>
     fetchJSON<Post[]>("https://jsonplaceholder.typicode.com/posts"),
@@ -120,7 +140,8 @@ async function fetchJSON<T>(url: string): Promise<T> {
   // Returns a single Post — id is typed as number, not string
   getPost: (id: number) =>
     fetchJSON<Post>(\`https://jsonplaceholder.typicode.com/posts/\${id}\`),
-};`}</pre>
+};`}
+        </CodeBlock>
         </div>
 
         <p className="text-base text-muted-foreground leading-relaxed">
@@ -133,7 +154,7 @@ async function fetchJSON<T>(url: string): Promise<T> {
       </section>
 
       {/* ── Step 4: Consuming the client ────────────────────── */}
-      <section className="space-y-5">
+      <section id="step-4" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Step 4 — Use it with full type safety</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Callers get accurate autocomplete and compile-time checking for free. No type annotations
@@ -145,7 +166,8 @@ async function fetchJSON<T>(url: string): Promise<T> {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             main.ts
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// posts is inferred as Post[] — no annotation needed
+          <CodeBlock language="javascript">
+          {`// posts is inferred as Post[] — no annotation needed
 const posts = await api.getPosts();
 console.log(posts[0].title);   // TS knows .title is string
 console.log(posts[0].userId);  // TS knows .userId is number
@@ -153,12 +175,13 @@ console.log(posts[0].userId);  // TS knows .userId is number
 
 // post is inferred as Post
 const post = await api.getPost(1);
-console.log(post.body);        // TS knows .body is string`}</pre>
+console.log(post.body);        // TS knows .body is string`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* ── Complete file ───────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="complete-file" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Complete file</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Here is everything together. Notice that the entire module — interface, wrapper, API
@@ -172,7 +195,8 @@ console.log(post.body);        // TS knows .body is string`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             typed-api-client.ts
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// 1. Define the shape of what the API returns
+          <CodeBlock language="json">
+          {`// 1. Define the shape of what the API returns
 interface Post {
   id: number;
   title: string;
@@ -200,12 +224,13 @@ const posts = await api.getPosts();  // Post[]
 console.log(posts[0].title);         // string ✓
 
 const post = await api.getPost(1);   // Post
-console.log(post.body);              // string ✓`}</pre>
+console.log(post.body);              // string ✓`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* ── What you built ──────────────────────────────────── */}
-      <section>
+      <section id="what-you-built">
         <div className="rounded-2xl bg-green-50 border border-green-200 px-6 py-6 space-y-4">
           <div className="flex items-center gap-2">
             <CheckCircle2 size={20} className="text-green-600 shrink-0" />
@@ -228,7 +253,7 @@ console.log(post.body);              // string ✓`}</pre>
       </section>
 
       {/* ── Stretch challenges ──────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="stretch-challenges" className="space-y-5">
         <div className="flex items-center gap-2">
           <Lightbulb size={18} className="text-amber-500 shrink-0" />
           <h2 className="text-2xl font-serif text-foreground">Stretch challenges</h2>

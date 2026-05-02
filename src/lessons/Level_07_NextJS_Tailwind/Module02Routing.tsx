@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const CORRECT = "app/products/[id]/page.tsx";
 
@@ -25,18 +26,36 @@ export default function Module02Routing() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#static-routes" className="text-primary hover:underline">→ Static routes</a></li>
+          <li><a href="#dynamic-routes" className="text-primary hover:underline">→ Dynamic routes</a></li>
+          <li><a href="#route-groups" className="text-primary hover:underline">→ Route groups</a></li>
+          <li><a href="#nested-layouts" className="text-primary hover:underline">→ Nested layouts</a></li>
+          <li><a href="#the-link-component" className="text-primary hover:underline">→ The Link component</a></li>
+          <li><a href="#userouter-and-usepathname" className="text-primary hover:underline">→ useRouter and usePathname</a></li>
+          <li><a href="#parallel-routes" className="text-primary hover:underline">→ Parallel routes</a></li>
+          <li><a href="#middleware" className="text-primary hover:underline">→ Middleware</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Static routes ───────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="static-routes" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">Static routes</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Every folder inside <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">app/</code>{" "}
           that contains a <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">page.tsx</code>{" "}
           becomes a publicly accessible URL:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`app/page.tsx          →  /
+        <CodeBlock language="javascript">
+          {`app/page.tsx          →  /
 app/about/page.tsx    →  /about
 app/blog/page.tsx     →  /blog
-app/contact/page.tsx  →  /contact`}</pre>
+app/contact/page.tsx  →  /contact`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Each <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">page.tsx</code>{" "}
           is just a React component that exports a default function. No special syntax, no imports
@@ -45,15 +64,17 @@ app/contact/page.tsx  →  /contact`}</pre>
       </section>
 
       {/* ── 3. Dynamic routes ──────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="dynamic-routes" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">Dynamic routes</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Wrap a folder name in square brackets to make it dynamic. The bracket name becomes the
           parameter your component receives:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`app/blog/[slug]/page.tsx   →  /blog/hello-world
+        <CodeBlock language="javascript">
+          {`app/blog/[slug]/page.tsx   →  /blog/hello-world
                            →  /blog/next-js-guide
-                           →  /blog/anything-at-all`}</pre>
+                           →  /blog/anything-at-all`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Inside the page component, the parameter arrives via{" "}
           <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">props.params</code>:
@@ -62,7 +83,8 @@ app/contact/page.tsx  →  /contact`}</pre>
           <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">
             app/blog/[slug]/page.tsx
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`interface Props {
+          <CodeBlock language="json">
+          {`interface Props {
   params: { slug: string };
 }
 
@@ -75,7 +97,8 @@ export default async function BlogPost({ params }: Props) {
       <p>{post.body}</p>
     </article>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
           You can have multiple dynamic segments — for example{" "}
@@ -88,21 +111,23 @@ export default async function BlogPost({ params }: Props) {
       </section>
 
       {/* ── 4. Route groups ────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="route-groups" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">Route groups</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Wrap a folder name in parentheses to create a{" "}
           <strong className="text-foreground">route group</strong>. The folder is used for
           organisation only — it does not appear in the URL:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`app/
+        <CodeBlock language="javascript">
+          {`app/
 ├── (marketing)/
 │   ├── about/page.tsx    →  /about   (not /marketing/about)
 │   └── contact/page.tsx  →  /contact
 └── (dashboard)/
-    ├── layout.tsx        ←  separate layout for dashboard only
+    ├── layout.tsx        //   separate layout for dashboard only
     ├── overview/page.tsx →  /overview
-    └── settings/page.tsx →  /settings`}</pre>
+    └── settings/page.tsx →  /settings`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Route groups are most useful when you want different layouts for different sections of your
           site without that section name showing in the URL.
@@ -110,7 +135,7 @@ export default async function BlogPost({ params }: Props) {
       </section>
 
       {/* ── 5. Nested layouts ──────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="nested-layouts" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">Nested layouts</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Every folder can have its own{" "}
@@ -119,13 +144,15 @@ export default async function BlogPost({ params }: Props) {
           <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">{"{children}"}</code>{" "}
           slot.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`app/
-├── layout.tsx          ← root layout: <html>, <body>, global nav
+        <CodeBlock language="html">
+          {`app/
+├── layout.tsx          <!--  root layout: <html>, <body>, global nav -->
 └── dashboard/
-    ├── layout.tsx      ← dashboard layout: sidebar + main area
+    ├── layout.tsx      <!--  dashboard layout: sidebar + main area -->
     ├── page.tsx        →  /dashboard
     └── settings/
-        └── page.tsx    →  /dashboard/settings`}</pre>
+        └── page.tsx    →  /dashboard/settings`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           When a user visits <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">/dashboard/settings</code>,
           the render tree is: root layout → dashboard layout → settings page. Both layouts stay
@@ -134,7 +161,7 @@ export default async function BlogPost({ params }: Props) {
       </section>
 
       {/* ── 6. Link component ──────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="the-link-component" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">The Link component</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Use{" "}
@@ -150,7 +177,8 @@ export default async function BlogPost({ params }: Props) {
           <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">
             app/layout.tsx
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`import Link from 'next/link';
+          <CodeBlock language="json">
+          {`import Link from 'next/link';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -165,7 +193,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
     </html>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
           <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">{"<Link>"}</code>{" "}
@@ -178,7 +207,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </section>
 
       {/* ── 7. useRouter and usePathname ───────────────────── */}
-      <section className="space-y-5">
+      <section id="userouter-and-usepathname" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">useRouter and usePathname</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           For programmatic navigation — redirecting after a form submit, for example — use the hooks
@@ -191,7 +220,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">
             Client Component — programmatic navigation
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`'use client';
+          <CodeBlock language="json">
+          {`'use client';
 import { useRouter, usePathname } from 'next/navigation';
 
 export default function NavBar() {
@@ -209,7 +239,8 @@ export default function NavBar() {
       <button onClick={handleLogin}>Log in</button>
     </nav>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">
@@ -239,20 +270,22 @@ export default function NavBar() {
       </section>
 
       {/* ── 8. Parallel routes (brief) ─────────────────────── */}
-      <section className="space-y-5">
+      <section id="parallel-routes" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">Parallel routes</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           A folder prefixed with <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">@</code>{" "}
           is a <strong className="text-foreground">slot</strong>. A layout can render multiple slots
           simultaneously — useful for modals that overlay a page without unmounting it:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`app/
-├── layout.tsx            ← receives both { children, modal }
-├── page.tsx              ← main feed
+        <CodeBlock language="javascript">
+          {`app/
+├── layout.tsx            //  receives both { children, modal }
+├── page.tsx              //  main feed
 └── @modal/
     └── photo/
         └── [id]/
-            └── page.tsx  →  overlaid on top of the feed`}</pre>
+            └── page.tsx  →  overlaid on top of the feed`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           This is an advanced pattern. You'll use it later in the project module — for now, just
           know the{" "}
@@ -262,7 +295,7 @@ export default function NavBar() {
       </section>
 
       {/* ── 9. Middleware ──────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="middleware" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">Middleware</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           A <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">middleware.ts</code>{" "}
@@ -276,8 +309,10 @@ export default function NavBar() {
           <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">
             middleware.ts — protect /dashboard routes
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`import { NextResponse } from 'next/server';
+          <CodeBlock language="javascript">
+          {`import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('session')?.value;
@@ -292,7 +327,8 @@ export function middleware(request: NextRequest) {
 // Run middleware only on these paths
 export const config = {
   matcher: ['/dashboard/:path*', '/settings/:path*'],
-};`}</pre>
+};`}
+        </CodeBlock>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">matcher</code>{" "}
@@ -302,7 +338,7 @@ export const config = {
       </section>
 
       {/* ── Knowledge Check ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="knowledge-check" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Knowledge Check</h2>
         <p className="text-sm text-muted-foreground">
           You are building a product detail page at the URL{" "}

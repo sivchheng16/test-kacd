@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module04Hooks() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -28,8 +29,19 @@ export default function Module04Hooks() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-is-a-side-effect" className="text-primary hover:underline">→ What is a side effect?</a></li>
+          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
+          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Concept */}
-      <section className="space-y-6">
+      <section id="what-is-a-side-effect" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">What is a side effect?</h2>
         <p className="text-muted-foreground leading-relaxed">
           A <em>side effect</em> is anything a component does besides returning JSX. Examples:
@@ -39,8 +51,8 @@ export default function Module04Hooks() {
         </p>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">useEffect — three patterns</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`// 1. Run after every render
+        <CodeBlock language="json">
+          {`// 1. Run after every render
 React.useEffect(() => {
   console.log("I run after every render");
 });
@@ -54,7 +66,7 @@ React.useEffect(() => {
 React.useEffect(() => {
   console.log("userId changed:", userId);
 }, [userId]);`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Cleanup</h2>
         <p className="text-muted-foreground leading-relaxed">
@@ -62,15 +74,15 @@ React.useEffect(() => {
           return a cleanup function. React calls it before the component unmounts or before the
           effect runs again.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`React.useEffect(() => {
+        <CodeBlock language="javascript">
+          {`React.useEffect(() => {
   const id = setInterval(() => {
     setSeconds(s => s + 1);
   }, 1000);
 
   return () => clearInterval(id); // cleanup
 }, []);`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">useRef — a mutable box</h2>
         <p className="text-muted-foreground leading-relaxed">
@@ -79,14 +91,14 @@ React.useEffect(() => {
           doesn't trigger a re-render when you change it. The most common use: getting a direct
           reference to a DOM element.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const inputRef = React.useRef(null);
+        <CodeBlock language="javascript">
+          {`const inputRef = React.useRef(null);
 
 <input ref={inputRef} type="text" />
 <button onClick={() => inputRef.current.focus()}>
   Focus the input
 </button>`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Rules of Hooks</h2>
         <ul className="space-y-2 text-sm text-muted-foreground">
@@ -104,7 +116,7 @@ React.useEffect(() => {
       </section>
 
       {/* Example */}
-      <section className="space-y-4">
+      <section id="live-example" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Live example — fetch on mount</h2>
         <p className="text-sm text-muted-foreground">
           This component fetches a random joke from a public API as soon as it mounts.
@@ -140,7 +152,7 @@ function App() {
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="try-it-yourself" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           The starter below has a timer that counts seconds. Add a <strong>Stop</strong> button
@@ -177,7 +189,7 @@ function App() {
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Use <code className="font-mono bg-stone-100 px-1 rounded">useEffect</code> to fetch from{" "}

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const CHALLENGE_STARTER = `// Write a sum function that accepts an array of numbers
 // and returns their total as a number.
@@ -72,21 +73,36 @@ export default function Module03FunctionsClasses() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#typed-parameters-and-return-types" className="text-primary hover:underline">→ Typed parameters and return types</a></li>
+          <li><a href="#optional-and-default-parameters" className="text-primary hover:underline">→ Optional and default parameters</a></li>
+          <li><a href="#void" className="text-primary hover:underline">→ void</a></li>
+          <li><a href="#function-types" className="text-primary hover:underline">→ Function types</a></li>
+          <li><a href="#typed-classes" className="text-primary hover:underline">→ Typed classes</a></li>
+          <li><a href="#access-modifiers" className="text-primary hover:underline">→ Access modifiers</a></li>
+          <li><a href="#constructor-parameter-shorthand" className="text-primary hover:underline">→ Constructor parameter shorthand</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Typed parameters & return types ───────────────── */}
-      <section className="space-y-5">
+      <section id="typed-parameters-and-return-types" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Typed parameters and return types</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Annotate each parameter and the return value. TypeScript verifies that
           every call site matches:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`function add(a: number, b: number): number {
+        <CodeBlock language="json">
+          {`function add(a: number, b: number): number {
   return a + b;
 }
 
 add(2, 3);       // ✓  returns 5
 add("2", 3);     // ✗  Error: Argument of type 'string' is not assignable to parameter of type 'number'`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           The return type annotation after the <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">)</code> is
           optional — TypeScript can usually infer it — but being explicit makes your
@@ -95,14 +111,14 @@ add("2", 3);     // ✗  Error: Argument of type 'string' is not assignable to p
       </section>
 
       {/* ── 3. Optional & default params ─────────────────────── */}
-      <section className="space-y-5">
+      <section id="optional-and-default-parameters" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Optional and default parameters</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Add <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">?</code> to make a parameter
           optional. Provide a default value with <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">= value</code>:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// Optional: title may be omitted
+        <CodeBlock language="json">
+          {`// Optional: title may be omitted
 function greet(name: string, title?: string): string {
   return title ? \`Hello, \${title} \${name}!\` : \`Hello, \${name}!\`;
 }
@@ -117,24 +133,24 @@ function power(base: number, exp: number = 2): number {
 
 power(4);      // 16  (4²)
 power(2, 10);  // 1024`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── 4. void return type ──────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="void" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">void — functions that return nothing</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           When a function exists only for its side effect and returns nothing,
           annotate the return type as <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">void</code>:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`function log(message: string): void {
+        <CodeBlock language="json">
+          {`function log(message: string): void {
   console.log(\`[LOG] \${message}\`);
   // no return statement
 }
 
 log("Server started");   // prints: [LOG] Server started`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           If you accidentally add a <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">return someValue</code> to
           a <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">void</code> function,
@@ -143,15 +159,15 @@ log("Server started");   // prints: [LOG] Server started`}
       </section>
 
       {/* ── 5. Function types ────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="function-types" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Function types</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Functions are values — you can assign them to variables and pass them
           around. Use a <strong className="text-foreground">function type</strong> to
           describe what a callback must look like:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// Describe the shape of a callback
+        <CodeBlock language="javascript">
+          {`// Describe the shape of a callback
 type Handler = (event: Event) => void;
 type Transformer = (input: string) => string;
 type Predicate<T> = (value: T) => boolean;
@@ -162,11 +178,11 @@ function runHandler(handler: Handler, event: Event): void {
 
 // Arrow function satisfying the Transformer type
 const toUpperCase: Transformer = (s) => s.toUpperCase();`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── 6. Typed classes ─────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="typed-classes" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Typed classes</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           TypeScript classes can be fully typed — properties, method parameters,
@@ -174,8 +190,8 @@ const toUpperCase: Transformer = (s) => s.toUpperCase();`}
           <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">Stack</code> that
           works with any element type:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`class Stack<T> {
+        <CodeBlock language="json">
+          {`class Stack<T> {
   private items: T[] = [];
 
   push(item: T): void {
@@ -203,7 +219,7 @@ numbers.pop();   // 2
 const words = new Stack<string>();
 words.push("hello");
 words.push(42);  // ✗ Error: '42' is not assignable to type 'string'`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           The <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;T&gt;</code> is a
           <strong className="text-foreground"> type parameter</strong> — a placeholder
@@ -213,7 +229,7 @@ words.push(42);  // ✗ Error: '42' is not assignable to type 'string'`}
       </section>
 
       {/* ── 7. Access modifiers ──────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="access-modifiers" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Access modifiers</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           TypeScript adds access control on class members:
@@ -246,8 +262,8 @@ words.push(42);  // ✗ Error: '42' is not assignable to type 'string'`}
             </tbody>
           </table>
         </div>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`class BankAccount {
+        <CodeBlock language="json">
+          {`class BankAccount {
   private balance: number = 0;
   readonly id: string;
 
@@ -268,18 +284,18 @@ const account = new BankAccount("acc-001");
 account.deposit(500);
 console.log(account.getBalance());  // 500
 console.log(account.balance);       // ✗ Error: 'balance' is private`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── 8. Constructor shorthand ─────────────────────────── */}
-      <section className="space-y-5">
+      <section id="constructor-parameter-shorthand" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Constructor parameter shorthand</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Declaring a parameter with an access modifier in the constructor
           automatically creates and assigns the property — no boilerplate needed:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// Without shorthand (verbose)
+        <CodeBlock language="json">
+          {`// Without shorthand (verbose)
 class PersonA {
   private name: string;
   public age: number;
@@ -298,7 +314,7 @@ class PersonB {
 const p = new PersonB("Chenda", 22);
 console.log(p.age);   // 22
 console.log(p.name);  // ✗ Error: 'name' is private`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           The shorthand is idiomatic TypeScript. You will see it everywhere in
           React component classes and Angular services.
@@ -306,7 +322,7 @@ console.log(p.name);  // ✗ Error: 'name' is private`}
       </section>
 
       {/* ── 9. Challenge ─────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

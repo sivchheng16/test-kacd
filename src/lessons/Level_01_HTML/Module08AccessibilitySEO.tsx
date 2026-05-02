@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 
@@ -121,8 +122,23 @@ export default function Module08AccessibilitySEO() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#semantic-html-is-the-foundation" className="text-primary hover:underline">→ Semantic HTML is the foundation</a></li>
+          <li><a href="#alt-text-and-form-labels" className="text-primary hover:underline">→ Alt text and form labels</a></li>
+          <li><a href="#aria" className="text-primary hover:underline">→ ARIA</a></li>
+          <li><a href="#heading-hierarchy" className="text-primary hover:underline">→ Heading hierarchy</a></li>
+          <li><a href="#seo-essentials" className="text-primary hover:underline">→ SEO essentials</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Semantic HTML ───────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="semantic-html-is-the-foundation" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Semantic HTML is the foundation</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Screen readers — the software blind users rely on — announce landmarks like "navigation region" or
@@ -158,7 +174,7 @@ export default function Module08AccessibilitySEO() {
       </section>
 
       {/* ── 3. Alt text + labels ───────────────────────────── */}
-      <section className="space-y-6">
+      <section id="alt-text-and-form-labels" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Alt text and form labels</h2>
         <div className="space-y-4 text-base text-muted-foreground leading-relaxed">
           <p>
@@ -176,12 +192,8 @@ export default function Module08AccessibilitySEO() {
             disappears when the user types — it is not a substitute for a label.
           </p>
         </div>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            alt text + label examples
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`<!-- Content image — describe what it shows -->
+        <CodeBlock language="html" title="alt-text.html">
+          {`<!-- Content image — describe what it shows -->
 <img src="chart.png" alt="Bar chart showing monthly sales" />
 
 <!-- Decorative image — screen reader skips this -->
@@ -190,23 +202,18 @@ export default function Module08AccessibilitySEO() {
 <!-- Correctly labelled input -->
 <label for="email">Email address</label>
 <input type="email" id="email" name="email" />`}
-          </pre>
-        </div>
+        </CodeBlock>
       </section>
 
       {/* ── 4. ARIA ────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="aria" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">ARIA — when HTML semantics aren't enough</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           ARIA attributes bolt extra meaning onto elements that HTML alone cannot express. The golden rule:
           reach for semantic HTML first. Use ARIA only when no native element fits.
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            common ARIA attributes
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`<!-- aria-label names an element that has no visible label -->
+        <CodeBlock language="html" title="aria.html">
+          {`<!-- aria-label names an element that has no visible label -->
 <button aria-label="Close dialog">X</button>
 
 <!-- aria-describedby links to helper text -->
@@ -215,12 +222,11 @@ export default function Module08AccessibilitySEO() {
 
 <!-- role overrides the implicit role of a generic element -->
 <div role="alert">Your session is about to expire.</div>`}
-          </pre>
-        </div>
+        </CodeBlock>
       </section>
 
       {/* ── 5. Heading hierarchy ───────────────────────────── */}
-      <section className="space-y-5">
+      <section id="heading-hierarchy" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Heading hierarchy</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           One <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;h1&gt;</code> per page. Never
@@ -231,21 +237,25 @@ export default function Module08AccessibilitySEO() {
         <div className="grid grid-cols-2 gap-4">
           <div className="rounded-xl border border-red-200 bg-red-50 px-5 py-4">
             <p className="text-xs font-semibold text-red-600 mb-2 uppercase tracking-wide">Wrong</p>
-            <pre className="text-sm font-mono text-red-800 leading-relaxed">{`<h1>Page title</h1>
+            <CodeBlock language="javascript">
+          {`<h1>Page title</h1>
 <h3>Skipped h2!</h3>
-<h5>Deep, no context</h5>`}</pre>
+<h5>Deep, no context</h5>`}
+        </CodeBlock>
           </div>
           <div className="rounded-xl border border-green-200 bg-green-50 px-5 py-4">
             <p className="text-xs font-semibold text-green-600 mb-2 uppercase tracking-wide">Correct</p>
-            <pre className="text-sm font-mono text-green-800 leading-relaxed">{`<h1>Page title</h1>
+            <CodeBlock language="javascript">
+          {`<h1>Page title</h1>
 <h2>Section heading</h2>
-<h3>Subsection</h3>`}</pre>
+<h3>Subsection</h3>`}
+        </CodeBlock>
           </div>
         </div>
       </section>
 
       {/* ── 6. SEO essentials ──────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="seo-essentials" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">SEO essentials</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Search engines read the same HTML as screen readers. Accessible markup and good SEO are the same work.
@@ -271,7 +281,7 @@ export default function Module08AccessibilitySEO() {
       </section>
 
       {/* ── 7. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it — semantic structure</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -286,7 +296,7 @@ export default function Module08AccessibilitySEO() {
         />
       </section>
 
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it — SEO metadata</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -302,8 +312,24 @@ export default function Module08AccessibilitySEO() {
         />
       </section>
 
+      {/* ── 7.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Here is what you need to remember about Accessibility and SEO:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Semantic HTML</strong> (<code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>) is the best foundation for accessibility. Avoid overusing <code>&lt;div&gt;</code>.</li>
+            <li>Maintain a strict <strong>Heading Hierarchy</strong> (<code>h1</code> → <code>h2</code> → <code>h3</code>).</li>
+            <li>Always provide <code>alt</code> text for images, leaving it empty (<code>alt=""</code>) only for purely decorative elements.</li>
+            <li>Always link <code>&lt;label&gt;</code> to <code>&lt;input&gt;</code> in forms.</li>
+            <li>Use <strong>ARIA</strong> attributes only when HTML alone cannot express the meaning (e.g., <code>aria-label</code>).</li>
+            <li>Write good metadata (<code>&lt;title&gt;</code>, <code>meta description</code>) in your <code>&lt;head&gt;</code> to rank well on search engines.</li>
+          </ul>
+        </div>
+      </section>
+
       {/* ── 8. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const CORRECT = "layout.tsx wraps all child pages and persists across navigations; page.tsx renders the route content";
 
@@ -24,8 +25,22 @@ export default function Module01AppRouter() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#why-nextjs" className="text-primary hover:underline">→ Why Next.js?</a></li>
+          <li><a href="#the-app-directory-mental-model" className="text-primary hover:underline">→ The app/ directory mental model</a></li>
+          <li><a href="#creating-a-nextjs-project" className="text-primary hover:underline">→ Creating a Next.js project</a></li>
+          <li><a href="#project-structure" className="text-primary hover:underline">→ Project structure</a></li>
+          <li><a href="#pagetsx-vs-layouttsx" className="text-primary hover:underline">→ page.tsx vs layout.tsx</a></li>
+          <li><a href="#the-shift-from-pages-router" className="text-primary hover:underline">→ The shift from Pages Router</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Why Next.js ─────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="why-nextjs" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Why Next.js?</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           A plain React app renders entirely in the browser. That means the user downloads your
@@ -61,7 +76,7 @@ export default function Module01AppRouter() {
       </section>
 
       {/* ── 3. The app/ mental model ───────────────────────── */}
-      <section className="space-y-6">
+      <section id="the-app-directory-mental-model" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">The app/ directory mental model</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The entire routing system lives inside <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">app/</code>.
@@ -72,7 +87,8 @@ export default function Module01AppRouter() {
           <div className="px-5 py-2 bg-stone-800 text-stone-400 text-xs border-b border-stone-700">
             app/ folder → URL mapping
           </div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`app/
+          <CodeBlock language="javascript">
+          {`app/
 ├── page.tsx              →  /
 ├── about/
 │   └── page.tsx          →  /about
@@ -80,7 +96,8 @@ export default function Module01AppRouter() {
 │   ├── page.tsx          →  /blog
 │   └── [slug]/
 │       └── page.tsx      →  /blog/any-post-slug
-└── layout.tsx            →  wraps everything`}</pre>
+└── layout.tsx            →  wraps everything`}
+        </CodeBlock>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Next.js recognises several <strong className="text-foreground">special filenames</strong>
@@ -114,19 +131,21 @@ export default function Module01AppRouter() {
       </section>
 
       {/* ── 4. Create Next.js project ──────────────────────── */}
-      <section className="space-y-5">
+      <section id="creating-a-nextjs-project" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">Creating a Next.js project</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           One command scaffolds the whole project. The flags below lock in the choices this track
           uses — App Router, TypeScript, and Tailwind CSS:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`npx create-next-app@latest my-app \\
+        <CodeBlock language="bash">
+          {`npx create-next-app@latest my-app \\
   --typescript \\
   --tailwind \\
   --app
 
 cd my-app
-npm run dev      # http://localhost:3000`}</pre>
+npm run dev      # http://localhost:3000`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The CLI will ask a few questions (ESLint, src/ directory, import alias). For this track,
           accept the defaults. The{" "}
@@ -136,18 +155,20 @@ npm run dev      # http://localhost:3000`}</pre>
       </section>
 
       {/* ── 5. Project structure ───────────────────────────── */}
-      <section className="space-y-5">
+      <section id="project-structure" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">Project structure</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`my-app/
+        <CodeBlock language="javascript">
+          {`my-app/
 ├── app/
-│   ├── layout.tsx      ← root layout (html, body tags live here)
-│   ├── page.tsx        ← home route (/)
+│   ├── layout.tsx      //  root layout (html, body tags live here)
+│   ├── page.tsx        //  home route (/)
 │   ├── globals.css
 │   └── about/
-│       └── page.tsx    ← /about
-├── public/             ← static files (images, fonts, robots.txt)
-├── next.config.js      ← Next.js configuration
-└── package.json`}</pre>
+│       └── page.tsx    //  /about
+├── public/             //  static files (images, fonts, robots.txt)
+├── next.config.js      //  Next.js configuration
+└── package.json`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Notice there is no <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">src/routes.ts</code>,
           no <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">react-router</code>,
@@ -156,7 +177,7 @@ npm run dev      # http://localhost:3000`}</pre>
       </section>
 
       {/* ── 6. page.tsx vs layout.tsx ──────────────────────── */}
-      <section className="space-y-5">
+      <section id="pagetsx-vs-layouttsx" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">page.tsx vs layout.tsx</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           These two files are the most important to understand. They serve different roles and
@@ -167,7 +188,8 @@ npm run dev      # http://localhost:3000`}</pre>
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">
               app/layout.tsx — root layout
             </div>
-            <pre className="px-4 py-4 text-xs font-mono leading-relaxed text-foreground overflow-x-auto bg-white">{`export default function RootLayout({
+            <CodeBlock language="json">
+          {`export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -181,13 +203,15 @@ npm run dev      # http://localhost:3000`}</pre>
       </body>
     </html>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
           </div>
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">
               app/page.tsx — home route
             </div>
-            <pre className="px-4 py-4 text-xs font-mono leading-relaxed text-foreground overflow-x-auto bg-white">{`export default function HomePage() {
+            <CodeBlock language="javascript">
+          {`export default function HomePage() {
   return (
     <main>
       <h1>Welcome</h1>
@@ -197,7 +221,8 @@ npm run dev      # http://localhost:3000`}</pre>
 }
 
 // This renders INSIDE layout.tsx
-// where {children} appears.`}</pre>
+// where {children} appears.`}
+        </CodeBlock>
           </div>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
@@ -208,7 +233,7 @@ npm run dev      # http://localhost:3000`}</pre>
       </section>
 
       {/* ── 7. The shift from Pages Router ─────────────────── */}
-      <section className="space-y-5">
+      <section id="the-shift-from-pages-router" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">The shift from Pages Router</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           If you have read older Next.js tutorials, you may have seen{" "}
@@ -243,7 +268,7 @@ npm run dev      # http://localhost:3000`}</pre>
       </section>
 
       {/* ── Knowledge Check ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="knowledge-check" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Knowledge Check</h2>
         <p className="text-sm text-muted-foreground">
           What is the difference between{" "}

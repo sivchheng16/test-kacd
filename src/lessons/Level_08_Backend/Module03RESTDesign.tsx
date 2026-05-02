@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module03RESTDesign() {
   return (
@@ -13,8 +14,22 @@ export default function Module03RESTDesign() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#resources-not-actions" className="text-primary hover:underline">→ Resources, not actions</a></li>
+          <li><a href="#http-verbs-as-actions" className="text-primary hover:underline">→ HTTP verbs as actions</a></li>
+          <li><a href="#status-codes" className="text-primary hover:underline">→ Status codes</a></li>
+          <li><a href="#consistent-response-shapes" className="text-primary hover:underline">→ Consistent response shapes</a></li>
+          <li><a href="#pagination" className="text-primary hover:underline">→ Pagination</a></li>
+          <li><a href="#versioning" className="text-primary hover:underline">→ Versioning</a></li>
+          <li><a href="#authentication-header" className="text-primary hover:underline">→ Authentication header</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Resources, not actions ─────────────────────────── */}
-      <section className="space-y-6">
+      <section id="resources-not-actions" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Resources, not actions</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The most common REST mistake is encoding actions into the URL.
@@ -52,7 +67,7 @@ export default function Module03RESTDesign() {
       </section>
 
       {/* ── 3. HTTP verbs as actions ──────────────────────────── */}
-      <section className="space-y-6">
+      <section id="http-verbs-as-actions" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">HTTP verbs as actions</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Each verb carries a precise semantic meaning. Using the right one makes your API predictable
@@ -94,7 +109,7 @@ export default function Module03RESTDesign() {
       </section>
 
       {/* ── 4. Status codes ───────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="status-codes" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Status codes</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Returning the right status code is not just politeness — it is part of the contract.
@@ -138,12 +153,13 @@ export default function Module03RESTDesign() {
       </section>
 
       {/* ── 5. Consistent response shapes ────────────────────── */}
-      <section className="space-y-6">
+      <section id="consistent-response-shapes" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Consistent response shapes</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Pick a shape and stick to it everywhere. A simple convention that works well:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// Success
+        <CodeBlock language="json">
+          {`// Success
 { "data": { "id": 1, "title": "Hello" } }
 
 // Success with a list
@@ -153,7 +169,8 @@ export default function Module03RESTDesign() {
 { "error": "Email is already in use" }
 
 // Validation error
-{ "error": "Validation failed", "fields": { "email": "Invalid format" } }`}</pre>
+{ "error": "Validation failed", "fields": { "email": "Invalid format" } }`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           The <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">data</code> wrapper leaves room to
           add metadata (pagination, rate limit info) later without breaking existing clients.
@@ -161,7 +178,7 @@ export default function Module03RESTDesign() {
       </section>
 
       {/* ── 6. Pagination ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="pagination" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Pagination</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Never return an unbounded list. Two common strategies:
@@ -182,25 +199,29 @@ export default function Module03RESTDesign() {
             regardless of concurrent writes.
           </li>
         </ul>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// Offset
+        <CodeBlock language="json">
+          {`// Offset
 GET /posts?page=2&limit=20
 { "data": [...], "pagination": { "total": 150, "page": 2, "limit": 20 } }
 
 // Cursor
 GET /posts?cursor=cjld2cjxh0000qzrmn831i7rn&limit=20
-{ "data": [...], "nextCursor": "cjld2cyuq0000t3rmniod1foy" }`}</pre>
+{ "data": [...], "nextCursor": "cjld2cyuq0000t3rmniod1foy" }`}
+        </CodeBlock>
       </section>
 
       {/* ── 7. Versioning ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="versioning" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Versioning</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           APIs change. Versioning lets you evolve the API without breaking existing clients.
           The simplest approach is a version prefix in the URL:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`/api/v1/users
+        <CodeBlock language="javascript">
+          {`/api/v1/users
 /api/v1/posts
-/api/v2/users   ← breaking changes go here; v1 stays alive`}</pre>
+/api/v2/users   //  breaking changes go here; v1 stays alive`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Start with <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">/api/v1</code> from day one —
           retrofitting versioning is painful. Keep old versions running until clients have migrated.
@@ -208,20 +229,24 @@ GET /posts?cursor=cjld2cjxh0000qzrmn831i7rn&limit=20
       </section>
 
       {/* ── 8. Authentication header ──────────────────────────── */}
-      <section className="space-y-6">
+      <section id="authentication-header" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Authentication header</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The standard way to send a token is the
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded mx-1">Authorization</code> header
           with the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">Bearer</code> scheme.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`GET /api/v1/posts HTTP/1.1
+        <CodeBlock language="javascript">
+          {`GET /api/v1/posts HTTP/1.1
 Host: api.example.com
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQyfQ.abc`}</pre>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQyfQ.abc`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           On the server, extract it with:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`const token = req.headers.authorization?.replace('Bearer ', '');`}</pre>
+        <CodeBlock language="javascript">
+          {`const token = req.headers.authorization?.replace('Bearer ', '');`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Never put tokens in the URL (<code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">?token=...</code>)
           — URLs end up in server logs, browser history, and referrer headers.

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const OPTIONS = [
   "git branch -b <branch-name>",
@@ -34,8 +35,23 @@ export default function Module04Collaboration() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-is-a-branch" className="text-primary hover:underline">→ What is a Branch?</a></li>
+          <li><a href="#creating-amp-switching-branches" className="text-primary hover:underline">→ Creating &amp; Switching Branches</a></li>
+          <li><a href="#merging-branches" className="text-primary hover:underline">→ Merging Branches</a></li>
+          <li><a href="#pull-requests" className="text-primary hover:underline">→ Pull Requests</a></li>
+          <li><a href="#merge-conflicts" className="text-primary hover:underline">→ Merge Conflicts</a></li>
+          <li><a href="#team-workflow" className="text-primary hover:underline">→ Team Workflow</a></li>
+          <li><a href="#quick-reference" className="text-primary hover:underline">→ Quick Reference</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* What is a branch */}
-      <section className="space-y-4">
+      <section id="what-is-a-branch" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">What is a Branch?</h2>
         <p className="text-base text-muted-foreground">
           A branch is an independent line of development. Think of it as a parallel universe
@@ -48,21 +64,24 @@ export default function Module04Collaboration() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Branch timeline
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`main:    A──B──C──────────────M   ← M = merge commit
+          <CodeBlock language="javascript">
+          {`main:    A──B──C──────────────M   //  M = merge commit
                   \\          /
-feature/navbar:   D──E──F──G      ← safe to experiment here`}</pre>
+feature/navbar:   D──E──F──G      //  safe to experiment here`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Creating branches */}
-      <section className="space-y-4">
+      <section id="creating-amp-switching-branches" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Creating &amp; Switching Branches</h2>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# List all branches (* = current)
+          <CodeBlock language="javascript">
+          {`# List all branches (* = current)
 git branch
 
 # Create a new branch (stays on current branch)
@@ -81,12 +100,13 @@ git switch -c feature/navbar
 git push -u origin feature/navbar
 
 # Delete a branch after merging
-git branch -d feature/navbar`}</pre>
+git branch -d feature/navbar`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Merging */}
-      <section className="space-y-4">
+      <section id="merging-branches" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Merging Branches</h2>
         <p className="text-base text-muted-foreground">
           Merging combines the commit history of two branches. Switch to the target branch
@@ -98,7 +118,8 @@ git branch -d feature/navbar`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Switch to the branch you want to merge INTO
+          <CodeBlock language="javascript">
+          {`# Switch to the branch you want to merge INTO
 git checkout main
 
 # Merge the feature branch
@@ -108,12 +129,13 @@ git merge feature/navbar
 git merge --ff-only feature/navbar
 
 # Always create a merge commit even if fast-forward is possible
-git merge --no-ff feature/navbar -m "Merge feature/navbar"`}</pre>
+git merge --no-ff feature/navbar -m "Merge feature/navbar"`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Pull requests */}
-      <section className="space-y-4">
+      <section id="pull-requests" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Pull Requests</h2>
         <p className="text-base text-muted-foreground">
           A Pull Request (PR) is GitHub's way to propose merging one branch into another.
@@ -134,7 +156,7 @@ git merge --no-ff feature/navbar -m "Merge feature/navbar"`}</pre>
       </section>
 
       {/* Merge conflicts */}
-      <section className="space-y-4">
+      <section id="merge-conflicts" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Merge Conflicts</h2>
         <p className="text-base text-muted-foreground">
           A conflict happens when two branches changed the same lines differently. Git marks
@@ -145,18 +167,21 @@ git merge --no-ff feature/navbar -m "Merge feature/navbar"`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Conflict markers in a file
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`<<<<<<< HEAD                          ← your current branch
+          <CodeBlock language="javascript">
+          {`<<<<<<< HEAD                          //  your current branch
 <h1>Welcome to KOOMPI</h1>
-=======                               ← separator
+=======                               //  separator
 <h1>Hello from KOOMPI Academy</h1>
->>>>>>> feature/new-hero              ← incoming branch`}</pre>
+>>>>>>> feature/new-hero              //  incoming branch`}
+        </CodeBlock>
         </div>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Resolving a conflict
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# 1. Open the conflicted file and delete the markers.
+          <CodeBlock language="json">
+          {`# 1. Open the conflicted file and delete the markers.
 #    Keep the version you want (or write a new version combining both).
 
 # 2. Stage the resolved file
@@ -166,19 +191,21 @@ git add index.html
 git commit -m "Merge feature/new-hero — use combined heading"
 
 # Tip: use git status to see all conflicted files
-git status`}</pre>
+git status`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Team workflow */}
-      <section className="space-y-4">
+      <section id="team-workflow" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Team Workflow</h2>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Feature branch workflow — complete cycle
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Get the latest main
+          <CodeBlock language="javascript">
+          {`# Get the latest main
 git checkout main
 git pull
 
@@ -198,12 +225,13 @@ git push -u origin feature/contact-form
 # After PR is merged, clean up
 git checkout main
 git pull                              # get the merge
-git branch -d feature/contact-form   # delete local branch`}</pre>
+git branch -d feature/contact-form   # delete local branch`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Quick reference */}
-      <section className="space-y-4">
+      <section id="quick-reference" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Quick Reference</h2>
         <div className="rounded-2xl border border-border overflow-hidden">
           <table className="w-full text-sm">
@@ -233,7 +261,7 @@ git branch -d feature/contact-form   # delete local branch`}</pre>
       </section>
 
       {/* Knowledge check */}
-      <section className="space-y-4">
+      <section id="knowledge-check" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Knowledge Check</h2>
         <p className="text-base text-muted-foreground">
           Which command creates a new branch <em>and</em> switches to it in one step?

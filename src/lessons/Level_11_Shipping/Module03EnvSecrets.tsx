@@ -1,5 +1,6 @@
 import React from "react";
-
+  import { CodeBlock } from "../../components/ui/CodeBlock";
+  
 export default function Module03EnvSecrets() {
   return (
     <article className="max-w-3xl mx-auto space-y-14 font-sans">
@@ -13,8 +14,22 @@ export default function Module03EnvSecrets() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-environment-variables-are" className="text-primary hover:underline">→ What environment variables are</a></li>
+          <li><a href="#env-and-envexample" className="text-primary hover:underline">→ .env and .env.example</a></li>
+          <li><a href="#validation-at-startup-with-zod" className="text-primary hover:underline">→ Validation at startup with Zod</a></li>
+          <li><a href="#where-to-put-secrets-in-production" className="text-primary hover:underline">→ Where to put secrets in production</a></li>
+          <li><a href="#next_public_" className="text-primary hover:underline">→ NEXT_PUBLIC_</a></li>
+          <li><a href="#detecting-leaks-before-they-hit-github" className="text-primary hover:underline">→ Detecting leaks before they hit GitHub</a></li>
+          <li><a href="#rotating-secrets" className="text-primary hover:underline">→ Rotating secrets</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. What environment variables are ─────────────── */}
-      <section className="space-y-6">
+      <section id="what-environment-variables-are" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What environment variables are</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Environment variables are runtime configuration — values that change between
@@ -25,49 +40,59 @@ export default function Module03EnvSecrets() {
           The rule is simple: if the value would be different in production than on your
           laptop, it's an environment variable. If it's secret, it's especially not in code.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// Bad — secret in code, will be committed
+        <CodeBlock language="javascript">
+          {`// Bad — secret in code, will be committed
 const db = new Client({ password: 'hunter2' });
 
 // Good — read from environment at runtime
-const db = new Client({ password: process.env.DB_PASSWORD });`}</pre>
+const db = new Client({ password: process.env.DB_PASSWORD });`}
+        </CodeBlock>
       </section>
 
       {/* ── 3. .env files ──────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="env-and-envexample" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">.env and .env.example</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">.env</code> file holds your local secrets.
           It is <strong className="text-foreground">never committed</strong> — add it to{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">.gitignore</code> immediately.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`# .env — local only, NEVER commit
+        <CodeBlock language="javascript">
+          {`# .env — local only, NEVER commit
 DATABASE_URL=postgres://localhost:5432/myapp_dev
 JWT_SECRET=dev-secret-change-in-production
-STRIPE_SECRET_KEY=sk_test_abc123`}</pre>
+STRIPE_SECRET_KEY=sk_test_abc123`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Commit a <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">.env.example</code> instead — same
           keys, placeholder values. New developers copy it and fill in their own values.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`# .env.example — committed to git
+        <CodeBlock language="javascript">
+          {`# .env.example — committed to git
 DATABASE_URL=postgres://localhost:5432/myapp_dev
 JWT_SECRET=replace-me-with-a-random-32-char-string
-STRIPE_SECRET_KEY=sk_test_your_key_here`}</pre>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`# .gitignore
+STRIPE_SECRET_KEY=sk_test_your_key_here`}
+        </CodeBlock>
+        <CodeBlock language="javascript">
+          {`# .gitignore
 .env
 .env.local
-.env.*.local`}</pre>
+.env.*.local`}
+        </CodeBlock>
       </section>
 
       {/* ── 4. Validation with Zod ─────────────────────────── */}
-      <section className="space-y-6">
+      <section id="validation-at-startup-with-zod" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Validation at startup with Zod</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A missing or malformed environment variable should crash the app at startup with
           a clear error — not silently fail at 2 AM when a request tries to use it.
           Zod makes validation a one-liner per variable.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// src/config.ts
+        <CodeBlock language="javascript">
+          {`// src/config.ts
 import { z } from 'zod';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const env = z.object({
   DATABASE_URL: z.string().url(),
@@ -77,7 +102,8 @@ const env = z.object({
                   .default('development'),
 }).parse(process.env);
 
-export default env;`}</pre>
+export default env;`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           If any variable is missing or invalid, <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">parse</code> throws
           immediately with a detailed error listing exactly which variables failed and why.
@@ -87,7 +113,7 @@ export default env;`}</pre>
       </section>
 
       {/* ── 5. Secrets in production ───────────────────────── */}
-      <section className="space-y-6">
+      <section id="where-to-put-secrets-in-production" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Where to put secrets in production</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Every deployment platform has a way to set environment variables without touching
@@ -110,7 +136,7 @@ export default env;`}</pre>
       </section>
 
       {/* ── 6. NEXT_PUBLIC_ ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="next_public_" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">NEXT_PUBLIC_ — only for truly public config</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           In Next.js, variables prefixed <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">NEXT_PUBLIC_</code> are
@@ -121,25 +147,29 @@ export default env;`}</pre>
           Only use this prefix for values that are genuinely public: your public Stripe
           key, your analytics site ID, your app's public URL. Never use it for secrets.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`# OK — public key, designed to be in the browser
+        <CodeBlock language="javascript">
+          {`# OK — public key, designed to be in the browser
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_abc123
 
 # Never — this goes to the browser if you add NEXT_PUBLIC_
-NEXT_PUBLIC_STRIPE_SECRET_KEY=sk_live_abc123  ← DO NOT DO THIS`}</pre>
+NEXT_PUBLIC_STRIPE_SECRET_KEY=sk_live_abc123  //  DO NOT DO THIS`}
+        </CodeBlock>
       </section>
 
       {/* ── 7. Detecting leaks ─────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="detecting-leaks-before-they-hit-github" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Detecting leaks before they hit GitHub</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Two tools can catch secrets before or after they reach git.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`# gitleaks — scans for secrets in your commit history
+        <CodeBlock language="javascript">
+          {`# gitleaks — scans for secrets in your commit history
 brew install gitleaks
 gitleaks detect --source .
 
 # install as a pre-commit hook so it blocks commits with secrets
-gitleaks protect --staged`}</pre>
+gitleaks protect --staged`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           <strong className="text-foreground">GitGuardian</strong> connects to your GitHub account and monitors every
           push in real time — free for open-source. It will email you within minutes of a
@@ -148,7 +178,7 @@ gitleaks protect --staged`}</pre>
       </section>
 
       {/* ── 8. Rotating secrets ────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="rotating-secrets" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Rotating secrets</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Rotate a secret when: it may have been exposed, when an employee with access

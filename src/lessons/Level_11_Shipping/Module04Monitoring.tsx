@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module04Monitoring() {
   return (
@@ -13,16 +14,33 @@ export default function Module04Monitoring() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#structured-logging" className="text-primary hover:underline">→ Structured logging</a></li>
+          <li><a href="#log-levels" className="text-primary hover:underline">→ Log levels</a></li>
+          <li><a href="#error-tracking-with-sentry" className="text-primary hover:underline">→ Error tracking with Sentry</a></li>
+          <li><a href="#uptime-monitoring" className="text-primary hover:underline">→ Uptime monitoring</a></li>
+          <li><a href="#health-check-endpoint" className="text-primary hover:underline">→ Health check endpoint</a></li>
+          <li><a href="#metrics-what-to-measure" className="text-primary hover:underline">→ Metrics: what to measure</a></li>
+          <li><a href="#alerting-when-to-wake-someone-up" className="text-primary hover:underline">→ Alerting: when to wake someone up</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Structured logging ──────────────────────────── */}
-      <section className="space-y-6">
+      <section id="structured-logging" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Structured logging</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">console.log('user logged in')</code> is not
           a log — it's a string you can't search, filter, or alert on. Structured logs are
           JSON objects that machines can parse.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`npm install pino pino-pretty`}</pre>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// src/logger.ts
+        <CodeBlock language="bash">
+          {`npm install pino pino-pretty`}
+        </CodeBlock>
+        <CodeBlock language="javascript">
+          {`// src/logger.ts
 import pino from 'pino';
 
 export const logger = pino({
@@ -34,7 +52,8 @@ export const logger = pino({
 
 // usage
 logger.info({ userId: 42, action: 'login' }, 'User logged in');
-logger.error({ err, requestId }, 'Failed to process payment');`}</pre>
+logger.error({ err, requestId }, 'Failed to process payment');`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Every log line should carry context: what happened, who triggered it, and any
           relevant IDs. A log without context is just noise.
@@ -42,7 +61,7 @@ logger.error({ err, requestId }, 'Failed to process payment');`}</pre>
       </section>
 
       {/* ── 3. Log levels ──────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="log-levels" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Log levels</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Log levels let you control verbosity without changing code. In production, set
@@ -65,30 +84,37 @@ logger.error({ err, requestId }, 'Failed to process payment');`}</pre>
       </section>
 
       {/* ── 4. Sentry ──────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="error-tracking-with-sentry" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Error tracking with Sentry</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Sentry catches unhandled exceptions and sends them to a dashboard with the full
           stack trace, the request context, and the user who experienced it. Free tier is
           enough for most small apps.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`npm install @sentry/node`}</pre>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// src/instrument.ts — import this FIRST in your entry point
+        <CodeBlock language="bash">
+          {`npm install @sentry/node`}
+        </CodeBlock>
+        <CodeBlock language="javascript">
+          {`// src/instrument.ts — import this FIRST in your entry point
 import * as Sentry from '@sentry/node';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   environment: process.env.NODE_ENV,
   tracesSampleRate: 0.1,  // capture 10% of transactions for performance
-});`}</pre>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// capture exceptions manually when you catch them
+});`}
+        </CodeBlock>
+        <CodeBlock language="javascript">
+          {`// capture exceptions manually when you catch them
 try {
   await processPayment(order);
 } catch (err) {
   Sentry.captureException(err);
   // still handle the error for the user
   return res.status(500).json({ error: 'Payment failed' });
-}`}</pre>
+}`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Upload source maps so Sentry can show original TypeScript line numbers instead
           of compiled JavaScript. The Sentry Vite and webpack plugins do this automatically
@@ -97,7 +123,7 @@ try {
       </section>
 
       {/* ── 5. Uptime monitoring ───────────────────────────── */}
-      <section className="space-y-6">
+      <section id="uptime-monitoring" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Uptime monitoring</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           An uptime monitor sends an HTTP request to your app every minute and alerts you
@@ -116,13 +142,14 @@ try {
       </section>
 
       {/* ── 6. Health check endpoint ───────────────────────── */}
-      <section className="space-y-6">
+      <section id="health-check-endpoint" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Health check endpoint</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A health check endpoint lets load balancers, uptime monitors, and orchestrators
           ask "is this service alive?" without knowing anything about your app's domain.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`app.get('/health', async (req, res) => {
+        <CodeBlock language="sql">
+          {`app.get('/health', async (req, res) => {
   try {
     await db.query('SELECT 1');  // verify the database is reachable
     res.json({
@@ -133,7 +160,8 @@ try {
   } catch (err) {
     res.status(503).json({ status: 'error', error: 'Database unreachable' });
   }
-});`}</pre>
+});`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Return <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">200</code> when healthy,{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">503</code> when not. Include the app version
@@ -142,7 +170,7 @@ try {
       </section>
 
       {/* ── 7. Metrics ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="metrics-what-to-measure" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Metrics: what to measure</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Three metrics tell you almost everything about your app's health in production:
@@ -164,7 +192,7 @@ try {
       </section>
 
       {/* ── 8. Alerting ────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="alerting-when-to-wake-someone-up" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Alerting: when to wake someone up</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Not every error needs a 3 AM page. Alert fatigue is real — if every minor issue

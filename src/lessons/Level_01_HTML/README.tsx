@@ -9,11 +9,9 @@ export default function Introduction() {
       <div>
         <div>
           <Typography variant="h1">Introduction: HTML Fundamentals</Typography>
-        </div>
-      </div>
-      <div>
-        <div>
-          <Typography variant="h2">Track 01: HTML Fundamentals</Typography>
+          <Typography variant="lead">
+            Building the structural foundation of every website on the internet.
+          </Typography>
         </div>
       </div>
       <div>
@@ -35,6 +33,8 @@ export default function Introduction() {
             <li>Links &amp; Navigation</li>
             <li>Images &amp; Media</li>
             <li>Tables &amp; Forms</li>
+            <li>Div, ID, Class &amp; Attributes</li>
+            <li>Accessibility &amp; SEO</li>
             <li>Project: Personal Bio Page</li>
           </ul>
         </div>
@@ -46,7 +46,7 @@ export default function Introduction() {
             Before starting this level, you should have:
           </Typography>
           <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
-            <li>Completed Track 00: Digital Foundations</li>
+            <li>Completed Track Digital Foundations</li>
             <li>Typing speed of 30+ WPM</li>
             <li>Comfort with Linux terminal</li>
             <li>Organized workspace set up</li>
@@ -145,6 +145,16 @@ cd html-fundamentals`}</CodeBlock>
               </TableRow>
               <TableRow>
                 <TableCell>08</TableCell>
+                <TableCell>Div, ID, Class &amp; Attributes</TableCell>
+                <TableCell>Structuring web pages with &lt;div&gt;, ID, class, attributes, and more</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>09</TableCell>
+                <TableCell>Acessibility &amp; SEO</TableCell>
+                <TableCell>Semantic HTML, ARIA roles, SEO best practices</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>09</TableCell>
                 <TableCell>Project</TableCell>
                 <TableCell>Personal bio page</TableCell>
               </TableRow>
@@ -159,7 +169,7 @@ cd html-fundamentals`}</CodeBlock>
             To complete Track 01:
           </Typography>
           <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
-            <li>All 7 modules studied</li>
+            <li>All 10 modules studied</li>
             <li>All exercises completed</li>
             <li>Personal Bio Page built and working</li>
             <li>Mentor verification received</li>

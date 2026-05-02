@@ -22,8 +22,24 @@ export default function Module04FileManagement() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#copying-files" className="text-primary hover:underline">→ Copying Files</a></li>
+          <li><a href="#moving-and-renaming" className="text-primary hover:underline">→ Moving and Renaming</a></li>
+          <li><a href="#deleting-folders" className="text-primary hover:underline">→ Deleting Folders</a></li>
+          <li><a href="#finding-files" className="text-primary hover:underline">→ Finding Files</a></li>
+          <li><a href="#searching-inside-files" className="text-primary hover:underline">→ Searching Inside Files</a></li>
+          <li><a href="#file-permissions" className="text-primary hover:underline">→ File Permissions</a></li>
+          <li><a href="#editing-files-in-the-terminal" className="text-primary hover:underline">→ Editing Files in the Terminal</a></li>
+          <li><a href="#a-practical-workflow" className="text-primary hover:underline">→ A Practical Workflow</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* cp */}
-      <section className="space-y-6">
+      <section id="copying-files" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Copying Files — <code className="text-base font-mono bg-stone-100 px-1.5 py-0.5 rounded">cp</code></h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           <code className="bg-stone-100 px-1 rounded text-xs font-mono">cp source destination</code> — the original file stays, and a copy is created at the destination.
@@ -61,7 +77,7 @@ export default function Module04FileManagement() {
       </section>
 
       {/* mv */}
-      <section className="space-y-6">
+      <section id="moving-and-renaming" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Moving and Renaming — <code className="text-base font-mono bg-stone-100 px-1.5 py-0.5 rounded">mv</code></h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           <code className="bg-stone-100 px-1 rounded text-xs font-mono">mv</code> moves a file to a new location, or renames it if the destination is in the same directory. Unlike <code className="bg-stone-100 px-1 rounded text-xs font-mono">cp</code>, the original disappears.
@@ -78,7 +94,7 @@ export default function Module04FileManagement() {
       </section>
 
       {/* rm -r */}
-      <section className="space-y-6">
+      <section id="deleting-folders" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Deleting Folders — <code className="text-base font-mono bg-stone-100 px-1.5 py-0.5 rounded">rm -r</code></h2>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">Terminal</div>
@@ -94,7 +110,7 @@ export default function Module04FileManagement() {
       </section>
 
       {/* find */}
-      <section className="space-y-6">
+      <section id="finding-files" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Finding Files — <code className="text-base font-mono bg-stone-100 px-1.5 py-0.5 rounded">find</code></h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           <code className="bg-stone-100 px-1 rounded text-xs font-mono">find</code> searches the file system starting from a directory you specify. It supports powerful filters.
@@ -113,7 +129,7 @@ export default function Module04FileManagement() {
       </section>
 
       {/* grep */}
-      <section className="space-y-6">
+      <section id="searching-inside-files" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Searching Inside Files — <code className="text-base font-mono bg-stone-100 px-1.5 py-0.5 rounded">grep</code></h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           <code className="bg-stone-100 px-1 rounded text-xs font-mono">grep</code> searches for text patterns inside files. It prints every matching line with the filename.
@@ -132,7 +148,7 @@ export default function Module04FileManagement() {
       </section>
 
       {/* Permissions */}
-      <section className="space-y-6">
+      <section id="file-permissions" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">File Permissions</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Every file has three permission groups: <strong>owner</strong>, <strong>group</strong>, and <strong>others</strong>. Each group can have read (r), write (w), and execute (x) permissions.
@@ -190,7 +206,7 @@ export default function Module04FileManagement() {
       </section>
 
       {/* Text editors */}
-      <section className="space-y-6">
+      <section id="editing-files-in-the-terminal" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Editing Files in the Terminal</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           When you are on a remote server without a graphical editor, you need a terminal-based text editor. The two most common are <strong>nano</strong> (beginner-friendly) and <strong>vim</strong> (powerful, steep learning curve).
@@ -245,7 +261,7 @@ export default function Module04FileManagement() {
       </section>
 
       {/* Practical workflow */}
-      <section className="space-y-6">
+      <section id="a-practical-workflow" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">A Practical Workflow</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Here is a common sequence when starting a new project:
@@ -272,7 +288,7 @@ export default function Module04FileManagement() {
       </section>
 
       {/* Knowledge check */}
-      <section className="space-y-6">
+      <section id="knowledge-check" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Knowledge Check</h2>
         <p className="text-sm text-muted-foreground">
           Which command copies a file named <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">report.txt</code> into the <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">backup/</code> folder?

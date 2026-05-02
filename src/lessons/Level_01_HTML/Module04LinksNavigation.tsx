@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 
@@ -74,8 +75,21 @@ export default function Module04LinksNavigation() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#the-anchor-element" className="text-primary hover:underline">→ The anchor element</a></li>
+          <li><a href="#special-links" className="text-primary hover:underline">→ Special Links (Email & Phone)</a></li>
+          <li><a href="#links-in-practice" className="text-primary hover:underline">→ Links in practice</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Concept ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="the-anchor-element" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">The anchor element</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A link is made with the <strong className="text-foreground">anchor</strong> element:{" "}
@@ -100,18 +114,26 @@ export default function Module04LinksNavigation() {
         </p>
       </section>
 
+      {/* ── 2.5 Special Links ──────────────────────────────── */}
+      <section id="special-links" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">Special Links (Email & Phone)</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          Links aren't just for web pages. You can use special prefixes in the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">href</code> attribute to trigger different actions on the user's device.
+        </p>
+        <div className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-2 text-sm font-mono text-foreground leading-relaxed">
+          <div><span className="text-[#c2622d]">mailto:email@address.com</span> — Opens the user's default email client, ready to send an email to that address.</div>
+          <div><span className="text-[#c2622d]">tel:+1234567890</span> — On mobile devices, this opens the phone dialer with the number pre-filled.</div>
+        </div>
+      </section>
+
       {/* ── 3. Example ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="links-in-practice" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Links in practice</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Here is a small page that uses every link type you will need day-to-day:
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            index.html
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`<!-- Absolute URL — full address, opens in same tab -->
+        <CodeBlock language="html" title="index.html">
+          {`<!-- Absolute URL — full address, opens in same tab -->
 <a href="https://koompi.com">Visit KOOMPI</a>
 
 <!-- target="_blank" — opens in a new tab -->
@@ -132,8 +154,7 @@ export default function Module04LinksNavigation() {
   <a href="products.html">Products</a>
   <a href="contact.html">Contact</a>
 </nav>`}
-          </pre>
-        </div>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <code className="text-primary font-mono shrink-0">href="https://..."</code>
@@ -159,7 +180,7 @@ export default function Module04LinksNavigation() {
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -176,8 +197,24 @@ export default function Module04LinksNavigation() {
         />
       </section>
 
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Here is what we covered about links and navigation:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>The <code>&lt;a&gt;</code> (anchor) tag creates links using the <code>href</code> attribute.</li>
+            <li>Links can point to absolute URLs (other websites) or relative URLs (pages on your site).</li>
+            <li>Use <code>#id</code> to jump to a specific section on the same page.</li>
+            <li>Use <code>target="_blank"</code> to open links in a new tab.</li>
+            <li>You can trigger email clients with <code>mailto:</code> and phone dialers with <code>tel:</code>.</li>
+            <li>Group navigation menus inside a semantic <code>&lt;nav&gt;</code> element.</li>
+          </ul>
+        </div>
+      </section>
+
       {/* ── 5. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

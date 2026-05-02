@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 
@@ -52,8 +53,20 @@ export default function Module01GettingStarted() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-html-actually-is" className="text-primary hover:underline">→ What HTML actually is</a></li>
+          <li><a href="#a-complete-page-annotated" className="text-primary hover:underline">→ A complete page, annotated</a></li>
+          <li><a href="#the-html-tag-cheat-sheet" className="text-primary hover:underline">→ The HTML Tag Cheat Sheet</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Concept ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="what-html-actually-is" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What HTML actually is</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           HTML stands for <strong className="text-foreground">HyperText Markup Language</strong>. It describes the
@@ -61,8 +74,8 @@ export default function Module01GettingStarted() {
           and decide how to display each piece.
         </p>
         <p className="text-base text-muted-foreground leading-relaxed">
-          The unit of HTML is a <strong className="text-foreground">tag</strong>: a keyword inside angle brackets.
-          Most tags come in pairs — an opening tag and a closing tag with a forward slash.
+          The unit of HTML is a <strong className="text-foreground">tag</strong>: a keyword inside angle brackets <code>&lt;tag&gt;</code>.
+          Most tags come in pairs — an opening tag and a closing tag with a forward slash <code>&lt;/tag&gt;</code>.
         </p>
         <div className="rounded-xl bg-stone-50 border border-border px-6 py-5 font-mono text-sm text-foreground leading-loose">
           <span className="text-[#c2622d]">&lt;p&gt;</span>
@@ -80,29 +93,24 @@ export default function Module01GettingStarted() {
       </section>
 
       {/* ── 3. Example ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="a-complete-page-annotated" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">A complete page, annotated</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Every HTML page shares the same skeleton. Here is the minimum:
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            index.html
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`<!DOCTYPE html>          ← tells the browser: "this is HTML5"
-<html lang="en">         ← root element, lang sets the language
-  <head>                 ← invisible metadata
+        <CodeBlock language="html" title="index.html">
+          {`<!DOCTYPE html>          <!-- tells the browser: "this is HTML5" -->
+<html lang="en">         <!-- root element, lang sets the language -->
+  <head>                 <!-- invisible metadata -->
     <meta charset="UTF-8">
-    <title>My Page</title>  ← appears in the browser tab
+    <title>My Page</title>  <!-- appears in the browser tab -->
   </head>
-  <body>                 ← everything visible goes here
+  <body>                 <!-- everything visible goes here -->
     <h1>Hello, World!</h1>
     <p>This is my first webpage.</p>
   </body>
 </html>`}
-          </pre>
-        </div>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2"><span className="text-primary font-mono shrink-0">h1–h6</span> headings, h1 is the largest</li>
           <li className="flex gap-2"><span className="text-primary font-mono shrink-0">p</span> paragraph of text</li>
@@ -111,8 +119,80 @@ export default function Module01GettingStarted() {
         </ul>
       </section>
 
+      {/* ── 3.5 Tag Glossary ───────────────────────────────── */}
+      <section id="the-html-tag-cheat-sheet" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">The HTML Tag Cheat Sheet</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          Here is a quick look at the most common tags you will learn in this course. You do not need to memorize them all now! Bookmark this page and use it as your personal dictionary.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Document Structure */}
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Document Structure</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;html&gt;</code><span>The root element that wraps everything.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;head&gt;</code><span>Invisible metadata (title, scripts, styles).</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;body&gt;</code><span>The visible content of the page.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;header&gt;</code><span>Top section, usually containing site navigation.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;main&gt;</code><span>The primary content of the page.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;footer&gt;</code><span>Bottom section, copyright and links.</span></li>
+            </ul>
+          </div>
+
+          {/* Text & Lists */}
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Text & Lists</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;h1&gt;</code><span>Headings. h1 is largest, h6 is smallest.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;p&gt;</code><span>A paragraph of standard text.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;strong&gt;</code><span>Important text (usually bold).</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;em&gt;</code><span>Emphasized text (usually italicized).</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;ul&gt; / &lt;ol&gt;</code><span>Unordered (bulleted) / Ordered (numbered) lists.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;li&gt;</code><span>A list item inside a ul or ol.</span></li>
+            </ul>
+          </div>
+
+          {/* Links & Media */}
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Links & Media</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;a&gt;</code><span>Anchor link to other pages or URLs.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;img&gt;</code><span>Embeds an image (requires src attribute).</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;video&gt;</code><span>Embeds a video player.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;audio&gt;</code><span>Embeds an audio player.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;figure&gt;</code><span>A container for media and its caption.</span></li>
+            </ul>
+          </div>
+
+          {/* Forms & Tables */}
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Forms & Tables</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;form&gt;</code><span>A container for user input fields.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;input&gt;</code><span>A field for the user to type or select data.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;button&gt;</code><span>A clickable button.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;table&gt;</code><span>A container for rows and columns of data.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;tr&gt;</code><span>A table row.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;td&gt;</code><span>A table data cell inside a row.</span></li>
+            </ul>
+          </div>
+
+          {/* Grouping & Attributes */}
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Grouping & Attributes</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;div&gt;</code><span>A generic container for block-level content.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">&lt;span&gt;</code><span>A generic container for inline text.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">class="..."</code><span>Attribute to group elements for styling.</span></li>
+              <li className="flex gap-2 items-start"><code className="text-[#c2622d] font-mono bg-stone-100 px-1.5 py-0.5 rounded shrink-0">id="..."</code><span>Attribute to uniquely identify an element.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* ── 4. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -130,7 +210,7 @@ export default function Module01GettingStarted() {
       </section>
 
       {/* ── 5. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

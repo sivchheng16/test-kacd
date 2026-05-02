@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module06ProjectEcommerce() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -22,8 +23,20 @@ export default function Module06ProjectEcommerce() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-you-will-build" className="text-primary hover:underline">→ What You Will Build</a></li>
+          <li><a href="#project-file-structure" className="text-primary hover:underline">→ Project File Structure</a></li>
+          <li><a href="#key-files-explained" className="text-primary hover:underline">→ Key Files Explained</a></li>
+          <li><a href="#deployment-checklist" className="text-primary hover:underline">→ Deployment Checklist</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* Project overview */}
-      <section className="space-y-6">
+      <section id="what-you-will-build" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">What You Will Build</h2>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">
@@ -54,47 +67,50 @@ export default function Module06ProjectEcommerce() {
       </section>
 
       {/* File structure */}
-      <section className="space-y-6">
+      <section id="project-file-structure" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Project File Structure</h2>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">ecommerce-store/</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`src/
+          <CodeBlock language="javascript">
+          {`src/
 ├── app/
-│   ├── layout.tsx              ← Root layout + CartProvider
-│   ├── page.tsx                ← Home / hero
+│   ├── layout.tsx              //  Root layout + CartProvider
+│   ├── page.tsx                //  Home / hero
 │   ├── globals.css
 │   ├── products/
-│   │   ├── page.tsx            ← Product listing (Server Component)
+│   │   ├── page.tsx            //  Product listing (Server Component)
 │   │   └── [id]/
-│   │       ├── page.tsx        ← Product detail (Server Component)
-│   │       └── loading.tsx     ← Skeleton while fetching
+│   │       ├── page.tsx        //  Product detail (Server Component)
+│   │       └── loading.tsx     //  Skeleton while fetching
 │   ├── cart/
-│   │   └── page.tsx            ← Cart page (Client Component)
+│   │   └── page.tsx            //  Cart page (Client Component)
 │   └── api/
 │       ├── products/
-│       │   └── route.ts        ← GET /api/products
+│       │   └── route.ts        //  GET /api/products
 │       └── cart/
-│           └── route.ts        ← POST /api/cart
+│           └── route.ts        //  POST /api/cart
 ├── components/
-│   ├── Header.tsx              ← Sticky nav with cart badge
-│   ├── ProductCard.tsx         ← Reusable card (Client — uses cart context)
-│   └── CartProvider.tsx        ← Context + localStorage sync
+│   ├── Header.tsx              //  Sticky nav with cart badge
+│   ├── ProductCard.tsx         //  Reusable card (Client — uses cart context)
+│   └── CartProvider.tsx        //  Context + localStorage sync
 ├── lib/
-│   └── products.ts             ← Shared fetch helpers
+│   └── products.ts             //  Shared fetch helpers
 └── data/
-    └── products.json           ← Static product catalogue`}</pre>
+    └── products.json           //  Static product catalogue`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Key files */}
-      <section className="space-y-6">
+      <section id="key-files-explained" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Key Files Explained</h2>
 
         <div className="space-y-4">
           <h3 className="text-sm font-semibold text-foreground">Product detail page — dynamic route + data fetch</h3>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
             <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">app/products/[id]/page.tsx</div>
-            <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`import { notFound } from 'next/navigation';
+            <CodeBlock language="json">
+          {`import { notFound } from 'next/navigation';
 import AddToCartButton from '@/components/AddToCartButton';
 
 async function getProduct(id: string) {
@@ -138,7 +154,8 @@ export default async function ProductPage({
       </div>
     </div>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
           </div>
         </div>
 
@@ -146,7 +163,8 @@ export default async function ProductPage({
           <h3 className="text-sm font-semibold text-foreground">Cart Context — client-side state + localStorage</h3>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
             <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">components/CartProvider.tsx</div>
-            <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`'use client';
+            <CodeBlock language="javascript">
+          {`'use client';
 import { createContext, useContext, useState, useEffect } from 'react';
 
 type CartItem = { id: number; name: string; price: number; quantity: number };
@@ -201,7 +219,8 @@ export const useCart = () => {
   const ctx = useContext(CartContext);
   if (!ctx) throw new Error('useCart must be inside CartProvider');
   return ctx;
-};`}</pre>
+};`}
+        </CodeBlock>
           </div>
         </div>
 
@@ -209,8 +228,10 @@ export const useCart = () => {
           <h3 className="text-sm font-semibold text-foreground">API route — GET /api/products</h3>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
             <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">app/api/products/route.ts</div>
-            <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`import { NextRequest, NextResponse } from 'next/server';
+            <CodeBlock language="javascript">
+          {`import { NextRequest, NextResponse } from 'next/server';
 import productsData from '@/../data/products.json';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -221,13 +242,14 @@ export async function GET(request: NextRequest) {
     : productsData.products;
 
   return NextResponse.json(filtered);
-}`}</pre>
+}`}
+        </CodeBlock>
           </div>
         </div>
       </section>
 
       {/* Deployment checklist */}
-      <section className="space-y-6">
+      <section id="deployment-checklist" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Deployment Checklist</h2>
         <div className="space-y-2">
           {[
@@ -248,7 +270,7 @@ export async function GET(request: NextRequest) {
       </section>
 
       {/* Knowledge check */}
-      <section className="space-y-6">
+      <section id="knowledge-check" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Knowledge Check</h2>
         <p className="text-sm text-muted-foreground">
           In a Next.js product page at <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">app/products/[id]/page.tsx</code>, how do you access the product ID?

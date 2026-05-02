@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_STARTER = {
   html: `<h1>Cambodian Dishes</h1>
@@ -89,8 +90,19 @@ export default function Module02SelectorsSpecificity() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#three-kinds-of-selector" className="text-primary hover:underline">→ Three kinds of selector</a></li>
+          <li><a href="#annotated-example" className="text-primary hover:underline">→ Annotated example</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Concept ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="three-kinds-of-selector" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Three kinds of selector</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The three selectors you will use on every project:
@@ -153,17 +165,13 @@ export default function Module02SelectorsSpecificity() {
       </section>
 
       {/* ── 3. Example ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="annotated-example" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Annotated example</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Four selector types, each doing a different job.
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            styles.css
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`/* Element — all paragraphs get a base style (score: 1) */
+        <CodeBlock language="css" title="styles.css">
+          {`/* Element — all paragraphs get a base style (score: 1) */
 p {
   font-size: 1rem;
   color: #444;
@@ -189,12 +197,11 @@ a:hover {
 
 /* If both p and .highlight target the same element,
    .highlight wins (10 > 1).                         */`}
-          </pre>
-        </div>
+        </CodeBlock>
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -223,7 +230,7 @@ a:hover {
       </section>
 
       {/* ── 5. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

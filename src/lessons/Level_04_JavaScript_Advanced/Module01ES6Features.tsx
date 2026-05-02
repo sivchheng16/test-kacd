@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_DESTRUCTURING = `// Object destructuring
 const user = { name: "Sokha", age: 22, city: "Phnom Penh" };
@@ -102,8 +103,21 @@ export default function Module01ES6Features() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#destructuring" className="text-primary hover:underline">→ Destructuring</a></li>
+          <li><a href="#spread-amp-rest" className="text-primary hover:underline">→ Spread &amp; Rest</a></li>
+          <li><a href="#template-literals" className="text-primary hover:underline">→ Template Literals</a></li>
+          <li><a href="#optional-chaining-amp-nullish-coalescing" className="text-primary hover:underline">→ Optional Chaining &amp; Nullish Coalescing</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Destructuring */}
-      <section className="space-y-4">
+      <section id="destructuring" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Destructuring</h2>
         <p className="text-base text-muted-foreground">
           Destructuring extracts values from objects or arrays into named variables without
@@ -114,7 +128,8 @@ export default function Module01ES6Features() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Object destructuring
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`const user = { name: "Sokha", age: 22, city: "Phnom Penh" };
+          <CodeBlock language="json">
+          {`const user = { name: "Sokha", age: 22, city: "Phnom Penh" };
 
 // Without destructuring
 const name = user.name;
@@ -127,14 +142,16 @@ const { name, age, city } = user;
 const { name: userName } = user;   // userName === "Sokha"
 
 // Default value when key is absent
-const { country = "Cambodia" } = user;  // country === "Cambodia"`}</pre>
+const { country = "Cambodia" } = user;  // country === "Cambodia"`}
+        </CodeBlock>
         </div>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Array destructuring
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`const colors = ["red", "green", "blue"];
+          <CodeBlock language="javascript">
+          {`const colors = ["red", "green", "blue"];
 const [first, second, third] = colors;
 
 // Skip elements with an empty comma
@@ -143,12 +160,13 @@ const [primary, , tertiary] = colors;   // tertiary === "blue"
 // Classic swap — no temp variable needed
 let a = 1, b = 2;
 [a, b] = [b, a];
-console.log(a, b); // 2 1`}</pre>
+console.log(a, b); // 2 1`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Spread & Rest */}
-      <section className="space-y-4">
+      <section id="spread-amp-rest" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Spread &amp; Rest</h2>
         <p className="text-base text-muted-foreground">
           The same <code className="font-mono text-sm">...</code> syntax plays two roles: <em>spread</em> expands
@@ -159,7 +177,8 @@ console.log(a, b); // 2 1`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Spread — expand
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`// Combine arrays
+          <CodeBlock language="json">
+          {`// Combine arrays
 const arr1 = [1, 2, 3];
 const arr2 = [4, 5, 6];
 const all  = [...arr1, ...arr2];     // [1,2,3,4,5,6]
@@ -177,14 +196,16 @@ const final = { ...base, ...patch };
 
 // Spread into function args
 const nums = [5, 2, 8, 1];
-Math.max(...nums); // 8`}</pre>
+Math.max(...nums); // 8`}
+        </CodeBlock>
         </div>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Rest — collect
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`// Rest in function parameters
+          <CodeBlock language="json">
+          {`// Rest in function parameters
 function sum(...numbers) {
   return numbers.reduce((total, n) => total + n, 0);
 }
@@ -195,12 +216,13 @@ const [head, ...tail] = [10, 20, 30, 40];
 // head === 10, tail === [20, 30, 40]
 
 const { name, ...rest } = { name: "Sokha", age: 22, city: "PP" };
-// rest === { age: 22, city: "PP" }`}</pre>
+// rest === { age: 22, city: "PP" }`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Template literals */}
-      <section className="space-y-4">
+      <section id="template-literals" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Template Literals</h2>
         <p className="text-base text-muted-foreground">
           Backtick strings support multi-line content and embed any JavaScript expression with{" "}
@@ -211,7 +233,8 @@ const { name, ...rest } = { name: "Sokha", age: 22, city: "PP" };
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Expressions inside strings
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`const name  = "Sokha";
+          <CodeBlock language="json">
+          {`const name  = "Sokha";
 const score = 95;
 
 // Old way
@@ -229,12 +252,13 @@ const html = \`
   <div class="card">
     <h2>\${name}</h2>
   </div>
-\`;`}</pre>
+\`;`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Optional chaining & nullish */}
-      <section className="space-y-4">
+      <section id="optional-chaining-amp-nullish-coalescing" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Optional Chaining &amp; Nullish Coalescing</h2>
         <p className="text-base text-muted-foreground">
           These two operators make defensive code much shorter.
@@ -244,7 +268,8 @@ const html = \`
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             ?. and ??
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`const user = { address: { city: "Phnom Penh" } };
+          <CodeBlock language="json">
+          {`const user = { address: { city: "Phnom Penh" } };
 
 // Optional chaining — returns undefined instead of throwing
 user.address?.country;    // undefined
@@ -258,12 +283,13 @@ count || 10;   // 10  ← bug! 0 is falsy
 count ?? 10;   //  0  ← correct, 0 is a valid value
 
 const name = "";
-name ?? "Anonymous"; // ""  — empty string is intentional`}</pre>
+name ?? "Anonymous"; // ""  — empty string is intentional`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Try it</h2>
         <p className="text-base text-muted-foreground">
           Experiment with all three features. Open the console tab in the playground to see output.
@@ -274,7 +300,7 @@ name ?? "Anonymous"; // ""  — empty string is intentional`}</pre>
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
         <p className="text-base text-muted-foreground">
           Destructure at least 3 keys from <code className="font-mono text-sm">product</code> and

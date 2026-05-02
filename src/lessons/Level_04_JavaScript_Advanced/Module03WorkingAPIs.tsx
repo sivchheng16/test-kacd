@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_FETCH = `// Basic GET with .then
 fetch("https://jsonplaceholder.typicode.com/users/1")
@@ -89,8 +90,21 @@ export default function Module03WorkingAPIs() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-is-an-api" className="text-primary hover:underline">→ What is an API?</a></li>
+          <li><a href="#http-basics" className="text-primary hover:underline">→ HTTP Basics</a></li>
+          <li><a href="#the-fetch-api" className="text-primary hover:underline">→ The Fetch API</a></li>
+          <li><a href="#json" className="text-primary hover:underline">→ JSON</a></li>
+          <li><a href="#sending-data" className="text-primary hover:underline">→ Sending Data</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* What is an API */}
-      <section className="space-y-4">
+      <section id="what-is-an-api" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">What is an API?</h2>
         <p className="text-base text-muted-foreground">
           An <strong>API</strong> (Application Programming Interface) is a contract between two
@@ -120,7 +134,7 @@ export default function Module03WorkingAPIs() {
       </section>
 
       {/* HTTP basics */}
-      <section className="space-y-4">
+      <section id="http-basics" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">HTTP Basics</h2>
         <p className="text-base text-muted-foreground">
           Every API call is an HTTP request. The <em>method</em> tells the server what action to
@@ -183,7 +197,7 @@ export default function Module03WorkingAPIs() {
       </section>
 
       {/* Fetch API */}
-      <section className="space-y-4">
+      <section id="the-fetch-api" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">The Fetch API</h2>
         <p className="text-base text-muted-foreground">
           <code className="font-mono text-sm">fetch(url)</code> is built into every modern
@@ -198,7 +212,8 @@ export default function Module03WorkingAPIs() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             The safe async/await pattern
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`async function fetchData(url) {
+          <CodeBlock language="javascript">
+          {`async function fetchData(url) {
   const response = await fetch(url);
 
   // fetch() only rejects on network failure — not on 404/500.
@@ -208,14 +223,15 @@ export default function Module03WorkingAPIs() {
   }
 
   return response.json();
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
 
         <CodePlayground mode="js" starter={{ js: EXPLORE_ASYNC_FETCH }} height="300px" />
       </section>
 
       {/* JSON */}
-      <section className="space-y-4">
+      <section id="json" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">JSON</h2>
         <p className="text-base text-muted-foreground">
           JSON (JavaScript Object Notation) is the universal data format for web APIs. It looks
@@ -227,7 +243,8 @@ export default function Module03WorkingAPIs() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             JSON.parse and JSON.stringify
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`// Network sends a string → parse into a JS object
+          <CodeBlock language="json">
+          {`// Network sends a string → parse into a JS object
 const obj = JSON.parse('{"name":"Sokha","age":22}');
 console.log(obj.name); // "Sokha"
 
@@ -236,14 +253,15 @@ const body = JSON.stringify({ name: "Dara", age: 25 });
 // '{"name":"Dara","age":25}'
 
 // Readable output for debugging
-console.log(JSON.stringify(obj, null, 2));`}</pre>
+console.log(JSON.stringify(obj, null, 2));`}
+        </CodeBlock>
         </div>
 
         <CodePlayground mode="js" starter={{ js: EXPLORE_JSON }} height="200px" />
       </section>
 
       {/* POST, PUT, DELETE */}
-      <section className="space-y-4">
+      <section id="sending-data" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Sending Data</h2>
         <p className="text-base text-muted-foreground">
           For POST, PUT, and PATCH requests you pass an options object to{" "}
@@ -254,7 +272,8 @@ console.log(JSON.stringify(obj, null, 2));`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             POST — create a resource
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`async function createPost(data) {
+          <CodeBlock language="json">
+          {`async function createPost(data) {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -265,12 +284,13 @@ console.log(JSON.stringify(obj, null, 2));`}</pre>
 }
 
 const newPost = await createPost({ title: "Hello", body: "World", userId: 1 });
-console.log(newPost); // includes id assigned by server`}</pre>
+console.log(newPost); // includes id assigned by server`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
         <p className="text-base text-muted-foreground">
           Fetch the todo at{" "}

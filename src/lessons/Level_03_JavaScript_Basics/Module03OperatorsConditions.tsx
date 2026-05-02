@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module03OperatorsConditions() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -28,11 +29,22 @@ export default function Module03OperatorsConditions() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#arithmetic-operators" className="text-primary hover:underline">→ Arithmetic operators</a></li>
+          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
+          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Concept */}
-      <section className="space-y-6">
+      <section id="arithmetic-operators" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Arithmetic operators</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`let price = 10000; // KHR
+        <CodeBlock language="javascript">
+          {`let price = 10000; // KHR
 let qty   = 3;
 
 document.write(price * qty);       // 30000  — multiply
@@ -40,7 +52,7 @@ document.write(price + 500);       // 10500  — add
 document.write(price - 1000);      // 9000   — subtract
 document.write(price / 4000);      // 2.5    — divide (USD)
 document.write(10 % 3);            // 1      — remainder (modulo)`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Comparison operators</h2>
         <p className="text-muted-foreground leading-relaxed">
@@ -78,8 +90,8 @@ document.write(10 % 3);            // 1      — remainder (modulo)`}
         </div>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Logical operators</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const age = 20;
+        <CodeBlock language="javascript">
+          {`const age = 20;
 const hasTicket = true;
 
 // && (AND) — both must be true
@@ -99,11 +111,11 @@ const isLoggedIn = false;
 if (!isLoggedIn) {
   document.write("Please sign in.");
 }`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">if / else</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const score = 75;
+        <CodeBlock language="javascript">
+          {`const score = 75;
 
 if (score >= 80) {
   document.write("Excellent!");
@@ -112,18 +124,18 @@ if (score >= 80) {
 } else {
   document.write("Study harder — you can do this.");
 }`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Ternary — one-line if/else</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const hour = 14;
+        <CodeBlock language="json">
+          {`const hour = 14;
 const greeting = hour < 12 ? "Good morning" : "Good afternoon";
 document.write(greeting); // Good afternoon`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* Example */}
-      <section className="space-y-4">
+      <section id="live-example" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Live example — tuk-tuk fare calculator</h2>
         <p className="text-sm text-muted-foreground">
           Change the distance and see the fare logic branch differently.
@@ -151,7 +163,7 @@ document.write(message);`,
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="try-it-yourself" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Write an if/else that checks whether a temperature is hot (&gt; 35°C),
@@ -169,7 +181,7 @@ document.write(message);`,
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Declare a number variable. Write an{" "}

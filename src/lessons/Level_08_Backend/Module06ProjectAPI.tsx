@@ -1,3 +1,4 @@
+import { CodeBlock } from "@/components/ui/CodeBlock";
 import React from "react";
 
 export default function Module06ProjectAPI() {
@@ -14,35 +15,55 @@ export default function Module06ProjectAPI() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#1-project-setup" className="text-primary hover:underline">→ 1. Project setup</a></li>
+          <li><a href="#2-database-connection-supabase" className="text-primary hover:underline">→ 2. Database connection (Supabase)</a></li>
+          <li><a href="#3-app-entry-point" className="text-primary hover:underline">→ 3. App entry point</a></li>
+          <li><a href="#4-auth-middleware" className="text-primary hover:underline">→ 4. Auth middleware</a></li>
+          <li><a href="#5-registration-and-login-endpoints" className="text-primary hover:underline">→ 5. Registration and login endpoints</a></li>
+          <li><a href="#6-protected-crud-routes-for-posts" className="text-primary hover:underline">→ 6. Protected CRUD routes for posts</a></li>
+          <li><a href="#7-testing-with-curl" className="text-primary hover:underline">→ 7. Testing with curl</a></li>
+          <li><a href="#what-you-built" className="text-primary hover:underline">→ What you built</a></li>
+        </ul>
+      </section>
+
       {/* ── 1. Project setup ──────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="1-project-setup" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">1. Project setup</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Create a new Node project and install the dependencies:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`mkdir blog-api && cd blog-api
+        <CodeBlock language="bash">
+          {`mkdir blog-api && cd blog-api
 npm init -y
 npm install express bcrypt jsonwebtoken zod cors helmet morgan @supabase/supabase-js
-npm install --save-dev @types/express @types/bcrypt @types/jsonwebtoken @types/cors @types/morgan`}</pre>
+npm install --save-dev @types/express @types/bcrypt @types/jsonwebtoken @types/cors @types/morgan`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Add <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">"type": "module"</code> to
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded mx-1">package.json</code> to use ESM imports,
           then create a <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">.env</code> file:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`# .env
+        <CodeBlock language="javascript">
+          {`# .env
 PORT=3000
 JWT_SECRET=your-long-random-secret-here
 SUPABASE_URL=https://xyzxyz.supabase.co
-SUPABASE_ANON_KEY=eyJhbGci...`}</pre>
+SUPABASE_ANON_KEY=eyJhbGci...`}
+        </CodeBlock>
       </section>
 
       {/* ── 2. Database connection ────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="2-database-connection-supabase" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">2. Database connection (Supabase)</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           This project uses Supabase as the database layer. Create two tables in the Supabase dashboard:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`-- users table
+        <CodeBlock language="javascript">
+          {`-- users table
 create table users (
   id         uuid primary key default gen_random_uuid(),
   email      text unique not null,
@@ -58,23 +79,27 @@ create table posts (
   body       text not null,
   author_id  uuid references users(id) on delete cascade,
   created_at timestamptz default now()
-);`}</pre>
+);`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Create <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">src/db.js</code> to initialise the Supabase client:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// src/db.js
+        <CodeBlock language="javascript">
+          {`// src/db.js
 import { createClient } from '@supabase/supabase-js';
 
 export const db = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_ANON_KEY,
-);`}</pre>
+);`}
+        </CodeBlock>
       </section>
 
       {/* ── 3. App entry point ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="3-app-entry-point" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">3. App entry point</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// src/app.js
+        <CodeBlock language="javascript">
+          {`// src/app.js
 import express from 'express';
 import cors    from 'cors';
 import helmet  from 'helmet';
@@ -96,19 +121,23 @@ app.use('/api/v1/posts', postsRouter);
 app.use((err, req, res, _next) => {
   console.error(err);
   res.status(err.status ?? 500).json({ error: err.message ?? 'Internal server error' });
-});`}</pre>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// src/index.js
+});`}
+        </CodeBlock>
+        <CodeBlock language="javascript">
+          {`// src/index.js
 import 'dotenv/config';
 import { app } from './app.js';
 
 const PORT = process.env.PORT ?? 3000;
-app.listen(PORT, () => console.log(\`API running on http://localhost:\${PORT}\`));`}</pre>
+app.listen(PORT, () => console.log(\`API running on http://localhost:\${PORT}\`));`}
+        </CodeBlock>
       </section>
 
       {/* ── 4. Auth middleware ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="4-auth-middleware" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">4. Auth middleware</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// src/middleware/requireAuth.js
+        <CodeBlock language="javascript">
+          {`// src/middleware/requireAuth.js
 import jwt from 'jsonwebtoken';
 
 export function requireAuth(req, res, next) {
@@ -120,13 +149,15 @@ export function requireAuth(req, res, next) {
   } catch {
     res.status(401).json({ error: 'Invalid or expired token' });
   }
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* ── 5. Registration and login ─────────────────────────── */}
-      <section className="space-y-6">
+      <section id="5-registration-and-login-endpoints" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">5. Registration and login endpoints</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// src/routes/auth.js
+        <CodeBlock language="javascript">
+          {`// src/routes/auth.js
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -186,17 +217,20 @@ authRouter.post('/login', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});`}</pre>
+});`}
+        </CodeBlock>
       </section>
 
       {/* ── 6. Protected CRUD routes for posts ───────────────── */}
-      <section className="space-y-6">
+      <section id="6-protected-crud-routes-for-posts" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">6. Protected CRUD routes for posts</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// src/routes/posts.js
+        <CodeBlock language="javascript">
+          {`// src/routes/posts.js
 import { Router } from 'express';
 import { z } from 'zod';
 import { db } from '../db.js';
 import { requireAuth } from '../middleware/requireAuth.js';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export const postsRouter = Router();
 
@@ -279,53 +313,66 @@ postsRouter.delete('/:id', requireAuth, async (req, res, next) => {
     if (error) throw error;
     res.status(204).end();
   } catch (err) { next(err); }
-});`}</pre>
+});`}
+        </CodeBlock>
       </section>
 
       {/* ── 7. Testing with curl ──────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="7-testing-with-curl" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">7. Testing with curl</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Start the server:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`node src/index.js`}</pre>
+        <CodeBlock language="javascript">
+          {`node src/index.js`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Register a user:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`curl -s -X POST http://localhost:3000/api/v1/auth/register \\
+        <CodeBlock language="json">
+          {`curl -s -X POST http://localhost:3000/api/v1/auth/register \\
   -H "Content-Type: application/json" \\
-  -d '{"name":"Rithy","email":"rithy@example.com","password":"secret123"}' | jq .`}</pre>
+  -d '{"name":"Rithy","email":"rithy@example.com","password":"secret123"}' | jq .`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Log in and capture the token:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`TOKEN=$(curl -s -X POST http://localhost:3000/api/v1/auth/login \\
+        <CodeBlock language="json">
+          {`TOKEN=$(curl -s -X POST http://localhost:3000/api/v1/auth/login \\
   -H "Content-Type: application/json" \\
   -d '{"email":"rithy@example.com","password":"secret123"}' | jq -r '.data.token')
 
-echo $TOKEN`}</pre>
+echo $TOKEN`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Create a post:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`curl -s -X POST http://localhost:3000/api/v1/posts \\
+        <CodeBlock language="json">
+          {`curl -s -X POST http://localhost:3000/api/v1/posts \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer $TOKEN" \\
-  -d '{"title":"My First Post","body":"Hello from the backend!"}' | jq .`}</pre>
+  -d '{"title":"My First Post","body":"Hello from the backend!"}' | jq .`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Fetch all posts (no auth required):
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`curl -s http://localhost:3000/api/v1/posts | jq .`}</pre>
+        <CodeBlock language="javascript">
+          {`curl -s http://localhost:3000/api/v1/posts | jq .`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Try accessing a protected route without a token — expect a
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded mx-1">401</code>:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`curl -s -X POST http://localhost:3000/api/v1/posts \\
+        <CodeBlock language="json">
+          {`curl -s -X POST http://localhost:3000/api/v1/posts \\
   -H "Content-Type: application/json" \\
   -d '{"title":"No token","body":"This should fail"}' | jq .
-# → { "error": "Unauthorized" }`}</pre>
+# → { "error": "Unauthorized" }`}
+        </CodeBlock>
       </section>
 
       {/* ── Summary ───────────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="what-you-built" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">What you built</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           In this project you assembled every concept from the track into a working system:

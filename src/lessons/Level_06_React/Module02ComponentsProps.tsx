@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module02ComponentsProps() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -28,15 +29,26 @@ export default function Module02ComponentsProps() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#defining-a-component" className="text-primary hover:underline">→ Defining a component</a></li>
+          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
+          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Concept */}
-      <section className="space-y-6">
+      <section id="defining-a-component" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Defining a component</h2>
         <p className="text-muted-foreground leading-relaxed">
           Any JavaScript function that returns JSX is a component. Name it with a
           capital letter so React knows it's a component and not a plain HTML tag.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`function Welcome() {
+        <CodeBlock language="javascript">
+          {`function Welcome() {
   return <h2>Welcome to KOOMPI Academy!</h2>;
 }
 
@@ -49,15 +61,15 @@ function App() {
     </div>
   );
 }`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Passing props</h2>
         <p className="text-muted-foreground leading-relaxed">
           Props look like HTML attributes. The child receives them as a single
           object — you can use the whole object or destructure the values you need.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`// Parent passes data
+        <CodeBlock language="javascript">
+          {`// Parent passes data
 <Greeting name="Sokha" />
 
 // Child receives it via props
@@ -69,7 +81,7 @@ function Greeting(props) {
 function Greeting({ name }) {
   return <p>Hello, {name}!</p>;
 }`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Props rules</h2>
         <ul className="space-y-2 text-sm text-muted-foreground">
@@ -92,8 +104,8 @@ function Greeting({ name }) {
           be made up of <code className="font-mono bg-stone-100 px-1 rounded">Avatar</code> and{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">UserInfo</code>, each knowing only about their own job.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`function Avatar({ name }) {
+        <CodeBlock language="json">
+          {`function Avatar({ name }) {
   return (
     <div style={{
       width: 48, height: 48, borderRadius: "50%",
@@ -118,11 +130,11 @@ function App() {
     </div>
   );
 }`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* Example */}
-      <section className="space-y-4">
+      <section id="live-example" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Live example — try editing it</h2>
         <p className="text-sm text-muted-foreground">
           A <code className="font-mono bg-stone-100 px-1 rounded">Greeting</code> component renders three times with different names.
@@ -154,7 +166,7 @@ function App() {
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="try-it-yourself" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Build a <code className="font-mono bg-stone-100 px-1 rounded">Badge</code> component that accepts a{" "}
@@ -195,7 +207,7 @@ function App() {
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Define a <code className="font-mono bg-stone-100 px-1 rounded">Greeting</code> component that accepts a{" "}

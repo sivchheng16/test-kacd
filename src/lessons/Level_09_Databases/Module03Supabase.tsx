@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module03Supabase() {
   return (
@@ -13,8 +14,21 @@ export default function Module03Supabase() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-supabase-actually-is" className="text-primary hover:underline">→ What Supabase actually is</a></li>
+          <li><a href="#setup" className="text-primary hover:underline">→ Setup</a></li>
+          <li><a href="#querying-with-the-js-client" className="text-primary hover:underline">→ Querying with the JS client</a></li>
+          <li><a href="#row-level-security" className="text-primary hover:underline">→ Row Level Security</a></li>
+          <li><a href="#anon-key-vs-service-role-key" className="text-primary hover:underline">→ Anon key vs service role key</a></li>
+          <li><a href="#the-sql-editor" className="text-primary hover:underline">→ The SQL editor</a></li>
+        </ul>
+      </section>
+
       {/* ── What Supabase is ─────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="what-supabase-actually-is" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">What Supabase actually is</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Supabase is not a proprietary database. It is a hosted PostgreSQL instance
@@ -37,7 +51,7 @@ export default function Module03Supabase() {
       </section>
 
       {/* ── Setup ────────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="setup" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Setup</h2>
         <ol className="space-y-2 text-sm text-muted-foreground list-none">
           {[
@@ -51,33 +65,34 @@ export default function Module03Supabase() {
             </li>
           ))}
         </ol>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`npm install @supabase/supabase-js`}
-        </pre>
+        <CodeBlock language="bash">
+          {`npm install @supabase/supabase-js`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Create a single client instance and export it for use across your app:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// src/lib/supabase.ts
+        <CodeBlock language="javascript">
+          {`// src/lib/supabase.ts
 import { createClient } from '@supabase/supabase-js';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const SUPABASE_URL  = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON);`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── Querying ─────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="querying-with-the-js-client" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Querying with the JS client</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The client methods map almost directly to SQL concepts.
           Every call returns <code className="text-foreground font-mono">{"{ data, error }"}</code> —
           always check <code className="text-foreground font-mono">error</code> before using <code className="text-foreground font-mono">data</code>.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// SELECT — fetch posts for a user, newest first
+        <CodeBlock language="sql">
+          {`// SELECT — fetch posts for a user, newest first
 const { data, error } = await supabase
   .from('posts')
   .select('id, title, created_at')
@@ -93,10 +108,10 @@ const { data: posts } = await supabase
   .from('posts')
   .select('title, users(name, email)')
   .eq('published', true);`}
-        </pre>
+        </CodeBlock>
 
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// INSERT — create a new post
+        <CodeBlock language="javascript">
+          {`// INSERT — create a new post
 const { data, error } = await supabase
   .from('posts')
   .insert({ title: 'Hello world', user_id: userId })
@@ -115,11 +130,11 @@ const { error } = await supabase
   .from('posts')
   .delete()
   .eq('id', postId);`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── RLS ──────────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="row-level-security" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Row Level Security — the feature you cannot skip</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           By default, any request to your Supabase API with the anon key can read{" "}
@@ -131,8 +146,8 @@ const { error } = await supabase
           Enable RLS on a table, then write policies in the Supabase dashboard
           (Table Editor → RLS) or via the SQL editor:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`-- Enable RLS on posts
+        <CodeBlock language="javascript">
+          {`-- Enable RLS on posts
 ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
 
 -- Anyone can read published posts
@@ -154,7 +169,7 @@ CREATE POLICY "insert own posts"
 CREATE POLICY "update own posts"
   ON posts FOR UPDATE
   USING (auth.uid() = user_id);`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           <code className="text-foreground font-mono">auth.uid()</code> is a Supabase function
           that returns the ID of the currently authenticated user. If the user is not
@@ -163,7 +178,7 @@ CREATE POLICY "update own posts"
       </section>
 
       {/* ── Key distinction ──────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="anon-key-vs-service-role-key" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Anon key vs service role key</h2>
         <div className="space-y-4">
           <div className="rounded-xl border border-border px-5 py-4 space-y-1">
@@ -185,7 +200,7 @@ CREATE POLICY "update own posts"
       </section>
 
       {/* ── SQL editor ───────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="the-sql-editor" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">The SQL editor</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Supabase has a full SQL editor in the dashboard (under SQL Editor in the

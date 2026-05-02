@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_STARTER = {
   html: `<div class="page">
@@ -112,8 +113,20 @@ export default function Module08CSSGrid() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#the-mental-model" className="text-primary hover:underline">→ The mental model</a></li>
+          <li><a href="#key-concepts" className="text-primary hover:underline">→ Key concepts</a></li>
+          <li><a href="#grid-vs-flexbox" className="text-primary hover:underline">→ Grid vs Flexbox</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Mental model ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="the-mental-model" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">The mental model</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Imagine a spreadsheet. You define how many{" "}
@@ -122,23 +135,18 @@ export default function Module08CSSGrid() {
           elements are placed into the resulting cells — automatically, or
           exactly where you tell them to go.
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            styles.css — basic 3-column grid
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`.container {
+        <CodeBlock language="javascript" title="styles.css — basic 3-column grid">
+          {`.container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;  /* 3 equal columns */
   grid-template-rows: auto;            /* rows size to content */
   gap: 16px;                           /* gutter between cells */
 }`}
-          </pre>
-        </div>
+        </CodeBlock>
       </section>
 
       {/* ── 3. Key concepts ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="key-concepts" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Key concepts</h2>
 
         {/* fr unit */}
@@ -193,11 +201,11 @@ export default function Module08CSSGrid() {
             and the grid adapts to the viewport with zero media queries:
           </p>
           <div className="rounded-xl border border-border overflow-hidden">
-            <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            <CodeBlock language="javascript">
+          {`grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 /* Each column is at least 200px wide. As the viewport
    shrinks, columns drop to a new row automatically. */`}
-            </pre>
+        </CodeBlock>
           </div>
         </div>
 
@@ -251,8 +259,8 @@ export default function Module08CSSGrid() {
             The ASCII diagram <em>is</em> the layout:
           </p>
           <div className="rounded-xl border border-border overflow-hidden">
-            <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`.page {
+            <CodeBlock language="json">
+          {`.page {
   display: grid;
   grid-template-columns: 200px 1fr;
   grid-template-areas:
@@ -266,13 +274,13 @@ export default function Module08CSSGrid() {
 .sidebar { grid-area: sidebar; }
 .content { grid-area: content; }
 .footer  { grid-area: footer; }`}
-            </pre>
+        </CodeBlock>
           </div>
         </div>
       </section>
 
       {/* ── 4. Grid vs Flexbox ─────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="grid-vs-flexbox" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Grid vs Flexbox</h2>
         <div className="rounded-xl bg-stone-50 border border-border divide-y divide-border text-sm">
           <div className="px-6 py-3 flex gap-3">
@@ -295,7 +303,7 @@ export default function Module08CSSGrid() {
       </section>
 
       {/* ── 5. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -322,7 +330,7 @@ export default function Module08CSSGrid() {
       </section>
 
       {/* ── 6. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

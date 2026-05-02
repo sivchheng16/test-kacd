@@ -9,13 +9,12 @@ export default function Introduction() {
       <div>
         <div>
           <Typography variant="h1">Introduction: JavaScript Basics</Typography>
+          <Typography variant="lead">
+            Adding interactivity, dynamic data, and logic to transform static pages into web apps.
+          </Typography>
         </div>
       </div>
-      <div>
-        <div>
-          <Typography variant="h2">Track 03: JavaScript Basics</Typography>
-        </div>
-      </div>
+
       <div>
         <div>
           <Typography variant="h2">Level Overview</Typography>

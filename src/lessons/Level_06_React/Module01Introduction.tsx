@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module01Introduction() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -44,8 +45,19 @@ export default function Module01Introduction() {
         </div>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#jsx" className="text-primary hover:underline">→ JSX</a></li>
+          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
+          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Concept */}
-      <section className="space-y-6">
+      <section id="jsx" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">JSX — HTML inside JavaScript</h2>
         <p className="text-muted-foreground leading-relaxed">
           React uses <strong>JSX</strong> — a syntax that looks like HTML but lives inside a
@@ -88,8 +100,8 @@ export default function Module01Introduction() {
           start with a capital letter. React auto-mounts an <code className="font-mono bg-stone-100 px-1 rounded">App</code> component
           at the root of the page — so every app starts there.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`function App() {
+        <CodeBlock language="javascript">
+          {`function App() {
   return (
     <div>
       <h1>Hello, Cambodia! 🇰🇭</h1>
@@ -97,7 +109,7 @@ export default function Module01Introduction() {
     </div>
   );
 }`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">The Virtual DOM</h2>
         <p className="text-muted-foreground leading-relaxed">
@@ -122,7 +134,7 @@ export default function Module01Introduction() {
       </section>
 
       {/* Example */}
-      <section className="space-y-4">
+      <section id="live-example" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Live example — try editing it</h2>
         <p className="text-sm text-muted-foreground">
           The playground runs React 18 in the browser. The preview updates as you type.
@@ -151,7 +163,7 @@ export default function Module01Introduction() {
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="try-it-yourself" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Modify the starter below. Add a second paragraph with your name inside it.
@@ -173,7 +185,7 @@ export default function Module01Introduction() {
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Write an <code className="font-mono bg-stone-100 px-1 rounded">App</code> component that returns a{" "}

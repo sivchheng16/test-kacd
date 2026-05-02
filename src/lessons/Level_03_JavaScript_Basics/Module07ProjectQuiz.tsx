@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module07ProjectQuiz() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -45,16 +46,28 @@ export default function Module07ProjectQuiz() {
         </div>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#how-a-quiz-app-works" className="text-primary hover:underline">→ How a quiz app works</a></li>
+          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
+          <li><a href="#customise-it" className="text-primary hover:underline">→ Customise it</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+          <li><a href="#you-completed-javascript-basics" className="text-primary hover:underline">→ You completed JavaScript Basics</a></li>
+        </ul>
+      </section>
+
       {/* Concept */}
-      <section className="space-y-6">
+      <section id="how-a-quiz-app-works" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">How a quiz app works</h2>
         <p className="text-muted-foreground leading-relaxed">
           The logic is simpler than it looks. You store your questions in an array
           of objects. When the user clicks Submit, you loop through the answers,
           count correct ones, and display the result.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`// 1. Data — array of question objects
+        <CodeBlock language="json">
+          {`// 1. Data — array of question objects
 const questions = [
   {
     question: "What is the capital of Cambodia?",
@@ -83,7 +96,7 @@ document.querySelector("#submit").addEventListener("click", () => {
   document.querySelector("#result").textContent =
     \`You scored \${score} / \${questions.length}\`;
 });`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Rendering questions from data</h2>
         <p className="text-muted-foreground leading-relaxed">
@@ -91,8 +104,8 @@ document.querySelector("#submit").addEventListener("click", () => {
           <code className="font-mono bg-stone-100 px-1 rounded">.map()</code> to generate it from the array.
           Adding a new question is then just one line in the data.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const quizHTML = questions.map((q, i) => {
+        <CodeBlock language="javascript">
+          {`const quizHTML = questions.map((q, i) => {
   const optionsHTML = q.options.map((opt) =>
     \`<label>
       <input type="radio" name="q\${i}" value="\${opt}"> \${opt}
@@ -106,11 +119,11 @@ document.querySelector("#submit").addEventListener("click", () => {
 }).join("");
 
 document.querySelector("#quiz").innerHTML = quizHTML;`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* Example */}
-      <section className="space-y-4">
+      <section id="live-example" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Live example — full working quiz</h2>
         <p className="text-sm text-muted-foreground">
           This is a complete quiz. Read through every line — you know all the
@@ -183,7 +196,7 @@ document.querySelector("#submit").addEventListener("click", () => {
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="customise-it" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Customise it</h2>
         <p className="text-sm text-muted-foreground">
           Fork the example above and make it your own. Ideas: change the questions
@@ -244,7 +257,7 @@ document.querySelector("#submit").addEventListener("click", () => {
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Build a quiz app with at least 2 questions, a Submit button, a{" "}
@@ -353,7 +366,7 @@ document.querySelector("#submit").addEventListener("click", () => {
       </section>
 
       {/* Wrap up */}
-      <section className="space-y-3 border-t border-border pt-10">
+      <section id="you-completed-javascript-basics" className="space-y-3 border-t border-border pt-10">
         <h2 className="text-xl font-semibold text-foreground">You completed JavaScript Basics</h2>
         <p className="text-muted-foreground leading-relaxed">
           In this track you learned variables, data types, conditions, functions,

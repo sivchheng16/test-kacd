@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module01Fundamentals() {
   return (
@@ -14,8 +15,22 @@ export default function Module01Fundamentals() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#database-vs-a-plain-file" className="text-primary hover:underline">→ Database vs a plain file</a></li>
+          <li><a href="#relational-databases" className="text-primary hover:underline">→ Relational databases</a></li>
+          <li><a href="#document-databases" className="text-primary hover:underline">→ Document databases</a></li>
+          <li><a href="#key-value-stores" className="text-primary hover:underline">→ Key-value stores</a></li>
+          <li><a href="#acid-the-four-guarantees" className="text-primary hover:underline">→ ACID: the four guarantees</a></li>
+          <li><a href="#primary-keys-foreign-keys-indexes" className="text-primary hover:underline">→ Primary keys, foreign keys, indexes</a></li>
+          <li><a href="#when-to-choose-what" className="text-primary hover:underline">→ When to choose what</a></li>
+        </ul>
+      </section>
+
       {/* ── Database vs file ─────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="database-vs-a-plain-file" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Database vs a plain file</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           You could store data in a JSON file. Many small scripts do. But files fall
@@ -37,15 +52,15 @@ export default function Module01Fundamentals() {
       </section>
 
       {/* ── Relational databases ─────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="relational-databases" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Relational databases</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Examples: <strong className="text-foreground">PostgreSQL</strong>, MySQL, SQLite.
           Data lives in tables — rows and columns, like a spreadsheet. Tables are linked
           by foreign keys. You query them with SQL.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`-- users table
+        <CodeBlock language="javascript">
+          {`-- users table
 id  | name    | email
 ----+---------+------------------
  1  | Alice   | alice@example.com
@@ -57,7 +72,7 @@ id  | user_id | title
  1  |    1    | My first post
  2  |    1    | Another post
  3  |    2    | Bob writes too`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           <strong className="text-foreground">Use relational when:</strong> your data has
           clear structure, relationships between entities matter, and you need consistency
@@ -66,15 +81,15 @@ id  | user_id | title
       </section>
 
       {/* ── Document databases ───────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="document-databases" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Document databases</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Examples: <strong className="text-foreground">MongoDB</strong>, Firestore.
           Data is stored as JSON-like documents inside collections. There is no fixed
           schema — each document can have different fields.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// Firestore "posts" collection — document
+        <CodeBlock language="json">
+          {`// Firestore "posts" collection — document
 {
   "id": "abc123",
   "title": "My first post",
@@ -82,7 +97,7 @@ id  | user_id | title
   "tags": ["react", "databases"],
   "published": true
 }`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           <strong className="text-foreground">Use document when:</strong> your schema
           changes often during development, data is naturally hierarchical, and you are
@@ -91,18 +106,18 @@ id  | user_id | title
       </section>
 
       {/* ── Key-value stores ─────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="key-value-stores" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Key-value stores</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Examples: <strong className="text-foreground">Redis</strong>, DynamoDB.
           The simplest model: store a value under a key, retrieve it by key.
           Reads and writes are measured in microseconds.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`SET session:user:42  '{"userId":42,"role":"admin"}'  EX 3600
+        <CodeBlock language="json">
+          {`SET session:user:42  '{"userId":42,"role":"admin"}'  EX 3600
 GET session:user:42
 -- returns the JSON string, or nil if expired`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           <strong className="text-foreground">Use key-value when:</strong> you need
           caching, user sessions, rate limiting, real-time leaderboards, or any
@@ -111,7 +126,7 @@ GET session:user:42
       </section>
 
       {/* ── ACID ─────────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="acid-the-four-guarantees" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">ACID: the four guarantees</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Relational databases promise ACID. These guarantees are why banks do not lose
@@ -133,7 +148,7 @@ GET session:user:42
       </section>
 
       {/* ── Keys and indexes ─────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="primary-keys-foreign-keys-indexes" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Primary keys, foreign keys, indexes</h2>
         <ul className="space-y-4">
           {[
@@ -150,7 +165,7 @@ GET session:user:42
       </section>
 
       {/* ── Decision table ───────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="when-to-choose-what" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">When to choose what</h2>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">

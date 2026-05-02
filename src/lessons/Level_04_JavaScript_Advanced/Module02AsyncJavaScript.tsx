@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_SYNC = `// Synchronous — runs line by line
 console.log("First");
@@ -96,8 +97,20 @@ export default function Module02AsyncJavaScript() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#why-async-exists" className="text-primary hover:underline">→ Why Async Exists</a></li>
+          <li><a href="#callbacks-brief" className="text-primary hover:underline">→ Callbacks (Brief)</a></li>
+          <li><a href="#promises" className="text-primary hover:underline">→ Promises</a></li>
+          <li><a href="#async-await" className="text-primary hover:underline">→ async / await</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* The Event Loop */}
-      <section className="space-y-4">
+      <section id="why-async-exists" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Why Async Exists</h2>
         <p className="text-base text-muted-foreground">
           JavaScript runs on a single thread. Without async, any slow operation — a network
@@ -110,7 +123,8 @@ export default function Module02AsyncJavaScript() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Sync vs async execution
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`console.log("A");
+          <CodeBlock language="json">
+          {`console.log("A");
 
 setTimeout(() => {
   console.log("B — after 0 ms");
@@ -119,14 +133,15 @@ setTimeout(() => {
 console.log("C");
 
 // Output: A, C, B
-// Even with 0 ms, setTimeout is async — B runs after the current call stack clears.`}</pre>
+// Even with 0 ms, setTimeout is async — B runs after the current call stack clears.`}
+        </CodeBlock>
         </div>
 
         <CodePlayground mode="js" starter={{ js: EXPLORE_SYNC }} height="160px" />
       </section>
 
       {/* Callbacks */}
-      <section className="space-y-4">
+      <section id="callbacks-brief" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Callbacks (Brief)</h2>
         <p className="text-base text-muted-foreground">
           The original async pattern: pass a function to be called later. Simple for single
@@ -138,7 +153,8 @@ console.log("C");
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Callback hell — why we moved on
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`getUser(id, (user) => {
+          <CodeBlock language="javascript">
+          {`getUser(id, (user) => {
   getPosts(user.id, (posts) => {
     getComments(posts[0].id, (comments) => {
       getLikes(comments[0].id, (likes) => {
@@ -149,12 +165,13 @@ console.log("C");
   });
 });
 
-// Promises and async/await solve this.`}</pre>
+// Promises and async/await solve this.`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Promises */}
-      <section className="space-y-4">
+      <section id="promises" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Promises</h2>
         <p className="text-base text-muted-foreground">
           A Promise is an object that represents a value which may arrive now, later, or never.
@@ -166,7 +183,8 @@ console.log("C");
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Creating and consuming a Promise
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`// Create
+          <CodeBlock language="json">
+          {`// Create
 function fetchUser(id) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -188,14 +206,15 @@ fetchUser(1)
 
 // Run multiple in parallel
 Promise.all([fetchUser(1), fetchUser(2), fetchUser(3)])
-  .then(([u1, u2, u3]) => console.log(u1, u2, u3));`}</pre>
+  .then(([u1, u2, u3]) => console.log(u1, u2, u3));`}
+        </CodeBlock>
         </div>
 
         <CodePlayground mode="js" starter={{ js: EXPLORE_PROMISES }} height="280px" />
       </section>
 
       {/* Async/await */}
-      <section className="space-y-4">
+      <section id="async-await" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">async / await</h2>
         <p className="text-base text-muted-foreground">
           The <code className="font-mono text-sm">async</code> keyword makes a function return a
@@ -207,7 +226,8 @@ Promise.all([fetchUser(1), fetchUser(2), fetchUser(3)])
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             The modern pattern
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`// Promise chain version
+          <CodeBlock language="json">
+          {`// Promise chain version
 function loadData() {
   return fetchUser(1)
     .then(user => fetchPosts(user.id))
@@ -240,14 +260,15 @@ async function sequential() {
 
 async function parallel() {
   const [a, b] = await Promise.all([fetch("/one"), fetch("/two")]); // both at once
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
 
         <CodePlayground mode="js" starter={{ js: EXPLORE_ASYNC }} height="300px" />
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
         <p className="text-base text-muted-foreground">
           Write an async function called <code className="font-mono text-sm">wait</code> that

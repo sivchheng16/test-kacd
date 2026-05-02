@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module02ReadingCode() {
   return (
@@ -14,8 +15,24 @@ export default function Module02ReadingCode() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#start-at-the-entry-point" className="text-primary hover:underline">→ Start at the entry point</a></li>
+          <li><a href="#dont-read-every-line" className="text-primary hover:underline">→ Don't read every line</a></li>
+          <li><a href="#follow-the-data" className="text-primary hover:underline">→ Follow the data</a></li>
+          <li><a href="#use-your-ide" className="text-primary hover:underline">→ Use your IDE</a></li>
+          <li><a href="#git-blame-and-git-log" className="text-primary hover:underline">→ Git blame and git log</a></li>
+          <li><a href="#read-the-tests" className="text-primary hover:underline">→ Read the tests</a></li>
+          <li><a href="#the-5-minute-rule" className="text-primary hover:underline">→ The 5-minute rule</a></li>
+          <li><a href="#when-to-rewrite-vs-when-to-understand" className="text-primary hover:underline">→ When to rewrite vs when to understand</a></li>
+          <li><a href="#build-a-mental-model" className="text-primary hover:underline">→ Build a mental model</a></li>
+        </ul>
+      </section>
+
       {/* Start at the entry point */}
-      <section className="space-y-5">
+      <section id="start-at-the-entry-point" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Start at the entry point</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Every codebase has a place where execution begins. In a Node server it's usually
@@ -32,18 +49,21 @@ export default function Module02ReadingCode() {
           start at chapter one because someone said to, you start at the door you're going
           to enter through.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// App.tsx — start here
+        <CodeBlock language="javascript">
+          {`// App.tsx — start here
 import { Router } from "./Router";
 import { AuthProvider } from "./context/AuthContext";
 import { ProgressProvider } from "./context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 // The providers wrap everything — so context is available everywhere.
 // The Router is the decision-maker — it decides what renders per URL.
-// Trace into Router next.`}</pre>
+// Trace into Router next.`}
+        </CodeBlock>
       </section>
 
       {/* Don't read every line */}
-      <section className="space-y-5">
+      <section id="dont-read-every-line" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Don't read every line</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Reading code is not reading a book. You are not obligated to process every line
@@ -59,7 +79,7 @@ import { ProgressProvider } from "./context/ProgressContext";
       </section>
 
       {/* Follow the data */}
-      <section className="space-y-5">
+      <section id="follow-the-data" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Follow the data</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The most reliable reading strategy in any codebase is to follow a piece of data.
@@ -79,7 +99,7 @@ import { ProgressProvider } from "./context/ProgressContext";
       </section>
 
       {/* Use your IDE */}
-      <section className="space-y-5">
+      <section id="use-your-ide" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Use your IDE</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Reading code with a text editor and no tooling is like navigating a city without
@@ -123,20 +143,22 @@ import { ProgressProvider } from "./context/ProgressContext";
       </section>
 
       {/* Git blame */}
-      <section className="space-y-5">
+      <section id="git-blame-and-git-log" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Git blame and git log</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Code is not written in a vacuum. Every line was written by someone, for a reason,
           in a specific context that may no longer be obvious from the code itself.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`# Who wrote this line and when?
+        <CodeBlock language="javascript">
+          {`# Who wrote this line and when?
 git blame src/lib/auth.ts
 
 # What changed in this file over time?
 git log --follow -p src/lib/auth.ts
 
 # When was this specific function added?
-git log -S "function validateToken" --source --all`}</pre>
+git log -S "function validateToken" --source --all`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           When you see code that looks wrong, or a condition that seems arbitrary, or a
           workaround that makes no sense — git blame will tell you who wrote it and when.
@@ -146,14 +168,15 @@ git log -S "function validateToken" --source --all`}</pre>
       </section>
 
       {/* Read tests */}
-      <section className="space-y-5">
+      <section id="read-the-tests" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Read the tests</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Tests are the most accurate documentation in a codebase, because unlike comments
           they break when they are wrong. A well-written test shows you exactly how a
           function is supposed to be called and what it is supposed to return.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// From the test file — tells you the contract
+        <CodeBlock language="javascript">
+          {`// From the test file — tells you the contract
 describe("formatCurrency", () => {
   it("formats USD with two decimal places", () => {
     expect(formatCurrency(1000, "USD")).toBe("$1,000.00");
@@ -164,7 +187,8 @@ describe("formatCurrency", () => {
   it("handles negative values", () => {
     expect(formatCurrency(-50, "USD")).toBe("-$50.00");
   });
-});`}</pre>
+});`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Three tests told you the function's entire behavior contract. You did not need to
           read the implementation at all. When good tests exist, read them first.
@@ -172,7 +196,7 @@ describe("formatCurrency", () => {
       </section>
 
       {/* 5-minute rule */}
-      <section className="space-y-5">
+      <section id="the-5-minute-rule" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">The 5-minute rule</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Before asking someone to explain a piece of code, spend 5 minutes trying to
@@ -189,7 +213,7 @@ describe("formatCurrency", () => {
       </section>
 
       {/* Rewrite vs understand */}
-      <section className="space-y-5">
+      <section id="when-to-rewrite-vs-when-to-understand" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">When to rewrite vs when to understand</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The junior developer instinct is to rewrite code that looks messy or hard to
@@ -206,7 +230,7 @@ describe("formatCurrency", () => {
       </section>
 
       {/* Build a mental model */}
-      <section className="space-y-5">
+      <section id="build-a-mental-model" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Build a mental model — literally draw it</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           When you are reading a complex system — a state machine, a data pipeline, a

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module04APIRoutes() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -22,15 +23,30 @@ export default function Module04APIRoutes() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#where-route-handlers-live" className="text-primary hover:underline">→ Where Route Handlers Live</a></li>
+          <li><a href="#a-simple-get-handler" className="text-primary hover:underline">→ A Simple GET Handler</a></li>
+          <li><a href="#get-post-in-one-file" className="text-primary hover:underline">→ GET + POST in One File</a></li>
+          <li><a href="#dynamic-route-handlers" className="text-primary hover:underline">→ Dynamic Route Handlers</a></li>
+          <li><a href="#reading-request-data" className="text-primary hover:underline">→ Reading Request Data</a></li>
+          <li><a href="#api-routes-vs-server-actions" className="text-primary hover:underline">→ API Routes vs Server Actions</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* Where routes live */}
-      <section className="space-y-6">
+      <section id="where-route-handlers-live" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Where Route Handlers Live</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           A file named <code className="bg-stone-100 px-1 rounded text-xs font-mono">route.ts</code> inside the <code className="bg-stone-100 px-1 rounded text-xs font-mono">app/</code> directory creates an API endpoint at that URL path. It must export named functions for each HTTP method.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">File tree → API URL</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`app/
+          <CodeBlock language="javascript">
+          {`app/
 └── api/
     ├── hello/
     │   └── route.ts      →  GET  /api/hello
@@ -40,19 +56,21 @@ export default function Module04APIRoutes() {
     │       └── route.ts  →  GET/PUT/DELETE  /api/products/42
     └── auth/
         └── login/
-            └── route.ts  →  POST  /api/auth/login`}</pre>
+            └── route.ts  →  POST  /api/auth/login`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Basic GET */}
-      <section className="space-y-6">
+      <section id="a-simple-get-handler" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">A Simple GET Handler</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Export an <code className="bg-stone-100 px-1 rounded text-xs font-mono">async function GET()</code>. Use <code className="bg-stone-100 px-1 rounded text-xs font-mono">NextResponse.json()</code> to return JSON. Test it in the browser at the matching URL.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">app/api/hello/route.ts</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`import { NextResponse } from 'next/server';
+          <CodeBlock language="javascript">
+          {`import { NextResponse } from 'next/server';
 
 export async function GET() {
   return NextResponse.json({
@@ -61,19 +79,21 @@ export async function GET() {
   });
 }
 
-// Visit http://localhost:3000/api/hello to see the JSON`}</pre>
+// Visit http://localhost:3000/api/hello to see the JSON`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* CRUD example */}
-      <section className="space-y-6">
+      <section id="get-post-in-one-file" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">GET + POST in One File</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Export one function per HTTP method in the same <code className="bg-stone-100 px-1 rounded text-xs font-mono">route.ts</code>. Next.js dispatches by method name automatically.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">app/api/products/route.ts</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`import { NextRequest, NextResponse } from 'next/server';
+          <CodeBlock language="javascript">
+          {`import { NextRequest, NextResponse } from 'next/server';
 
 // In-memory store (use a real DB in production)
 let products = [
@@ -96,19 +116,21 @@ export async function POST(request: NextRequest) {
   };
   products.push(newProduct);
   return NextResponse.json(newProduct, { status: 201 });
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Dynamic route handler */}
-      <section className="space-y-6">
+      <section id="dynamic-route-handlers" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Dynamic Route Handlers</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Dynamic segments work exactly like page routes. The second argument to the handler provides <code className="bg-stone-100 px-1 rounded text-xs font-mono">params</code> with the URL values.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">app/api/products/[id]/route.ts</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`import { NextRequest, NextResponse } from 'next/server';
+          <CodeBlock language="javascript">
+          {`import { NextRequest, NextResponse } from 'next/server';
 
 // GET /api/products/42
 export async function GET(
@@ -133,18 +155,20 @@ export async function DELETE(
   }
   products.splice(index, 1);
   return NextResponse.json({ success: true });
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Request data */}
-      <section className="space-y-6">
+      <section id="reading-request-data" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Reading Request Data</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           <code className="bg-stone-100 px-1 rounded text-xs font-mono">NextRequest</code> extends the standard Web API Request with Next.js helpers for cookies and URL search params.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`export async function POST(request: NextRequest) {
+          <CodeBlock language="javascript">
+          {`export async function POST(request: NextRequest) {
   // JSON body
   const body = await request.json();
 
@@ -159,12 +183,13 @@ export async function DELETE(
   const token = request.cookies.get('session')?.value;
 
   return NextResponse.json({ body, query, auth, token });
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* API Routes vs Server Actions */}
-      <section className="space-y-6">
+      <section id="api-routes-vs-server-actions" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">API Routes vs Server Actions</h2>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">
@@ -191,7 +216,7 @@ export async function DELETE(
       </section>
 
       {/* Knowledge check */}
-      <section className="space-y-6">
+      <section id="knowledge-check" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Knowledge Check</h2>
         <p className="text-sm text-muted-foreground">
           Where does a GET route handler live in Next.js App Router?

@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module02SQLFundamentals() {
   return (
@@ -13,20 +14,36 @@ export default function Module02SQLFundamentals() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#select" className="text-primary hover:underline">→ SELECT</a></li>
+          <li><a href="#insert" className="text-primary hover:underline">→ INSERT</a></li>
+          <li><a href="#update" className="text-primary hover:underline">→ UPDATE</a></li>
+          <li><a href="#delete" className="text-primary hover:underline">→ DELETE</a></li>
+          <li><a href="#joins" className="text-primary hover:underline">→ JOINs</a></li>
+          <li><a href="#group-by-and-aggregates" className="text-primary hover:underline">→ GROUP BY and aggregates</a></li>
+          <li><a href="#subqueries" className="text-primary hover:underline">→ Subqueries</a></li>
+          <li><a href="#create-table" className="text-primary hover:underline">→ CREATE TABLE</a></li>
+          <li><a href="#common-mistakes" className="text-primary hover:underline">→ Common mistakes</a></li>
+        </ul>
+      </section>
+
       {/* ── SELECT ───────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="select" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">SELECT — reading data</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The most common operation. Read specific columns, filter rows, sort the result,
           and limit how many rows come back.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`SELECT name, email
+        <CodeBlock language="sql">
+          {`SELECT name, email
 FROM   users
 WHERE  active = true
 ORDER  BY name
 LIMIT  10;`}
-        </pre>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li><code className="text-foreground font-mono">WHERE</code> — filters rows before they are returned</li>
           <li><code className="text-foreground font-mono">ORDER BY</code> — sorts ascending by default; append <code className="text-foreground font-mono">DESC</code> for descending</li>
@@ -35,10 +52,10 @@ LIMIT  10;`}
       </section>
 
       {/* ── INSERT ───────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="insert" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">INSERT — creating rows</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`INSERT INTO users (name, email, active)
+        <CodeBlock language="javascript">
+          {`INSERT INTO users (name, email, active)
 VALUES ('Alice', 'alice@example.com', true);
 
 -- Insert multiple rows at once
@@ -46,7 +63,7 @@ INSERT INTO users (name, email, active)
 VALUES
   ('Bob',   'bob@example.com',   true),
   ('Carol', 'carol@example.com', false);`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Columns with defaults (like <code className="text-foreground font-mono">created_at DEFAULT NOW()</code>)
           do not need to be listed — the database fills them in.
@@ -54,14 +71,14 @@ VALUES
       </section>
 
       {/* ── UPDATE ───────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="update" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">UPDATE — modifying rows</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`UPDATE users
+        <CodeBlock language="javascript">
+          {`UPDATE users
 SET    last_login = NOW(),
        login_count = login_count + 1
 WHERE  id = 42;`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           The <code className="text-foreground font-mono">WHERE</code> clause is critical.
           An UPDATE without WHERE updates <em>every row in the table</em>. Always double-check
@@ -70,19 +87,19 @@ WHERE  id = 42;`}
       </section>
 
       {/* ── DELETE ───────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="delete" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">DELETE — removing rows</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`DELETE FROM users
+        <CodeBlock language="javascript">
+          {`DELETE FROM users
 WHERE  id = 42;
 
 -- Always WHERE. This deletes every row:
--- DELETE FROM users;  ← do not do this`}
-        </pre>
+-- DELETE FROM users;  //  do not do this`}
+        </CodeBlock>
       </section>
 
       {/* ── JOINs ────────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="joins" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">JOINs — the most important concept</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Data lives in separate tables. JOINs combine them. This is the central idea
@@ -91,28 +108,28 @@ WHERE  id = 42;
 
         <div className="space-y-2">
           <p className="text-sm font-semibold text-foreground">INNER JOIN — only rows that match in both tables</p>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`SELECT users.name, posts.title
+          <CodeBlock language="sql">
+          {`SELECT users.name, posts.title
 FROM   posts
 INNER  JOIN users ON users.id = posts.user_id;
 -- Users with no posts do NOT appear`}
-          </pre>
+        </CodeBlock>
         </div>
 
         <div className="space-y-2">
           <p className="text-sm font-semibold text-foreground">LEFT JOIN — all rows from the left table, matching rows from the right (or NULL)</p>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`SELECT users.name, posts.title
+          <CodeBlock language="sql">
+          {`SELECT users.name, posts.title
 FROM   users
 LEFT   JOIN posts ON posts.user_id = users.id;
 -- Users with no posts appear with posts.title = NULL`}
-          </pre>
+        </CodeBlock>
         </div>
 
         <div className="space-y-2">
           <p className="text-sm font-semibold text-foreground">Real-world example: posts with author name and post count</p>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`SELECT
+          <CodeBlock language="javascript">
+          {`SELECT
   users.name      AS author,
   posts.title,
   posts.created_at
@@ -121,12 +138,12 @@ INNER  JOIN users ON users.id = posts.user_id
 WHERE  users.active = true
 ORDER  BY posts.created_at DESC
 LIMIT  20;`}
-          </pre>
+        </CodeBlock>
         </div>
       </section>
 
       {/* ── GROUP BY + aggregates ────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="group-by-and-aggregates" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">GROUP BY and aggregates</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Aggregate functions collapse many rows into one value per group.
@@ -136,8 +153,8 @@ LIMIT  20;`}
           <code className="text-foreground font-mono">MAX</code>,{" "}
           <code className="text-foreground font-mono">MIN</code>.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`-- How many posts per user?
+        <CodeBlock language="sql">
+          {`-- How many posts per user?
 SELECT   user_id, COUNT(*) AS post_count
 FROM     posts
 GROUP BY user_id
@@ -148,18 +165,18 @@ SELECT   user_id, COUNT(*) AS post_count
 FROM     posts
 GROUP BY user_id
 HAVING   COUNT(*) > 5;`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── Subqueries ───────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="subqueries" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Subqueries</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A SELECT inside another SELECT. Useful when a JOIN would be awkward or when
           you want to filter based on the result of another query.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`-- All posts by active users
+        <CodeBlock language="sql">
+          {`-- All posts by active users
 SELECT *
 FROM   posts
 WHERE  user_id IN (
@@ -167,7 +184,7 @@ WHERE  user_id IN (
   FROM   users
   WHERE  active = true
 );`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           A JOIN often performs better than an <code className="text-foreground font-mono">IN</code> subquery
           on large tables, but the subquery form is easier to read when you are first
@@ -176,10 +193,10 @@ WHERE  user_id IN (
       </section>
 
       {/* ── CREATE TABLE ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="create-table" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">CREATE TABLE — defining structure</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`CREATE TABLE users (
+        <CodeBlock language="sql">
+          {`CREATE TABLE users (
   id         UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
   name       TEXT        NOT NULL,
   email      TEXT        NOT NULL UNIQUE,
@@ -195,7 +212,7 @@ CREATE TABLE posts (
   published  BOOLEAN     NOT NULL DEFAULT false,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );`}
-        </pre>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li><code className="text-foreground font-mono">TEXT</code> — variable-length string, no arbitrary limit needed in PostgreSQL</li>
           <li><code className="text-foreground font-mono">BOOLEAN</code> — true / false</li>
@@ -206,7 +223,7 @@ CREATE TABLE posts (
       </section>
 
       {/* ── Common mistakes ──────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="common-mistakes" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Common mistakes</h2>
         <div className="space-y-4">
           {[

@@ -1,4 +1,6 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
+
 
 export default function Module03ServerComponents() {
   return (
@@ -8,12 +10,28 @@ export default function Module03ServerComponents() {
       <section>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Server Components</h1>
         <p className="mt-3 text-muted-foreground text-base">
-          Most of the JavaScript you send to users today doesn't need to run in the browser. Server Components change the default — components render on the server and ship zero JavaScript to the client unless you explicitly ask for it.
+          Most of the JavaScript   you send to users today doesn't need to run in the browser. Server Components change the default — components render on the server and ship zero JavaScript to the client unless you explicitly ask for it.
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#server-components" className="text-primary hover:underline">→ Server Components</a></li>
+          <li><a href="#client-components" className="text-primary hover:underline">→ Client Components</a></li>
+          <li><a href="#the-mental-model" className="text-primary hover:underline">→ The mental model</a></li>
+          <li><a href="#when-to-add-use-client" className="text-primary hover:underline">→ When to add 'use client'</a></li>
+          <li><a href="#composition-pattern" className="text-primary hover:underline">→ Composition pattern</a></li>
+          <li><a href="#the-boundary-rule" className="text-primary hover:underline">→ The boundary rule</a></li>
+          <li><a href="#common-mistakes" className="text-primary hover:underline">→ Common mistakes</a></li>
+          <li><a href="#guarding-server-code" className="text-primary hover:underline">→ Guarding server code</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
+        </ul>
+      </section>
+
       {/* What are Server Components */}
-      <section className="space-y-6">
+      <section id="server-components" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Server Components — the new default</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Every component inside <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">app/</code> is a Server Component by default. It runs on the server, produces HTML, and that HTML is sent to the browser. No component code, no React runtime, no hydration cost — unless you opt in.
@@ -23,7 +41,8 @@ export default function Module03ServerComponents() {
         </p>
         <div className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-[#2a2a2a] text-[#6c7086] text-xs">app/posts/page.tsx — Server Component</div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// No 'use client' — this is a Server Component
+          <CodeBlock language="sql">
+          {`// No 'use client' — this is a Server Component
 // Can be async, can use secrets, sends zero JS to browser
 
 import { db } from '@/lib/db';
@@ -39,19 +58,21 @@ export default async function PostsPage() {
       ))}
     </ul>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Client Components */}
-      <section className="space-y-6">
+      <section id="client-components" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Client Components — opt in with <code className="bg-stone-100 px-1.5 py-0.5 rounded text-sm font-mono">'use client'</code></h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Adding <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">'use client'</code> as the very first line of a file marks it as a Client Component. It runs in the browser, gets hydrated, and can use all the React features you're used to: <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">useState</code>, <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">useEffect</code>, event handlers, browser APIs.
         </p>
         <div className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-[#2a2a2a] text-[#6c7086] text-xs">components/Counter.tsx — Client Component</div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`'use client'; // ← must be the very first line
+          <CodeBlock language="javascript">
+          {`'use client'; // //  must be the very first line
 
 import { useState } from 'react';
 
@@ -66,7 +87,8 @@ export default function Counter() {
       Clicked {count} times
     </button>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
 
         <div className="overflow-x-auto rounded-xl border border-border">
@@ -100,7 +122,7 @@ export default function Counter() {
       </section>
 
       {/* Mental model */}
-      <section className="space-y-6">
+      <section id="the-mental-model" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">The mental model</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Think of it like classic server-rendered apps — PHP, Rails, Django — but still React. The server renders HTML that is already populated with data. The browser displays it instantly. Client Components layer interactivity on top, exactly where needed.
@@ -136,7 +158,7 @@ export default function Counter() {
       </section>
 
       {/* When to use 'use client' */}
-      <section className="space-y-6">
+      <section id="when-to-add-use-client" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">When to add <code className="bg-stone-100 px-1.5 py-0.5 rounded text-sm font-mono">'use client'</code></h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The rule is simple: start without it. Add <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">'use client'</code> only when your component genuinely needs one of these:
@@ -175,14 +197,15 @@ export default function Counter() {
       </section>
 
       {/* Composition pattern */}
-      <section className="space-y-6">
+      <section id="composition-pattern" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Composition pattern — server wraps client</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Server Components can import and render Client Components. This is the primary composition pattern: the server does the heavy lifting (data fetching, secrets), then passes serialisable data down as props to interactive client leaves.
         </p>
         <div className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-[#2a2a2a] text-[#6c7086] text-xs">app/posts/page.tsx — server wraps client</div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// ServerPage.tsx (Server Component — no 'use client')
+          <CodeBlock language="javascript">
+          {`// ServerPage.tsx (Server Component — no 'use client')
 import LikeButton from './LikeButton'; // 'use client'
 
 export default async function PostPage({ params }: { params: { id: string } }) {
@@ -197,11 +220,13 @@ export default async function PostPage({ params }: { params: { id: string } }) {
       <LikeButton postId={post.id} initialLikes={post.likes} />
     </article>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
         <div className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-[#2a2a2a] text-[#6c7086] text-xs">components/LikeButton.tsx — Client Component</div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`'use client';
+          <CodeBlock language="javascript">
+          {`'use client';
 
 import { useState } from 'react';
 
@@ -219,7 +244,8 @@ export default function LikeButton({
       {likes} likes
     </button>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
         <div className="px-5 py-4 rounded-xl border border-amber-200 bg-amber-50">
           <p className="text-sm font-semibold text-amber-800">Props must be serialisable</p>
@@ -230,7 +256,7 @@ export default function LikeButton({
       </section>
 
       {/* The boundary rule */}
-      <section className="space-y-6">
+      <section id="the-boundary-rule" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">The boundary rule — keep <code className="bg-stone-100 px-1.5 py-0.5 rounded text-sm font-mono">'use client'</code> at the leaves</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Once a file has <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">'use client'</code>, every module it imports is also treated as a Client Component — even if those modules don't explicitly say so. The client boundary propagates downward through the import tree.
@@ -238,19 +264,23 @@ export default function LikeButton({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="rounded-xl border border-red-200 overflow-hidden">
             <div className="px-4 py-2 bg-red-50 border-b border-red-200 text-xs font-medium text-red-700">Avoid — 'use client' too high</div>
-            <pre className="px-4 py-4 text-xs font-mono leading-relaxed text-foreground overflow-x-auto bg-white">{`// app/layout.tsx
+            <CodeBlock language="javascript">
+          {`// app/layout.tsx
 'use client'; // ❌ now every child is client
 
 // This kills Server Component benefits
-// for the entire subtree`}</pre>
+// for the entire subtree`}
+        </CodeBlock>
           </div>
           <div className="rounded-xl border border-green-200 overflow-hidden">
             <div className="px-4 py-2 bg-green-50 border-b border-green-200 text-xs font-medium text-green-700">Prefer — push to the leaf</div>
-            <pre className="px-4 py-4 text-xs font-mono leading-relaxed text-foreground overflow-x-auto bg-white">{`// app/layout.tsx — no directive, stays server
+            <CodeBlock language="javascript">
+          {`// app/layout.tsx — no directive, stays server
 
 // Only the interactive button is client:
 // components/MobileMenuButton.tsx
-'use client'; // ✅ only this small component`}</pre>
+'use client'; // ✅ only this small component`}
+        </CodeBlock>
           </div>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
@@ -259,51 +289,59 @@ export default function LikeButton({
       </section>
 
       {/* Common mistakes */}
-      <section className="space-y-6">
+      <section id="common-mistakes" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Common mistakes</h2>
         <div className="space-y-4">
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-foreground">Mistake 1 — 'use client' on every file</div>
-            <pre className="px-4 py-3 text-xs font-mono text-muted-foreground bg-white overflow-x-auto">{`// ❌ This defeats the purpose of the App Router entirely.
+            <CodeBlock language="javascript">
+          {`// ❌ This defeats the purpose of the App Router entirely.
 // You lose server-side data fetching, bundle size benefits,
 // and end up with a standard React SPA inside Next.js.
 'use client';
-export default function StaticAboutPage() { ... }`}</pre>
+export default function StaticAboutPage() { ... }`}
+        </CodeBlock>
           </div>
 
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-foreground">Mistake 2 — importing server-only packages in a client component</div>
-            <pre className="px-4 py-3 text-xs font-mono text-muted-foreground bg-white overflow-x-auto">{`'use client';
+            <CodeBlock language="javascript">
+          {`'use client';
 import { db } from '@/lib/db'; // ❌ db uses Node.js — crashes in browser
 import fs from 'fs';           // ❌ fs does not exist in browser
 
-// The build may succeed but the app will throw at runtime.`}</pre>
+// The build may succeed but the app will throw at runtime.`}
+        </CodeBlock>
           </div>
 
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-foreground">Mistake 3 — trying to async/await in a client component</div>
-            <pre className="px-4 py-3 text-xs font-mono text-muted-foreground bg-white overflow-x-auto">{`'use client';
+            <CodeBlock language="javascript">
+          {`'use client';
 // ❌ Client Components cannot be async functions.
 export default async function Page() {
   const data = await fetch('/api/posts'); // won't work as intended
   ...
 }
-// Fix: do the fetch in a Server Component parent and pass data as props.`}</pre>
+// Fix: do the fetch in a Server Component parent and pass data as props.`}
+        </CodeBlock>
           </div>
         </div>
       </section>
 
       {/* server-only package */}
-      <section className="space-y-6">
+      <section id="guarding-server-code" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Guarding server code — <code className="bg-stone-100 px-1.5 py-0.5 rounded text-sm font-mono">server-only</code></h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">server-only</code> package is a compile-time guard. Import it at the top of any module that must never run in the browser — database helpers, secret readers, internal API clients. If a Client Component ever imports that module (directly or transitively), the build fails with a clear error message.
         </p>
         <div className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-[#2a2a2a] text-[#6c7086] text-xs">lib/db.ts — guaranteed server-only</div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`import 'server-only'; // throws at build time if imported by a Client Component
+          <CodeBlock language="javascript">
+          {`import 'server-only'; // throws at build time if imported by a Client Component
 
 import { Pool } from 'pg';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL, // secret — safe here
@@ -311,7 +349,8 @@ const pool = new Pool({
 
 export const db = {
   query: (sql: string) => pool.query(sql),
-};`}</pre>
+};`}
+        </CodeBlock>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Install it with <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">npm install server-only</code>. There is a matching <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">client-only</code> package for the reverse: modules that must never run on the server (anything that touches <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">window</code>, for example).
@@ -319,7 +358,7 @@ export const db = {
       </section>
 
       {/* Summary */}
-      <section className="space-y-4">
+      <section id="summary" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Summary</h2>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const OPTIONS = ["git start", "git init", "git new", "git create"];
 const CORRECT = "git init";
@@ -29,8 +30,23 @@ export default function Module01IntroductionGit() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-is-version-control" className="text-primary hover:underline">→ What is Version Control?</a></li>
+          <li><a href="#git-vs-github" className="text-primary hover:underline">→ Git vs GitHub</a></li>
+          <li><a href="#core-concepts" className="text-primary hover:underline">→ Core Concepts</a></li>
+          <li><a href="#the-init-add-commit-cycle" className="text-primary hover:underline">→ The init / add / commit Cycle</a></li>
+          <li><a href="#first-time-setup" className="text-primary hover:underline">→ First-time Setup</a></li>
+          <li><a href="#gitignore" className="text-primary hover:underline">→ .gitignore</a></li>
+          <li><a href="#writing-good-commit-messages" className="text-primary hover:underline">→ Writing Good Commit Messages</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* What is version control */}
-      <section className="space-y-4">
+      <section id="what-is-version-control" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">What is Version Control?</h2>
         <p className="text-base text-muted-foreground">
           Version control is a system that records changes to files over time. Think of it as
@@ -45,7 +61,7 @@ export default function Module01IntroductionGit() {
       </section>
 
       {/* Git vs GitHub */}
-      <section className="space-y-4">
+      <section id="git-vs-github" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Git vs GitHub</h2>
         <p className="text-base text-muted-foreground">
           These two names are often confused. They are different things.
@@ -83,7 +99,7 @@ export default function Module01IntroductionGit() {
       </section>
 
       {/* Core concepts */}
-      <section className="space-y-4">
+      <section id="core-concepts" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Core Concepts</h2>
 
         <div className="space-y-3">
@@ -113,7 +129,7 @@ export default function Module01IntroductionGit() {
       </section>
 
       {/* The three-step workflow */}
-      <section className="space-y-4">
+      <section id="the-init-add-commit-cycle" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">The init / add / commit Cycle</h2>
         <p className="text-base text-muted-foreground">
           Every Git session follows the same rhythm.
@@ -123,7 +139,8 @@ export default function Module01IntroductionGit() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# 1. Create a new repository (do this once per project)
+          <CodeBlock language="javascript">
+          {`# 1. Create a new repository (do this once per project)
 git init
 
 # 2. Check what Git sees
@@ -136,28 +153,31 @@ git add index.html     # or stage one file
 # 4. Save a snapshot
 git commit -m "Add navigation bar"
 
-# 5. Repeat steps 2–4 for every set of changes`}</pre>
+# 5. Repeat steps 2–4 for every set of changes`}
+        </CodeBlock>
         </div>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             What git status shows
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`On branch main
+          <CodeBlock language="javascript">
+          {`On branch main
 
-Changes to be committed:          ← staged (will go into next commit)
+Changes to be committed:          //  staged (will go into next commit)
   new file:   index.html
 
-Changes not staged for commit:    ← modified but not staged yet
+Changes not staged for commit:    //  modified but not staged yet
   modified:   style.css
 
-Untracked files:                  ← Git doesn't know about these yet
-  script.js`}</pre>
+Untracked files:                  //  Git doesn't know about these yet
+  script.js`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Setup */}
-      <section className="space-y-4">
+      <section id="first-time-setup" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">First-time Setup</h2>
         <p className="text-base text-muted-foreground">
           Before your first commit, tell Git who you are. This information is stored in every
@@ -168,7 +188,8 @@ Untracked files:                  ← Git doesn't know about these yet
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal — run once on your machine
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`git config --global user.name  "Sokha Chan"
+          <CodeBlock language="javascript">
+          {`git config --global user.name  "Sokha Chan"
 git config --global user.email "sokha@example.com"
 
 # Verify
@@ -178,12 +199,13 @@ git config --list
 git --version
 
 # Install on KOOMPI OS (Arch Linux) if not present
-sudo pacman -S git`}</pre>
+sudo pacman -S git`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* .gitignore */}
-      <section className="space-y-4">
+      <section id="gitignore" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">.gitignore</h2>
         <p className="text-base text-muted-foreground">
           Some files should never be committed — secrets, generated build outputs, and large
@@ -195,23 +217,26 @@ sudo pacman -S git`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             .gitignore — common entries
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`node_modules/   # can always be reinstalled
+          <CodeBlock language="javascript">
+          {`node_modules/   # can always be reinstalled
 dist/           # build output
 .env            # secrets — NEVER commit this
 .DS_Store       # macOS metadata
-*.log           # log files`}</pre>
+*.log           # log files`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Good commit messages */}
-      <section className="space-y-4">
+      <section id="writing-good-commit-messages" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Writing Good Commit Messages</h2>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Bad vs good
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Bad — tells you nothing
+          <CodeBlock language="javascript">
+          {`# Bad — tells you nothing
 git commit -m "fix"
 git commit -m "changes"
 git commit -m "asdfgh"
@@ -219,7 +244,8 @@ git commit -m "asdfgh"
 # Good — explains what and why
 git commit -m "Fix navigation overlap on mobile"
 git commit -m "Add contact form with validation"
-git commit -m "Remove unused CSS to reduce bundle size"`}</pre>
+git commit -m "Remove unused CSS to reduce bundle size"`}
+        </CodeBlock>
         </div>
 
         <ul className="space-y-1 text-sm text-muted-foreground list-disc list-inside">
@@ -230,7 +256,7 @@ git commit -m "Remove unused CSS to reduce bundle size"`}</pre>
       </section>
 
       {/* Knowledge check */}
-      <section className="space-y-4">
+      <section id="knowledge-check" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Knowledge Check</h2>
         <p className="text-base text-muted-foreground">
           Which command initialises a new Git repository in the current folder?

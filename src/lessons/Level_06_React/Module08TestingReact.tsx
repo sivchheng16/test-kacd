@@ -1,5 +1,6 @@
 import React from "react";
 import { CheckCircle2 } from "lucide-react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module08TestingReact() {
   return (
@@ -20,8 +21,24 @@ export default function Module08TestingReact() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#react-testing-library-philosophy" className="text-primary hover:underline">→ React Testing Library philosophy</a></li>
+          <li><a href="#setup" className="text-primary hover:underline">→ Setup</a></li>
+          <li><a href="#queries" className="text-primary hover:underline">→ Queries</a></li>
+          <li><a href="#your-first-component-test" className="text-primary hover:underline">→ Your first component test</a></li>
+          <li><a href="#firing-events-with-userevent" className="text-primary hover:underline">→ Firing events with userEvent</a></li>
+          <li><a href="#mocking-api-calls" className="text-primary hover:underline">→ Mocking API calls</a></li>
+          <li><a href="#async-testing" className="text-primary hover:underline">→ Async testing</a></li>
+          <li><a href="#what-not-to-test" className="text-primary hover:underline">→ What not to test</a></li>
+          <li><a href="#key-takeaways" className="text-primary hover:underline">→ Key takeaways</a></li>
+        </ul>
+      </section>
+
       {/* Philosophy */}
-      <section className="space-y-6">
+      <section id="react-testing-library-philosophy" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">React Testing Library philosophy</h2>
         <p className="text-muted-foreground leading-relaxed">
           <a
@@ -58,15 +75,15 @@ export default function Module08TestingReact() {
       </section>
 
       {/* Setup */}
-      <section className="space-y-4">
+      <section id="setup" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Setup</h2>
         <p className="text-muted-foreground leading-relaxed">
           Install RTL and the user-event library. Vitest (bundled with Vite) handles test
           running; Jest works too.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`npm install --save-dev @testing-library/react @testing-library/user-event`}
-        </pre>
+        <CodeBlock language="bash">
+          {`npm install --save-dev @testing-library/react @testing-library/user-event`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground">
           If you're using Vitest, also add{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">@testing-library/jest-dom</code>{" "}
@@ -74,14 +91,14 @@ export default function Module08TestingReact() {
           <code className="font-mono bg-stone-100 px-1 rounded">toBeInTheDocument()</code>, and
           import it in your Vitest setup file:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// vitest.setup.ts
+        <CodeBlock language="javascript">
+          {`// vitest.setup.ts
 import '@testing-library/jest-dom';`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* Queries */}
-      <section className="space-y-6">
+      <section id="queries" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Queries — how to find elements</h2>
         <p className="text-muted-foreground leading-relaxed">
           RTL exposes a <code className="font-mono bg-stone-100 px-1 rounded">screen</code> object
@@ -119,14 +136,14 @@ import '@testing-library/jest-dom';`}
       </section>
 
       {/* First test */}
-      <section className="space-y-4">
+      <section id="your-first-component-test" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Your first component test</h2>
         <p className="text-muted-foreground leading-relaxed">
           Render the component, find what the user would see, assert it's there.
           Three lines of logic — render, query, expect.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`import { render, screen } from '@testing-library/react';
+        <CodeBlock language="javascript">
+          {`import { render, screen } from '@testing-library/react';
 import Button from './Button';
 
 test('renders button with text', () => {
@@ -135,7 +152,7 @@ test('renders button with text', () => {
     screen.getByRole('button', { name: /click me/i })
   ).toBeInTheDocument();
 });`}
-        </pre>
+        </CodeBlock>
         <p className="text-sm text-muted-foreground">
           The <code className="font-mono bg-stone-100 px-1 rounded">/click me/i</code> is a
           case-insensitive regex — it matches "Click me", "CLICK ME", or "click me". Prefer
@@ -144,7 +161,7 @@ test('renders button with text', () => {
       </section>
 
       {/* Firing events */}
-      <section className="space-y-6">
+      <section id="firing-events-with-userevent" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Firing events with userEvent</h2>
         <p className="text-muted-foreground leading-relaxed">
           <code className="font-mono bg-stone-100 px-1 rounded">userEvent</code> simulates real
@@ -152,8 +169,8 @@ test('renders button with text', () => {
           Always use it over the lower-level{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">fireEvent</code>.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`import { render, screen } from '@testing-library/react';
+        <CodeBlock language="javascript">
+          {`import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Counter from './Counter';
 
@@ -166,7 +183,7 @@ test('increments counter on click', async () => {
 
   expect(screen.getByText('1')).toBeInTheDocument();
 });`}
-        </pre>
+        </CodeBlock>
         <p className="text-sm text-muted-foreground">
           Note the <code className="font-mono bg-stone-100 px-1 rounded">async/await</code> —
           userEvent v14+ is fully async because real browser interactions are asynchronous.
@@ -174,8 +191,8 @@ test('increments counter on click', async () => {
         </p>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Testing a form</h2>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`test('submits the form with the typed value', async () => {
+        <CodeBlock language="javascript">
+          {`test('submits the form with the typed value', async () => {
   render(<SearchForm />);
 
   await userEvent.type(
@@ -189,11 +206,11 @@ test('increments counter on click', async () => {
   expect(screen.getByText(/results for: react hooks/i))
     .toBeInTheDocument();
 });`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* Mocking API calls */}
-      <section className="space-y-6">
+      <section id="mocking-api-calls" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Mocking API calls</h2>
         <p className="text-muted-foreground leading-relaxed">
           Components that fetch data need their API calls mocked in tests — you don't want
@@ -201,10 +218,11 @@ test('increments counter on click', async () => {
           <code className="font-mono bg-stone-100 px-1 rounded">vi.mock</code> to replace the
           fetch or a specific module.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`import { render, screen } from '@testing-library/react';
+        <CodeBlock language="json">
+          {`import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import UserProfile from './UserProfile';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 // Mock the global fetch
 global.fetch = vi.fn(() =>
@@ -219,7 +237,7 @@ test('displays fetched user name', async () => {
   // findBy* waits for the element to appear (async)
   expect(await screen.findByText('Dara Sok')).toBeInTheDocument();
 });`}
-        </pre>
+        </CodeBlock>
         <p className="text-sm text-muted-foreground">
           For larger projects,{" "}
           <a
@@ -236,21 +254,21 @@ test('displays fetched user name', async () => {
       </section>
 
       {/* Async testing */}
-      <section className="space-y-6">
+      <section id="async-testing" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Async testing — waitFor and findBy</h2>
         <p className="text-muted-foreground leading-relaxed">
           When content appears after a state update or async operation, you need to wait for it.
           RTL gives you two tools:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// findBy* = getBy* + automatic waiting (preferred for single elements)
+        <CodeBlock language="javascript">
+          {`// findBy* = getBy* + automatic waiting (preferred for single elements)
 const heading = await screen.findByRole('heading', { name: /welcome/i });
 
 // waitFor = run assertions repeatedly until they pass or timeout
 await waitFor(() => {
   expect(screen.getByText('Loaded')).toBeInTheDocument();
 });`}
-        </pre>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           {[
             "findBy* is shorthand for waitFor + getBy* — use it when you're waiting for one element.",
@@ -266,7 +284,7 @@ await waitFor(() => {
       </section>
 
       {/* What not to test */}
-      <section className="space-y-6">
+      <section id="what-not-to-test" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">What not to test</h2>
         <p className="text-muted-foreground leading-relaxed">
           Knowing what to skip is just as important as knowing what to write.
@@ -300,7 +318,7 @@ await waitFor(() => {
       </section>
 
       {/* Summary */}
-      <section className="space-y-4 px-6 py-5 rounded-2xl bg-stone-50 border border-border">
+      <section id="key-takeaways" className="space-y-4 px-6 py-5 rounded-2xl bg-stone-50 border border-border">
         <h2 className="text-base font-semibold text-foreground">Key takeaways</h2>
         <ul className="space-y-2 text-sm text-muted-foreground">
           {[

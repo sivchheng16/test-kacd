@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module04AIAsTool() {
   return (
@@ -13,8 +14,24 @@ export default function Module04AIAsTool() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-ai-is-actually-good-at" className="text-primary hover:underline">→ What AI is actually good at</a></li>
+          <li><a href="#what-ai-gets-wrong" className="text-primary hover:underline">→ What AI gets wrong</a></li>
+          <li><a href="#the-verification-rule" className="text-primary hover:underline">→ The verification rule</a></li>
+          <li><a href="#prompting-for-code" className="text-primary hover:underline">→ Prompting for code</a></li>
+          <li><a href="#using-ai-for-debugging" className="text-primary hover:underline">→ Using AI for debugging</a></li>
+          <li><a href="#using-ai-for-learning" className="text-primary hover:underline">→ Using AI for learning</a></li>
+          <li><a href="#the-dependency-trap" className="text-primary hover:underline">→ The dependency trap</a></li>
+          <li><a href="#current-tools-20242025" className="text-primary hover:underline">→ Current tools (2024–2025)</a></li>
+          <li><a href="#the-senior-engineer-posture" className="text-primary hover:underline">→ The senior engineer posture</a></li>
+        </ul>
+      </section>
+
       {/* What AI is good at */}
-      <section className="space-y-5">
+      <section id="what-ai-is-actually-good-at" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">What AI is actually good at</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Use AI without reservation for these:
@@ -36,7 +53,7 @@ export default function Module04AIAsTool() {
       </section>
 
       {/* What AI gets wrong */}
-      <section className="space-y-5">
+      <section id="what-ai-gets-wrong" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">What AI gets wrong</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           This is the part most developers learn the hard way. AI is confidently wrong in
@@ -58,7 +75,7 @@ export default function Module04AIAsTool() {
       </section>
 
       {/* The verification rule */}
-      <section className="space-y-5">
+      <section id="the-verification-rule" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">The verification rule</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Never ship code you don't understand.
@@ -78,13 +95,14 @@ export default function Module04AIAsTool() {
       </section>
 
       {/* Prompting for code */}
-      <section className="space-y-5">
+      <section id="prompting-for-code" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Prompting for code</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The quality of output is directly proportional to the quality of your prompt.
           Vague prompts produce vague code.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// Vague — produces generic code that probably doesn't fit
+        <CodeBlock language="json">
+          {`// Vague — produces generic code that probably doesn't fit
 "Write a function to fetch users"
 
 // Better — gives it the constraints it needs
@@ -94,7 +112,8 @@ export default function Module04AIAsTool() {
 - Returns Promise<User | null> (null on 404)
 - Throws on other error status codes
 - Follow this existing pattern:
-  [paste a similar function from your codebase]"`}</pre>
+  [paste a similar function from your codebase]"`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Showing an existing pattern from your codebase is the most powerful move.
           The AI will match your naming conventions, your error handling style, your
@@ -103,14 +122,15 @@ export default function Module04AIAsTool() {
       </section>
 
       {/* AI for debugging */}
-      <section className="space-y-5">
+      <section id="using-ai-for-debugging" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Using AI for debugging</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           AI is a useful debugging assistant if you give it the right information.
           Paste the error message plus the relevant code. Describe what you expected to
           happen and what actually happened. Describe what you have already tried.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// Less useful
+        <CodeBlock language="json">
+          {`// Less useful
 "My code is broken"
 
 // Actually useful
@@ -124,7 +144,8 @@ Here's the component:
 I expected users to be an array from the API.
 I already checked: the API returns 200 and the response body
 contains the array. The fetch runs. But users is undefined
-when the component renders."}`}</pre>
+when the component renders."}`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           That prompt gives AI everything it needs to identify the cause — likely a missing
           loading state or a state initialization issue.
@@ -132,7 +153,7 @@ when the component renders."}`}</pre>
       </section>
 
       {/* AI for learning */}
-      <section className="space-y-5">
+      <section id="using-ai-for-learning" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Using AI for learning</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           This is one of the most underused applications. AI is a tireless explainer that
@@ -158,7 +179,7 @@ when the component renders."}`}</pre>
       </section>
 
       {/* Dependency trap */}
-      <section className="space-y-5">
+      <section id="the-dependency-trap" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">The dependency trap</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Here is the test: can you debug the code AI wrote for you?
@@ -179,7 +200,7 @@ when the component renders."}`}</pre>
       </section>
 
       {/* Current tools */}
-      <section className="space-y-5">
+      <section id="current-tools-20242025" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Current tools (2024–2025)</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The landscape changes fast. This is what exists now and what each is best at:
@@ -200,7 +221,7 @@ when the component renders."}`}</pre>
       </section>
 
       {/* Senior posture */}
-      <section className="space-y-5">
+      <section id="the-senior-engineer-posture" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">The senior engineer posture</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Think of AI as a very smart junior developer who has read every piece of code on

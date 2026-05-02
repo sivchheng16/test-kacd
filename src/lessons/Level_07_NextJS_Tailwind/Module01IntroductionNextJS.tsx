@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
+
 
 export default function Module01IntroductionNextJS() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -22,8 +24,20 @@ export default function Module01IntroductionNextJS() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-is-nextjs" className="text-primary hover:underline">→ What is Next.js?</a></li>
+          <li><a href="#app-router-project-structure" className="text-primary hover:underline">→ App Router Project Structure</a></li>
+          <li><a href="#server-components-vs-client-components" className="text-primary hover:underline">→ Server Components vs Client Components</a></li>
+          <li><a href="#navigation-with-link" className="text-primary hover:underline">→ Navigation with Link</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* What is Next.js */}
-      <section className="space-y-6">
+      <section id="what-is-nextjs" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">What is Next.js?</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           React alone is a UI library — it renders components in the browser. Next.js wraps React and gives you routing, data fetching on the server, API endpoints, image optimization, and one-command deployment. It is used in production by Netflix, TikTok, Nike, Notion, and Twitch.
@@ -56,14 +70,15 @@ export default function Module01IntroductionNextJS() {
       </section>
 
       {/* Project structure */}
-      <section className="space-y-6">
+      <section id="app-router-project-structure" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">App Router Project Structure</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Run <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">npx create-next-app@latest my-app</code> and choose Tailwind + App Router + src/ directory. The folder structure maps directly to your URLs:
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">File tree → URL mapping</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`src/app/
+          <CodeBlock language="javascript">
+          {`src/app/
 ├── layout.tsx          →  wraps every page
 ├── page.tsx            →  /
 ├── about/
@@ -74,7 +89,8 @@ export default function Module01IntroductionNextJS() {
 │       └── page.tsx    →  /products/42
 └── api/
     └── hello/
-        └── route.ts    →  /api/hello`}</pre>
+        └── route.ts    →  /api/hello`}
+        </CodeBlock>
         </div>
 
         <div className="overflow-x-auto rounded-xl border border-border">
@@ -105,7 +121,7 @@ export default function Module01IntroductionNextJS() {
       </section>
 
       {/* Server vs Client components */}
-      <section className="space-y-6">
+      <section id="server-components-vs-client-components" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Server Components vs Client Components</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           In the App Router, every component is a <strong>Server Component</strong> by default — it runs on the server, can use <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">async/await</code>, and never sends its own JS to the browser. To use state or event handlers, add <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">'use client'</code> at the top.
@@ -114,7 +130,8 @@ export default function Module01IntroductionNextJS() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">Server Component (default)</div>
-            <pre className="px-4 py-4 text-xs font-mono leading-relaxed text-foreground overflow-x-auto bg-white">{`// No 'use client' needed
+            <CodeBlock language="javascript">
+          {`// No 'use client' needed
 async function ProductList() {
   // Can fetch directly — runs on server
   const data = await fetch('/api/products');
@@ -127,13 +144,16 @@ async function ProductList() {
       ))}
     </ul>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
           </div>
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">Client Component</div>
-            <pre className="px-4 py-4 text-xs font-mono leading-relaxed text-foreground overflow-x-auto bg-white">{`'use client'; // ← this line is the switch
+            <CodeBlock language="javascript">
+          {`'use client'; // //  this line is the switch
 
 import { useState } from 'react';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Counter() {
   const [count, setCount] = useState(0);
@@ -143,7 +163,8 @@ export default function Counter() {
       Clicked {count} times
     </button>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
           </div>
         </div>
 
@@ -173,14 +194,15 @@ export default function Counter() {
       </section>
 
       {/* Navigation */}
-      <section className="space-y-6">
+      <section id="navigation-with-link" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Navigation with Link</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Use Next.js <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">Link</code> instead of plain <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">&lt;a&gt;</code>. It prefetches pages in the background so navigation feels instant.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">src/app/layout.tsx</div>
-          <pre className="px-5 py-4 leading-relaxed text-stone-200 overflow-x-auto">{`import Link from 'next/link';
+          <CodeBlock language="json">
+          {`import Link from 'next/link';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -195,12 +217,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
     </html>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Knowledge check */}
-      <section className="space-y-6">
+      <section id="knowledge-check" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Knowledge Check</h2>
         <p className="text-sm text-muted-foreground">
           In Next.js App Router, what does adding <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">'use client'</code> to a component do?

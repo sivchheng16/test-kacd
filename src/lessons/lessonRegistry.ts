@@ -26,6 +26,7 @@ const HTML_Links              = lazy(() => import("./Level_01_HTML/Module04Links
 const HTML_Images             = lazy(() => import("./Level_01_HTML/Module05ImagesMedia"));
 const HTML_Forms              = lazy(() => import("./Level_01_HTML/Module06TablesForms"));
 const HTML_A11ySEO            = lazy(() => import("./Level_01_HTML/Module08AccessibilitySEO"));
+const HTML_DivIdClass         = lazy(() => import("./Level_01_HTML/Module09DivIdClass"));
 const HTML_Project            = lazy(() => import("./Level_01_HTML/Module07ProjectBioPage"));
 
 // ── CSS ──────────────────────────────────────────────────────────────────────
@@ -156,6 +157,7 @@ export const lessonRegistry: Record<string, ComponentType<any>> = {
   "html-module04linksnavigation": HTML_Links,
   "html-module05imagesmedia":     HTML_Images,
   "html-module06tablesforms":     HTML_Forms,
+  "html-module09dividclass":      HTML_DivIdClass,
   "html-module08accessibilityseo": HTML_A11ySEO,
   "html-module07projectbiopage":  HTML_Project,
 

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_STARTER = {
   html: `<h1>Siem Reap Travel Guide</h1>
@@ -92,8 +93,19 @@ export default function Module03ColorsTypography() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#colors-and-type-properties" className="text-primary hover:underline">→ Colors and type properties</a></li>
+          <li><a href="#annotated-example" className="text-primary hover:underline">→ Annotated example</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Concept ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="colors-and-type-properties" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Colors and type properties</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           CSS accepts colors in three formats. All three are valid — pick
@@ -162,17 +174,13 @@ export default function Module03ColorsTypography() {
       </section>
 
       {/* ── 3. Example ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="annotated-example" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Annotated example</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A travel article styled with Google Fonts and HSL colors.
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            styles.css
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`/* Pull in the font from Google Fonts CDN */
+        <CodeBlock language="css" title="styles.css">
+          {`/* Pull in the font from Google Fonts CDN */
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
 body {
@@ -194,8 +202,7 @@ p.intro {
   font-style: italic;
   color: rgb(90, 70, 50);              /* warm brown for the lead paragraph */
 }`}
-          </pre>
-        </div>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <span className="text-primary font-mono shrink-0">rem</span>
@@ -213,7 +220,7 @@ p.intro {
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -245,7 +252,7 @@ p.intro {
       </section>
 
       {/* ── 5. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

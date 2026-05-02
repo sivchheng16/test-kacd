@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module01Philosophy() {
   return (
@@ -13,8 +14,21 @@ export default function Module01Philosophy() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#the-testing-pyramid" className="text-primary hover:underline">→ The testing pyramid</a></li>
+          <li><a href="#what-makes-a-good-test" className="text-primary hover:underline">→ What makes a good test</a></li>
+          <li><a href="#test-doubles-mocks-stubs-spies-fakes" className="text-primary hover:underline">→ Test doubles: mocks, stubs, spies, fakes</a></li>
+          <li><a href="#tdd-red-green-refactor" className="text-primary hover:underline">→ TDD: red → green → refactor</a></li>
+          <li><a href="#what-to-test" className="text-primary hover:underline">→ What to test</a></li>
+          <li><a href="#coverage-is-a-metric-not-a-goal" className="text-primary hover:underline">→ Coverage is a metric, not a goal</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. The testing pyramid ─────────────────────────── */}
-      <section className="space-y-6">
+      <section id="the-testing-pyramid" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">The testing pyramid</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Think of your test suite as a pyramid. Many unit tests at the base — fast, cheap,
@@ -27,24 +41,27 @@ export default function Module01Philosophy() {
           instead of a broad base of fast unit tests. The suite takes ten minutes, everyone
           skips it locally, and bugs slip through.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`        ▲
+        <CodeBlock language="javascript">
+          {`        ▲
        /E2E\\          few — slow — expensive
       /──────\\
      /  Integ  \\       some — seconds each
     /────────────\\
    /  Unit Tests  \\    many — milliseconds each
-  /________________\\`}</pre>
+  /________________\\`}
+        </CodeBlock>
       </section>
 
       {/* ── 3. What makes a good test ──────────────────────── */}
-      <section className="space-y-6">
+      <section id="what-makes-a-good-test" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What makes a good test</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Every test follows the same three-phase structure: <strong className="text-foreground">Arrange</strong> the
           inputs and dependencies, <strong className="text-foreground">Act</strong> by calling the code under test,
           then <strong className="text-foreground">Assert</strong> that the output is what you expected.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`test('calculates total with tax', () => {
+        <CodeBlock language="javascript">
+          {`test('calculates total with tax', () => {
   // Arrange
   const price = 100;
   const taxRate = 0.1;
@@ -54,7 +71,8 @@ export default function Module01Philosophy() {
 
   // Assert
   expect(total).toBe(110);
-});`}</pre>
+});`}
+        </CodeBlock>
         <ul className="space-y-3 text-base text-muted-foreground">
           <li className="flex gap-3"><span className="text-primary shrink-0">—</span><span><strong className="text-foreground">One assertion per test.</strong> When a test has five assertions and fails, you don't know which one mattered.</span></li>
           <li className="flex gap-3"><span className="text-primary shrink-0">—</span><span><strong className="text-foreground">Descriptive names.</strong> The test name should read like a sentence: <em>"returns null when user is not found"</em>.</span></li>
@@ -63,7 +81,7 @@ export default function Module01Philosophy() {
       </section>
 
       {/* ── 4. Test doubles ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="test-doubles-mocks-stubs-spies-fakes" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Test doubles: mocks, stubs, spies, fakes</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A test double is a stand-in for a real dependency. There are four flavors, and
@@ -90,7 +108,7 @@ export default function Module01Philosophy() {
       </section>
 
       {/* ── 5. TDD ─────────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="tdd-red-green-refactor" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">TDD: red → green → refactor</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Test-Driven Development inverts the usual order. Write the test first, watch it
@@ -101,7 +119,8 @@ export default function Module01Philosophy() {
           It confirms your test is actually testing something — a test that passes before
           you write the implementation is not testing anything.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// Step 1: write the test — it fails because slugify doesn't exist yet
+        <CodeBlock language="javascript">
+          {`// Step 1: write the test — it fails because slugify doesn't exist yet
 test('converts spaces to hyphens', () => {
   expect(slugify('Hello World')).toBe('hello-world');
 });
@@ -111,11 +130,12 @@ function slugify(str) {
   return str.toLowerCase().replace(/\s+/g, '-');
 }
 
-// Step 3: refactor — handle edge cases, clean up, test still passes`}</pre>
+// Step 3: refactor — handle edge cases, clean up, test still passes`}
+        </CodeBlock>
       </section>
 
       {/* ── 6. What to test ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="what-to-test" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What to test — and what not to</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           <strong className="text-foreground">Test:</strong> business logic, edge cases (empty string, zero, null, negative numbers),
@@ -135,7 +155,7 @@ function slugify(str) {
       </section>
 
       {/* ── 7. Coverage ────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="coverage-is-a-metric-not-a-goal" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Coverage is a metric, not a goal</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Code coverage measures which lines were executed by your tests. 100% coverage
@@ -147,11 +167,13 @@ function slugify(str) {
           to add tests. Don't use it as a target you optimize for — that produces tests
           written to hit numbers, not to catch bugs.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`# generate a coverage report
+        <CodeBlock language="bash">
+          {`# generate a coverage report
 npx vitest run --coverage
 
 # output shows which lines, branches, and functions were hit
-# focus on the uncovered branches in your business logic`}</pre>
+# focus on the uncovered branches in your business logic`}
+        </CodeBlock>
       </section>
 
     </article>

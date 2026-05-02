@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module05ArraysLoops() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -27,11 +28,22 @@ export default function Module05ArraysLoops() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#creating-arrays" className="text-primary hover:underline">→ Creating arrays</a></li>
+          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
+          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Concept */}
-      <section className="space-y-6">
+      <section id="creating-arrays" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Creating arrays</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`// Array literal — the most common way
+        <CodeBlock language="javascript">
+          {`// Array literal — the most common way
 const foods = ["banh mi", "lok lak", "amok", "kuy teav"];
 
 // Access by index (starts at 0)
@@ -43,21 +55,21 @@ document.write(foods.length); // 4
 
 // Last item
 document.write(foods[foods.length - 1]); // "kuy teav"`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Modifying arrays</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const items = ["rice", "fish"];
+        <CodeBlock language="javascript">
+          {`const items = ["rice", "fish"];
 
 items.push("mango");      // add to end  → ["rice","fish","mango"]
 items.pop();              // remove last → ["rice","fish"]
 items.unshift("bread");   // add to front→ ["bread","rice","fish"]
 items.shift();            // remove first→ ["rice","fish"]`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">The for loop</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const prices = [1000, 2500, 4000, 8000];
+        <CodeBlock language="javascript">
+          {`const prices = [1000, 2500, 4000, 8000];
 
 for (let i = 0; i < prices.length; i++) {
   document.write(prices[i] + " ៛<br>");
@@ -66,42 +78,42 @@ for (let i = 0; i < prices.length; i++) {
 // 2500 ៛
 // 4000 ៛
 // 8000 ៛`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">forEach — cleaner iteration</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const cities = ["Phnom Penh", "Siem Reap", "Battambang"];
+        <CodeBlock language="javascript">
+          {`const cities = ["Phnom Penh", "Siem Reap", "Battambang"];
 
 cities.forEach((city) => {
   document.write(\`<p>\${city}</p>\`);
 });`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">map — transform every item</h2>
         <p className="text-muted-foreground leading-relaxed">
           <code className="font-mono bg-stone-100 px-1 rounded">.map()</code> creates a <em>new</em> array by running
           a function on every item. The original is unchanged.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const pricesKHR = [4000, 8000, 12000];
+        <CodeBlock language="json">
+          {`const pricesKHR = [4000, 8000, 12000];
 
 // Convert to USD (rate: 4100 KHR per USD)
 const pricesUSD = pricesKHR.map((khr) => (khr / 4100).toFixed(2));
 
 document.write(pricesUSD.join(", ")); // "0.98, 1.95, 2.93"`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">filter — keep only what matches</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const scores = [45, 78, 62, 90, 55, 88];
+        <CodeBlock language="javascript">
+          {`const scores = [45, 78, 62, 90, 55, 88];
 
 const passing = scores.filter((s) => s >= 60);
 document.write(passing.join(", ")); // 78, 62, 90, 88`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* Example */}
-      <section className="space-y-4">
+      <section id="live-example" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Live example — market menu with map</h2>
         <p className="text-sm text-muted-foreground">
           Watch how <code className="font-mono bg-stone-100 px-1 rounded">.map()</code> turns a plain array into
@@ -127,7 +139,7 @@ document.write(rows.join(""));`,
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="try-it-yourself" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Create an array of at least 4 province names. Use{" "}
@@ -149,7 +161,7 @@ document.write("</ul>");`,
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Create an array with at least 3 numbers. Use{" "}

@@ -9,11 +9,9 @@ export default function Introduction() {
       <div>
         <div>
           <Typography variant="h1">Introduction: CSS Styling</Typography>
-        </div>
-      </div>
-      <div>
-        <div>
-          <Typography variant="h2">Track 02: CSS Styling</Typography>
+          <Typography variant="lead">
+            Bringing the web to life with vibrant colors, modern layouts, and beautiful typography.
+          </Typography>
         </div>
       </div>
       <div>

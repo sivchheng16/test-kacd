@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_STARTER = {
   html: `<h1>Angkor Wat</h1>
@@ -75,8 +76,19 @@ export default function Module01IntroductionCSS() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#one-rule-three-parts" className="text-primary hover:underline">→ One rule, three parts</a></li>
+          <li><a href="#annotated-example" className="text-primary hover:underline">→ Annotated example</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Concept ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="one-rule-three-parts" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">One rule, three parts</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           CSS stands for <strong className="text-foreground">Cascading Style Sheets</strong>.
@@ -115,29 +127,20 @@ export default function Module01IntroductionCSS() {
       </section>
 
       {/* ── 3. Example ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="annotated-example" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Annotated example</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Read through both files once. Notice how the HTML stays clean while
           all appearance decisions live in CSS.
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            index.html
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`<link rel="stylesheet" href="styles.css">   ← links the CSS file
+        <CodeBlock language="html" title="index.html">
+          {`<link rel="stylesheet" href="styles.css">   <!--  links the CSS file -->
 
 <h1>Phnom Penh Street Food</h1>
 <p>The best banh mi you will ever eat.</p>`}
-          </pre>
-        </div>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            styles.css
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`/* selector { property: value; } */
+        </CodeBlock>
+        <CodeBlock language="css" title="styles.css">
+          {`/* selector { property: value; } */
 
 body {
   background-color: #fdf6ec;   /* warm off-white */
@@ -153,8 +156,7 @@ p {
   color: #555;                 /* dark grey — readable without being harsh */
   line-height: 1.7;            /* breathing room between lines */
 }`}
-          </pre>
-        </div>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <span className="text-primary font-mono shrink-0">body</span>
@@ -172,7 +174,7 @@ p {
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -193,7 +195,7 @@ p {
       </section>
 
       {/* ── 5. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

@@ -1,3 +1,4 @@
+import { CodeBlock } from "../../components/ui/CodeBlock";
 export default function Module05AdvancedGit() {
   return (
     <article className="max-w-3xl mx-auto space-y-14 font-sans">
@@ -15,8 +16,21 @@ export default function Module05AdvancedGit() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#git-stash" className="text-primary hover:underline">→ git stash</a></li>
+          <li><a href="#git-rebase" className="text-primary hover:underline">→ git rebase</a></li>
+          <li><a href="#git-cherry-pick" className="text-primary hover:underline">→ git cherry-pick</a></li>
+          <li><a href="#git-bisect" className="text-primary hover:underline">→ git bisect</a></li>
+          <li><a href="#git-reflog" className="text-primary hover:underline">→ git reflog</a></li>
+          <li><a href="#quick-reference" className="text-primary hover:underline">→ Quick Reference</a></li>
+        </ul>
+      </section>
+
       {/* git stash */}
-      <section className="space-y-4">
+      <section id="git-stash" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git stash — Save Work Without Committing</h2>
         <p className="text-base text-muted-foreground">
           Stash shelves your uncommitted changes so you can switch branches with a clean
@@ -27,7 +41,8 @@ export default function Module05AdvancedGit() {
           When to use: you're mid-task on a feature and need to jump to another branch
           to review or hotfix something.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`# Stash all uncommitted changes (tracked files)
+        <CodeBlock language="javascript">
+          {`# Stash all uncommitted changes (tracked files)
 git stash
 
 # Include untracked files too
@@ -46,11 +61,12 @@ git stash pop
 git stash apply stash@{1}
 
 # Drop a stash you no longer need
-git stash drop stash@{0}`}</pre>
+git stash drop stash@{0}`}
+        </CodeBlock>
       </section>
 
       {/* git rebase */}
-      <section className="space-y-4">
+      <section id="git-rebase" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git rebase — Replay Commits on a New Base</h2>
         <p className="text-base text-muted-foreground">
           Rebase moves your commits to start from the tip of another branch instead of
@@ -61,7 +77,8 @@ git stash drop stash@{0}`}</pre>
           When to use: before opening a PR, to bring your feature branch up to date with{" "}
           <code className="font-mono">main</code> without a noisy merge commit.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`# On your feature branch — rebase onto main
+        <CodeBlock language="javascript">
+          {`# On your feature branch — rebase onto main
 git checkout feature/login
 git rebase main
 
@@ -73,7 +90,7 @@ git rebase main
 # After rebase:
 # main:          A──B──C
 #                         \\
-# feature/login:           D'──E'  ← commits replayed on top of C
+# feature/login:           D'──E'  //  commits replayed on top of C
 
 # If there are conflicts during rebase, Git pauses.
 # Fix the conflict, then:
@@ -81,14 +98,16 @@ git add <resolved-file>
 git rebase --continue
 
 # Changed your mind? Abort and go back to where you started:
-git rebase --abort`}</pre>
+git rebase --abort`}
+        </CodeBlock>
 
         <h3 className="text-lg font-serif text-foreground">Interactive Rebase</h3>
         <p className="text-base text-muted-foreground">
           Interactive rebase lets you rewrite, reorder, squash, or drop commits before
           they're shared. It's the standard way to clean up a messy local history.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`# Rewrite the last 3 commits interactively
+        <CodeBlock language="json">
+          {`# Rewrite the last 3 commits interactively
 git rebase -i HEAD~3
 
 # Git opens an editor listing the commits:
@@ -101,7 +120,8 @@ git rebase -i HEAD~3
 #   reword  — keep commit, edit its message
 #   squash  — meld into the previous commit
 #   fixup   — like squash, discard this commit's message
-#   drop    — remove the commit entirely`}</pre>
+#   drop    — remove the commit entirely`}
+        </CodeBlock>
 
         <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800 leading-relaxed">
           <strong>Warning:</strong> rebase rewrites commit history (new SHA hashes). Never
@@ -111,7 +131,7 @@ git rebase -i HEAD~3
       </section>
 
       {/* git cherry-pick */}
-      <section className="space-y-4">
+      <section id="git-cherry-pick" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git cherry-pick — Apply One Specific Commit</h2>
         <p className="text-base text-muted-foreground">
           Cherry-pick copies a single commit from any branch and applies it to the current
@@ -121,10 +141,11 @@ git rebase -i HEAD~3
           When to use: a critical bug fix landed on a feature branch and you need it on{" "}
           <code className="font-mono">main</code> right now, without merging the whole feature.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`# Find the commit hash you want
+        <CodeBlock language="javascript">
+          {`# Find the commit hash you want
 git log feature/payments --oneline
 # abc1234 Fix null pointer in checkout
-# def5678 WIP: refactor cart logic   ← don't want this one
+# def5678 WIP: refactor cart logic   //  don't want this one
 
 # Switch to the branch you want to apply the fix to
 git checkout main
@@ -140,11 +161,12 @@ git add <resolved-file>
 git cherry-pick --continue
 
 # Or abort:
-git cherry-pick --abort`}</pre>
+git cherry-pick --abort`}
+        </CodeBlock>
       </section>
 
       {/* git bisect */}
-      <section className="space-y-4">
+      <section id="git-bisect" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git bisect — Binary Search for a Bug</h2>
         <p className="text-base text-muted-foreground">
           Bisect performs an automated binary search through your commit history to find
@@ -155,7 +177,8 @@ git cherry-pick --abort`}</pre>
           When to use: the app is broken today but worked two weeks ago, and you have no
           idea which of the 200 commits between then and now caused it.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`# Start a bisect session
+        <CodeBlock language="javascript">
+          {`# Start a bisect session
 git bisect start
 
 # Mark the current commit as bad (the bug exists here)
@@ -174,18 +197,20 @@ git bisect bad    # bug IS present here
 # <commit details>
 
 # End the session and return to your original HEAD
-git bisect reset`}</pre>
+git bisect reset`}
+        </CodeBlock>
       </section>
 
       {/* git reflog */}
-      <section className="space-y-4">
+      <section id="git-reflog" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git reflog — Your Safety Net</h2>
         <p className="text-base text-muted-foreground">
           Reflog records every position HEAD has ever been at — even after resets, rebases,
           or deleted branches. If you've ever thought "I just lost my work", reflog is how
           you get it back.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">{`# Show the full HEAD history
+        <CodeBlock language="javascript">
+          {`# Show the full HEAD history
 git reflog
 # Outputs:
 # 9a1c3f0 HEAD@{0}: rebase finished: returning to refs/heads/feature/login
@@ -197,7 +222,8 @@ git reflog
 git checkout HEAD@{2}
 
 # Or create a new branch from that point to recover lost work
-git checkout -b recovered-work HEAD@{2}`}</pre>
+git checkout -b recovered-work HEAD@{2}`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Reflog entries expire after 90 days by default, so act quickly when recovering.
           It only exists locally — it is not pushed to GitHub.
@@ -205,7 +231,7 @@ git checkout -b recovered-work HEAD@{2}`}</pre>
       </section>
 
       {/* Quick reference */}
-      <section className="space-y-4">
+      <section id="quick-reference" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Quick Reference</h2>
         <div className="rounded-2xl border border-border overflow-hidden">
           <table className="w-full text-sm">

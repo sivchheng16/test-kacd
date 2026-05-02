@@ -3,14 +3,17 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_HTML = `<h1>Learning HTML</h1>
 <h2>Why it matters</h2>
 <p>
-  HTML gives your content <strong>meaning</strong>, not just looks.
+  HTML gives your content <strong>meaning</strong>, not just looks.<br>
   A browser, a screen reader, and a search engine all read
-  the same file — good markup works for all three.
+  the same file &mdash; good markup works for all three.
 </p>
+
+<hr>
 
 <h2>Things I already know</h2>
 <ul>
@@ -27,8 +30,18 @@ const EXPLORE_HTML = `<h1>Learning HTML</h1>
   <li>Open it in a browser</li>
 </ol>
 
+<hr>
+
+<h2>Terminology</h2>
+<dl>
+  <dt>Tag</dt>
+  <dd>The angle brackets and the text inside them, like <code>&lt;p&gt;</code>.</dd>
+  <dt>Element</dt>
+  <dd>The opening tag, the closing tag, and everything in between.</dd>
+</dl>
+
 <blockquote>
-  <p>"The best time to learn HTML was yesterday. The second best time is now."</p>
+  <p>"The best time to learn HTML was <del>yesterday</del> <ins>today</ins>. The second best time is <mark>now</mark>."</p>
 </blockquote>`;
 
 const CHALLENGE_STARTER = `<!-- Create an ordered list of exactly 3 things you want to learn.
@@ -94,8 +107,21 @@ export default function Module03TextandLists() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#hierarchy-emphasis-and-order" className="text-primary hover:underline">→ Hierarchy, emphasis, and order</a></li>
+          <li><a href="#advanced-formatting-and-breaks" className="text-primary hover:underline">→ Advanced formatting and breaks</a></li>
+          <li><a href="#text-and-lists-in-action" className="text-primary hover:underline">→ Text and lists in action</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Concept ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="hierarchy-emphasis-and-order" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Hierarchy, emphasis, and order</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           HTML gives you six heading levels (
@@ -126,52 +152,83 @@ export default function Module03TextandLists() {
         </div>
       </section>
 
+      {/* ── 2.5 Advanced Formatting ────────────────────────── */}
+      <section id="advanced-formatting-and-breaks" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">Advanced formatting and breaks</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          Sometimes you need to add specific visual or semantic meaning to your text that goes beyond just paragraphs and basic lists.
+        </p>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          <strong>Breaks:</strong> Use <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;br&gt;</code> to force a line break within a paragraph without starting a new one (useful for poetry or addresses). Use <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;hr&gt;</code> to create a horizontal rule, which visually and semantically separates different topics. Both are "empty tags" and do not have a closing tag.
+        </p>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          <strong>Inline Edits & Highlights:</strong> To show that text has been deleted, use <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;del&gt;</code> (strikethrough). For newly added text, use <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;ins&gt;</code> (underlined). If you want to highlight text for reference, use <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;mark&gt;</code>.
+        </p>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          <strong>Description Lists:</strong> When you have terms and definitions, like a glossary, use a description list (<code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;dl&gt;</code>). Inside it, use <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;dt&gt;</code> for the term and <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;dd&gt;</code> for its description.
+        </p>
+        
+        <div className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-2 text-sm font-mono text-foreground leading-relaxed">
+          <div><span className="text-[#c2622d]">br</span> — line break (no closing tag)</div>
+          <div><span className="text-[#c2622d]">hr</span> — thematic break / horizontal line (no closing tag)</div>
+          <div><span className="text-[#c2622d]">del / ins</span> — deleted text / inserted text</div>
+          <div><span className="text-[#c2622d]">mark</span> — highlighted text</div>
+          <div><span className="text-[#c2622d]">dl / dt / dd</span> — description list / term / description</div>
+        </div>
+      </section>
+
       {/* ── 3. Example ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="text-and-lists-in-action" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Text and lists in action</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Here is a short article that uses every element from this lesson. Read the comments — each one
           explains the choice.
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            article.html
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`<h1>Getting Started with Linux</h1>    ← one h1, the page title
+
+        <CodeBlock language="html" title="article.html">
+          {`<h1>Getting Started with Linux</h1>    <!-- one h1, the page title -->
 
 <p>
-  Linux is <strong>free</strong>,       ← strong = important fact
-  <strong>open source</strong>, and
+  Linux is <strong>free</strong>,       <!-- strong = important fact -->
+  <strong>open source</strong>, and<br> <!-- br = manual line break -->
   used on most of the world's servers.
 </p>
 
-<h2>Why developers choose it</h2>       ← h2 starts a new section
+<hr>                                    <!-- hr = thematic break -->
 
-<ul>                                    ← order doesn't matter here
+<h2>Why developers choose it</h2>       <!-- h2 starts a new section -->
+
+<ul>                                    <!-- order doesn't matter here -->
   <li>Full control over the system</li>
-  <li>No licence fees</li>
+  <li>No <del>license</del> <ins>licence</ins> fees</li> <!-- spelling edit -->
   <li>Huge community and documentation</li>
 </ul>
 
 <h2>How to install it</h2>
 
-<ol>                                    ← order matters: steps
+<ol>                                    <!-- order matters: steps -->
   <li>Download an ISO image</li>
   <li>Write it to a USB drive</li>
   <li>Boot from the USB</li>
   <li>Follow the installer</li>
 </ol>
 
+<h2>Core Concepts</h2>
+<dl>                                    <!-- description list -->
+  <dt>Kernel</dt>                       <!-- term -->
+  <dd>The core of the OS that talks to hardware.</dd> <!-- description -->
+  <dt>Distribution (Distro)</dt>
+  <dd>A <mark>specific version</mark> of Linux like Ubuntu or KOOMPI.</dd>
+</dl>
+
 <h2>A word from Linus Torvalds</h2>
 
 <blockquote>
   <p>
     "Software is like sex: it's better when it's <em>free</em>."
-  </p>                                  ← em = verbal stress
-</blockquote>`}
-          </pre>
-        </div>
+  </p>                                  <!-- em = verbal stress -->
+</blockquote>`}</CodeBlock>
+
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <span className="text-primary font-mono shrink-0">ul</span>
@@ -193,7 +250,7 @@ export default function Module03TextandLists() {
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -211,8 +268,23 @@ export default function Module03TextandLists() {
         />
       </section>
 
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Here is what you learned about structuring text in HTML:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Use headings (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>) to create a logical outline.</li>
+            <li>Use <code>&lt;p&gt;</code> for standard paragraphs of text.</li>
+            <li>Use <code>&lt;strong&gt;</code> for importance and <code>&lt;em&gt;</code> for stress emphasis.</li>
+            <li>Use <code>&lt;ul&gt;</code> for unordered (bulleted) lists and <code>&lt;ol&gt;</code> for ordered (numbered) lists, containing <code>&lt;li&gt;</code> items.</li>
+            <li>Use advanced tags like <code>&lt;br&gt;</code> for line breaks, <code>&lt;hr&gt;</code> for thematic breaks, and <code>&lt;blockquote&gt;</code> for quotes.</li>
+          </ul>
+        </div>
+      </section>
+
       {/* ── 5. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

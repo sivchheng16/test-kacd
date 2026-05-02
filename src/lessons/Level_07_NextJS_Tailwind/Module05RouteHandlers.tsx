@@ -1,3 +1,4 @@
+import { CodeBlock } from "@/components/ui/CodeBlock";
 import React from "react";
 
 export default function Module05RouteHandlers() {
@@ -12,60 +13,81 @@ export default function Module05RouteHandlers() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#where-route-handlers-live" className="text-primary hover:underline">→ Where Route Handlers Live</a></li>
+          <li><a href="#basic-get-handler" className="text-primary hover:underline">→ Basic GET Handler</a></li>
+          <li><a href="#post-with-body-parsing" className="text-primary hover:underline">→ POST with Body Parsing</a></li>
+          <li><a href="#dynamic-route-segments" className="text-primary hover:underline">→ Dynamic Route Segments</a></li>
+          <li><a href="#headers-and-cookies" className="text-primary hover:underline">→ Headers and Cookies</a></li>
+          <li><a href="#middleware-vs-route-handler" className="text-primary hover:underline">→ Middleware vs Route Handler</a></li>
+          <li><a href="#route-handlers-vs-server-actions" className="text-primary hover:underline">→ Route Handlers vs Server Actions</a></li>
+        </ul>
+      </section>
+
       {/* Where route handlers live */}
-      <section className="space-y-6">
+      <section id="where-route-handlers-live" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Where Route Handlers Live</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           A file named <code className="bg-stone-100 px-1 rounded text-xs font-mono">route.ts</code> inside the <code className="bg-stone-100 px-1 rounded text-xs font-mono">app/api/</code> directory creates an API endpoint. Export named functions matching HTTP method names — <code className="bg-stone-100 px-1 rounded text-xs font-mono">GET</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">POST</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">PUT</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">DELETE</code>, etc.
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">File tree → API URL</div>
-          <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`app/
+          <CodeBlock language="javascript">
+          {`app/
 └── api/
     ├── posts/
     │   ├── route.ts          →  GET / POST  /api/posts
     │   └── [id]/
     │       └── route.ts      →  GET / PUT / DELETE  /api/posts/42
     └── users/
-        └── route.ts          →  GET / POST  /api/users`}</pre>
+        └── route.ts          →  GET / POST  /api/users`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Basic GET */}
-      <section className="space-y-6">
+      <section id="basic-get-handler" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Basic GET Handler</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Export an <code className="bg-stone-100 px-1 rounded text-xs font-mono">async function GET()</code> and return a <code className="bg-stone-100 px-1 rounded text-xs font-mono">NextResponse</code>. Visit the URL in a browser — it returns JSON directly.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// app/api/posts/route.ts
+        <CodeBlock language="javascript">
+          {`// app/api/posts/route.ts
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   const posts = await db.getPosts();
   return NextResponse.json(posts);
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* POST with body parsing */}
-      <section className="space-y-6">
+      <section id="post-with-body-parsing" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">POST with Body Parsing</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The first argument is a standard Web API <code className="bg-stone-100 px-1 rounded text-xs font-mono">Request</code>. Call <code className="bg-stone-100 px-1 rounded text-xs font-mono">request.json()</code> to parse the JSON body. Return a <code className="bg-stone-100 px-1 rounded text-xs font-mono">201</code> status code to signal that a resource was created.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`export async function POST(request: Request) {
+        <CodeBlock language="javascript">
+          {`export async function POST(request: Request) {
   const body = await request.json();
   const post = await db.createPost(body);
   return NextResponse.json(post, { status: 201 });
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* Dynamic routes */}
-      <section className="space-y-6">
+      <section id="dynamic-route-segments" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Dynamic Route Segments</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Dynamic segments work the same as page routes. The second argument provides a <code className="bg-stone-100 px-1 rounded text-xs font-mono">params</code> object containing the URL values. The file lives at <code className="bg-stone-100 px-1 rounded text-xs font-mono">app/api/posts/[id]/route.ts</code>.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// app/api/posts/[id]/route.ts
+        <CodeBlock language="javascript">
+          {`// app/api/posts/[id]/route.ts
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -85,17 +107,20 @@ export async function DELETE(
 ) {
   await db.deletePost(params.id);
   return NextResponse.json({ success: true });
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* Headers and cookies */}
-      <section className="space-y-6">
+      <section id="headers-and-cookies" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Headers and Cookies</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Read request headers with <code className="bg-stone-100 px-1 rounded text-xs font-mono">request.headers.get()</code>. For cookies, import Next.js's <code className="bg-stone-100 px-1 rounded text-xs font-mono">cookies()</code> helper from <code className="bg-stone-100 px-1 rounded text-xs font-mono">next/headers</code> — it reads the incoming cookie jar on the server.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`import { cookies } from 'next/headers';
+        <CodeBlock language="javascript">
+          {`import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export async function GET(request: Request) {
   // Read an Authorization header
@@ -110,11 +135,12 @@ export async function GET(request: Request) {
   }
 
   return NextResponse.json({ ok: true });
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* Middleware vs Route Handler */}
-      <section className="space-y-6">
+      <section id="middleware-vs-route-handler" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Middleware vs Route Handler</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Both run on the server, but at different points in the request lifecycle.
@@ -145,7 +171,7 @@ export async function GET(request: Request) {
       </section>
 
       {/* Route Handlers vs Server Actions */}
-      <section className="space-y-6">
+      <section id="route-handlers-vs-server-actions" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Route Handlers vs Server Actions</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Both run server-side code — the choice comes down to who is calling your endpoint.

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_TRY = `// try / catch / finally
 function divide(a, b) {
@@ -116,8 +117,21 @@ export default function Module04ErrorHandling() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#types-of-errors" className="text-primary hover:underline">→ Types of Errors</a></li>
+          <li><a href="#try-catch-finally" className="text-primary hover:underline">→ try / catch / finally</a></li>
+          <li><a href="#throwing-errors" className="text-primary hover:underline">→ Throwing Errors</a></li>
+          <li><a href="#custom-error-classes" className="text-primary hover:underline">→ Custom Error Classes</a></li>
+          <li><a href="#async-error-handling" className="text-primary hover:underline">→ Async Error Handling</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Types of errors */}
-      <section className="space-y-4">
+      <section id="types-of-errors" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Types of Errors</h2>
 
         <div className="rounded-2xl border border-border overflow-hidden">
@@ -150,7 +164,7 @@ export default function Module04ErrorHandling() {
       </section>
 
       {/* try/catch/finally */}
-      <section className="space-y-4">
+      <section id="try-catch-finally" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">try / catch / finally</h2>
         <p className="text-base text-muted-foreground">
           Wrap risky code in a <code className="font-mono text-sm">try</code> block. If anything
@@ -163,7 +177,8 @@ export default function Module04ErrorHandling() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Structure
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`try {
+          <CodeBlock language="json">
+          {`try {
   // code that might throw
   const data = JSON.parse(rawInput);
   process(data);
@@ -174,14 +189,15 @@ export default function Module04ErrorHandling() {
   console.error(err.name + ":", err.message);
 } finally {
   hideSpinner(); // always runs
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
 
         <CodePlayground mode="js" starter={{ js: EXPLORE_TRY }} height="260px" />
       </section>
 
       {/* Throwing errors */}
-      <section className="space-y-4">
+      <section id="throwing-errors" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Throwing Errors</h2>
         <p className="text-base text-muted-foreground">
           Use <code className="font-mono text-sm">throw</code> to signal a problem intentionally.
@@ -193,7 +209,8 @@ export default function Module04ErrorHandling() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Throw and re-throw
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`// Throw from a validation function
+          <CodeBlock language="javascript">
+          {`// Throw from a validation function
 function requireEmail(email) {
   if (!email.includes("@")) {
     throw new TypeError("Invalid email address");
@@ -209,12 +226,13 @@ try {
   } else {
     throw err; // let the caller deal with unexpected errors
   }
-}`}</pre>
+}`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Custom errors */}
-      <section className="space-y-4">
+      <section id="custom-error-classes" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Custom Error Classes</h2>
         <p className="text-base text-muted-foreground">
           Extend the built-in <code className="font-mono text-sm">Error</code> class to create
@@ -226,7 +244,7 @@ try {
       </section>
 
       {/* Async error handling */}
-      <section className="space-y-4">
+      <section id="async-error-handling" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Async Error Handling</h2>
         <p className="text-base text-muted-foreground">
           Async functions throw errors the same way sync functions do — just use{" "}
@@ -241,7 +259,8 @@ try {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Defensive programming pattern
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`// Safe wrapper — always returns something useful
+          <CodeBlock language="json">
+          {`// Safe wrapper — always returns something useful
 async function safeGet(url, fallback = null) {
   try {
     const res = await fetch(url);
@@ -253,12 +272,13 @@ async function safeGet(url, fallback = null) {
   }
 }
 
-const users = await safeGet("/api/users", []); // empty array if it fails`}</pre>
+const users = await safeGet("/api/users", []); // empty array if it fails`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
         <p className="text-base text-muted-foreground">
           Write a function <code className="font-mono text-sm">checkPositive(n)</code> that throws a

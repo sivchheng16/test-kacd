@@ -14,8 +14,20 @@ export default function Module01WhatIsSoftware() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-software-actually-is" className="text-primary hover:underline">→ What software actually is</a></li>
+          <li><a href="#the-four-layers-every-computer-has" className="text-primary hover:underline">→ The four layers every computer has</a></li>
+          <li><a href="#what-developers-actually-do" className="text-primary hover:underline">→ What developers actually do</a></li>
+          <li><a href="#the-two-kinds-of-software" className="text-primary hover:underline">→ The two kinds of software</a></li>
+          <li><a href="#three-roles-you-will-hear-about-constantly" className="text-primary hover:underline">→ Three roles you will hear about constantly</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Concept ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="what-software-actually-is" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What software actually is</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A computer is hardware — the physical chips, screen, keyboard, and wires. Hardware can
@@ -45,7 +57,7 @@ export default function Module01WhatIsSoftware() {
       </section>
 
       {/* ── 3. The layers ──────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="the-four-layers-every-computer-has" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">The four layers every computer has</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Software is not one flat thing. It lives in layers, each one built on top of the one below it.
@@ -75,7 +87,7 @@ export default function Module01WhatIsSoftware() {
       </section>
 
       {/* ── 4. What developers do ──────────────────────────── */}
-      <section className="space-y-6">
+      <section id="what-developers-actually-do" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What developers actually do</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           CPUs only understand machine code, but writing machine code is painfully slow and error-prone.
@@ -92,7 +104,7 @@ export default function Module01WhatIsSoftware() {
       </section>
 
       {/* ── 5. Two kinds of software ───────────────────────── */}
-      <section className="space-y-6">
+      <section id="the-two-kinds-of-software" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">The two kinds of software</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Every piece of software you will ever build falls into one of two categories:
@@ -120,7 +132,7 @@ export default function Module01WhatIsSoftware() {
       </section>
 
       {/* ── 6. Frontend / Backend / Full-stack ─────────────── */}
-      <section className="space-y-6">
+      <section id="three-roles-you-will-hear-about-constantly" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Three roles you will hear about constantly</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Web software has two sides. Think of a restaurant: there is the dining room the customer

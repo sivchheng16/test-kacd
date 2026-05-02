@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module01HowBackendsWork() {
   return (
@@ -13,8 +14,22 @@ export default function Module01HowBackendsWork() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#the-client-server-model" className="text-primary hover:underline">→ The client-server model</a></li>
+          <li><a href="#http-request-anatomy" className="text-primary hover:underline">→ HTTP request anatomy</a></li>
+          <li><a href="#response-anatomy" className="text-primary hover:underline">→ Response anatomy</a></li>
+          <li><a href="#rest" className="text-primary hover:underline">→ REST</a></li>
+          <li><a href="#stateless-servers" className="text-primary hover:underline">→ Stateless servers</a></li>
+          <li><a href="#json" className="text-primary hover:underline">→ JSON</a></li>
+          <li><a href="#what-happens-when-you-log-in" className="text-primary hover:underline">→ What happens when you log in</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Client-server model ────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="the-client-server-model" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">The client-server model</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Every web application is split between two distinct roles.
@@ -35,7 +50,7 @@ export default function Module01HowBackendsWork() {
       </section>
 
       {/* ── 3. HTTP request anatomy ───────────────────────────── */}
-      <section className="space-y-6">
+      <section id="http-request-anatomy" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">HTTP request anatomy</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Every conversation between client and server happens over HTTP. A request has four parts:
@@ -46,7 +61,8 @@ export default function Module01HowBackendsWork() {
           <li><strong className="text-foreground">Headers</strong> — metadata: <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">Content-Type</code>, <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">Authorization</code></li>
           <li><strong className="text-foreground">Body</strong> — optional data payload (POST/PUT/PATCH only)</li>
         </ul>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`POST /api/posts HTTP/1.1
+        <CodeBlock language="json">
+          {`POST /api/posts HTTP/1.1
 Host: api.example.com
 Content-Type: application/json
 Authorization: Bearer eyJhbGci...
@@ -54,18 +70,20 @@ Authorization: Bearer eyJhbGci...
 {
   "title": "My first post",
   "body": "Hello, backend!"
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* ── 4. Response anatomy ───────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="response-anatomy" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Response anatomy</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The server replies with a status code, headers, and usually a body.
           The <strong className="text-foreground">status code</strong> is a three-digit number that tells
           the client whether the request succeeded and, if not, why.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`HTTP/1.1 201 Created
+        <CodeBlock language="json">
+          {`HTTP/1.1 201 Created
 Content-Type: application/json
 
 {
@@ -74,11 +92,12 @@ Content-Type: application/json
     "title": "My first post",
     "createdAt": "2025-01-15T10:30:00Z"
   }
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* ── 5. REST ───────────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="rest" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">REST — resources as URLs, verbs as actions</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           REST (Representational State Transfer) is the dominant style for web APIs. The core idea is simple:
@@ -112,7 +131,7 @@ Content-Type: application/json
       </section>
 
       {/* ── 6. Stateless servers ──────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="stateless-servers" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Stateless servers</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           HTTP is <strong className="text-foreground">stateless</strong>: the server does not remember previous
@@ -127,14 +146,15 @@ Content-Type: application/json
       </section>
 
       {/* ── 7. JSON ───────────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="json" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">JSON — the universal data format</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           JSON (JavaScript Object Notation) is the standard format for sending data between client and server.
           It maps directly to JavaScript objects and arrays, supports strings, numbers, booleans, null, objects,
           and arrays — and nothing else. No functions, no dates (use ISO 8601 strings), no undefined.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`{
+        <CodeBlock language="json">
+          {`{
   "id": 42,
   "title": "Hello backend",
   "published": true,
@@ -143,11 +163,12 @@ Content-Type: application/json
     "id": 7,
     "name": "Rithy"
   }
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* ── 8. Login flow ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="what-happens-when-you-log-in" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What happens when you log in</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Authentication over HTTP follows a predictable pattern. Understanding it end-to-end makes every
@@ -160,7 +181,8 @@ Content-Type: application/json
           <li>Client stores the token (in memory or a cookie) and attaches it to every subsequent request: <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">Authorization: Bearer &lt;token&gt;</code>.</li>
           <li>On protected routes, server verifies the token before proceeding. If the token is missing or invalid, it returns <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">401 Unauthorized</code>.</li>
         </ol>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// 1. Login
+        <CodeBlock language="json">
+          {`// 1. Login
 POST /auth/login
 { "email": "rithy@example.com", "password": "secret" }
 
@@ -169,7 +191,8 @@ POST /auth/login
 
 // 3. Client attaches token to future requests
 GET /posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`}</pre>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`}
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Notice that the server never stores the token — it just verifies it. This is what makes the
           system stateless and scalable.

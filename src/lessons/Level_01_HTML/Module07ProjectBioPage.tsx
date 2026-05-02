@@ -94,8 +94,20 @@ export default function Module07ProjectBioPage() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#what-your-bio-page-must-include" className="text-primary hover:underline">→ What your bio page must include</a></li>
+          <li><a href="#taking-it-further" className="text-primary hover:underline">→ Taking it further</a></li>
+          <li><a href="#start-here" className="text-primary hover:underline">→ Start here</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Requirements ────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="what-your-bio-page-must-include" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What your bio page must include</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The challenge checker will verify all five requirements below. Everything else — the content, the wording,
@@ -135,8 +147,30 @@ export default function Module07ProjectBioPage() {
         </div>
       </section>
 
+      {/* ── 2.5 Taking it further ──────────────────────────── */}
+      <section id="taking-it-further" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">Taking it further</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          If you want to make your bio page stand out even before we dive into CSS in the next course, try incorporating some of the advanced tags you learned:
+        </p>
+        <ul className="space-y-3 text-sm text-muted-foreground">
+          <li className="flex gap-3 leading-relaxed">
+            <code className="text-primary font-mono shrink-0 mt-0.5">&lt;figure&gt;</code>
+            Wrap your profile picture in a figure and add a caption with your title.
+          </li>
+          <li className="flex gap-3 leading-relaxed">
+            <code className="text-primary font-mono shrink-0 mt-0.5">&lt;dl&gt;</code>
+            Use a description list for your work experience (e.g., Company name as <code className="text-xs bg-stone-100 px-1 py-0.5 rounded">&lt;dt&gt;</code>, description as <code className="text-xs bg-stone-100 px-1 py-0.5 rounded">&lt;dd&gt;</code>).
+          </li>
+          <li className="flex gap-3 leading-relaxed">
+            <code className="text-primary font-mono shrink-0 mt-0.5">&lt;mark&gt;</code>
+            Highlight your key skills or availability status using the mark tag.
+          </li>
+        </ul>
+      </section>
+
       {/* ── 3. Starter code / Try it ───────────────────────── */}
-      <section className="space-y-4">
+      <section id="start-here" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Start here</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -151,8 +185,22 @@ export default function Module07ProjectBioPage() {
         />
       </section>
 
+      {/* ── 3.5 Summary ─────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Congratulations! By completing this project, you have demonstrated that you can:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Structure a complete HTML document from scratch.</li>
+            <li>Use semantic tags (<code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>) to organize content.</li>
+            <li>Incorporate text, lists, and images effectively.</li>
+            <li>Build a foundation that is ready to be styled with CSS.</li>
+          </ul>
+        </div>
+      </section>
+
       {/* ── 4. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

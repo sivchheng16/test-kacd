@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const OPTIONS = ["git stage .", "git add .", "git commit -a", "git push ."];
 const CORRECT = "git add .";
@@ -33,8 +34,23 @@ export default function Module02BasicCommands() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#git-add" className="text-primary hover:underline">→ git add</a></li>
+          <li><a href="#git-commit" className="text-primary hover:underline">→ git commit</a></li>
+          <li><a href="#git-status" className="text-primary hover:underline">→ git status</a></li>
+          <li><a href="#git-log" className="text-primary hover:underline">→ git log</a></li>
+          <li><a href="#git-diff" className="text-primary hover:underline">→ git diff</a></li>
+          <li><a href="#undoing-changes" className="text-primary hover:underline">→ Undoing Changes</a></li>
+          <li><a href="#quick-reference" className="text-primary hover:underline">→ Quick Reference</a></li>
+          <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
+        </ul>
+      </section>
+
       {/* git add */}
-      <section className="space-y-4">
+      <section id="git-add" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git add — Staging Changes</h2>
         <p className="text-base text-muted-foreground">
           Staging is the step between editing files and saving a commit. It lets you
@@ -45,7 +61,8 @@ export default function Module02BasicCommands() {
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Stage a single file
+          <CodeBlock language="javascript">
+          {`# Stage a single file
 git add index.html
 
 # Stage a folder
@@ -58,12 +75,13 @@ git add .
 git add -p index.html
 
 # Unstage a file (keep your edits, just un-queue it)
-git restore --staged index.html`}</pre>
+git restore --staged index.html`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* git commit */}
-      <section className="space-y-4">
+      <section id="git-commit" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git commit — Saving a Snapshot</h2>
         <p className="text-base text-muted-foreground">
           A commit permanently saves everything in the staging area into the repository history
@@ -74,19 +92,21 @@ git restore --staged index.html`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Basic commit
+          <CodeBlock language="javascript">
+          {`# Basic commit
 git commit -m "Add hero section to homepage"
 
 # Stage all tracked files and commit in one step
 git commit -am "Fix typo in about page"
 
 # Amend the last commit (before pushing)
-git commit --amend -m "Better message for the last commit"`}</pre>
+git commit --amend -m "Better message for the last commit"`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* git status */}
-      <section className="space-y-4">
+      <section id="git-status" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git status — What's Going On?</h2>
         <p className="text-base text-muted-foreground">
           Run <code className="font-mono text-sm">git status</code> constantly. It shows you
@@ -97,7 +117,8 @@ git commit --amend -m "Better message for the last commit"`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Example output
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`On branch main
+          <CodeBlock language="json">
+          {`On branch main
 Your branch is up to date with 'origin/main'.
 
 Changes to be committed:
@@ -110,12 +131,13 @@ Changes not staged for commit:
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
-        contact.html                    ← Git doesn't know about this yet`}</pre>
+        contact.html                    ← Git doesn't know about this yet`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* git log */}
-      <section className="space-y-4">
+      <section id="git-log" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git log — Viewing History</h2>
         <p className="text-base text-muted-foreground">
           The log shows every commit in reverse chronological order. Each entry has a SHA-1
@@ -126,7 +148,8 @@ Untracked files:
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Full log
+          <CodeBlock language="javascript">
+          {`# Full log
 git log
 
 # Compact — one line per commit (great for overview)
@@ -142,23 +165,26 @@ git log --oneline --graph --all
 git log --grep="fix"
 
 # Commits that changed a specific file
-git log -- index.html`}</pre>
+git log -- index.html`}
+        </CodeBlock>
         </div>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             git log --oneline output
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`a3f91bc Fix mobile nav overlap
+          <CodeBlock language="javascript">
+          {`a3f91bc Fix mobile nav overlap
 7d2e4a1 Add contact form with validation
 c1089ff Update hero section colours
 3b55abc Add about page
-e7812d0 Initial commit`}</pre>
+e7812d0 Initial commit`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* git diff */}
-      <section className="space-y-4">
+      <section id="git-diff" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">git diff — Seeing Changes</h2>
         <p className="text-base text-muted-foreground">
           <code className="font-mono text-sm">git diff</code> shows exactly what lines changed
@@ -170,7 +196,8 @@ e7812d0 Initial commit`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Terminal
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Unstaged changes (working dir vs last commit)
+          <CodeBlock language="javascript">
+          {`# Unstaged changes (working dir vs last commit)
 git diff
 
 # Staged changes (what will go into the next commit)
@@ -180,12 +207,13 @@ git diff --staged
 git diff a3f91bc 7d2e4a1
 
 # Diff a specific file
-git diff index.html`}</pre>
+git diff index.html`}
+        </CodeBlock>
         </div>
       </section>
 
       {/* Undoing */}
-      <section className="space-y-4">
+      <section id="undoing-changes" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Undoing Changes</h2>
         <p className="text-base text-muted-foreground">
           Git gives you several ways to go back, depending on how far you went.
@@ -195,7 +223,8 @@ git diff index.html`}</pre>
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
             Common undo operations
           </div>
-          <pre className="px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">{`# Discard edits to a file (restore to last commit)
+          <CodeBlock language="javascript">
+          {`# Discard edits to a file (restore to last commit)
 git restore index.html
 
 # Unstage a file (keep edits, just remove from staging)
@@ -210,7 +239,8 @@ git reset --mixed HEAD~1  # default: un-commits and unstages
 
 # DESTRUCTIVE — discards commits AND working dir changes
 # Only use locally before pushing
-git reset --hard HEAD~1`}</pre>
+git reset --hard HEAD~1`}
+        </CodeBlock>
         </div>
 
         <div className="rounded-2xl border border-border px-5 py-4">
@@ -224,7 +254,7 @@ git reset --hard HEAD~1`}</pre>
       </section>
 
       {/* Cheat sheet */}
-      <section className="space-y-4">
+      <section id="quick-reference" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Quick Reference</h2>
         <div className="rounded-2xl border border-border overflow-hidden">
           <table className="w-full text-sm">
@@ -257,7 +287,7 @@ git reset --hard HEAD~1`}</pre>
       </section>
 
       {/* Knowledge check */}
-      <section className="space-y-4">
+      <section id="knowledge-check" className="space-y-4">
         <h2 className="text-2xl font-serif text-foreground">Knowledge Check</h2>
         <p className="text-base text-muted-foreground">
           Which command stages <em>all</em> changed files in the current directory?

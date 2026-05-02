@@ -1,3 +1,4 @@
+import { CodeBlock } from "@/components/ui/CodeBlock";
 import React from "react";
 
 export default function Module06TailwindCSS() {
@@ -12,8 +13,24 @@ export default function Module06TailwindCSS() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#utility-first-philosophy" className="text-primary hover:underline">→ Utility-First Philosophy</a></li>
+          <li><a href="#setup" className="text-primary hover:underline">→ Setup</a></li>
+          <li><a href="#core-classes" className="text-primary hover:underline">→ Core Classes</a></li>
+          <li><a href="#responsive-design" className="text-primary hover:underline">→ Responsive Design</a></li>
+          <li><a href="#state-variants" className="text-primary hover:underline">→ State Variants</a></li>
+          <li><a href="#arbitrary-values" className="text-primary hover:underline">→ Arbitrary Values</a></li>
+          <li><a href="#component-extraction" className="text-primary hover:underline">→ Component Extraction</a></li>
+          <li><a href="#conditional-classes-with-cn" className="text-primary hover:underline">→ Conditional Classes with cn()</a></li>
+          <li><a href="#tailwind-vs-other-approaches" className="text-primary hover:underline">→ Tailwind vs Other Approaches</a></li>
+        </ul>
+      </section>
+
       {/* Utility-first philosophy */}
-      <section className="space-y-6">
+      <section id="utility-first-philosophy" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Utility-First Philosophy</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Traditional CSS requires you to invent a class name, write a rule in a separate file, and then keep both in sync. Utility-first flips this: each class does one thing, and you compose them directly in HTML. No naming decisions, no specificity battles, no dead CSS accumulating over time.
@@ -21,38 +38,46 @@ export default function Module06TailwindCSS() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
             <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">Traditional CSS</div>
-            <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`.card {
+            <CodeBlock language="json">
+          {`.card {
   padding: 1rem;
   border-radius: 0.75rem;
   background: white;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-<div class="card">…</div>`}</pre>
+<div class="card">…</div>`}
+        </CodeBlock>
           </div>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
             <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">Tailwind</div>
-            <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`<div className="p-4 rounded-xl
+            <CodeBlock language="javascript">
+          {`<div className="p-4 rounded-xl
   bg-white shadow-sm">
   …
-</div>`}</pre>
+</div>`}
+        </CodeBlock>
           </div>
         </div>
       </section>
 
       {/* Setup */}
-      <section className="space-y-6">
+      <section id="setup" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Setup</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Tailwind is included when you use <code className="bg-stone-100 px-1 rounded text-xs font-mono">create-next-app</code> and select "Yes" for Tailwind. For an existing project, install it manually:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p`}</pre>
+        <CodeBlock language="bash">
+          {`npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p`}
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The config file at <code className="bg-stone-100 px-1 rounded text-xs font-mono">tailwind.config.ts</code> tells Tailwind which files to scan for class names so unused styles are purged from the production bundle.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// tailwind.config.ts
+        <CodeBlock language="javascript">
+          {`// tailwind.config.ts
 import type { Config } from 'tailwindcss';
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const config: Config = {
   content: [
@@ -64,11 +89,12 @@ const config: Config = {
   },
   plugins: [],
 };
-export default config;`}</pre>
+export default config;`}
+        </CodeBlock>
       </section>
 
       {/* Core classes */}
-      <section className="space-y-6">
+      <section id="core-classes" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Core Classes</h2>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">
@@ -99,27 +125,30 @@ export default config;`}</pre>
       </section>
 
       {/* Responsive */}
-      <section className="space-y-6">
+      <section id="responsive-design" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Responsive Design</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Tailwind is mobile-first. An unprefixed class applies at all screen sizes. Add a breakpoint prefix to override at that width and above: <code className="bg-stone-100 px-1 rounded text-xs font-mono">sm:</code> (640px), <code className="bg-stone-100 px-1 rounded text-xs font-mono">md:</code> (768px), <code className="bg-stone-100 px-1 rounded text-xs font-mono">lg:</code> (1024px), <code className="bg-stone-100 px-1 rounded text-xs font-mono">xl:</code> (1280px).
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`<h1 className="text-2xl md:text-4xl lg:text-5xl font-bold">
+        <CodeBlock language="json">
+          {`<h1 className="text-2xl md:text-4xl lg:text-5xl font-bold">
   Hello
 </h1>
 
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   {/* cards */}
-</div>`}</pre>
+</div>`}
+        </CodeBlock>
       </section>
 
       {/* State variants */}
-      <section className="space-y-6">
+      <section id="state-variants" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">State Variants</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Prefix any utility with a state to apply it conditionally — no extra CSS required.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`<button
+        <CodeBlock language="json">
+          {`<button
   className="
     bg-blue-500 text-white px-4 py-2 rounded-lg
     hover:bg-blue-600
@@ -129,7 +158,8 @@ export default config;`}</pre>
   "
 >
   Submit
-</button>`}</pre>
+</button>`}
+        </CodeBlock>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">
             <thead className="bg-stone-50 border-b border-border">
@@ -158,27 +188,30 @@ export default config;`}</pre>
       </section>
 
       {/* Arbitrary values */}
-      <section className="space-y-6">
+      <section id="arbitrary-values" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Arbitrary Values</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           When a design calls for an exact pixel value or a colour outside the default palette, use square-bracket notation. This is an escape hatch — reach for it for one-off values, not as a substitute for the design system.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`<div className="w-[347px] h-[200px] bg-[#6366f1] mt-[13px]">
+        <CodeBlock language="javascript">
+          {`<div className="w-[347px] h-[200px] bg-[#6366f1] mt-[13px]">
   Custom dimensions and colour
 </div>
 
 <p className="text-[15px] leading-[1.7]">
   Fine-tuned typography
-</p>`}</pre>
+</p>`}
+        </CodeBlock>
       </section>
 
       {/* Component extraction */}
-      <section className="space-y-6">
+      <section id="component-extraction" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Component Extraction</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           When you find yourself copying the same six classes across multiple files, extract a React component — not a CSS class. Components carry logic, props, and state in ways a CSS class cannot.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`// Instead of repeating this everywhere:
+        <CodeBlock language="json">
+          {`// Instead of repeating this everywhere:
 <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium text-sm">
 
 // Extract a component:
@@ -191,16 +224,18 @@ function Button({ children, onClick }: { children: React.ReactNode; onClick?: ()
       {children}
     </button>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* cn() utility */}
-      <section className="space-y-6">
+      <section id="conditional-classes-with-cn" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Conditional Classes with cn()</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Combining classes conditionally with template literals gets messy fast. The <code className="bg-stone-100 px-1 rounded text-xs font-mono">cn()</code> helper — built from <code className="bg-stone-100 px-1 rounded text-xs font-mono">clsx</code> and <code className="bg-stone-100 px-1 rounded text-xs font-mono">tailwind-merge</code> — handles merging and deduplication cleanly.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">{`import { cn } from '@/lib/utils';
+        <CodeBlock language="javascript">
+          {`import { cn } from '@/lib/utils';
 
 function Badge({ active }: { active: boolean }) {
   return (
@@ -213,11 +248,12 @@ function Badge({ active }: { active: boolean }) {
       {active ? 'Active' : 'Inactive'}
     </span>
   );
-}`}</pre>
+}`}
+        </CodeBlock>
       </section>
 
       {/* Tailwind vs alternatives */}
-      <section className="space-y-6">
+      <section id="tailwind-vs-other-approaches" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Tailwind vs Other Approaches</h2>
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">

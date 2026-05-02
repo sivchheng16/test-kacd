@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 const EXPLORE_STARTER = {
   html: `<div class="card">
@@ -118,8 +119,21 @@ export default function Module09CSSVariablesAnimations() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#part-1" className="text-primary hover:underline">→ Part 1</a></li>
+          <li><a href="#part-2" className="text-primary hover:underline">→ Part 2</a></li>
+          <li><a href="#part-3" className="text-primary hover:underline">→ Part 3</a></li>
+          <li><a href="#part-4" className="text-primary hover:underline">→ Part 4</a></li>
+          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. CSS Variables ───────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="part-1" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Part 1 — CSS Custom Properties</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           CSS custom properties (also called <strong className="text-foreground">variables</strong>) let you
@@ -127,12 +141,8 @@ export default function Module09CSSVariablesAnimations() {
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">:root</code> so they're available
           across the whole page:
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            styles.css
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`:root {
+        <CodeBlock language="css" title="styles.css">
+          {`:root {
   --primary: #6366f1;       /* indigo brand colour */
   --spacing-md: 16px;       /* reusable spacing unit */
 }
@@ -142,8 +152,7 @@ button {
   padding: var(--spacing-md);
   color: var(--accent, white);         /* fallback if --accent is unset */
 }`}
-          </pre>
-        </div>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <span className="text-primary font-mono shrink-0">--name</span>
@@ -163,12 +172,8 @@ button {
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">[data-theme="dark"]</code> selector
           and every component updates automatically — no JavaScript needed.
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            theme switching
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`:root {
+        <CodeBlock language="javascript" title="theme switching">
+          {`:root {
   --bg: #ffffff;
   --text: #111111;
 }
@@ -182,12 +187,11 @@ body {
   background: var(--bg);
   color: var(--text);
 }`}
-          </pre>
-        </div>
+        </CodeBlock>
       </section>
 
       {/* ── 3. Transitions ─────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="part-2" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Part 2 — Transitions</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A transition tells the browser to animate between two states smoothly instead of snapping.
@@ -196,12 +200,8 @@ body {
             transition: property duration timing-function
           </code>
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            transitions
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`.btn {
+        <CodeBlock language="javascript" title="transitions">
+          {`.btn {
   background: var(--primary);
   transition: background-color 200ms ease;   /* smooth colour swap */
 }
@@ -209,8 +209,7 @@ body {
 .btn:hover {
   background: var(--primary-hover);
 }`}
-          </pre>
-        </div>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <span className="text-primary font-mono shrink-0">ease</span>
@@ -234,18 +233,14 @@ body {
       </section>
 
       {/* ── 4. Transforms ──────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="part-3" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Part 3 — Transforms</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Transforms move, scale, or rotate elements without touching the layout — the browser hands
           them to the GPU, so they're smooth even on complex pages.
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            transform examples
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`.card:hover {
+        <CodeBlock language="javascript" title="transform examples">
+          {`.card:hover {
   transform: translateY(-4px);   /* lift effect — card rises 4px */
 }
 
@@ -261,8 +256,7 @@ body {
 .btn:hover {
   transform: translateY(-2px) scale(1.02);
 }`}
-          </pre>
-        </div>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Always pair transforms with a{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">transition</code> — without it the
@@ -271,19 +265,15 @@ body {
       </section>
 
       {/* ── 5. Keyframe Animations ─────────────────────────── */}
-      <section className="space-y-6">
+      <section id="part-4" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">Part 4 — Keyframe Animations</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Transitions only work between two states triggered by interaction. For animations that play
           automatically — a fade-in on load, a pulsing badge — use{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">@keyframes</code>.
         </p>
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
-            keyframes
-          </div>
-          <pre className="px-6 py-5 text-sm font-mono leading-relaxed text-foreground overflow-x-auto bg-[#fafaf9]">
-{`@keyframes fadeIn {
+        <CodeBlock language="javascript" title="keyframes">
+          {`@keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
@@ -297,8 +287,7 @@ body {
   /* shorthand: name duration timing fill */
   animation: fadeIn 400ms ease-out forwards;
 }`}
-          </pre>
-        </div>
+        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <span className="text-primary font-mono shrink-0">from / to</span>
@@ -316,7 +305,7 @@ body {
       </section>
 
       {/* ── 6. Try it ──────────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="try-it" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Try it</h2>
           <p className="text-base text-muted-foreground mt-1">
@@ -336,7 +325,7 @@ body {
       </section>
 
       {/* ── 7. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

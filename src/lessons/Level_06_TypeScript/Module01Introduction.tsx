@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 // ── Challenge ────────────────────────────────────────────────────────────────
 
@@ -84,8 +85,24 @@ export default function Module01Introduction() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#typescript-is-a-superset-of-javascript" className="text-primary hover:underline">→ TypeScript is a superset of JavaScript</a></li>
+          <li><a href="#type-annotations" className="text-primary hover:underline">→ Type annotations</a></li>
+          <li><a href="#type-inference" className="text-primary hover:underline">→ Type inference</a></li>
+          <li><a href="#the-any-type" className="text-primary hover:underline">→ The any type</a></li>
+          <li><a href="#array-types" className="text-primary hover:underline">→ Array types</a></li>
+          <li><a href="#object-types" className="text-primary hover:underline">→ Object types</a></li>
+          <li><a href="#union-types" className="text-primary hover:underline">→ Union types</a></li>
+          <li><a href="#compiling-typescript" className="text-primary hover:underline">→ Compiling TypeScript</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* ── 2. Superset ─────────────────────────────────────── */}
-      <section className="space-y-6">
+      <section id="typescript-is-a-superset-of-javascript" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">TypeScript is a superset of JavaScript</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Every valid JavaScript file is already a valid TypeScript file. You
@@ -99,38 +116,38 @@ export default function Module01Introduction() {
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
               greet.ts — what you write
             </div>
-            <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`function greet(name: string): string {
+            <CodeBlock language="json">
+          {`function greet(name: string): string {
   return "Hello, " + name;
 }`}
-            </pre>
+        </CodeBlock>
           </div>
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
               greet.js — what tsc produces
             </div>
-            <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`function greet(name) {
+            <CodeBlock language="javascript">
+          {`function greet(name) {
   return "Hello, " + name;
 }`}
-            </pre>
+        </CodeBlock>
           </div>
         </div>
       </section>
 
       {/* ── 3. Type annotations ─────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="type-annotations" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Type annotations</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A type annotation is a colon followed by the type name, written right
           after the variable or parameter. The three primitive types cover most
           of what you will write day-to-day.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`const name: string  = "Alice";
+        <CodeBlock language="json">
+          {`const name: string  = "Alice";
 const age:  number  = 25;
 const active: boolean = true;`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           If you try to assign the wrong type — say,{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">const age: number = "twenty-five"</code>{" "}
@@ -139,18 +156,18 @@ const active: boolean = true;`}
       </section>
 
       {/* ── 4. Type inference ───────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="type-inference" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Type inference — TypeScript is smart</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           You do not have to annotate everything. When the value is obvious,
           TypeScript infers the type automatically.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// TypeScript knows name is a string — you don't need to say so.
+        <CodeBlock language="json">
+          {`// TypeScript knows name is a string — you don't need to say so.
 const name = "Alice";   // inferred: string
 const score = 42;       // inferred: number
 const done = false;     // inferred: boolean`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Use explicit annotations where the type is not obvious from the value
           — function parameters and return types are the most important places.
@@ -159,7 +176,7 @@ const done = false;     // inferred: boolean`}
       </section>
 
       {/* ── 5. The any type ─────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="the-any-type" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">The <code className="font-mono text-[#c2622d]">any</code> type — and why to avoid it</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">any</code> is an escape hatch that
@@ -167,15 +184,15 @@ const done = false;     // inferred: boolean`}
           from plain JavaScript, but using it freely defeats the purpose of
           TypeScript entirely.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`// ✗ avoid — you lose all protection
+        <CodeBlock language="json">
+          {`// ✗ avoid — you lose all protection
 let value: any = "hello";
 value = 42;         // no error
 value.toUpperCase(); // no error, but crashes at runtime!
 
 // ✓ prefer a union type instead (covered next)
 let value: string | number = "hello";`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Treat <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">any</code> like a fire
           extinguisher: it is there for emergencies, but if you use it daily
@@ -184,39 +201,39 @@ let value: string | number = "hello";`}
       </section>
 
       {/* ── 6. Array types ──────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="array-types" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Array types</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Two syntaxes, same meaning — pick one and stick with it (
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">string[]</code> is the most
           common in practice):
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`const names: string[]        = ["Alice", "Bob", "Carol"];
+        <CodeBlock language="json">
+          {`const names: string[]        = ["Alice", "Bob", "Carol"];
 const scores: Array<number>  = [98, 87, 76];
 
 // TypeScript prevents mixing types
 names.push(42);  // ✗ error: Argument of type 'number'
                  //          is not assignable to 'string'`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── 7. Object types ─────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="object-types" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Object types</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           You can describe an object's shape inline. Each property gets its own
           type, separated by semicolons.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`const user: { name: string; age: number } = {
+        <CodeBlock language="json">
+          {`const user: { name: string; age: number } = {
   name: "Alice",
   age: 25,
 };
 
 user.name = "Bob";  // ✓ fine
 user.age  = "old";  // ✗ error: string is not assignable to number`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           Inline object types work for one-offs. When the same shape is reused,
           you will use an <strong className="text-foreground">interface</strong> instead — that is the
@@ -225,19 +242,19 @@ user.age  = "old";  // ✗ error: string is not assignable to number`}
       </section>
 
       {/* ── 8. Union types ──────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="union-types" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Union types</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Sometimes a value can be one of several types. The pipe character{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">|</code> creates a union.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`const id: string | number = "abc123";  // could also be 42
+        <CodeBlock language="json">
+          {`const id: string | number = "abc123";  // could also be 42
 let status: "loading" | "success" | "error" = "loading";
 
 status = "success";  // ✓
 status = "oops";     // ✗ error: not one of the allowed strings`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           String literal unions (the second example) are especially useful for
           state machines — TypeScript will tell you immediately if you mistype a
@@ -246,7 +263,7 @@ status = "oops";     // ✗ error: not one of the allowed strings`}
       </section>
 
       {/* ── 9. Compiling ────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="compiling-typescript" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Compiling TypeScript</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           On the command line you run{" "}
@@ -256,8 +273,8 @@ status = "oops";     // ✗ error: not one of the allowed strings`}
           automatically — you never invoke{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">tsc</code> by hand.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm px-6 py-4 overflow-x-auto leading-relaxed">
-{`# compile a single file
+        <CodeBlock language="javascript">
+          {`# compile a single file
 tsc greet.ts          # outputs greet.js
 
 # type-check your whole project without emitting files
@@ -265,7 +282,7 @@ tsc --noEmit
 
 # watch mode — recompiles on every save
 tsc --watch`}
-        </pre>
+        </CodeBlock>
         <p className="text-base text-muted-foreground leading-relaxed">
           The challenge playground below runs JavaScript, so TypeScript
           annotations are written as comments to keep them valid. In a real{" "}
@@ -275,7 +292,7 @@ tsc --watch`}
       </section>
 
       {/* ── 10. Challenge ───────────────────────────────────── */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module02VariablesDataTypes() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -27,8 +28,19 @@ export default function Module02VariablesDataTypes() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#declaring-variables" className="text-primary hover:underline">→ Declaring variables</a></li>
+          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
+          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
+        </ul>
+      </section>
+
       {/* Concept */}
-      <section className="space-y-6">
+      <section id="declaring-variables" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Declaring variables</h2>
         <p className="text-muted-foreground leading-relaxed">
           There are three keywords. In modern JavaScript you only need two of them:
@@ -62,12 +74,12 @@ export default function Module02VariablesDataTypes() {
           </table>
         </div>
 
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const city = "Phnom Penh";   // won't change
+        <CodeBlock language="javascript">
+          {`const city = "Phnom Penh";   // won't change
 let score = 0;               // will change as user plays
 // city = "Siem Reap";      // ❌ error — const can't change
 score = score + 10;          // ✅ fine — let can change`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">The four basic data types</h2>
         <div className="grid grid-cols-2 gap-4">
@@ -91,8 +103,8 @@ score = score + 10;          // ✅ fine — let can change`}
           variables with <code className="font-mono bg-stone-100 px-1 rounded">{`\${}`}</code>. Much cleaner than string
           concatenation with <code className="font-mono bg-stone-100 px-1 rounded">+</code>.
         </p>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`const name = "Dara";
+        <CodeBlock language="javascript">
+          {`const name = "Dara";
 const price = 4000; // KHR
 
 // Old way (messy)
@@ -101,19 +113,19 @@ console.log("Hello " + name + ", price is " + price + " ៛");
 // Template literal (clean)
 console.log(\`Hello \${name}, price is \${price} ៛\`);
 // → Hello Dara, price is 4000 ៛`}
-        </pre>
+        </CodeBlock>
 
         <h2 className="text-xl font-semibold text-foreground pt-4">Checking types with typeof</h2>
-        <pre className="bg-stone-100 rounded-xl px-5 py-4 text-sm font-mono overflow-x-auto leading-relaxed">
-{`console.log(typeof "hello");   // "string"
+        <CodeBlock language="javascript">
+          {`console.log(typeof "hello");   // "string"
 console.log(typeof 42);        // "number"
 console.log(typeof true);      // "boolean"
 console.log(typeof undefined); // "undefined"`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* Example */}
-      <section className="space-y-4">
+      <section id="live-example" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Live example — a Cambodian market price tag</h2>
         <p className="text-sm text-muted-foreground">
           Read the code, then tweak the values and watch the preview update.
@@ -137,7 +149,7 @@ document.write("<pre>" + tag + "</pre>");`,
       </section>
 
       {/* Try it */}
-      <section className="space-y-4">
+      <section id="try-it-yourself" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Declare some variables about yourself — your name, your age, your hometown — and
@@ -157,7 +169,7 @@ document.write(\`Hello, I am \${name} and I am \${age} years old.\`);`,
       </section>
 
       {/* Challenge */}
-      <section className="space-y-4">
+      <section id="challenge" className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Declare a <code className="font-mono bg-stone-100 px-1 rounded">const</code> for a name (string) and a{" "}

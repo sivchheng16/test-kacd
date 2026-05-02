@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module02DevSetup() {
   return (
@@ -13,8 +14,22 @@ export default function Module02DevSetup() {
         </p>
       </section>
 
+      {/* ── Overview ───────────────────────────────────────── */}
+      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
+        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
+        <ul className="space-y-1.5 text-sm">
+          <li><a href="#1-install-vs-code" className="text-primary hover:underline">→ 1. Install VS Code</a></li>
+          <li><a href="#2-install-nodejs" className="text-primary hover:underline">→ 2. Install Node.js</a></li>
+          <li><a href="#3-install-git" className="text-primary hover:underline">→ 3. Install Git</a></li>
+          <li><a href="#4-essential-vs-code-extensions" className="text-primary hover:underline">→ 4. Essential VS Code Extensions</a></li>
+          <li><a href="#5-configure-vs-code" className="text-primary hover:underline">→ 5. Configure VS Code</a></li>
+          <li><a href="#6-the-integrated-terminal" className="text-primary hover:underline">→ 6. The Integrated Terminal</a></li>
+          <li><a href="#7-final-check" className="text-primary hover:underline">→ 7. Final Check</a></li>
+        </ul>
+      </section>
+
       {/* ── 1. VS Code ─────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="1-install-vs-code" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">1. Install VS Code</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           <strong className="text-foreground">Visual Studio Code</strong> is the most popular code editor in the
@@ -38,7 +53,7 @@ export default function Module02DevSetup() {
       </section>
 
       {/* ── 2. Node.js ─────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="2-install-nodejs" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">2. Install Node.js</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           <strong className="text-foreground">Node.js</strong> is a JavaScript runtime — it lets you run
@@ -59,13 +74,13 @@ export default function Module02DevSetup() {
           <li>Run the installer and accept all defaults.</li>
           <li>Open a terminal and verify:</li>
         </ol>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">
-{`node --version
+        <CodeBlock language="javascript">
+          {`node --version
 # v22.x.x  (any v18+ is fine)
 
 npm --version
 # 10.x.x`}
-        </pre>
+        </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           If both commands print version numbers, Node.js is installed correctly.{" "}
           <strong className="text-foreground">npm</strong> (Node Package Manager) comes bundled with Node — you'll
@@ -74,7 +89,7 @@ npm --version
       </section>
 
       {/* ── 3. Git ─────────────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="3-install-git" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">3. Install Git</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           <strong className="text-foreground">Git</strong> is a version control system — it tracks every change you
@@ -95,14 +110,14 @@ npm --version
           <li>Run the installer (Windows: keep all defaults; macOS: install via Xcode tools if prompted).</li>
           <li>Verify in your terminal:</li>
         </ol>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">
-{`git --version
+        <CodeBlock language="javascript">
+          {`git --version
 # git version 2.x.x`}
-        </pre>
+        </CodeBlock>
       </section>
 
       {/* ── 4. VS Code Extensions ──────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="4-essential-vs-code-extensions" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">4. Essential VS Code Extensions</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Extensions turn VS Code from a plain editor into a full development environment. Open the Extensions
@@ -137,7 +152,7 @@ npm --version
       </section>
 
       {/* ── 5. Configure VS Code ───────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="5-configure-vs-code" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">5. Configure VS Code</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Open your user settings JSON with{" "}
@@ -145,12 +160,12 @@ npm --version
           → <span className="font-mono text-foreground">Open User Settings (JSON)</span> and paste these lines inside
           the curly braces:
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">
-{`"editor.formatOnSave": true,
+        <CodeBlock language="json">
+          {`"editor.formatOnSave": true,
 "editor.tabSize": 2,
 "editor.fontSize": 14,
 "editor.defaultFormatter": "esbenp.prettier-vscode"`}
-        </pre>
+        </CodeBlock>
         <ul className="space-y-1.5 text-sm text-muted-foreground">
           <li><strong className="text-foreground">formatOnSave</strong> — Prettier runs every time you hit save. No manual formatting.</li>
           <li><strong className="text-foreground">tabSize: 2</strong> — Industry standard for web code. Two spaces per indent level.</li>
@@ -159,7 +174,7 @@ npm --version
       </section>
 
       {/* ── 6. Terminal in VS Code ─────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="6-the-integrated-terminal" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">6. The Integrated Terminal</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           VS Code has a built-in terminal — you'll live here. Open it with{" "}
@@ -174,7 +189,7 @@ npm --version
       </section>
 
       {/* ── 7. Final Check ─────────────────────────────────────── */}
-      <section className="space-y-5">
+      <section id="7-final-check" className="space-y-5">
         <h2 className="text-xl font-semibold text-foreground">7. Final Check — All Systems Go</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
           Open VS Code, press{" "}
@@ -182,11 +197,11 @@ npm --version
           to open the terminal, and run these three commands. Each one should print a version number — not an
           error.
         </p>
-        <pre className="rounded-xl bg-[#1e1e1e] text-green-400 font-mono text-sm px-6 py-4 overflow-x-auto">
-{`node --version
+        <CodeBlock language="javascript">
+          {`node --version
 npm --version
 git --version`}
-        </pre>
+        </CodeBlock>
         <div className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-2">
           <p className="text-sm font-semibold text-foreground">If a command says "not found":</p>
           <ul className="space-y-1 text-sm text-muted-foreground list-disc list-inside">
