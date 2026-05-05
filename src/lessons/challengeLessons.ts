@@ -8,6 +8,7 @@ export const CHALLENGE_LESSON_IDS = new Set([
   "html-module04linksnavigation",
   "html-module05imagesmedia",
   "html-module06tablesforms",
+  "html-module10comments",
   "html-module07projectbiopage",
   // CSS track
   "css-module01introductioncss",

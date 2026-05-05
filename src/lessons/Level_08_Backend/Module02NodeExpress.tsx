@@ -26,6 +26,7 @@ export default function Module02NodeExpress() {
           <li><a href="#request-body" className="text-primary hover:underline">→ Request body</a></li>
           <li><a href="#error-handling" className="text-primary hover:underline">→ Error handling</a></li>
           <li><a href="#project-structure" className="text-primary hover:underline">→ Project structure</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -243,6 +244,21 @@ app.use((err, req, res, next) => {
           Controllers contain the business logic. Middleware functions are reusable steps
           that run before (or after) your controllers.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key takeaways for building web servers with Node.js and Express:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Node.js:</strong> A powerful runtime that allows you to execute JavaScript on the server, providing access to the file system and network.</li>
+            <li><strong>Express Framework:</strong> A minimal and flexible web framework that simplifies routing, middleware, and request handling.</li>
+            <li><strong>Request & Response:</strong> Mastering the <code>req</code> and <code>res</code> objects to read client data and send structured replies.</li>
+            <li><strong>Dynamic Routing:</strong> Using route parameters (<code>:id</code>) and query strings to create flexible and interactive API endpoints.</li>
+            <li><strong>Error Management:</strong> Implementing centralized error-handling middleware to catch and process exceptions gracefully.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

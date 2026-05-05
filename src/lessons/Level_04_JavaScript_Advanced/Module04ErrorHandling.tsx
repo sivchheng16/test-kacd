@@ -117,7 +117,6 @@ export default function Module04ErrorHandling() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -126,6 +125,7 @@ export default function Module04ErrorHandling() {
           <li><a href="#throwing-errors" className="text-primary hover:underline">→ Throwing Errors</a></li>
           <li><a href="#custom-error-classes" className="text-primary hover:underline">→ Custom Error Classes</a></li>
           <li><a href="#async-error-handling" className="text-primary hover:underline">→ Async Error Handling</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -274,6 +274,21 @@ async function safeGet(url, fallback = null) {
 
 const users = await safeGet("/api/users", []); // empty array if it fails`}
         </CodeBlock>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Writing resilient code that handles the unexpected:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Use <strong>try / catch</strong> to handle runtime errors without crashing your app.</li>
+            <li>The <strong>finally</strong> block is ideal for cleanup tasks that must run regardless of success or failure.</li>
+            <li><strong>throw new Error()</strong> lets you signal problems intentionally.</li>
+            <li><strong>Custom Error classes</strong> allow for more specific error identification using <code>instanceof</code>.</li>
+            <li>Async errors should be handled with <strong>try / catch</strong> around <code>await</code> calls.</li>
+          </ul>
         </div>
       </section>
 

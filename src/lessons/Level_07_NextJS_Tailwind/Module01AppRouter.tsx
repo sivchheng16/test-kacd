@@ -25,7 +25,6 @@ export default function Module01AppRouter() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -35,6 +34,7 @@ export default function Module01AppRouter() {
           <li><a href="#project-structure" className="text-primary hover:underline">→ Project structure</a></li>
           <li><a href="#pagetsx-vs-layouttsx" className="text-primary hover:underline">→ page.tsx vs layout.tsx</a></li>
           <li><a href="#the-shift-from-pages-router" className="text-primary hover:underline">→ The shift from Pages Router</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -188,7 +188,7 @@ npm run dev      # http://localhost:3000`}
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">
               app/layout.tsx — root layout
             </div>
-            <CodeBlock language="json">
+            <CodeBlock language="javascript">
           {`export default function RootLayout({
   children,
 }: {
@@ -264,6 +264,20 @@ npm run dev      # http://localhost:3000`}
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The core mental models of the Next.js App Router:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Framework Benefits:</strong> Next.js provides built-in routing, optimization, and server-side rendering.</li>
+            <li><strong>File-Based Routing:</strong> Your folder structure in the <code>app/</code> directory defines your URLs.</li>
+            <li><strong>Special Files:</strong> <code>page.tsx</code> for route UI and <code>layout.tsx</code> for shared, persisting UI.</li>
+            <li><strong>App Router vs Pages Router:</strong> The modern App Router uses Server Components by default for better performance.</li>
+          </ul>
         </div>
       </section>
 

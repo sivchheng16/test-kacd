@@ -26,6 +26,7 @@ export default function Module06TailwindCSS() {
           <li><a href="#component-extraction" className="text-primary hover:underline">→ Component Extraction</a></li>
           <li><a href="#conditional-classes-with-cn" className="text-primary hover:underline">→ Conditional Classes with cn()</a></li>
           <li><a href="#tailwind-vs-other-approaches" className="text-primary hover:underline">→ Tailwind vs Other Approaches</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -38,14 +39,16 @@ export default function Module06TailwindCSS() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
             <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">Traditional CSS</div>
-            <CodeBlock language="json">
-          {`.card {
+            <CodeBlock language="javascript">
+          {`// Traditional CSS
+.card {
   padding: 1rem;
   border-radius: 0.75rem;
   background: white;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
+// HTML
 <div class="card">…</div>`}
         </CodeBlock>
           </div>
@@ -130,7 +133,7 @@ export default config;`}
         <p className="text-sm text-muted-foreground leading-relaxed">
           Tailwind is mobile-first. An unprefixed class applies at all screen sizes. Add a breakpoint prefix to override at that width and above: <code className="bg-stone-100 px-1 rounded text-xs font-mono">sm:</code> (640px), <code className="bg-stone-100 px-1 rounded text-xs font-mono">md:</code> (768px), <code className="bg-stone-100 px-1 rounded text-xs font-mono">lg:</code> (1024px), <code className="bg-stone-100 px-1 rounded text-xs font-mono">xl:</code> (1280px).
         </p>
-        <CodeBlock language="json">
+        <CodeBlock language="javascript">
           {`<h1 className="text-2xl md:text-4xl lg:text-5xl font-bold">
   Hello
 </h1>
@@ -147,7 +150,7 @@ export default config;`}
         <p className="text-sm text-muted-foreground leading-relaxed">
           Prefix any utility with a state to apply it conditionally — no extra CSS required.
         </p>
-        <CodeBlock language="json">
+        <CodeBlock language="javascript">
           {`<button
   className="
     bg-blue-500 text-white px-4 py-2 rounded-lg
@@ -210,7 +213,7 @@ export default config;`}
         <p className="text-sm text-muted-foreground leading-relaxed">
           When you find yourself copying the same six classes across multiple files, extract a React component — not a CSS class. Components carry logic, props, and state in ways a CSS class cannot.
         </p>
-        <CodeBlock language="json">
+        <CodeBlock language="javascript">
           {`// Instead of repeating this everywhere:
 <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium text-sm">
 
@@ -278,6 +281,21 @@ function Badge({ active }: { active: boolean }) {
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The core advantages of a utility-first styling approach with Tailwind CSS:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Utility-First:</strong> Style components by composing small, single-purpose utility classes directly in your JSX.</li>
+            <li><strong>Constraint-Based:</strong> Tailwind enforces a consistent design system (spacing, colors, typography) across your entire app.</li>
+            <li><strong>Responsive & Interactive:</strong> Easily handle screen sizes (<code>md:</code>) and states (<code>hover:</code>) with prefix-based variants.</li>
+            <li><strong>Performance:</strong> Only the CSS you actually use is shipped to the production bundle, resulting in minimal file sizes.</li>
+            <li><strong>Scalability:</strong> Avoid the "CSS append-only" problem by extracting reusable React components for complex UI patterns.</li>
+          </ul>
         </div>
       </section>
 

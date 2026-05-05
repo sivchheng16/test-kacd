@@ -25,6 +25,7 @@ export default function Module03RESTDesign() {
           <li><a href="#pagination" className="text-primary hover:underline">→ Pagination</a></li>
           <li><a href="#versioning" className="text-primary hover:underline">→ Versioning</a></li>
           <li><a href="#authentication-header" className="text-primary hover:underline">→ Authentication header</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -251,6 +252,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQyfQ.ab
           Never put tokens in the URL (<code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">?token=...</code>)
           — URLs end up in server logs, browser history, and referrer headers.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The core principles of professional RESTful API design:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Resource-Centric URLs:</strong> Design your endpoints around nouns (resources) rather than actions (verbs).</li>
+            <li><strong>Semantic Verbs:</strong> Use the appropriate HTTP methods (GET, POST, PUT, PATCH, DELETE) to match the action's intent.</li>
+            <li><strong>Status Code Accuracy:</strong> Always return the correct HTTP status code to signal success or specific failure types.</li>
+            <li><strong>Consistency & Predictability:</strong> Maintain uniform response shapes and implement versioning early to avoid breaking changes.</li>
+            <li><strong>Security Best Practices:</strong> Use standard Authorization headers (Bearer tokens) and avoid exposing sensitive data in URLs.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

@@ -24,6 +24,7 @@ export default function Module03Supabase() {
           <li><a href="#row-level-security" className="text-primary hover:underline">→ Row Level Security</a></li>
           <li><a href="#anon-key-vs-service-role-key" className="text-primary hover:underline">→ Anon key vs service role key</a></li>
           <li><a href="#the-sql-editor" className="text-primary hover:underline">→ The SQL editor</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -217,6 +218,21 @@ CREATE POLICY "update own posts"
           For serious projects, use proper migration files (Supabase CLI or a migration
           tool) so your schema changes are tracked in version control.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The core features and best practices for using Supabase as your backend:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>All-in-One Platform:</strong> Supabase provides a hosted PostgreSQL database, authentication, and an auto-generated API in one package.</li>
+            <li><strong>Client-Side Integration:</strong> The <code>@supabase/supabase-js</code> client allows you to query your database with a clean, promise-based API.</li>
+            <li><strong>Essential Security:</strong> Row Level Security (RLS) is mandatory for protecting user data when using the public anon key.</li>
+            <li><strong>Key Management:</strong> Use the <strong>Anon key</strong> for frontend requests and keep the <strong>Service role key</strong> strictly on the server.</li>
+            <li><strong>Database Control:</strong> Leverage the built-in SQL editor to manage your schema and test queries directly in the dashboard.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

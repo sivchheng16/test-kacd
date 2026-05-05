@@ -103,7 +103,6 @@ export default function Module01ES6Features() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -112,6 +111,7 @@ export default function Module01ES6Features() {
           <li><a href="#template-literals" className="text-primary hover:underline">→ Template Literals</a></li>
           <li><a href="#optional-chaining-amp-nullish-coalescing" className="text-primary hover:underline">→ Optional Chaining &amp; Nullish Coalescing</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -297,6 +297,21 @@ name ?? "Anonymous"; // ""  — empty string is intentional`}
         <CodePlayground mode="js" starter={{ js: EXPLORE_DESTRUCTURING }} height="280px" />
         <CodePlayground mode="js" starter={{ js: EXPLORE_SPREAD }} height="260px" />
         <CodePlayground mode="js" starter={{ js: EXPLORE_MODERN }} height="280px" />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Modern JavaScript features make your code cleaner and safer:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Destructuring</strong> lets you extract values from objects and arrays into variables in one line.</li>
+            <li>The <strong>Spread operator (...)</strong> expands iterables, while the <strong>Rest operator</strong> collects remaining items.</li>
+            <li><strong>Template literals</strong> allow multi-line strings and easy expression embedding.</li>
+            <li><strong>Optional chaining (?.)</strong> prevents errors when accessing properties of null/undefined.</li>
+            <li><strong>Nullish coalescing (??)</strong> provides a default value only when a variable is null or undefined.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 
@@ -16,7 +17,37 @@ const EXPLORE_HTML = `<!-- Grouping elements with a div -->
   <h3 class="username">Dara</h3>
   <p class="role">Designer</p>
   <p class="status">Status: <span class="offline">Offline</span></p>
+</div>
+<div>
+  <p title="Hover tooltip text!">Hover over me!</p>
+  <div style="background: black; color: white;">Styled div</div>
+  <p hidden>You cannot see me!</p>
+  <button data-user-id="42" data-role="admin">Click me</button>
+  <details>
+    <summary>What does HTML stand for?</summary>
+    <p>HyperText Markup Language</p>
+  </details>
 </div>`;
+
+const ANNOTATED_ID_CLASS = `<div id="header" style="background: #f5f0e8; padding: 20px;">
+  <h1 class="title" style="margin: 0;">My Website</h1>
+  <div style="margin-top: 10px;">
+    <button class="btn primary" style="background: #c2622d; color: white; border: none; padding: 8px 16px;">Login</button>
+    <button class="btn secondary" style="background: white; border: 1px solid #c2622d; color: #c2622d; padding: 8px 16px;">Sign Up</button>
+  </div>
+</div>`;
+
+const ANNOTATED_GLOBAL = `<p title="I am a tooltip!">Hover over me!</p>
+
+<div style="background: #1a1a1a; color: white; padding: 15px; border-radius: 8px;">
+  I am styled with the style attribute.
+</div>
+
+<p hidden>You cannot see me!</p>
+
+<button data-user-id="42" style="margin-top: 10px;">
+  Button with Data Attribute
+</button>`;
 
 const CHALLENGE_STARTER = `<!-- Wrap the heading and paragraph inside a div -->
 <!-- Give the div a class of "container" and an id of "main-box" -->
@@ -114,13 +145,12 @@ export default function Module09DivIdClass() {
           <div><span className="text-[#c2622d]">id="..."</span> — Must be completely <strong>unique</strong> per page. Used for specific, one-of-a-kind elements (like a main navigation bar).</div>
           <div><span className="text-[#c2622d]">class="..."</span> — Can be <strong>reused</strong> on multiple elements. Used for elements that share the same styling (like multiple buttons or cards).</div>
         </div>
-        <CodeBlock language="html" title="attributes.html">
-          {`<div id="header">
-  <h1 class="title">My Website</h1>
-  <button class="btn primary">Login</button>
-  <button class="btn secondary">Sign Up</button>
-  </div>`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_ID_CLASS}
+          css=""
+          title="Ids and Classes"
+          height="220px"
+        />
         <p className="text-base text-muted-foreground leading-relaxed">
           Notice how the buttons share the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">btn</code> class, but also have their own specific classes (<code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">primary</code> and <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">secondary</code>). You can put multiple classes in the same attribute by separating them with a space!
         </p>
@@ -172,12 +202,12 @@ export default function Module09DivIdClass() {
             <p className="text-sm text-muted-foreground">Custom data attributes. You can replace the <code className="text-xs bg-stone-200 px-1 rounded">*</code> with any name to store custom data for JavaScript.</p>
           </div>
         </div>
-        <CodeBlock language="html" title="global-attributes.html">
-          {`<p title="Hover tooltip text!">Hover over me!</p>
-<div style="background: black; color: white;">Styled div</div>
-<p hidden>You cannot see me!</p>
-<button data-user-id="42" data-role="admin">Click me</button>`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_GLOBAL}
+          css=""
+          title="Global Attributes"
+          height="320px"
+        />
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}

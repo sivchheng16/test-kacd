@@ -45,13 +45,13 @@ export default function Module01Introduction() {
         </div>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#jsx" className="text-primary hover:underline">→ JSX</a></li>
           <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
           <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -182,6 +182,20 @@ export default function Module01Introduction() {
 }`,
           }}
         />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>React revolutionizes UI development with these core principles:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Declarative UI:</strong> You describe <em>what</em> the UI should look like, and React handles <em>how</em> to update the DOM.</li>
+            <li><strong>Components:</strong> Building blocks of UI that are independent, reusable, and composable.</li>
+            <li><strong>JSX:</strong> A syntax extension for JavaScript that looks like HTML and makes code easier to read.</li>
+            <li><strong>Virtual DOM:</strong> A lightweight copy of the real DOM that React uses to calculate and apply only the necessary changes.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

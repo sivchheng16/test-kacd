@@ -35,6 +35,7 @@ export default function Introduction() {
             <li>Tables &amp; Forms</li>
             <li>Div, ID, Class &amp; Attributes</li>
             <li>Accessibility &amp; SEO</li>
+            <li>HTML Comments</li>
             <li>Project: Personal Bio Page</li>
           </ul>
         </div>
@@ -154,7 +155,12 @@ cd html-fundamentals`}</CodeBlock>
                 <TableCell>Semantic HTML, ARIA roles, SEO best practices</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>09</TableCell>
+                <TableCell>10</TableCell>
+                <TableCell>HTML Comments</TableCell>
+                <TableCell>&lt;!--Comments Message--&gt;</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>11</TableCell>
                 <TableCell>Project</TableCell>
                 <TableCell>Personal bio page</TableCell>
               </TableRow>
@@ -169,7 +175,7 @@ cd html-fundamentals`}</CodeBlock>
             To complete Track 01:
           </Typography>
           <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
-            <li>All 10 modules studied</li>
+            <li>All 11 modules studied</li>
             <li>All exercises completed</li>
             <li>Personal Bio Page built and working</li>
             <li>Mentor verification received</li>

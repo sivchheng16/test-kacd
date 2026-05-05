@@ -30,7 +30,6 @@ export default function Module01IntroductionGit() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -41,6 +40,7 @@ export default function Module01IntroductionGit() {
           <li><a href="#first-time-setup" className="text-primary hover:underline">→ First-time Setup</a></li>
           <li><a href="#gitignore" className="text-primary hover:underline">→ .gitignore</a></li>
           <li><a href="#writing-good-commit-messages" className="text-primary hover:underline">→ Writing Good Commit Messages</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -253,6 +253,21 @@ git commit -m "Remove unused CSS to reduce bundle size"`}
           <li>Keep it under 50 characters.</li>
           <li>Describe <em>what</em> changed, not <em>how</em>.</li>
         </ul>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Git is the essential tool for tracking code changes:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Git</strong> is local software, while <strong>GitHub</strong> is a cloud platform for hosting Git repositories.</li>
+            <li>A <strong>Repository (repo)</strong> is a project folder where Git tracks history in a hidden <code>.git/</code> directory.</li>
+            <li>The <strong>add / commit</strong> cycle is how you save snapshots of your work.</li>
+            <li>Use <strong>.gitignore</strong> to keep sensitive or unnecessary files out of your project history.</li>
+            <li>Always write <strong>meaningful commit messages</strong> that explain <em>what</em> and <em>why</em>.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Knowledge check */}

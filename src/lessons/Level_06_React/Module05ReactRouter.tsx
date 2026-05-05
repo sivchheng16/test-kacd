@@ -88,11 +88,11 @@ export default function Module05ReactRouter() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#setting-up-routes" className="text-primary hover:underline">→ Setting up routes</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge check</a></li>
         </ul>
       </section>
@@ -210,6 +210,21 @@ function Layout() {
   </Route>
 </Routes>`}
         </CodeBlock>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Navigating single-page applications with React Router:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Declarative Routing:</strong> Map URLs to components using <code>Routes</code> and <code>Route</code>.</li>
+            <li><strong>Navigation:</strong> Use the <code>Link</code> component for internal links to avoid page reloads.</li>
+            <li><strong>Dynamic Segments:</strong> Handle variable URLs like <code>/user/:id</code> using <code>useParams</code>.</li>
+            <li><strong>Programmatic Navigation:</strong> Use the <code>useNavigate</code> hook to redirect users after actions.</li>
+            <li><strong>Nested Routes:</strong> Build shared layouts with the <code>Outlet</code> component.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Knowledge Check */}

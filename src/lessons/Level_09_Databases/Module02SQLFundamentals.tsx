@@ -27,6 +27,7 @@ export default function Module02SQLFundamentals() {
           <li><a href="#subqueries" className="text-primary hover:underline">→ Subqueries</a></li>
           <li><a href="#create-table" className="text-primary hover:underline">→ CREATE TABLE</a></li>
           <li><a href="#common-mistakes" className="text-primary hover:underline">→ Common mistakes</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -249,6 +250,21 @@ CREATE TABLE posts (
               <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The essential building blocks of SQL for relational database management:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Data Retrieval:</strong> Using <code>SELECT</code> with <code>WHERE</code>, <code>ORDER BY</code>, and <code>LIMIT</code> to fetch precise datasets.</li>
+            <li><strong>Modifying Data:</strong> Mastering <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code>, and always remembering the critical <code>WHERE</code> clause.</li>
+            <li><strong>Relational Power:</strong> Using <code>INNER JOIN</code> and <code>LEFT JOIN</code> to combine data from multiple tables efficiently.</li>
+            <li><strong>Aggregates & Analysis:</strong> Summarizing data with functions like <code>COUNT</code> and <code>SUM</code> paired with <code>GROUP BY</code>.</li>
+            <li><strong>DDL (Data Definition Language):</strong> Defining robust table structures with proper types and foreign key relationships.</li>
+          </ul>
         </div>
       </section>
 

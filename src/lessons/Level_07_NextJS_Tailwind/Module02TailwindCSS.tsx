@@ -35,6 +35,7 @@ export default function Module02TailwindCSS() {
           <li><a href="#why-utility-first" className="text-primary hover:underline">→ Why Utility-First?</a></li>
           <li><a href="#essential-class-categories" className="text-primary hover:underline">→ Essential Class Categories</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try It</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -44,8 +45,8 @@ export default function Module02TailwindCSS() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">Traditional CSS</div>
-            <CodeBlock language="json">
-          {`/* styles.css */
+            <CodeBlock language="javascript">
+          {`// styles.css
 .card {
   background: white;
   border-radius: 8px;
@@ -53,7 +54,7 @@ export default function Module02TailwindCSS() {
   padding: 24px;
 }
 
-/* HTML */
+// HTML
 <div class="card">Hello</div>`}
         </CodeBlock>
           </div>
@@ -122,14 +123,14 @@ export default function Module02TailwindCSS() {
         <div className="space-y-4">
           <h3 className="text-base font-semibold text-foreground">Layout — flex, grid</h3>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
-            <CodeBlock language="json">
-          {`/* Flexbox */
+            <CodeBlock language="javascript">
+          {`// Flexbox
 <div class="flex items-center justify-between gap-4">
   <span>Left</span>
   <span>Right</span>
 </div>
 
-/* Grid — responsive columns */
+// Grid — responsive columns
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   <div>Card 1</div>
   <div>Card 2</div>
@@ -158,7 +159,7 @@ export default function Module02TailwindCSS() {
             Each color has shades 50–950. Use the shade after the color name: <code className="bg-stone-100 px-1 rounded text-xs font-mono">bg-blue-500</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">text-red-700</code>, <code className="bg-stone-100 px-1 rounded text-xs font-mono">border-green-300</code>.
           </p>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
-            <CodeBlock language="json">
+            <CodeBlock language="javascript">
           {`<button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
   Primary
 </button>
@@ -259,6 +260,21 @@ rounded-full /* 9999px — circle or pill */`}
           }}
           onChallengePassed={handleChallengePassed}
         />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Tailwind CSS simplifies styling with a utility-first approach:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Utility-First:</strong> Style components directly in JSX/HTML using single-purpose classes.</li>
+            <li><strong>Efficient Spacing:</strong> Use <code>p-</code>, <code>m-</code>, <code>gap-</code> on a standardized scale for consistent layouts.</li>
+            <li><strong>Flexible Layouts:</strong> Leverage <code>flex</code> and <code>grid</code> classes with responsive prefixes for complex designs.</li>
+            <li><strong>Theming & Typography:</strong> Quickly apply colors, font sizes, and weights without writing custom CSS rules.</li>
+            <li><strong>Responsive Design:</strong> Mobile-first breakpoints like <code>md:</code> and <code>lg:</code> make building for all screens straightforward.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Gate */}

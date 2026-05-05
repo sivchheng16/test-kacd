@@ -26,7 +26,6 @@ export default function Module02Routing() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -38,6 +37,7 @@ export default function Module02Routing() {
           <li><a href="#userouter-and-usepathname" className="text-primary hover:underline">→ useRouter and usePathname</a></li>
           <li><a href="#parallel-routes" className="text-primary hover:underline">→ Parallel routes</a></li>
           <li><a href="#middleware" className="text-primary hover:underline">→ Middleware</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -83,7 +83,7 @@ app/contact/page.tsx  →  /contact`}
           <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">
             app/blog/[slug]/page.tsx
           </div>
-          <CodeBlock language="json">
+          <CodeBlock language="typescript">
           {`interface Props {
   params: { slug: string };
 }
@@ -144,14 +144,14 @@ export default async function BlogPost({ params }: Props) {
           <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">{"{children}"}</code>{" "}
           slot.
         </p>
-        <CodeBlock language="html">
+        <CodeBlock language="javascript">
           {`app/
-├── layout.tsx          <!--  root layout: <html>, <body>, global nav -->
+├── layout.tsx          //  root layout: <html>, <body>, global nav
 └── dashboard/
-    ├── layout.tsx      <!--  dashboard layout: sidebar + main area -->
-    ├── page.tsx        →  /dashboard
+    ├── layout.tsx      //  dashboard layout: sidebar + main area
+    ├── page.tsx        //  →  /dashboard
     └── settings/
-        └── page.tsx    →  /dashboard/settings`}
+        └── page.tsx    //  →  /dashboard/settings`}
         </CodeBlock>
         <p className="text-sm text-muted-foreground leading-relaxed">
           When a user visits <code className="bg-stone-100 px-1.5 py-0.5 rounded text-xs font-mono">/dashboard/settings</code>,
@@ -177,7 +177,7 @@ export default async function BlogPost({ params }: Props) {
           <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">
             app/layout.tsx
           </div>
-          <CodeBlock language="json">
+          <CodeBlock language="javascript">
           {`import Link from 'next/link';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -220,7 +220,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">
             Client Component — programmatic navigation
           </div>
-          <CodeBlock language="json">
+          <CodeBlock language="javascript">
           {`'use client';
 import { useRouter, usePathname } from 'next/navigation';
 
@@ -335,6 +335,21 @@ export const config = {
           config limits which routes trigger the middleware — without it, the middleware runs on
           every request including static files.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Navigating the Next.js routing ecosystem:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Static vs Dynamic:</strong> Fixed paths for pages like <code>/about</code> vs flexible paths like <code>/blog/[slug]</code>.</li>
+            <li><strong>Organization:</strong> Using route groups <code>(folder)</code> to organize files without affecting the URL structure.</li>
+            <li><strong>Nesting:</strong> Creating hierarchical layouts that preserve state and UI across child routes.</li>
+            <li><strong>Navigation Tools:</strong> Using the <code>&lt;Link&gt;</code> component for prefetching and <code>useRouter</code> for code-driven redirects.</li>
+            <li><strong>Global Logic:</strong> Implementing <code>middleware.ts</code> to handle authentication and redirection project-wide.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── Knowledge Check ────────────────────────────────── */}

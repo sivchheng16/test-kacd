@@ -25,6 +25,7 @@ export default function Module03PRsReviews() {
           <li><a href="#link-the-issue-annotate-the-complex-parts" className="text-primary hover:underline">→ Link the issue. Annotate the complex parts.</a></li>
           <li><a href="#giving-good-reviews" className="text-primary hover:underline">→ Giving good reviews</a></li>
           <li><a href="#being-reviewed" className="text-primary hover:underline">→ Being reviewed</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -232,6 +233,21 @@ nit: could use optional chaining here for brevity — user?.profile?.name`}
               changes.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The collaborative art of pull requests and professional code reviews:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>The Human Factor:</strong> A pull request is a professional conversation; treat it as an opportunity for collaboration, not just a code submission.</li>
+            <li><strong>Cognitive Load:</strong> Keep PRs small and focused on a single logical change to ensure thorough and efficient reviews.</li>
+            <li><strong>Contextual Documentation:</strong> Provide clear descriptions including the "why," testing steps, and visual aids (screenshots) for UI changes.</li>
+            <li><strong>Review Etiquette:</strong> Give specific, actionable feedback on the code itself, distinguishing between blocking issues and helpful "nits."</li>
+            <li><strong>Growth Mindset:</strong> Separate your self-worth from your code; respond to all comments and prioritize the health of the codebase over being "right."</li>
+          </ul>
         </div>
       </section>
 

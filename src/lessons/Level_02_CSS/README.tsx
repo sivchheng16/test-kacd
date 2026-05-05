@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { Typography } from '../../components/ui/Typography';
 import { CodeBlock } from '../../components/ui/CodeBlock';
+import { CodeExample } from '../../components/playground/CodeExample';
 import { Table, TableHead, TableBody, TableHeader, TableRow, TableCell } from '../../components/ui/table';
 export default function Introduction() {
   return (
@@ -28,12 +28,14 @@ export default function Introduction() {
           </Typography>
           <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
             <li>Introduction to CSS</li>
-            <li>Selectors &amp; Specificity</li>
-            <li>Colors, Backgrounds &amp; Typography</li>
+            <li>Selectors & Specificity</li>
+            <li>Colors, Backgrounds & Typography</li>
             <li>The Box Model</li>
-            <li>Layout &amp; Positioning</li>
-            <li>Flexbox &amp; Responsive Design</li>
+            <li>Layout & Positioning</li>
+            <li>Flexbox & Responsive Design</li>
             <li>Project: Styled Portfolio</li>
+            <li>CSS Grid Layout</li>
+            <li>CSS Variables & Animations</li>
           </ul>
         </div>
       </div>
@@ -83,44 +85,49 @@ export default function Introduction() {
             </TableHeader>
             <TableBody>
               <TableRow>
-                <TableCell>01</TableCell>
-                <TableCell>Introduction</TableCell>
-                <TableCell>Level overview, objectives, and prerequisites</TableCell>
-              </TableRow>
-              <TableRow>
                 <TableCell>02</TableCell>
                 <TableCell>Introduction to CSS</TableCell>
-                <TableCell>What CSS is, how to add it</TableCell>
+                <TableCell>What CSS is, how to add it, and the Cascade</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>03</TableCell>
                 <TableCell>Selectors &amp; Specificity</TableCell>
-                <TableCell>Targeting elements precisely</TableCell>
+                <TableCell>Targeting elements precisely with combinators</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>04</TableCell>
                 <TableCell>Colors &amp; Typography</TableCell>
-                <TableCell>Visual styling fundamentals</TableCell>
+                <TableCell>Visual styling, Google Fonts, and alignment</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>05</TableCell>
                 <TableCell>The Box Model</TableCell>
-                <TableCell>Spacing: margin, padding, border</TableCell>
+                <TableCell>Spacing: margin, padding, border, and display</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>06</TableCell>
                 <TableCell>Layout &amp; Positioning</TableCell>
-                <TableCell>Display, position, float</TableCell>
+                <TableCell>Relative, Absolute, Fixed, and Sticky positioning</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>07</TableCell>
                 <TableCell>Flexbox &amp; Responsive</TableCell>
-                <TableCell>Modern layout, media queries</TableCell>
+                <TableCell>Modern 1D layout and media queries</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>08</TableCell>
-                <TableCell>Project</TableCell>
-                <TableCell>Styled Portfolio Website</TableCell>
+                <TableCell>Variables &amp; Animations</TableCell>
+                <TableCell>Theming and making interfaces come alive</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>09</TableCell>
+                <TableCell>CSS Grid</TableCell>
+                <TableCell>Advanced 2D layout and grid areas</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>10</TableCell>
+                <TableCell>Project: Portfolio</TableCell>
+                <TableCell>Building a professional portfolio card</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -129,18 +136,24 @@ export default function Introduction() {
       <div>
         <div>
           <Typography variant="h2">CSS Changes Everything</Typography>
-          <CodeBlock language="css">{`/* Just a few lines of CSS... */
-body {
- font-family: 'Arial', sans-serif;
- line-height: 1.6;
- color: #333;
- background-color: #f5f5f5;
+          <CodeExample 
+            html={`<h1>Welcome to KOOMPI</h1>
+<p>This is how CSS transforms your page.</p>`}
+            css={`body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fdf6ec;
+  padding: 20px;
+  border-radius: 12px;
 }
 h1 {
- color: #2c3e50;
- text-align: center;
-}
-/* ...transforms your entire page! */`}</CodeBlock>
+  color: #c2622d;
+  text-align: center;
+}`}
+            title="CSS in Action"
+            height="220px"
+          />
         </div>
       </div>
       <div>
@@ -150,13 +163,11 @@ h1 {
             To complete Track 02:
           </Typography>
           <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
-            <li>All 7 modules studied</li>
-            <li>All exercises completed</li>
-            <li>Styled Portfolio built and working</li>
-            <li>Portfolio is responsive (works on mobile)</li>
+            <li>All 9 modules studied</li>
+            <li>All interactive challenges completed</li>
+            <li>Responsive Portfolio built and working</li>
             <li>Mentor verification received</li>
             <li>CSS Styling Badge earned</li>
-            <li>Web Developer Apprentice Certificate awarded!</li>
           </ul>
         </div>
       </div>
@@ -166,7 +177,7 @@ h1 {
             Time to make your websites beautiful!
           </Typography>
           <Typography>
-            Start with Module 02: Introduction to CSS
+            Start with Module 01: Introduction to CSS
           </Typography>
         </div>
       </div>

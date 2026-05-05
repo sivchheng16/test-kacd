@@ -25,6 +25,7 @@ export default function Module04Monitoring() {
           <li><a href="#health-check-endpoint" className="text-primary hover:underline">→ Health check endpoint</a></li>
           <li><a href="#metrics-what-to-measure" className="text-primary hover:underline">→ Metrics: what to measure</a></li>
           <li><a href="#alerting-when-to-wake-someone-up" className="text-primary hover:underline">→ Alerting: when to wake someone up</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -207,6 +208,21 @@ try {
           Start with just uptime alerts and Sentry for errors. Add more alerting only when
           you've been burned by something that those two didn't catch.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The essential practices for monitoring and maintaining healthy production applications:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Proactive Awareness:</strong> Monitoring allows you to identify and fix issues before they impact your users or result in support tickets.</li>
+            <li><strong>Structured Visibility:</strong> Using JSON-based structured logging (like Pino) to create searchable and filterable operational data.</li>
+            <li><strong>Real-time Error Tracking:</strong> Integrating tools like Sentry to capture unhandled exceptions with full context and stack traces.</li>
+            <li><strong>System Health:</strong> Implementing <code>/health</code> endpoints and uptime monitors to ensure your application and its dependencies are alive and reachable.</li>
+            <li><strong>Actionable Metrics:</strong> Focusing on response times (p95), error rates, and throughput to measure the actual user experience and system performance.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

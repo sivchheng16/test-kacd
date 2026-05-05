@@ -25,6 +25,7 @@ export default function Module02UnitTesting() {
           <li><a href="#testing-pure-functions-thoroughly" className="text-primary hover:underline">→ Testing pure functions thoroughly</a></li>
           <li><a href="#testing-async-functions" className="text-primary hover:underline">→ Testing async functions</a></li>
           <li><a href="#snapshot-testing" className="text-primary hover:underline">→ Snapshot testing</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -248,6 +249,21 @@ test('rejects when user is not found', async () => {
           They hurt when they're updated reflexively without checking what changed — at that
           point they document bugs instead of preventing them.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The essential practices for writing effective unit tests with Vitest:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>The Feedback Loop:</strong> Unit tests provide rapid validation of code without external dependencies like servers or databases.</li>
+            <li><strong>Vitest Ecosystem:</strong> Leveraging Vitest's Vite-native capabilities for fast, watch-mode testing and simple configuration.</li>
+            <li><strong>Mastering Matchers:</strong> Using <code>toBe</code>, <code>toEqual</code>, and other specialized assertions to verify results accurately.</li>
+            <li><strong>Isolation through Mocking:</strong> Controlling external dependencies with <code>vi.mock</code> and <code>vi.fn</code> to keep tests focused and deterministic.</li>
+            <li><strong>Async & Snapshots:</strong> Handling complex code with <code>async/await</code> testing and capturing large outputs with snapshot assertions.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

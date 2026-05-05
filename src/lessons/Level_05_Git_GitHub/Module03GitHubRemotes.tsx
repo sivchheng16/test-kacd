@@ -35,7 +35,6 @@ export default function Module03GitHubRemotes() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -47,6 +46,7 @@ export default function Module03GitHubRemotes() {
           <li><a href="#git-pull" className="text-primary hover:underline">→ git pull</a></li>
           <li><a href="#typical-daily-workflow" className="text-primary hover:underline">→ Typical Daily Workflow</a></li>
           <li><a href="#quick-reference" className="text-primary hover:underline">→ Quick Reference</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -245,6 +245,21 @@ git push                         # share with team`}
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Collaborating online using GitHub and Remotes:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>SSH Keys</strong> provide a secure way to connect your local machine to GitHub without passwords.</li>
+            <li>A <strong>Remote (origin)</strong> is the URL of your project hosted on a server.</li>
+            <li><strong>git push:</strong> Upload your local commits to the remote repository.</li>
+            <li><strong>git clone:</strong> Download a complete copy of an existing project.</li>
+            <li><strong>git pull:</strong> Fetch and merge the latest changes from your team.</li>
+          </ul>
         </div>
       </section>
 

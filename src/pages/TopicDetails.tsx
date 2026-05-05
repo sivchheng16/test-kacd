@@ -20,6 +20,7 @@ export default function TopicDetails() {
   const { isMobileSidebarOpen, setIsMobileSidebarOpen } = useLayout();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [completing, setCompleting] = React.useState(false);
+  const [showWarning, setShowWarning] = React.useState(false);
   const topic = TOPICS.find((t) => t.id === topicId);
   const { markComplete, setLastViewed, isComplete, isLessonUnlocked, progress } = useProgress();
   const { user, login } = useAuth();
@@ -128,6 +129,11 @@ export default function TopicDetails() {
   const prevLesson = currentIndex > 0 ? topic.lessons[currentIndex - 1] : null;
   const nextLesson = currentIndex < topic.lessons.length - 1 ? topic.lessons[currentIndex + 1] : null;
 
+  const currentTopicIndex = TOPICS.findIndex((t) => t.id === topicId);
+  const nextTopic = currentTopicIndex < TOPICS.length - 1 ? TOPICS[currentTopicIndex + 1] : null;
+
+  const allLessonsCompleted = topic.lessons.every((l) => isComplete(l.id) || l.id === activeLessonId);
+
   const handleLessonSelect = (_id: string) => {
     setIsMobileSidebarOpen(false);
   };
@@ -154,11 +160,20 @@ export default function TopicDetails() {
               className="fixed inset-y-0 left-0 w-64 bg-white border-r border-border z-50 lg:hidden overflow-y-auto flex flex-col"
               style={{ scrollbarWidth: "none" }}
             >
-              <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-border">
-                <span className="text-xs font-sans font-medium text-muted-foreground">{topic.title}</span>
-                <button onClick={() => setIsMobileSidebarOpen(false)} className="p-1.5 rounded-lg text-muted-foreground hover:bg-muted transition-colors">
-                  <X size={15} />
-                </button>
+              <div className="px-3 pt-4 pb-3 border-b border-border space-y-4">
+                <div className="flex items-center justify-between">
+                  <Link to="/" onClick={() => setIsMobileSidebarOpen(false)} className="flex items-center gap-2.5 group">
+                    <img src="/koompi-black.png" alt="KOOMPI" className="h-6 w-auto transition-transform group-hover:scale-105" />
+                    <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-foreground/60 uppercase pt-0.5">Academy</span>
+                  </Link>
+                  <button onClick={() => setIsMobileSidebarOpen(false)} className="p-1.5 rounded-full text-muted-foreground/40 hover:bg-muted hover:text-foreground transition-all">
+                    <X size={18} />
+                  </button>
+                </div>
+                <div className="space-y-1 px-0.5">
+                  <p className="text-[9px] font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground/30">Curriculum</p>
+                  <h3 className="text-lg font-sans font-semibold text-foreground tracking-tight">{topic?.title}</h3>
+                </div>
               </div>
               <div className="flex-1 px-2 py-3">
                 <LessonSidebar
@@ -262,7 +277,22 @@ export default function TopicDetails() {
           )}
 
           {/* Navigation */}
-          <div className="mt-14 space-y-3">
+          <div className="mt-14 space-y-3 relative">
+            <AnimatePresence>
+              {showWarning && (
+                <motion.div
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5 }}
+                  className="absolute bottom-full left-0 right-0 mb-3 flex justify-center z-10"
+                >
+                  <div className="bg-destructive text-destructive-foreground text-[11px] font-sans font-semibold px-4 py-2 rounded-xl shadow-xl shadow-destructive/20 border border-white/10 backdrop-blur-md">
+                    Finish all modules in this course first
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             {/* Primary action — full width */}
             {nextLesson ? (
               <motion.button
@@ -301,18 +331,49 @@ export default function TopicDetails() {
               </motion.button>
             ) : (
               <motion.button
-                onClick={() => { if (activeLessonId && topicId) markComplete(activeLessonId, topicId); }}
-                disabled={!!activeLessonId && CHALLENGE_LESSON_IDS.has(activeLessonId) && !isLessonUnlocked(activeLessonId)}
+                onClick={() => { 
+                  if (completing) return;
+                  
+                  if (!allLessonsCompleted) {
+                    setShowWarning(true);
+                    setTimeout(() => setShowWarning(false), 3000);
+                    return;
+                  }
+
+                  setCompleting(true);
+                  if (activeLessonId && topicId) markComplete(activeLessonId, topicId);
+                  
+                  setTimeout(() => {
+                    if (nextTopic) {
+                      navigate(`/document/${nextTopic.id}/${nextTopic.lessons[0].id}`);
+                    } else {
+                      navigate('/dashboard');
+                    }
+                    setCompleting(false);
+                  }, 200);
+                }}
+                disabled={completing || (!!activeLessonId && CHALLENGE_LESSON_IDS.has(activeLessonId) && !isLessonUnlocked(activeLessonId))}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.1 }}
                 className={cn(
                   "w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-sans font-semibold transition-colors",
                   activeLessonId && CHALLENGE_LESSON_IDS.has(activeLessonId) && !isLessonUnlocked(activeLessonId)
                     ? "bg-black/5 text-foreground/30 cursor-not-allowed"
+                    : completing
+                    ? "bg-foreground/80 text-background"
                     : "bg-foreground text-background hover:bg-foreground/90 active:bg-foreground/80"
                 )}
               >
-                Mark complete ✓
+                {completing ? (
+                  <>
+                    <span className="w-3.5 h-3.5 border-2 border-background/40 border-t-background rounded-full animate-spin" />
+                    Completing Course…
+                  </>
+                ) : (
+                  <>
+                    {nextTopic ? "Complete Course & Next →" : "Finish Course ✓"}
+                  </>
+                )}
               </motion.button>
             )}
 

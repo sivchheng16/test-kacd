@@ -33,6 +33,7 @@ export default function Module04APIRoutes() {
           <li><a href="#dynamic-route-handlers" className="text-primary hover:underline">→ Dynamic Route Handlers</a></li>
           <li><a href="#reading-request-data" className="text-primary hover:underline">→ Reading Request Data</a></li>
           <li><a href="#api-routes-vs-server-actions" className="text-primary hover:underline">→ API Routes vs Server Actions</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -212,6 +213,20 @@ export async function DELETE(
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The core mental models of API Routes in Next.js:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Route Handlers:</strong> Create endpoints by exporting HTTP methods (<code>GET</code>, <code>POST</code>) from a <code>route.ts</code> file.</li>
+            <li><strong>Location:</strong> Built inside the <code>app/</code> directory alongside your UI components.</li>
+            <li><strong>Request Data:</strong> Access query parameters, headers, and body using the <code>NextRequest</code> object.</li>
+            <li><strong>Use Cases:</strong> Ideal for public REST APIs and webhooks, compared to Server Actions for simple form mutations.</li>
+          </ul>
         </div>
       </section>
 

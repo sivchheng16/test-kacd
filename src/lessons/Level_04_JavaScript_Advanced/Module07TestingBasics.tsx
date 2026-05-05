@@ -27,7 +27,7 @@ export default function Module07TestingBasics() {
           <li><a href="#what-to-test" className="text-primary hover:underline">→ What to test</a></li>
           <li><a href="#running-tests" className="text-primary hover:underline">→ Running tests</a></li>
           <li><a href="#test-file-conventions" className="text-primary hover:underline">→ Test file conventions</a></li>
-          <li><a href="#key-takeaways" className="text-primary hover:underline">→ Key takeaways</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -239,16 +239,19 @@ npm test -- --run     # run once and exit (for CI)`}
         </p>
       </section>
 
-      {/* ── Summary ────────────────────────────────────────── */}
-      <section id="key-takeaways" className="rounded-2xl bg-stone-50 border border-border px-6 py-6 space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">Key takeaways</h2>
-        <ul className="space-y-2 text-sm text-muted-foreground">
-          <li className="flex gap-2"><span className="text-primary font-bold shrink-0">1.</span> A test calls your function and asserts the output — nothing more.</li>
-          <li className="flex gap-2"><span className="text-primary font-bold shrink-0">2.</span> Vitest is installed with one command and needs no config for basic use.</li>
-          <li className="flex gap-2"><span className="text-primary font-bold shrink-0">3.</span> Use <code className="bg-stone-100 px-1 rounded">toBe</code> for primitives, <code className="bg-stone-100 px-1 rounded">toEqual</code> for objects.</li>
-          <li className="flex gap-2"><span className="text-primary font-bold shrink-0">4.</span> Structure every test as Arrange → Act → Assert.</li>
-          <li className="flex gap-2"><span className="text-primary font-bold shrink-0">5.</span> Test pure functions and edge cases; skip implementation details and third-party code.</li>
-        </ul>
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Automated testing is your safety net as a developer:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>A <strong>test</strong> calls your function and asserts that the output matches your expectations.</li>
+            <li><strong>Vitest</strong> is a modern, fast test runner that integrates seamlessly with Vite projects.</li>
+            <li>Structure tests using the <strong>Arrange → Act → Assert</strong> pattern for clarity.</li>
+            <li>Use <code>toBe</code> for primitives and <code>toEqual</code> for objects and arrays.</li>
+            <li>Focus your testing on <strong>pure functions</strong>, <strong>business logic</strong>, and <strong>edge cases</strong>.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

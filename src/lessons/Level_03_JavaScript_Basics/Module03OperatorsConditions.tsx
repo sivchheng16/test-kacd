@@ -29,13 +29,13 @@ export default function Module03OperatorsConditions() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#arithmetic-operators" className="text-primary hover:underline">→ Arithmetic operators</a></li>
           <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
           <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -178,6 +178,21 @@ document.write(message);`,
 `,
           }}
         />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Important points to remember about decision making in JS:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Arithmetic operators</strong> (+, -, *, /, %) perform math calculations.</li>
+            <li><strong>Comparison operators</strong> (===, !==, &gt;, &lt;) return booleans.</li>
+            <li><strong>Logical operators</strong> (&&, ||, !) combine or flip conditions.</li>
+            <li><strong>if / else if / else</strong> blocks let you run different code based on conditions.</li>
+            <li>The <strong>ternary operator</strong> is a shorthand for simple if/else decisions.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

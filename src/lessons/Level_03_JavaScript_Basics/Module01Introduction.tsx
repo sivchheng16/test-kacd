@@ -45,13 +45,13 @@ export default function Module01Introduction() {
         </div>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#what-can-javascript-do" className="text-primary hover:underline">→ What can JavaScript do?</a></li>
           <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
           <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -170,6 +170,20 @@ document.getElementById("sub").textContent = "JavaScript is running!";`,
             js: `// Your JS here — try: document.write("<p>It works!</p>")`,
           }}
         />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>In this introduction, you've learned that:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>JavaScript</strong> is the "brain" of the web, providing behavior and interactivity.</li>
+            <li>It runs directly in the browser using the <code>&lt;script&gt;</code> tag.</li>
+            <li>You can output data to the page using <code>document.write()</code> or <code>element.innerHTML</code>.</li>
+            <li>JS can respond to clicks, validate forms, and update content dynamically.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

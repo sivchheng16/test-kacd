@@ -26,6 +26,7 @@ export default function Module01Fundamentals() {
           <li><a href="#acid-the-four-guarantees" className="text-primary hover:underline">→ ACID: the four guarantees</a></li>
           <li><a href="#primary-keys-foreign-keys-indexes" className="text-primary hover:underline">→ Primary keys, foreign keys, indexes</a></li>
           <li><a href="#when-to-choose-what" className="text-primary hover:underline">→ When to choose what</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -190,6 +191,21 @@ GET session:user:42
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The core concepts of data persistence and database management:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Persistence:</strong> Databases are essential for remembering data permanently beyond server restarts or crashes.</li>
+            <li><strong>Relational vs. Non-Relational:</strong> Choose between structured, linked tables (SQL) or flexible, hierarchical documents (NoSQL) based on your needs.</li>
+            <li><strong>ACID Guarantees:</strong> Understanding Atomicity, Consistency, Isolation, and Durability is key to handling sensitive data like financial transactions.</li>
+            <li><strong>Structural Integrity:</strong> Primary keys identify rows, foreign keys link tables, and indexes make searches lightning-fast.</li>
+            <li><strong>Tool Selection:</strong> Knowing when to use a database like PostgreSQL for consistency, MongoDB for flexibility, or Redis for speed.</li>
+          </ul>
         </div>
       </section>
 

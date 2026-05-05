@@ -25,6 +25,7 @@ export default function Module01HowBackendsWork() {
           <li><a href="#stateless-servers" className="text-primary hover:underline">→ Stateless servers</a></li>
           <li><a href="#json" className="text-primary hover:underline">→ JSON</a></li>
           <li><a href="#what-happens-when-you-log-in" className="text-primary hover:underline">→ What happens when you log in</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -197,6 +198,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`}
           Notice that the server never stores the token — it just verifies it. This is what makes the
           system stateless and scalable.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The foundational mental models of backend development:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Client-Server Model:</strong> Separating the user interface (client) from the data and logic (server).</li>
+            <li><strong>HTTP Protocol:</strong> The universal language used for communication, consisting of requests (methods, URLs) and responses (status codes).</li>
+            <li><strong>RESTful Design:</strong> Organizing your API around resources (nouns) and actions (verbs).</li>
+            <li><strong>Statelessness:</strong> Ensuring each request stands alone by carrying all necessary information, including authentication.</li>
+            <li><strong>Data Exchange:</strong> Using JSON as the standard format for transferring data between systems.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

@@ -25,6 +25,7 @@ export default function Module04E2E() {
           <li><a href="#running-in-ci" className="text-primary hover:underline">→ Running in CI</a></li>
           <li><a href="#visual-regression-testing" className="text-primary hover:underline">→ Visual regression testing</a></li>
           <li><a href="#when-e2e-is-too-slow" className="text-primary hover:underline">→ When E2E is too slow</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -225,6 +226,21 @@ jobs:
           focused E2E tests that runs in three minutes is worth more than fifty broad tests
           that take forty minutes and fail randomly.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key strategies for implementing reliable End-to-End (E2E) testing with Playwright:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>The User's Perspective:</strong> E2E tests are the ultimate validation that your application functions correctly for a real person.</li>
+            <li><strong>Resilient Locators:</strong> Using roles, labels, and <code>data-testid</code> instead of fragile CSS selectors to find elements.</li>
+            <li><strong>Maintainability:</strong> Implementing the Page Object Model (POM) to centralize page-specific logic and reduce duplication.</li>
+            <li><strong>CI/CD Integration:</strong> Running tests in headless mode and utilizing artifact reports to debug failures in automated environments.</li>
+            <li><strong>Strategic Scope:</strong> Focusing E2E efforts on mission-critical paths (login, payments) to maintain a fast and reliable test suite.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

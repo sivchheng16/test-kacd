@@ -26,7 +26,7 @@ export default function Module06ProjectAPI() {
           <li><a href="#5-registration-and-login-endpoints" className="text-primary hover:underline">→ 5. Registration and login endpoints</a></li>
           <li><a href="#6-protected-crud-routes-for-posts" className="text-primary hover:underline">→ 6. Protected CRUD routes for posts</a></li>
           <li><a href="#7-testing-with-curl" className="text-primary hover:underline">→ 7. Testing with curl</a></li>
-          <li><a href="#what-you-built" className="text-primary hover:underline">→ What you built</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -371,24 +371,19 @@ echo $TOKEN`}
         </CodeBlock>
       </section>
 
-      {/* ── Summary ───────────────────────────────────────────── */}
-      <section id="what-you-built" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">What you built</h2>
-        <p className="text-base text-muted-foreground leading-relaxed">
-          In this project you assembled every concept from the track into a working system:
-        </p>
-        <ul className="list-disc list-inside space-y-2 text-base text-muted-foreground">
-          <li>A Node.js + Express server with a clean route/middleware structure</li>
-          <li>User registration with bcrypt-hashed passwords and JWT issuance</li>
-          <li>A reusable <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">requireAuth</code> middleware</li>
-          <li>Zod validation on every write endpoint</li>
-          <li>Full CRUD for posts with ownership checks</li>
-          <li>Consistent JSON responses and correct HTTP status codes throughout</li>
-        </ul>
-        <p className="text-base text-muted-foreground leading-relaxed">
-          This API is ready to connect to any frontend — React, Next.js, or a mobile app.
-          The next track will go deeper on databases: schema design, migrations, and querying patterns.
-        </p>
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Congratulations on building a complete, production-ready REST API! Key takeaways:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Architecture:</strong> You've built a scalable Node/Express server with clean separation between routes, controllers, and database.</li>
+            <li><strong>Security:</strong> Implementing industry-standard practices including password hashing (bcrypt) and JWT-based authentication.</li>
+            <li><strong>Validation:</strong> Using Zod to ensure that only well-formed data enters your system, protecting against malformed requests.</li>
+            <li><strong>CRUD Operations:</strong> Mastering the full lifecycle of a resource—from creation and retrieval to updates and secure deletion.</li>
+            <li><strong>Tooling:</strong> Leveraging <code>curl</code> and <code>jq</code> to test and verify your API endpoints independently of a frontend.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

@@ -147,7 +147,6 @@ export default function Module06ClassesOOP() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -158,6 +157,7 @@ export default function Module06ClassesOOP() {
           <li><a href="#static-methods-amp-properties" className="text-primary hover:underline">→ Static methods &amp; properties</a></li>
           <li><a href="#the-this-problem-in-callbacks" className="text-primary hover:underline">→ The this problem in callbacks</a></li>
           <li><a href="#when-to-use-classes" className="text-primary hover:underline">→ When to use classes</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -365,6 +365,21 @@ new Timer("Pomodoro").startFixed(); // "Pomodoro"`}
           Classes are not always the answer. In modern React codebases, for example,
           components are functions — classes have largely been replaced by hooks. Know when each tool fits.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Object-Oriented Programming provides structure for complex data:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Classes</strong> are blueprints for creating objects with shared properties and methods.</li>
+            <li><strong>Inheritance (extends)</strong> allows you to build specialized classes based on existing ones.</li>
+            <li><strong>Private fields (#)</strong> encapsulate data and protect it from outside interference.</li>
+            <li><strong>Static members</strong> belong to the class itself rather than any specific instance.</li>
+            <li><strong>Arrow functions</strong> solve the common problem of losing the <code>this</code> context in callbacks.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

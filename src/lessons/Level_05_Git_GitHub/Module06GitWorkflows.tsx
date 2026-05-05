@@ -27,7 +27,7 @@ export default function Module06GitWorkflows() {
           <li><a href="#writing-good-pull-requests" className="text-primary hover:underline">→ Writing good pull requests</a></li>
           <li><a href="#code-review-etiquette" className="text-primary hover:underline">→ Code review etiquette</a></li>
           <li><a href="#which-workflow-should-you-use" className="text-primary hover:underline">→ Which workflow should you use?</a></li>
-          <li><a href="#key-takeaways" className="text-primary hover:underline">→ Key takeaways</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -285,15 +285,19 @@ had to rely on the OS system preference.
       </section>
 
       {/* ── 9. Summary ─────────────────────────────────────── */}
-      <section id="key-takeaways" className="rounded-2xl bg-stone-50 border border-border px-6 py-6 space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">Key takeaways</h2>
-        <ul className="space-y-2 text-sm text-muted-foreground">
-          <li className="flex gap-2"><span className="text-primary shrink-0">·</span>Trunk-Based keeps the branch graph simple but demands feature flags and fast CI.</li>
-          <li className="flex gap-2"><span className="text-primary shrink-0">·</span>Git Flow adds release structure at the cost of longer-lived branches and heavier merges.</li>
-          <li className="flex gap-2"><span className="text-primary shrink-0">·</span>Feature Branch Workflow is the right default for most teams.</li>
-          <li className="flex gap-2"><span className="text-primary shrink-0">·</span>Conventional Commits make history readable and enable automated changelogs.</li>
-          <li className="flex gap-2"><span className="text-primary shrink-0">·</span>Small PRs + clear descriptions + respectful review culture = fast, safe shipping.</li>
-        </ul>
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Choosing and following the right workflow for your team:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Feature Branch Workflow</strong> is the best default for most small-to-medium teams.</li>
+            <li><strong>Trunk-Based Development</strong> eliminates merge debt but requires mature infrastructure like feature flags.</li>
+            <li><strong>Git Flow</strong> is suitable for projects with strict versioned release cycles (e.g., mobile apps).</li>
+            <li><strong>Conventional Commits</strong> make your history machine-readable and easy to scan.</li>
+            <li><strong>Small PRs and respectful code reviews</strong> are critical for maintaining code quality and team velocity.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

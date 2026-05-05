@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 
@@ -11,8 +12,8 @@ const EXPLORE_HTML = `<h1>Cambodia Through My Lens</h1>
 <img
   src="../../../public/angkor-wat.jpeg"
   alt="Angkor Wat temple at sunrise, reflected in the moat"
-  width="120"
-  height="80"
+  width="80"
+  height="40"
 >
 
 <!-- figure + figcaption adds a visible caption -->
@@ -20,8 +21,8 @@ const EXPLORE_HTML = `<h1>Cambodia Through My Lens</h1>
   <img
     src="../../../public/phnom-penh.jpeg"
     alt="Phnom Penh City Hall with palm trees in front"
-    width="120"
-    height="80"
+    width="80"
+    height="40"
   >
   <figcaption>Phnom Penh City Hall — Cambodia's capital city.</figcaption>
 </figure>
@@ -31,10 +32,59 @@ const EXPLORE_HTML = `<h1>Cambodia Through My Lens</h1>
   <img
     src="https://koompi.com/assets/KoompiBlackLogo-259c65d2.png"
     alt="KOOMPI — visit our website"
-    width="80"
-    height="80"
+    width="40"
+    height="40"
   >
 </a>`;
+
+const ANNOTATED_HTML = `<!-- Basic image -->
+<img 
+  src="https://i.pravatar.cc/150?img=12" 
+  alt="User profile photo"
+  width="100"
+>
+
+<!-- figure + figcaption -->
+<figure>
+  <img 
+    src="https://i.pravatar.cc/150?img=32" 
+    alt="Technical Lead"
+    width="100"
+  >
+  <figcaption>Sarah Chen, Tech Lead</figcaption>
+</figure>
+
+<!-- Video example -->
+<video 
+  src="https://www.w3schools.com/html/mov_bbb.mp4" 
+  width="320" 
+  controls
+>
+  Your browser does not support the video tag.
+</video>`;
+
+const ANNOTATED_MEDIA = `<!-- Video with controls, playing automatically, muted -->
+<video src="https://www.w3schools.com/html/mov_bbb.mp4" width="320" controls autoplay muted>
+  Your browser does not support the video tag.
+</video>
+
+<br><br>
+
+<!-- Audio player with controls -->
+<audio src="https://www.w3schools.com/html/horse.mp3" controls>
+  Your browser does not support the audio element.
+</audio>`;
+
+const ANNOTATED_PATHS = `<!-- 1. File is in the SAME folder -->
+<p>Note: These are examples of how you would write the code in your own project.</p>
+<code style="display:block; background: #eee; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+  &lt;img src="my-photo.jpg" alt="A photo I took"&gt;
+</code>
+
+<!-- 2. File is in an 'images' subfolder (best practice) -->
+<code style="display:block; background: #eee; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+  &lt;img src="images/logo.png" alt="Company Logo"&gt;
+</code>`;
 
 const CHALLENGE_STARTER = `<!-- Add an image to this page.
      It needs a src attribute AND a non-empty alt attribute. -->
@@ -146,40 +196,12 @@ export default function Module05ImagesMedia() {
         <p className="text-base text-muted-foreground leading-relaxed">
           Four common patterns you will use on almost every project:
         </p>
-        <CodeBlock language="html" title="index.html">
-          {`<!-- 1. Basic image — src and alt are always required -->
-<img src="images/koompi-e13.jpg" alt="KOOMPI E13 laptop open on a desk">
-
-<!-- 2. With dimensions — reserves space, prevents layout shift -->
-<img
-  src="images/team-phnom-penh.jpg"
-  alt="Four KOOMPI team members in the Phnom Penh office"
-  width="800"
-  height="533"
->
-
-<!-- 3. External image — full URL for images hosted elsewhere -->
-<img
-  src="https://koompi.com/images/hero.jpg"
-  alt="KOOMPI Academy students working on laptops"
-  width="1200"
-  height="600"
->
-
-<!-- 4. figure + figcaption — image with a visible caption -->
-<figure>
-  <img
-    src="images/angkor-wat.jpg"
-    alt="Angkor Wat reflected in the north pool at sunrise"
-    width="960"
-    height="640"
-  >
-  <figcaption>Angkor Wat, Siem Reap — a UNESCO World Heritage Site.</figcaption>
-</figure>
-
-<!-- 5. Decorative image — alt="" tells screen readers to skip it -->
-<img src="images/divider.png" alt="">`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_HTML}
+          css=""
+          title="Images and Media Examples"
+          height="480px"
+        />
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <code className="text-primary font-mono shrink-0">src</code>
@@ -210,17 +232,12 @@ export default function Module05ImagesMedia() {
         <p className="text-base text-muted-foreground leading-relaxed">
           HTML5 brought native support for embedding rich media using the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;audio&gt;</code> and <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;video&gt;</code> tags. Like images, they use a <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">src</code> attribute. Unlike images, they have both an opening and closing tag, allowing you to provide fallback text inside them if the browser doesn't support the media.
         </p>
-        <CodeBlock language="html" title="media.html">
-          {`<!-- Video with controls, playing automatically, muted -->
-<video src="videos/koompi-intro.mp4" width="640" controls autoplay muted>
-  Your browser does not support the video tag.
-</video>
-
-<!-- Audio player with controls -->
-<audio src="audio/podcast-ep1.mp3" controls>
-  Your browser does not support the audio element.
-</audio>`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_MEDIA}
+          css=""
+          title="Audio and Video Controls"
+          height="340px"
+        />
         <p className="text-base text-muted-foreground leading-relaxed">
           Adding the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">controls</code> attribute is crucial—it provides the browser's default play, pause, and volume buttons. Without it, the user can't interact with the media.
         </p>
@@ -264,18 +281,12 @@ export default function Module05ImagesMedia() {
         <p className="text-base text-muted-foreground leading-relaxed">
           If the image is in the exact same folder as the HTML file, you just write the file name. However, since we organize assets into folders, you must include the folder name followed by a forward slash <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">/</code> before the file name. If your HTML file is inside a folder and you need to go <em>up</em> a directory to reach the images folder, you use <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">../</code>.
         </p>
-        <CodeBlock language="html" title="index.html">
-          {`<!-- 1. File is in the SAME folder (less common for images) -->
-<img src="my-photo.jpg" alt="A photo I took">
-
-<!-- 2. File is in an 'images' subfolder (best practice) -->
-<img src="images/logo.png" alt="Company Logo">
-<video src="videos/intro.mp4" controls></video>
-
-<!-- 3. HTML is in a subfolder, and we must go UP one level to reach 'images' -->
-<!-- Use ../ to mean "go up one folder" -->
-<img src="../images/hero-banner.jpg" alt="Hero Banner">`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_PATHS}
+          css=""
+          title="Relative Path Examples"
+          height="240px"
+        />
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}

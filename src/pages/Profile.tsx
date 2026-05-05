@@ -80,7 +80,7 @@ export default function Profile() {
           </div>
 
           <div className="flex-1 min-w-0">
-            <h2 className="text-xl font-semibold text-foreground">{user.fullname}</h2>
+            <h2 className="text-xl font-semibold text-foreground">{user.username?.slice(0, -3)}{" "}{user.fullname}</h2>
             {user.email && (
               <p className="flex items-center gap-1.5 text-sm text-muted-foreground mt-1">
                 <Mail size={13} />

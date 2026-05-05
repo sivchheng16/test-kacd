@@ -150,7 +150,6 @@ export default function Module04GenericsAdvanced() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -160,6 +159,7 @@ export default function Module04GenericsAdvanced() {
           <li><a href="#utility-types" className="text-primary hover:underline">→ Utility types</a></li>
           <li><a href="#mapped-types-brief" className="text-primary hover:underline">→ Mapped types (brief)</a></li>
           <li><a href="#when-to-reach-for-generics" className="text-primary hover:underline">→ When to reach for generics</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -379,6 +379,21 @@ type Nullable<T> = { [K in keyof T]: T[K] | null }`}
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Mastering flexible and reusable types with generics:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Generics:</strong> Creating components that work with a variety of types while maintaining type safety.</li>
+            <li><strong>Type Parameters:</strong> Using placeholders like <code>&lt;T&gt;</code> that are filled when the code is used.</li>
+            <li><strong>Constraints:</strong> Restricting generics to certain shapes using the <code>extends</code> keyword.</li>
+            <li><strong>Utility Types:</strong> Leveraging built-in helpers like <code>Partial</code>, <code>Pick</code>, and <code>Omit</code>.</li>
+            <li><strong>Reusability:</strong> Writing cleaner code by avoiding <code>any</code> and preserving type relationships.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── Challenge ───────────────────────────────────────── */}

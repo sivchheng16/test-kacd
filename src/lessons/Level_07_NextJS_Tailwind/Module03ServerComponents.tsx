@@ -357,32 +357,18 @@ export const db = {
         </p>
       </section>
 
-      {/* Summary */}
+      {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Summary</h2>
-        <div className="overflow-x-auto rounded-xl border border-border">
-          <table className="w-full text-sm">
-            <thead className="bg-stone-50 border-b border-border">
-              <tr>
-                <th className="text-left px-4 py-3 font-medium text-foreground">Concept</th>
-                <th className="text-left px-4 py-3 font-medium text-foreground">Key point</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              {[
-                ["Server Component", "Default in app/. Runs on server. Zero JS to browser. Can be async."],
-                ["Client Component", "'use client' at top. Runs in browser. Required for hooks and events."],
-                ["Composition", "Server wraps client, passes serialisable props across the boundary."],
-                ["Boundary rule", "Once you go client, all imports are also client. Push the boundary down."],
-                ["server-only", "import 'server-only' — build error if a Client Component imports it."],
-              ].map(([concept, point]) => (
-                <tr key={concept} className="hover:bg-stone-50/50">
-                  <td className="px-4 py-3 font-mono text-xs text-foreground font-semibold">{concept}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{point}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Understanding the balance between Server and Client Components:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Server Components:</strong> The default in Next.js. They run on the server, fetch data directly, and ship zero JavaScript to the browser.</li>
+            <li><strong>Client Components:</strong> Explicitly opted-in with <code>'use client'</code>. Necessary for hooks (<code>useState</code>), event handlers, and browser-only APIs.</li>
+            <li><strong>Composition:</strong> Server Components should wrap Client Components, passing data down as serializable props.</li>
+            <li><strong>The Boundary:</strong> Keep <code>'use client'</code> as far down the component tree as possible (at the leaves) to maximize performance.</li>
+            <li><strong>Guarding Code:</strong> Use <code>import 'server-only'</code> to prevent server-side logic from accidentally leaking into the browser.</li>
+          </ul>
         </div>
       </section>
 

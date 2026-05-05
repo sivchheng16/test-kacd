@@ -24,6 +24,7 @@ export default function Module01Philosophy() {
           <li><a href="#tdd-red-green-refactor" className="text-primary hover:underline">→ TDD: red → green → refactor</a></li>
           <li><a href="#what-to-test" className="text-primary hover:underline">→ What to test</a></li>
           <li><a href="#coverage-is-a-metric-not-a-goal" className="text-primary hover:underline">→ Coverage is a metric, not a goal</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -174,6 +175,21 @@ npx vitest run --coverage
 # output shows which lines, branches, and functions were hit
 # focus on the uncovered branches in your business logic`}
         </CodeBlock>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The philosophical foundation for building reliable and maintainable software through testing:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>The Testing Pyramid:</strong> Balancing many fast unit tests with fewer, slower integration and E2E tests for maximum efficiency.</li>
+            <li><strong>High-Quality Tests:</strong> Following the Arrange-Act-Assert pattern with descriptive names and independent execution.</li>
+            <li><strong>Test Doubles:</strong> Using stubs, mocks, spies, and fakes to isolate code and maintain deterministic testing environments.</li>
+            <li><strong>Test-Driven Development (TDD):</strong> Adopting the red-green-refactor cycle to ensure tests are meaningful and drive better code design.</li>
+            <li><strong>Strategic Coverage:</strong> Focus testing on complex business logic and edge cases rather than hitting arbitrary coverage metrics.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

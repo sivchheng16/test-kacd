@@ -28,13 +28,13 @@ export default function Module05ArraysLoops() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#creating-arrays" className="text-primary hover:underline">→ Creating arrays</a></li>
           <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
           <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -158,6 +158,20 @@ provinces.forEach((province) => {
 document.write("</ul>");`,
           }}
         />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Managing lists of data is essential for any app:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Arrays</strong> store multiple values in a single variable, indexed starting at 0.</li>
+            <li>Use <strong>.push()</strong> and <strong>.pop()</strong> to add or remove items from the end.</li>
+            <li><strong>for loops</strong> and <strong>forEach</strong> allow you to iterate over every item in an array.</li>
+            <li><strong>.map()</strong> transforms an array into a new one, while <strong>.filter()</strong> keeps only specific items.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

@@ -29,7 +29,6 @@ export default function Module07StateManagement() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -40,6 +39,7 @@ export default function Module07StateManagement() {
           <li><a href="#zustand" className="text-primary hover:underline">→ Zustand</a></li>
           <li><a href="#when-to-use-what" className="text-primary hover:underline">→ When to use what</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -354,6 +354,20 @@ function App() {
 }`,
           }}
         />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Choosing the right state management tool for your React app:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Prop Drilling:</strong> The manual passing of data through many levels, which becomes unmaintainable in large apps.</li>
+            <li><strong>Context API:</strong> A built-in way to share state globally without prop drilling.</li>
+            <li><strong>useReducer:</strong> Best for components with complex state logic or multiple related state transitions.</li>
+            <li><strong>External Libraries (Zustand):</strong> Use these when you need high-performance global state with minimal boilerplate.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

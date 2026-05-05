@@ -34,7 +34,6 @@ export default function Module02BasicCommands() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -45,6 +44,7 @@ export default function Module02BasicCommands() {
           <li><a href="#git-diff" className="text-primary hover:underline">→ git diff</a></li>
           <li><a href="#undoing-changes" className="text-primary hover:underline">→ Undoing Changes</a></li>
           <li><a href="#quick-reference" className="text-primary hover:underline">→ Quick Reference</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -283,6 +283,22 @@ git reset --hard HEAD~1`}
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Mastering the core Git commands for your daily workflow:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>git add:</strong> Move changes into the staging area before saving.</li>
+            <li><strong>git commit:</strong> Save a permanent snapshot of your staged changes.</li>
+            <li><strong>git status:</strong> Your most-used command to see the current state of your project.</li>
+            <li><strong>git log:</strong> Review the history of your commits.</li>
+            <li><strong>git diff:</strong> See exactly what lines changed in your files.</li>
+            <li><strong>git restore/revert:</strong> Use these to undo mistakes safely.</li>
+          </ul>
         </div>
       </section>
 

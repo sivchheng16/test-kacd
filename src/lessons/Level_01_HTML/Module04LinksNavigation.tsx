@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 
@@ -25,6 +26,24 @@ const EXPLORE_HTML = `<h1>KOOMPI</h1>
 </p>
 
 <p><a href="#contact">Jump to Contact section</a></p>`;
+
+const ANNOTATED_HTML = `<!-- Absolute URL -->
+<a href="https://koompi.com">Visit KOOMPI</a>
+<br><br>
+
+<!-- target="_blank" -->
+<a href="https://koompi.com" target="_blank">Open in new tab</a>
+<br><br>
+
+<!-- Nav groups links -->
+<nav>
+  <a href="index.html">Home</a> |
+  <a href="products.html">Products</a> |
+  <a href="#team">Our Team</a>
+</nav>
+
+<h2 id="team" style="margin-top: 100px;">Our Team</h2>
+<p>Jumping here from the link above!</p>`;
 
 const CHALLENGE_STARTER = `<!-- Build a simple site navigation.
      Add a <nav> element with at least 3 links inside it. -->
@@ -132,29 +151,12 @@ export default function Module04LinksNavigation() {
         <p className="text-base text-muted-foreground leading-relaxed">
           Here is a small page that uses every link type you will need day-to-day:
         </p>
-        <CodeBlock language="html" title="index.html">
-          {`<!-- Absolute URL — full address, opens in same tab -->
-<a href="https://koompi.com">Visit KOOMPI</a>
-
-<!-- target="_blank" — opens in a new tab -->
-<a href="https://koompi.com" target="_blank">Open KOOMPI in new tab</a>
-
-<!-- Relative URL — another page in your own project -->
-<a href="about.html">About Us</a>
-
-<!-- Anchor link — jumps to an element with id="team" on this page -->
-<a href="#team">Meet the team ↓</a>
-
-<!-- The target section (anywhere on the page) -->
-<h2 id="team">Our Team</h2>
-
-<!-- A nav groups navigation links together semantically -->
-<nav>
-  <a href="index.html">Home</a>
-  <a href="products.html">Products</a>
-  <a href="contact.html">Contact</a>
-</nav>`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_HTML}
+          css=""
+          title="Links and Navigation"
+          height="320px"
+        />
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <code className="text-primary font-mono shrink-0">href="https://..."</code>

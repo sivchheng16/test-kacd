@@ -84,13 +84,13 @@ export default function Module05ProjectWeather() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#what-you-will-build" className="text-primary hover:underline">→ What You Will Build</a></li>
           <li><a href="#the-open-meteo-api" className="text-primary hover:underline">→ The Open-Meteo API</a></li>
           <li><a href="#build-steps" className="text-primary hover:underline">→ Build Steps</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#try-it-build-it" className="text-primary hover:underline">→ Try it / Build it</a></li>
           <li><a href="#take-it-further" className="text-primary hover:underline">→ Take It Further</a></li>
         </ul>
@@ -177,6 +177,20 @@ export default function Module05ProjectWeather() {
           <li>Write the temperature and wind speed into the result div.</li>
           <li>Wrap everything in <code className="font-mono">try/catch</code> and show an error message if it fails.</li>
         </ol>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>This capstone project integrates all the core skills of modern JS:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Asynchronous Fetching:</strong> Communicating with external servers.</li>
+            <li><strong>JSON Data Handling:</strong> Parsing complex objects from responses.</li>
+            <li><strong>Defensive Programming:</strong> Using <code>try/catch</code> to handle API failures.</li>
+            <li><strong>Dynamic UI:</strong> Updating the DOM in response to real-time data.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Playground */}

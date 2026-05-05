@@ -28,6 +28,7 @@ export default function Module02ReadingCode() {
           <li><a href="#the-5-minute-rule" className="text-primary hover:underline">→ The 5-minute rule</a></li>
           <li><a href="#when-to-rewrite-vs-when-to-understand" className="text-primary hover:underline">→ When to rewrite vs when to understand</a></li>
           <li><a href="#build-a-mental-model" className="text-primary hover:underline">→ Build a mental model</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -248,6 +249,21 @@ describe("formatCurrency", () => {
           faster pattern recognition, so they need to draw less often — but when they are
           in genuinely unfamiliar territory, they still reach for a pen.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Effective strategies for navigating and understanding existing codebases:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>The Reading Mindset:</strong> Accept that reading code is a primary part of the job; start at entry points and trace execution forward.</li>
+            <li><strong>Targeted Investigation:</strong> Don't read every line; instead, follow the journey of specific data through its entire lifecycle.</li>
+            <li><strong>IDE Mastery:</strong> Utilize "Go to Definition" and "Find All References" to navigate the code's map efficiently.</li>
+            <li><strong>Contextual Awareness:</strong> Use git history and existing test suites to understand the "why" and the expected behavior of code.</li>
+            <li><strong>The 5-Minute Rule:</strong> Invest a focused burst of effort to build a mental model before seeking external help.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

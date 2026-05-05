@@ -25,6 +25,7 @@ export default function Module01Docker() {
           <li><a href="#docker-compose-for-multi-service-apps" className="text-primary hover:underline">→ docker-compose for multi-service apps</a></li>
           <li><a href="#dockerignore" className="text-primary hover:underline">→ .dockerignore</a></li>
           <li><a href="#multi-stage-builds" className="text-primary hover:underline">→ Multi-stage builds</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -213,6 +214,21 @@ CMD ["node", "dist/server.js"]`}
           The final image contains no TypeScript compiler, no test framework, no source maps.
           A typical Node.js app shrinks from 800 MB to under 150 MB with this pattern.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The core concepts of containerization and portable deployments with Docker:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Consistency:</strong> Docker eliminates "it works on my machine" by packaging the entire runtime and dependency environment.</li>
+            <li><strong>Images vs. Containers:</strong> Understanding images as read-only blueprints and containers as active, isolated running instances.</li>
+            <li><strong>Optimized Dockerfiles:</strong> Using layer caching effectively by copying package files before source code.</li>
+            <li><strong>Orchestration:</strong> Leveraging <code>docker-compose</code> to define and wire together multi-service applications (API, DB, Cache).</li>
+            <li><strong>Production Readiness:</strong> Utilizing <code>.dockerignore</code> and multi-stage builds to create secure, minimal, and high-performance production images.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

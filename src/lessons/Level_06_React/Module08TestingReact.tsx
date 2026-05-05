@@ -33,7 +33,7 @@ export default function Module08TestingReact() {
           <li><a href="#mocking-api-calls" className="text-primary hover:underline">→ Mocking API calls</a></li>
           <li><a href="#async-testing" className="text-primary hover:underline">→ Async testing</a></li>
           <li><a href="#what-not-to-test" className="text-primary hover:underline">→ What not to test</a></li>
-          <li><a href="#key-takeaways" className="text-primary hover:underline">→ Key takeaways</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -317,23 +317,19 @@ await waitFor(() => {
         </div>
       </section>
 
-      {/* Summary */}
-      <section id="key-takeaways" className="space-y-4 px-6 py-5 rounded-2xl bg-stone-50 border border-border">
-        <h2 className="text-base font-semibold text-foreground">Key takeaways</h2>
-        <ul className="space-y-2 text-sm text-muted-foreground">
-          {[
-            "Use getByRole first — it rewards accessible HTML and mirrors how users navigate.",
-            "Use userEvent over fireEvent — it's closer to real browser behavior.",
-            "Use findBy* or waitFor for anything that appears asynchronously.",
-            "Mock at the boundary (fetch / module) not inside the component.",
-            "A test that only breaks when user-visible behavior changes is a good test.",
-          ].map((item) => (
-            <li key={item} className="flex items-start gap-2">
-              <CheckCircle2 size={15} className="text-green-500 mt-0.5 shrink-0" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Writing resilient and meaningful tests for React components:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>User-Centric Testing:</strong> Focus on testing what the user sees and does, not the implementation details.</li>
+            <li><strong>Accessible Queries:</strong> Prioritize <code>getByRole</code> to ensure your UI is accessible to everyone.</li>
+            <li><strong>userEvent:</strong> Use this library to simulate realistic browser interactions like clicking and typing.</li>
+            <li><strong>Async Support:</strong> Use <code>findBy*</code> or <code>waitFor</code> when testing content that appears after an async operation.</li>
+            <li><strong>Mocking:</strong> Isolate your tests by mocking external dependencies like API calls.</li>
+          </ul>
+        </div>
       </section>
     </article>
   );

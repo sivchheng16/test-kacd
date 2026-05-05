@@ -4,6 +4,7 @@ import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 
 const EXPLORE_STARTER = {
   html: `<div class="card">
@@ -59,6 +60,42 @@ const CHALLENGE_STARTER = {
 }`,
 };
 
+const ANNOTATED_HTML = `<div class="card">
+  <h2>The Box Model</h2>
+  <p>This card uses <span>padding</span>, <span>border</span>, and <span>margin</span>.</p>
+</div>`;
+
+const ANNOTATED_CSS = `* {
+  box-sizing: border-box;
+}
+
+.card {
+  display: block;          /* ensures it takes its own space */
+  width: 360px;            /* total visible width (with border-box) */
+  background-color: white;
+
+  padding: 24px;           /* 24px on all four inner sides */
+  border: 4px solid #d4c8b4;
+  border-radius: 8px;      /* rounds the corners */
+  margin: 0 auto 24px;     /* 0 top, auto left/right (centers it), 24px bottom */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+  margin: 0 0 12px 0;
+  color: #c2622d;
+}
+
+.card span {
+  display: inline-block;   /* allow padding/width on an inline element */
+  background: #fdf6ec;
+  padding: 2px 6px;
+  border: 1px solid #c2622d;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}`;
+
 const challenge = {
   prompt:
     "Add `padding`, `margin`, and `border` to any element. All three must appear in your CSS.",
@@ -107,8 +144,10 @@ export default function Module04BoxModel() {
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#four-layers-one-box" className="text-primary hover:underline">→ Four layers, one box</a></li>
+          <li><a href="#collapsing-and-display" className="text-primary hover:underline">→ Collapsing and Display</a></li>
           <li><a href="#annotated-example" className="text-primary hover:underline">→ Annotated example</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -158,14 +197,27 @@ export default function Module04BoxModel() {
           selector) to make width mean the full visible size. Almost every
           professional stylesheet does this.
         </p>
+      </section>
+
+      {/* ── 2.5 Collapsing & Display ───────────────────────── */}
+      <section id="collapsing-and-display" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">Collapsing and Display</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
-          Shorthand properties let you set all four sides at once:{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            padding: 16px 24px
-          </code>{" "}
-          means 16px top/bottom, 24px left/right. One value sets all four
-          sides. Four values go clockwise: top, right, bottom, left.
+          Two common "gotchas" that confuse beginners:
         </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Margin Collapsing</h3>
+            <p className="text-sm text-muted-foreground">If two vertical margins touch, they merge into one. If the top box has 20px bottom margin and the bottom box has 10px top margin, the gap between them is 20px, not 30px.</p>
+          </div>
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Display Types</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground font-mono">
+              <li><span className="text-[#c2622d]">display: block;</span> (default for div, p) starts on a new line and takes full width.</li>
+              <li><span className="text-[#c2622d]">display: inline;</span> (default for span, a) fits into the text flow and ignores width/height.</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       {/* ── 3. Example ─────────────────────────────────────── */}
@@ -174,27 +226,12 @@ export default function Module04BoxModel() {
         <p className="text-base text-muted-foreground leading-relaxed">
           A card component using all four box model layers.
         </p>
-        <CodeBlock language="css" title="styles.css">
-          {`/* Reset first — prevents browser defaults from fighting you */
-* {
-  box-sizing: border-box;
-}
-
-.card {
-  width: 360px;            /* total visible width (with border-box) */
-  background-color: white;
-
-  padding: 24px;           /* 24px on all four inner sides */
-  border: 2px solid #d4c8b4;
-  border-radius: 8px;      /* rounds the corners */
-  margin: 0 auto 24px;     /* 0 top, auto left/right (centers it), 24px bottom */
-}
-
-/* Padding shorthand:
-   padding: top right bottom left  (clockwise)
-   padding: vertical horizontal    (two-value)
-   padding: 24px                   (all four equal) */`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_HTML}
+          css={ANNOTATED_CSS}
+          title="Box Model Layers"
+          height="300px"
+        />
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
@@ -226,6 +263,21 @@ export default function Module04BoxModel() {
           starter={EXPLORE_STARTER}
           height="440px"
         />
+      </section>
+
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The Box Model is the foundation of all CSS layout:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Every element is a box composed of <strong>Content, Padding, Border, and Margin</strong>.</li>
+            <li>Use <strong>padding</strong> for space inside the box and <strong>margin</strong> for space outside.</li>
+            <li>Always set <code>box-sizing: border-box</code> to make width and height include padding and borders.</li>
+            <li>Vertical margins sometimes <strong>collapse</strong> into each other.</li>
+            <li><strong>Block</strong> elements take full width, while <strong>Inline</strong> elements only take as much space as their content.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── 5. Challenge ───────────────────────────────────── */}

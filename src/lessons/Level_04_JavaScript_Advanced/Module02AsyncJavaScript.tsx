@@ -97,7 +97,6 @@ export default function Module02AsyncJavaScript() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -105,6 +104,7 @@ export default function Module02AsyncJavaScript() {
           <li><a href="#callbacks-brief" className="text-primary hover:underline">→ Callbacks (Brief)</a></li>
           <li><a href="#promises" className="text-primary hover:underline">→ Promises</a></li>
           <li><a href="#async-await" className="text-primary hover:underline">→ async / await</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -265,6 +265,21 @@ async function parallel() {
         </div>
 
         <CodePlayground mode="js" starter={{ js: EXPLORE_ASYNC }} height="300px" />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Asynchronous programming is key to a smooth web experience:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>The <strong>Event Loop</strong> allows JS to handle slow tasks without freezing the main thread.</li>
+            <li><strong>Promises</strong> represent a future value and have three states: pending, fulfilled, or rejected.</li>
+            <li><strong>async / await</strong> is modern syntax that makes asynchronous code look and behave like synchronous code.</li>
+            <li>Use <strong>try / catch</strong> for error handling in async functions.</li>
+            <li>Use <strong>Promise.all()</strong> to run multiple async operations in parallel.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

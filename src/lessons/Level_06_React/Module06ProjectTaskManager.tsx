@@ -45,12 +45,12 @@ export default function Module06ProjectTaskManager() {
         </div>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#design-before-you-build" className="text-primary hover:underline">→ Design before you build</a></li>
           <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -173,6 +173,20 @@ setTasks(tasks.filter(t => t.id !== id));`}
 }`,
           }}
         />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key takeaways from building the Task Manager project:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>State Orchestration:</strong> Managing multiple pieces of state (tasks array, input text) that work together.</li>
+            <li><strong>Immutable Array Updates:</strong> Using <code>map</code>, <code>filter</code>, and the spread operator to update state without mutation.</li>
+            <li><strong>Conditional Rendering & Styling:</strong> Dynamic UI updates based on task properties (e.g., strikethrough for completed tasks).</li>
+            <li><strong>Controlled Components:</strong> Syncing the input field value with React state for predictable behavior.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

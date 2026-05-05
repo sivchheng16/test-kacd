@@ -25,6 +25,7 @@ export default function Module02CICD() {
           <li><a href="#deploy-step-after-tests-pass" className="text-primary hover:underline">→ Deploy step after tests pass</a></li>
           <li><a href="#branch-protection-require-ci-to-pass-before-merging" className="text-primary hover:underline">→ Branch protection: require CI to pass before merging</a></li>
           <li><a href="#status-badges-in-readme" className="text-primary hover:underline">→ Status badges in README</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -155,6 +156,21 @@ jobs:
         <p className="text-base text-muted-foreground leading-relaxed">
           Get the exact URL from Actions → select your workflow → the three-dot menu → "Create status badge".
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key automation strategies for building a reliable CI/CD pipeline with GitHub Actions:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>The Pipeline Process:</strong> Automation eliminates manual deploy errors and ensures tests run on every code change.</li>
+            <li><strong>Continuous Integration:</strong> Setting up automated test suites that run on every push and pull request for rapid feedback.</li>
+            <li><strong>Workflow Anatomy:</strong> Mastering the structure of GitHub Actions using triggers, jobs, and steps to build, test, and deploy.</li>
+            <li><strong>Secure Deployments:</strong> Protecting sensitive credentials using GitHub Secrets and configuring conditional deployment jobs.</li>
+            <li><strong>Branch Integrity:</strong> Enforcing branch protection rules to ensure the main branch remains stable and always in a deployable state.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

@@ -4,6 +4,7 @@ import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 
 const EXPLORE_HTML = `<h1>Learning HTML</h1>
 <h2>Why it matters</h2>
@@ -42,6 +43,49 @@ const EXPLORE_HTML = `<h1>Learning HTML</h1>
 
 <blockquote>
   <p>"The best time to learn HTML was <del>yesterday</del> <ins>today</ins>. The second best time is <mark>now</mark>."</p>
+</blockquote>`;
+
+const ANNOTATED_HTML = `<h1>Getting Started with Linux</h1>
+
+<p>
+  Linux is <strong>free</strong>, 
+  <strong>open source</strong>, and<br>
+  used on most of the world's servers.
+</p>
+
+<hr>
+
+<h2>Why developers choose it</h2>
+
+<ul>
+  <li>Full control over the system</li>
+  <li>No <del>license</del> <ins>licence</ins> fees</li>
+  <li>Huge community and documentation</li>
+</ul>
+
+<h2>How to install it</h2>
+
+<ol>
+  <li>Download an ISO image</li>
+  <li>Write it to a USB drive</li>
+  <li>Boot from the USB</li>
+  <li>Follow the installer</li>
+</ol>
+
+<h2>Core Concepts</h2>
+<dl>
+  <dt>Kernel</dt>
+  <dd>The core of the OS that talks to hardware.</dd>
+  <dt>Distribution (Distro)</dt>
+  <dd>A <mark>specific version</mark> of Linux like Ubuntu or KOOMPI.</dd>
+</dl>
+
+<h2>A word from Linus Torvalds</h2>
+
+<blockquote>
+  <p>
+    "Software is like sex: it's better when it's <em>free</em>."
+  </p>
 </blockquote>`;
 
 const CHALLENGE_STARTER = `<!-- Create an ordered list of exactly 3 things you want to learn.
@@ -185,49 +229,12 @@ export default function Module03TextandLists() {
           explains the choice.
         </p>
 
-        <CodeBlock language="html" title="article.html">
-          {`<h1>Getting Started with Linux</h1>    <!-- one h1, the page title -->
-
-<p>
-  Linux is <strong>free</strong>,       <!-- strong = important fact -->
-  <strong>open source</strong>, and<br> <!-- br = manual line break -->
-  used on most of the world's servers.
-</p>
-
-<hr>                                    <!-- hr = thematic break -->
-
-<h2>Why developers choose it</h2>       <!-- h2 starts a new section -->
-
-<ul>                                    <!-- order doesn't matter here -->
-  <li>Full control over the system</li>
-  <li>No <del>license</del> <ins>licence</ins> fees</li> <!-- spelling edit -->
-  <li>Huge community and documentation</li>
-</ul>
-
-<h2>How to install it</h2>
-
-<ol>                                    <!-- order matters: steps -->
-  <li>Download an ISO image</li>
-  <li>Write it to a USB drive</li>
-  <li>Boot from the USB</li>
-  <li>Follow the installer</li>
-</ol>
-
-<h2>Core Concepts</h2>
-<dl>                                    <!-- description list -->
-  <dt>Kernel</dt>                       <!-- term -->
-  <dd>The core of the OS that talks to hardware.</dd> <!-- description -->
-  <dt>Distribution (Distro)</dt>
-  <dd>A <mark>specific version</mark> of Linux like Ubuntu or KOOMPI.</dd>
-</dl>
-
-<h2>A word from Linus Torvalds</h2>
-
-<blockquote>
-  <p>
-    "Software is like sex: it's better when it's <em>free</em>."
-  </p>                                  <!-- em = verbal stress -->
-</blockquote>`}</CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_HTML}
+          css=""
+          title="Text and Lists Examples"
+          height="460px"
+        />
 
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">

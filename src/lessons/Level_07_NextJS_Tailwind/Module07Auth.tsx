@@ -25,6 +25,7 @@ export default function Module07Auth() {
           <li><a href="#callbacks" className="text-primary hover:underline">→ Callbacks</a></li>
           <li><a href="#database-sessions" className="text-primary hover:underline">→ Database Sessions</a></li>
           <li><a href="#sign-in-sign-out-buttons" className="text-primary hover:underline">→ Sign In / Sign Out Buttons</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -111,7 +112,7 @@ export default async function DashboardPage() {
           </div>
           <div>
             <p className="text-sm font-semibold text-foreground mb-2">Client Components — use <code className="bg-stone-100 px-1 rounded text-xs font-mono">useSession()</code></p>
-            <CodeBlock language="json">
+            <CodeBlock language="javascript">
           {`'use client';
 import { useSession } from 'next-auth/react';
 
@@ -240,6 +241,21 @@ export default async function AuthButtons() {
         <p className="text-sm text-muted-foreground leading-relaxed">
           In Client Components, redirect to <code className="bg-stone-100 px-1 rounded text-xs font-mono">/api/auth/signin</code> or call <code className="bg-stone-100 px-1 rounded text-xs font-mono">signIn()</code> / <code className="bg-stone-100 px-1 rounded text-xs font-mono">signOut()</code> from <code className="bg-stone-100 px-1 rounded text-xs font-mono">next-auth/react</code>.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key takeaways for implementing robust authentication with Auth.js:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Auth.js Ecosystem:</strong> Use <code>next-auth@beta</code> for the latest App Router-compatible authentication flows.</li>
+            <li><strong>Centralized Config:</strong> Manage providers and callbacks in a single <code>auth.ts</code> file.</li>
+            <li><strong>Session Management:</strong> Access session data on the server with <code>auth()</code> and on the client with <code>useSession()</code>.</li>
+            <li><strong>Route Protection:</strong> Use middleware for efficient, edge-side redirects for unauthenticated users.</li>
+            <li><strong>Customization:</strong> Utilize callbacks to enrich tokens and sessions with custom data from your database.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

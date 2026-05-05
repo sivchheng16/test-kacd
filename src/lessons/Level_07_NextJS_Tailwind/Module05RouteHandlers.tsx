@@ -24,6 +24,7 @@ export default function Module05RouteHandlers() {
           <li><a href="#headers-and-cookies" className="text-primary hover:underline">→ Headers and Cookies</a></li>
           <li><a href="#middleware-vs-route-handler" className="text-primary hover:underline">→ Middleware vs Route Handler</a></li>
           <li><a href="#route-handlers-vs-server-actions" className="text-primary hover:underline">→ Route Handlers vs Server Actions</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -200,6 +201,21 @@ export async function GET(request: Request) {
         </div>
         <div className="px-4 py-3 rounded-xl bg-blue-50 border border-blue-200 text-sm text-blue-800">
           Rule of thumb: if an external client (mobile app, another service, curl) needs to call it, use a Route Handler. If only your own UI calls it, a Server Action is simpler.
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key concepts for building internal APIs with Next.js Route Handlers:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>API Structure:</strong> Defined by <code>route.ts</code> files within the <code>app/api</code> directory.</li>
+            <li><strong>HTTP Methods:</strong> Handlers are created by exporting functions like <code>GET</code>, <code>POST</code>, <code>PUT</code>, and <code>DELETE</code>.</li>
+            <li><strong>Request and Response:</strong> Using standard Web APIs to parse JSON bodies and return formatted data with status codes.</li>
+            <li><strong>Dynamic API Routes:</strong> Creating flexible endpoints using the square bracket notation <code>[id]</code>.</li>
+            <li><strong>Comparison:</strong> Use Route Handlers for external integrations and Server Actions for internal UI-triggered mutations.</li>
+          </ul>
         </div>
       </section>
 

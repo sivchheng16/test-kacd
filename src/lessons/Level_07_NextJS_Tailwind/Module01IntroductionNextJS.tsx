@@ -32,6 +32,7 @@ export default function Module01IntroductionNextJS() {
           <li><a href="#app-router-project-structure" className="text-primary hover:underline">→ App Router Project Structure</a></li>
           <li><a href="#server-components-vs-client-components" className="text-primary hover:underline">→ Server Components vs Client Components</a></li>
           <li><a href="#navigation-with-link" className="text-primary hover:underline">→ Navigation with Link</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -201,7 +202,7 @@ export default function Counter() {
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">src/app/layout.tsx</div>
-          <CodeBlock language="json">
+          <CodeBlock language="javascript">
           {`import Link from 'next/link';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -219,6 +220,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }`}
         </CodeBlock>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key takeaways for beginning your Next.js journey:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Next.js:</strong> A powerful framework built on React that simplifies routing, data fetching, and optimization for production.</li>
+            <li><strong>File-Based Routing:</strong> Your folder structure in the <code>app/</code> directory determines your application's URLs.</li>
+            <li><strong>Server vs. Client Components:</strong> Use Server Components by default for better performance, and <code>'use client'</code> only when interactivity (hooks, events) is needed.</li>
+            <li><strong>Optimized Navigation:</strong> Use the <code>&lt;Link&gt;</code> component for instant page transitions and automatic prefetching.</li>
+            <li><strong>Production Ready:</strong> Built-in features like image optimization and easy deployment make it the industry standard for modern web apps.</li>
+          </ul>
         </div>
       </section>
 

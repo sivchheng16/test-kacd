@@ -25,6 +25,7 @@ export default function Module08Deployment() {
           <li><a href="#ci-with-github-actions" className="text-primary hover:underline">→ CI with GitHub Actions</a></li>
           <li><a href="#other-hosting-options" className="text-primary hover:underline">→ Other Hosting Options</a></li>
           <li><a href="#pre-launch-checklist" className="text-primary hover:underline">→ Pre-Launch Checklist</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -238,6 +239,21 @@ jobs:
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Final steps for taking your Next.js application from local development to production:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Vercel Deployment:</strong> The native and easiest path for deploying Next.js apps with zero-config optimization.</li>
+            <li><strong>Secrets Management:</strong> Securely handling sensitive data using environment variables in both local and production settings.</li>
+            <li><strong>Build Analysis:</strong> Understanding the difference between static and dynamic routes through the build output table.</li>
+            <li><strong>Automation:</strong> Integrating CI/CD pipelines with GitHub Actions to ensure code quality before every deployment.</li>
+            <li><strong>Production Readiness:</strong> Following a pre-launch checklist for performance, accessibility, and monitoring.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

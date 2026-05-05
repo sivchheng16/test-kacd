@@ -4,6 +4,7 @@ import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 
 const EXPLORE_STARTER = {
   html: `<div class="card">
@@ -103,6 +104,95 @@ const challenge = {
   },
 };
 
+const VARS_HTML = `<div class="box">
+  <h2>Variable Colors</h2>
+  <button>Styled Button</button>
+</div>`;
+
+const VARS_CSS = `:root {
+  --primary: #6366f1;       /* indigo brand colour */
+  --spacing-md: 16px;       /* reusable spacing unit */
+}
+
+.box {
+  padding: var(--spacing-md);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+h2 {
+  color: var(--primary);
+  margin-top: 0;
+}
+
+button {
+  background: var(--primary);          /* use it */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}`;
+
+const TRANSITION_HTML = `<button class="btn">Hover for Smoothness</button>`;
+
+const TRANSITION_CSS = `.btn {
+  background: #6366f1;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  /* smooth colour swap */
+  transition: background-color 300ms ease;   
+}
+
+.btn:hover {
+  background: #4f46e5;
+}`;
+
+const TRANSFORM_HTML = `<div class="card">Hover me to lift</div>
+<div class="logo">KOOMPI</div>`;
+
+const TRANSFORM_CSS = `.card, .logo {
+  display: inline-block;
+  padding: 20px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card:hover {
+  transform: translateY(-8px);   /* lift effect */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.logo:hover {
+  transform: scale(1.1) rotate(5deg); /* grow and tilt */
+  background: #fdf6ec;
+}`;
+
+const KEYFRAMES_HTML = `<div class="pulse-badge">New Feature</div>`;
+
+const KEYFRAMES_CSS = `@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+}
+
+.pulse-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #6366f1;
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}`;
+
 export default function Module09CSSVariablesAnimations() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
@@ -123,11 +213,13 @@ export default function Module09CSSVariablesAnimations() {
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
-          <li><a href="#part-1" className="text-primary hover:underline">→ Part 1</a></li>
-          <li><a href="#part-2" className="text-primary hover:underline">→ Part 2</a></li>
-          <li><a href="#part-3" className="text-primary hover:underline">→ Part 3</a></li>
-          <li><a href="#part-4" className="text-primary hover:underline">→ Part 4</a></li>
+          <li><a href="#part-1" className="text-primary hover:underline">→ Part 1: CSS Variables</a></li>
+          <li><a href="#part-2" className="text-primary hover:underline">→ Part 2: Transitions</a></li>
+          <li><a href="#part-3" className="text-primary hover:underline">→ Part 3: Transforms</a></li>
+          <li><a href="#part-4" className="text-primary hover:underline">→ Part 4: Keyframe Animations</a></li>
+          <li><a href="#performance-accessibility" className="text-primary hover:underline">→ Performance & Accessibility</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -141,53 +233,12 @@ export default function Module09CSSVariablesAnimations() {
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">:root</code> so they're available
           across the whole page:
         </p>
-        <CodeBlock language="css" title="styles.css">
-          {`:root {
-  --primary: #6366f1;       /* indigo brand colour */
-  --spacing-md: 16px;       /* reusable spacing unit */
-}
-
-button {
-  background: var(--primary);          /* use it */
-  padding: var(--spacing-md);
-  color: var(--accent, white);         /* fallback if --accent is unset */
-}`}
-        </CodeBlock>
-        <ul className="space-y-2 text-sm text-muted-foreground">
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">--name</span>
-            always two dashes — that's how the browser tells variables apart from regular properties
-          </li>
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">var(--name, fallback)</span>
-            the second argument is used if the variable isn't defined
-          </li>
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">cascade &amp; inherit</span>
-            variables follow the cascade — override on a specific element to scope them to a component
-          </li>
-        </ul>
-        <p className="text-base text-muted-foreground leading-relaxed">
-          Light/dark theming in ~10 lines: redefine the same variable names inside a{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">[data-theme="dark"]</code> selector
-          and every component updates automatically — no JavaScript needed.
-        </p>
-        <CodeBlock language="javascript" title="theme switching">
-          {`:root {
-  --bg: #ffffff;
-  --text: #111111;
-}
-
-[data-theme="dark"] {
-  --bg: #0f0f0f;
-  --text: #f5f5f5;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-}`}
-        </CodeBlock>
+        <CodeExample 
+          html={VARS_HTML}
+          css={VARS_CSS}
+          title="Using Variables"
+          height="200px"
+        />
       </section>
 
       {/* ── 3. Transitions ─────────────────────────────────── */}
@@ -200,36 +251,12 @@ body {
             transition: property duration timing-function
           </code>
         </p>
-        <CodeBlock language="javascript" title="transitions">
-          {`.btn {
-  background: var(--primary);
-  transition: background-color 200ms ease;   /* smooth colour swap */
-}
-
-.btn:hover {
-  background: var(--primary-hover);
-}`}
-        </CodeBlock>
-        <ul className="space-y-2 text-sm text-muted-foreground">
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">ease</span>
-            starts fast, ends slow — feels natural, good default for most interactions
-          </li>
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">ease-in-out</span>
-            slow start, fast middle, slow end — great for modals or elements entering the screen
-          </li>
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">linear</span>
-            constant speed — suits looping spinners; feels mechanical for one-off interactions
-          </li>
-        </ul>
-        <p className="text-base text-muted-foreground leading-relaxed">
-          Avoid transitioning <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">width</code> or{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">height</code> — they force the
-          browser to recalculate layout on every frame, causing jank. Use{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">transform</code> instead.
-        </p>
+        <CodeExample 
+          html={TRANSITION_HTML}
+          css={TRANSITION_CSS}
+          title="CSS Transitions"
+          height="160px"
+        />
       </section>
 
       {/* ── 4. Transforms ──────────────────────────────────── */}
@@ -239,29 +266,12 @@ body {
           Transforms move, scale, or rotate elements without touching the layout — the browser hands
           them to the GPU, so they're smooth even on complex pages.
         </p>
-        <CodeBlock language="javascript" title="transform examples">
-          {`.card:hover {
-  transform: translateY(-4px);   /* lift effect — card rises 4px */
-}
-
-.logo:hover {
-  transform: scale(1.05);        /* grow 5% on hover */
-}
-
-.icon {
-  transform: rotate(45deg);      /* spin 45° */
-}
-
-/* stack multiple transforms in one declaration */
-.btn:hover {
-  transform: translateY(-2px) scale(1.02);
-}`}
-        </CodeBlock>
-        <p className="text-base text-muted-foreground leading-relaxed">
-          Always pair transforms with a{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">transition</code> — without it the
-          change is instant and loses its effect.
-        </p>
+        <CodeExample 
+          html={TRANSFORM_HTML}
+          css={TRANSFORM_CSS}
+          title="2D Transforms"
+          height="200px"
+        />
       </section>
 
       {/* ── 5. Keyframe Animations ─────────────────────────── */}
@@ -272,36 +282,36 @@ body {
           automatically — a fade-in on load, a pulsing badge — use{" "}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">@keyframes</code>.
         </p>
-        <CodeBlock language="javascript" title="keyframes">
-          {`@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+        <CodeExample 
+          html={KEYFRAMES_HTML}
+          css={KEYFRAMES_CSS}
+          title="Keyframe Animations"
+          height="180px"
+        />
+      </section>
 
-.card {
-  animation-name: fadeIn;
-  animation-duration: 400ms;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;   /* stay at the final state */
-
-  /* shorthand: name duration timing fill */
-  animation: fadeIn 400ms ease-out forwards;
-}`}
-        </CodeBlock>
-        <ul className="space-y-2 text-sm text-muted-foreground">
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">from / to</span>
-            simple two-step animation — you can also use percentages: 0%, 50%, 100%
-          </li>
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">fill-mode: forwards</span>
-            without this the element snaps back to its original state when the animation ends
-          </li>
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">iteration-count: infinite</span>
-            loops forever — useful for spinners and loading indicators
-          </li>
-        </ul>
+      {/* ── 5.5 Performance & Accessibility ────────────────── */}
+      <section id="performance-accessibility" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">Performance and Accessibility</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">GPU Acceleration</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Always animate <code>opacity</code> and <code>transform</code>. These are "cheap" for the browser to animate because they don't trigger layout recalculations.
+            </p>
+          </div>
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Respecting Users</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Some users find animations disorienting. Respect their system settings with:
+            </p>
+            <code className="block p-3 bg-stone-100 rounded text-xs font-mono">
+              @media (prefers-reduced-motion: reduce) {"{"} <br />
+              &nbsp;&nbsp;* {"{"} animation: none !important; {"}"} <br />
+              {"}"}
+            </code>
+          </div>
+        </div>
       </section>
 
       {/* ── 6. Try it ──────────────────────────────────────── */}
@@ -322,6 +332,21 @@ body {
           starter={EXPLORE_STARTER}
           height="420px"
         />
+      </section>
+
+      {/* ── 6.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Variables and Animations make CSS more maintainable and interactive:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>CSS Variables:</strong> Store reusable values (like colors or spacing) on <code>:root</code> to keep your code DRY.</li>
+            <li><strong>Transitions:</strong> Create smooth state changes (e.g., hover effects) with minimal code.</li>
+            <li><strong>Transforms:</strong> Modify an element's position, size, and rotation efficiently using the GPU.</li>
+            <li><strong>Keyframe Animations:</strong> Define complex, automatic animations that play independently of user interaction.</li>
+            <li><strong>Accessibility:</strong> Always consider <code>prefers-reduced-motion</code> for users who may be sensitive to movement.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── 7. Challenge ───────────────────────────────────── */}

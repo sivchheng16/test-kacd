@@ -46,13 +46,13 @@ export default function Module07ProjectQuiz() {
         </div>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#how-a-quiz-app-works" className="text-primary hover:underline">→ How a quiz app works</a></li>
           <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
           <li><a href="#customise-it" className="text-primary hover:underline">→ Customise it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
           <li><a href="#you-completed-javascript-basics" className="text-primary hover:underline">→ You completed JavaScript Basics</a></li>
         </ul>
@@ -254,6 +254,20 @@ document.querySelector("#submit").addEventListener("click", () => {
 });`,
           }}
         />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>By completing this project, you have demonstrated mastery of:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Structuring data using <strong>Arrays of Objects</strong>.</li>
+            <li>Dynamically rendering content using <strong>.map()</strong>.</li>
+            <li>Handling user input via <strong>Radio Buttons</strong> and <strong>Event Listeners</strong>.</li>
+            <li>Implementing application logic to calculate and display a score.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

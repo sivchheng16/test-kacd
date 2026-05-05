@@ -4,6 +4,7 @@ import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 
 const EXPLORE_STARTER = {
   html: `<h1>Angkor Wat</h1>
@@ -59,6 +60,24 @@ const challenge = {
   },
 };
 
+const ANNOTATED_HTML = `<h1>Phnom Penh Street Food</h1>
+<p>The best banh mi you will ever eat.</p>`;
+
+const ANNOTATED_CSS = `body {
+  background-color: #fdf6ec;   /* warm off-white */
+  padding: 24px;
+}
+
+h1 {
+  color: #c2622d;              /* deep orange — warm, strong */
+  font-size: 2rem;
+}
+
+p {
+  color: #555;                 /* dark grey — readable without being harsh */
+  line-height: 1.7;            /* breathing room between lines */
+}`;
+
 export default function Module01IntroductionCSS() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
@@ -81,8 +100,10 @@ export default function Module01IntroductionCSS() {
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#one-rule-three-parts" className="text-primary hover:underline">→ One rule, three parts</a></li>
+          <li><a href="#the-cascade-and-inheritance" className="text-primary hover:underline">→ The Cascade and Inheritance</a></li>
           <li><a href="#annotated-example" className="text-primary hover:underline">→ Annotated example</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -126,37 +147,38 @@ export default function Module01IntroductionCSS() {
         </p>
       </section>
 
+      {/* ── 2.5 The Cascade ────────────────────────────────── */}
+      <section id="the-cascade-and-inheritance" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">The Cascade and Inheritance</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          The "C" in CSS stands for <strong className="text-foreground">Cascading</strong>. This means that if you have two rules that apply to the same element, the browser has a set of rules to decide which one "wins." Usually, the rule that is written last in the file takes priority.
+        </p>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          Another key concept is <strong className="text-foreground">Inheritance</strong>. Some styles, like font-family and color, are passed down from parent elements to their children. If you set a font on the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">body</code>, every paragraph and heading inside it will use that font unless you tell them otherwise.
+        </p>
+        <div className="rounded-xl bg-amber-50/50 border border-amber-200 p-5 space-y-3">
+          <h3 className="text-lg font-serif text-amber-900">Why it matters</h3>
+          <p className="text-sm text-amber-800 leading-relaxed">
+            Understanding the cascade prevents "style wars" where you're constantly fighting with your own code. Instead of styling every single paragraph, you style the container and let inheritance do the heavy lifting.
+          </p>
+        </div>
+      </section>
+
       {/* ── 3. Example ─────────────────────────────────────── */}
       <section id="annotated-example" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Annotated example</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
-          Read through both files once. Notice how the HTML stays clean while
+          Read through the example below. Notice how the HTML stays clean while
           all appearance decisions live in CSS.
         </p>
-        <CodeBlock language="html" title="index.html">
-          {`<link rel="stylesheet" href="styles.css">   <!--  links the CSS file -->
+        
+        <CodeExample 
+          html={ANNOTATED_HTML}
+          css={ANNOTATED_CSS}
+          title="Basic Styling"
+          height="220px"
+        />
 
-<h1>Phnom Penh Street Food</h1>
-<p>The best banh mi you will ever eat.</p>`}
-        </CodeBlock>
-        <CodeBlock language="css" title="styles.css">
-          {`/* selector { property: value; } */
-
-body {
-  background-color: #fdf6ec;   /* warm off-white */
-  padding: 24px;
-}
-
-h1 {
-  color: #c2622d;              /* deep orange — warm, strong */
-  font-size: 2rem;
-}
-
-p {
-  color: #555;                 /* dark grey — readable without being harsh */
-  line-height: 1.7;            /* breathing room between lines */
-}`}
-        </CodeBlock>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">
             <span className="text-primary font-mono shrink-0">body</span>
@@ -194,6 +216,21 @@ p {
         />
       </section>
 
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>In this introduction to CSS, you have learned:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>CSS stands for <strong>Cascading Style Sheets</strong> and is used to style HTML elements.</li>
+            <li>A CSS rule consists of a <strong>selector</strong>, a <strong>property</strong>, and a <strong>value</strong>.</li>
+            <li>Styles can be applied inline, in a style block, or via an <strong>external .css file</strong> (best practice).</li>
+            <li>The <strong>Cascade</strong> determines which styles win when rules conflict, often favoring the last rule written.</li>
+            <li><strong>Inheritance</strong> allows styles to flow from parent elements to children, making code more efficient.</li>
+          </ul>
+        </div>
+      </section>
+
       {/* ── 5. Challenge ───────────────────────────────────── */}
       <section id="challenge" className="space-y-4">
         <div>
@@ -217,6 +254,7 @@ p {
           onChallengePassed={() => notifyChallengePassed(moduleId ?? "")}
         />
       </section>
+
 
       {/* ── 6. Gate ────────────────────────────────────────── */}
       <section>

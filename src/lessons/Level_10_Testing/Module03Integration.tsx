@@ -23,6 +23,7 @@ export default function Module03Integration() {
           <li><a href="#real-database-vs-mocked-database" className="text-primary hover:underline">→ Real database vs mocked database</a></li>
           <li><a href="#test-database-setup-seed-clean-repeat" className="text-primary hover:underline">→ Test database setup: seed, clean, repeat</a></li>
           <li><a href="#testing-auth-flows-within-the-api" className="text-primary hover:underline">→ Testing auth flows within the API</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -207,6 +208,21 @@ afterAll(async () => {
           Extract helper functions like <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">loginAndGetToken</code> into
           a shared test utilities file. Tests should read like specs, not setup scripts.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The core principles and practices of integration testing for robust backend services:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Beyond Isolation:</strong> Integration tests bridge the gap between unit tests by verifying that different modules (HTTP, logic, DB) work together.</li>
+            <li><strong>API Testing with Supertest:</strong> Using <code>supertest</code> to exercise your full Express application flow without the overhead of a real network.</li>
+            <li><strong>The Real DB Advantage:</strong> Favoring real database instances over mocks in integration tests to catch SQL-specific errors and constraint violations.</li>
+            <li><strong>Clean State Management:</strong> Implementing seed and clean cycles in your test setup to ensure every test run is independent and predictable.</li>
+            <li><strong>High-Value Targets:</strong> Prioritizing authentication flows and complex request/response cycles that involve multiple layers of the stack.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

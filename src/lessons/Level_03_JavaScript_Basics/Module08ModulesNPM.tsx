@@ -35,7 +35,7 @@ export default function Module08ModulesNPM() {
           <li><a href="#npm-scripts" className="text-primary hover:underline">→ npm scripts</a></li>
           <li><a href="#node_modules" className="text-primary hover:underline">→ node_modules</a></li>
           <li><a href="#commonjs-vs-esm" className="text-primary hover:underline">→ CommonJS vs ESM</a></li>
-          <li><a href="#what-you-learned" className="text-primary hover:underline">→ What you learned</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -295,19 +295,19 @@ export { myFn };`}
         </div>
       </section>
 
-      {/* ── 12. Summary ────────────────────────────────────── */}
-      <section id="what-you-learned" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">What you learned</h2>
-        <ul className="space-y-2 text-sm text-muted-foreground">
-          <li className="flex gap-2"><span className="text-primary font-mono shrink-0">→</span> Modules give each file its own scope and let files import from each other</li>
-          <li className="flex gap-2"><span className="text-primary font-mono shrink-0">→</span> Named exports use <code className="bg-stone-100 px-1 rounded">export const x</code>, imported with <code className="bg-stone-100 px-1 rounded">{"{ x }"}</code></li>
-          <li className="flex gap-2"><span className="text-primary font-mono shrink-0">→</span> Default exports use <code className="bg-stone-100 px-1 rounded">export default</code>, imported without curly braces</li>
-          <li className="flex gap-2"><span className="text-primary font-mono shrink-0">→</span> ESM imports are static — resolved before code runs, enabling tree-shaking</li>
-          <li className="flex gap-2"><span className="text-primary font-mono shrink-0">→</span> npm is the package registry; <code className="bg-stone-100 px-1 rounded">package.json</code> is the project manifest</li>
-          <li className="flex gap-2"><span className="text-primary font-mono shrink-0">→</span> <code className="bg-stone-100 px-1 rounded">npm install pkg</code> for runtime deps, <code className="bg-stone-100 px-1 rounded">--save-dev</code> for dev-only tools</li>
-          <li className="flex gap-2"><span className="text-primary font-mono shrink-0">→</span> Never commit <code className="bg-stone-100 px-1 rounded">node_modules/</code> — <code className="bg-stone-100 px-1 rounded">npm install</code> recreates it</li>
-          <li className="flex gap-2"><span className="text-primary font-mono shrink-0">→</span> CommonJS uses <code className="bg-stone-100 px-1 rounded">require()</code> — you'll see it in older code, use ESM for new projects</li>
-        </ul>
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key takeaways from this module:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Modules</strong> give each file its own scope and let files import from each other.</li>
+            <li><strong>Named exports</strong> use <code>export const x</code>, while <strong>default exports</strong> use <code>export default</code>.</li>
+            <li><strong>ESM imports</strong> are static, enabling <strong>tree-shaking</strong> by bundlers like Vite.</li>
+            <li><strong>npm</strong> is the package registry; <code>package.json</code> is the project manifest.</li>
+            <li>Never commit <strong>node_modules/</strong> — use <code>npm install</code> to recreate it from <code>package.json</code>.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

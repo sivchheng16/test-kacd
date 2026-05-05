@@ -23,9 +23,9 @@ export default function Module05AdvancedGit() {
           <li><a href="#git-stash" className="text-primary hover:underline">→ git stash</a></li>
           <li><a href="#git-rebase" className="text-primary hover:underline">→ git rebase</a></li>
           <li><a href="#git-cherry-pick" className="text-primary hover:underline">→ git cherry-pick</a></li>
-          <li><a href="#git-bisect" className="text-primary hover:underline">→ git bisect</a></li>
           <li><a href="#git-reflog" className="text-primary hover:underline">→ git reflog</a></li>
           <li><a href="#quick-reference" className="text-primary hover:underline">→ Quick Reference</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -258,6 +258,21 @@ git checkout -b recovered-work HEAD@{2}`}
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Advanced Git tools for expert control over your project history:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>git stash:</strong> Temporarily shelf changes to work on something else with a clean tree.</li>
+            <li><strong>git rebase:</strong> Rewrite your branch history to start from a new base commit.</li>
+            <li><strong>git cherry-pick:</strong> Grab a single specific commit from another branch.</li>
+            <li><strong>git bisect:</strong> Pinpoint the exact commit that introduced a bug using binary search.</li>
+            <li><strong>git reflog:</strong> The ultimate safety net to recover "lost" commits and branches.</li>
+          </ul>
         </div>
       </section>
 

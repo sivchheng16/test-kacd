@@ -29,13 +29,13 @@ export default function Module04Hooks() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#what-is-a-side-effect" className="text-primary hover:underline">→ What is a side effect?</a></li>
           <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
           <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -186,6 +186,21 @@ function App() {
 }`,
           }}
         />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Managing side effects and DOM references with Hooks:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>useEffect:</strong> The hook for side effects like data fetching, subscriptions, and DOM updates.</li>
+            <li><strong>Dependency Array:</strong> Controls when the effect runs (on mount, on change, or every render).</li>
+            <li><strong>Cleanup Function:</strong> Prevents memory leaks by cleaning up timers or subscriptions when a component unmounts.</li>
+            <li><strong>useRef:</strong> Provides a way to persist values between renders or directly reference DOM elements.</li>
+            <li><strong>Rules of Hooks:</strong> Always call hooks at the top level and only within React components or custom hooks.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

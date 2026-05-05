@@ -85,7 +85,6 @@ export default function Module01Introduction() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -97,6 +96,7 @@ export default function Module01Introduction() {
           <li><a href="#object-types" className="text-primary hover:underline">→ Object types</a></li>
           <li><a href="#union-types" className="text-primary hover:underline">→ Union types</a></li>
           <li><a href="#compiling-typescript" className="text-primary hover:underline">→ Compiling TypeScript</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -289,6 +289,21 @@ tsc --watch`}
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">.ts</code> file the
           annotations go directly in the code.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Getting started with TypeScript fundamentals:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Superset:</strong> Every valid JavaScript file is valid TypeScript; types are added on top.</li>
+            <li><strong>Type Annotations:</strong> Explicitly defining types for variables and parameters (e.g., <code>: string</code>).</li>
+            <li><strong>Type Inference:</strong> TypeScript is smart enough to guess types when values are obvious.</li>
+            <li><strong>Array and Object Types:</strong> Declaring the shape of complex data structures for better safety.</li>
+            <li><strong>Union Types:</strong> Allowing a variable to hold one of several specified types (e.g., <code>string | number</code>).</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── 10. Challenge ───────────────────────────────────── */}

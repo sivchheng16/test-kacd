@@ -31,6 +31,7 @@ export default function Module06ProjectEcommerce() {
           <li><a href="#project-file-structure" className="text-primary hover:underline">→ Project File Structure</a></li>
           <li><a href="#key-files-explained" className="text-primary hover:underline">→ Key Files Explained</a></li>
           <li><a href="#deployment-checklist" className="text-primary hover:underline">→ Deployment Checklist</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -109,7 +110,7 @@ export default function Module06ProjectEcommerce() {
           <h3 className="text-sm font-semibold text-foreground">Product detail page — dynamic route + data fetch</h3>
           <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
             <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">app/products/[id]/page.tsx</div>
-            <CodeBlock language="json">
+            <CodeBlock language="javascript">
           {`import { notFound } from 'next/navigation';
 import AddToCartButton from '@/components/AddToCartButton';
 
@@ -309,12 +310,19 @@ export async function GET(request: NextRequest) {
         )}
       </section>
 
-      {/* Track complete */}
-      <section className="px-6 py-8 rounded-2xl bg-blue-50 border border-blue-200 space-y-2">
-        <p className="text-sm font-semibold text-blue-900">Track 07 Complete</p>
-        <p className="text-sm text-blue-800 leading-relaxed">
-          You have finished the Next.js &amp; Tailwind track. You can now build, style, and deploy full-stack React applications. The next track covers backend development and databases.
-        </p>
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Congratulations on completing the Capstone E-Commerce project! Key takeaways:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Full-Stack Integration:</strong> You've successfully combined routing, data fetching, and styling into a single application.</li>
+            <li><strong>Component Architecture:</strong> Using Server Components for performance and Client Components for interactivity (cart management).</li>
+            <li><strong>Dynamic Content:</strong> Mastering <code>[id]</code> routes to render thousands of potential products from a single file.</li>
+            <li><strong>State Persistence:</strong> Implementing <code>localStorage</code> within a React Context to maintain the user's shopping experience.</li>
+            <li><strong>Production Deployment:</strong> Taking the final step to deploy a live, optimized application to the web.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Gate */}

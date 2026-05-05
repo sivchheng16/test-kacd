@@ -205,6 +205,7 @@ export const TOPICS: Topic[] = [
       { id: "html-module06tablesforms", title: "Tables & Forms", description: "Build data tables and fully accessible input forms with labels and validation attributes.", duration: "1 hr" },
       { id: "html-module09dividclass", title: "Div, ID, Class & Attributes", description: "Learn how to group elements with div and span, and use classes, IDs, and global attributes.", duration: "40 mins" },
       { id: "html-module08accessibilityseo", title: "Accessibility & SEO", description: "ARIA roles, semantic HTML, meta tags, Open Graph — write code that works for everyone and ranks.", duration: "50 mins" },
+      { id: "html-module10comments", title: "HTML Comments", description: "Learn what comments are, how to write them, when to use them, and how to temporarily hide code.", duration: "25 mins" },
       { id: "html-module07projectbiopage", title: "Project — Bio Page", description: "Build a complete, semantic, accessible personal bio page from scratch.", duration: "1.5 hrs" },
     ],
   },

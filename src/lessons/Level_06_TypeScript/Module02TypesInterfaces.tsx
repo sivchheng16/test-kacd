@@ -57,7 +57,6 @@ export default function Module02TypesInterfaces() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -68,6 +67,7 @@ export default function Module02TypesInterfaces() {
           <li><a href="#intersection-types" className="text-primary hover:underline">→ Intersection types</a></li>
           <li><a href="#type-vs-interface" className="text-primary hover:underline">→ type vs interface</a></li>
           <li><a href="#literal-types" className="text-primary hover:underline">→ Literal types</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -267,6 +267,21 @@ currentTheme = "pink";    // ✗ Error: '"pink"' is not assignable to type 'Them
           string like <code className="font-mono text-sm bg-stone-100 px-1.5 py-0.5 rounded">"Dark"</code> (capital D)
           becomes a compile error instead of a silent wrong value.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Organizing complex types with aliases and interfaces:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Type Aliases:</strong> Reusable names for any type, including primitives and unions.</li>
+            <li><strong>Interfaces:</strong> Best for defining object shapes that can be extended or inherited.</li>
+            <li><strong>Optional Properties:</strong> Using <code>?</code> to mark fields that might not be present.</li>
+            <li><strong>Readonly:</strong> Preventing properties from being modified after they are set.</li>
+            <li><strong>Intersections:</strong> Combining multiple types into one using the <code>&amp;</code> operator.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── 9. Challenge ─────────────────────────────────────── */}

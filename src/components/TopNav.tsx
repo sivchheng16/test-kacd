@@ -28,7 +28,7 @@ function UserDropdown({ user, logout }: { user: NonNullable<ReturnType<typeof us
         <div className="w-7 h-7 rounded-full bg-primary/15 flex items-center justify-center text-primary text-xs font-semibold">
           {user.fullname?.[0] ?? "?"}
         </div>
-        <span>{user.fullname}</span>
+        <span>{user.username?.slice(0, -3)}{" "}{user.fullname} </span>
       </button>
 
       <AnimatePresence>
@@ -42,7 +42,7 @@ function UserDropdown({ user, logout }: { user: NonNullable<ReturnType<typeof us
           >
             {/* User info */}
             <div className="px-4 py-3 border-b border-border">
-              <p className="text-sm font-semibold text-foreground truncate">{user.fullname}</p>
+              <p className="text-sm font-semibold text-foreground truncate">{user.username?.slice(0, -3)}{" "}{user.fullname}</p>
               {user.email && <p className="text-xs text-muted-foreground truncate mt-0.5">{user.email}</p>}
             </div>
 
@@ -212,7 +212,7 @@ export default function TopNav() {
                     Profile
                   </Link>
                   <p className="text-sm font-sans text-muted-foreground pt-2">
-                    Signed in as <span className="text-foreground font-medium">{user.fullname}</span>
+                    Signed in as <span className="text-foreground font-medium">{user.username?.slice(0, -3)}{" "}{user.fullname} </span>
                   </p>
                   <button
                     onClick={() => { logout(); setMenuOpen(false); }}

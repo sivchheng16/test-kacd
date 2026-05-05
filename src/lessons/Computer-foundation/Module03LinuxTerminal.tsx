@@ -33,6 +33,7 @@ export default function Module03LinuxTerminal() {
           <li><a href="#creating-files-and-directories" className="text-primary hover:underline">→ Creating Files and Directories</a></li>
           <li><a href="#work-faster" className="text-primary hover:underline">→ Work Faster</a></li>
           <li><a href="#quick-reference" className="text-primary hover:underline">→ Quick Reference</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -324,7 +325,20 @@ export default function Module03LinuxTerminal() {
           </table>
         </div>
       </section>
-
+      {/* ── 9. Summary ──────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The terminal is your direct line to the operating system:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Command Line Interface (CLI):</strong> A fast, text-based alternative to the mouse and icons.</li>
+            <li><strong>The File Tree:</strong> Linux starts at root (/) and branches out. Your space is home (~).</li>
+            <li><strong>Core Navigation:</strong> <code>pwd</code> (where am I?), <code>ls</code> (what's here?), and <code>cd</code> (go there).</li>
+            <li><strong>File Manipulation:</strong> <code>mkdir</code> for folders, <code>touch</code> for files, and <code>rm</code> for deletion (be careful!).</li>
+            <li><strong>Efficiency:</strong> Use <strong>Tab completion</strong> and arrow keys to work significantly faster.</li>
+          </ul>
+        </div>
+      </section>
       {/* Knowledge check */}
       <section id="knowledge-check" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Knowledge Check</h2>

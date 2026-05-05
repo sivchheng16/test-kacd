@@ -4,6 +4,7 @@ import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 
 const EXPLORE_STARTER = {
   html: `<div class="card">
@@ -143,6 +144,111 @@ body {
 }`,
 };
 
+const ANNOTATED_HTML = `<div class="card">
+  <div class="card-header">
+    <img
+      class="avatar"
+      src="https://i.pravatar.cc/80?img=47"
+      alt="Sokha's photo"
+    />
+    <div>
+      <h2 class="name">Sokha Dara</h2>
+      <p class="title">Frontend Developer</p>
+    </div>
+  </div>
+
+  <p class="bio">
+    Passionate about building fast, beautiful interfaces.
+  </p>
+
+  <div class="tags">
+    <span class="tag">HTML</span>
+    <span class="tag">CSS</span>
+    <span class="tag">React</span>
+  </div>
+
+  <a class="cta" href="#">View Portfolio →</a>
+</div>`;
+
+const ANNOTATED_CSS = `@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;   /* Module 03 */
+  background-color: #fdf6ec;          /* Module 03 */
+  padding: 20px;
+}
+
+/* ── Module 04: Box model ── */
+.card {
+  background: white;
+  padding: 32px;                      /* inner space */
+  border: 1px solid #e7e0d6;          /* visible edge */
+  border-radius: 16px;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* ── Module 06: Flexbox ── */
+.card-header {
+  display: flex;                      /* Module 06 */
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid #c2622d;
+}
+
+.name { margin: 0; font-size: 1.2rem; }
+.title { margin: 0; color: #666; font-size: 0.9rem; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.tag {
+  background: #fdf6ec;
+  color: #c2622d;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.cta {
+  display: block;
+  text-align: center;
+  background: #c2622d;
+  color: white;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  /* Module 09: Transition */
+  transition: transform 0.2s, background 0.2s;
+}
+
+/* ── Module 02: Pseudo-class :hover ── */
+.cta:hover {
+  background-color: #a34f22;          /* hover effect */
+  transform: translateY(-2px);
+}
+
+/* ── Module 06: Media query ── */
+@media (max-width: 400px) {
+  .card-header {
+    flex-direction: column;           /* stack on phones */
+    text-align: center;
+  }
+}`;
+
 const CHALLENGE_STARTER = {
   html: `<div class="card">
   <h2 class="name">Your Name</h2>
@@ -240,8 +346,10 @@ export default function Module07ProjectPortfolio() {
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#what-the-card-must-include" className="text-primary hover:underline">→ What the card must include</a></li>
+          <li><a href="#best-practices-debugging" className="text-primary hover:underline">→ Best Practices & Debugging</a></li>
           <li><a href="#reference-card" className="text-primary hover:underline">→ Reference card</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -286,11 +394,25 @@ export default function Module07ProjectPortfolio() {
             </span>
           </div>
         </div>
-        <p className="text-base text-muted-foreground leading-relaxed">
-          There is no single right answer. The reference below is one
-          approach — a complete portfolio card you can study before
-          building your own in the challenge.
-        </p>
+      </section>
+
+      {/* ── 2.5 Best Practices & Debugging ─────────────────── */}
+      <section id="best-practices-debugging" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">Best Practices and Debugging</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Write Clean CSS</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Use descriptive class names (like <code>.portfolio-card</code> instead of <code>.box1</code>). Keep your code DRY (Don't Repeat Yourself) by using variables for common colors.
+            </p>
+          </div>
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">The "Outline Trick"</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Struggling with layout? Add <code>outline: 1px solid red;</code> to your elements. It helps you see exactly where boxes start and end without affecting their size.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* ── 3. Example ─────────────────────────────────────── */}
@@ -300,49 +422,12 @@ export default function Module07ProjectPortfolio() {
           A complete working card using everything from this track. Read the
           comments — they map each rule back to the lesson that introduced it.
         </p>
-        <CodeBlock language="javascript" title="styles.css (annotated)">
-          {`/* ── Module 03: Google Font + typography ── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
-body {
-  font-family: 'Inter', sans-serif;   /* Module 03 */
-  background-color: #f5f0e8;          /* Module 03 */
-}
-
-/* ── Module 04: Box model ── */
-.card {
-  padding: 32px;                      /* inner space */
-  border: 1px solid #e7e0d6;          /* visible edge */
-  border-radius: 16px;
-  margin: 0 auto;
-  max-width: 420px;
-}
-
-/* ── Module 06: Flexbox ── */
-.card-header {
-  display: flex;                      /* Module 06 */
-  align-items: center;
-  gap: 16px;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-/* ── Module 02: Pseudo-class :hover ── */
-.cta:hover {
-  background-color: #a34f22;          /* hover effect */
-}
-
-/* ── Module 06: Media query ── */
-@media (max-width: 480px) {
-  .card-header {
-    flex-direction: column;           /* stack on phones */
-  }
-}`}
-        </CodeBlock>
+        <CodeExample
+          html={ANNOTATED_HTML}
+          css={ANNOTATED_CSS}
+          title="Annotated Portfolio Card"
+          height="480px"
+        />
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
@@ -361,6 +446,20 @@ body {
           starter={EXPLORE_STARTER}
           height="520px"
         />
+      </section>
+
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>This project is the culmination of your CSS journey so far:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Integration:</strong> You've combined Typography, Box Model, Flexbox, and Positioning into a single component.</li>
+            <li><strong>Responsive Design:</strong> You've ensured the card looks great on both mobile and desktop.</li>
+            <li><strong>Interactivity:</strong> You've added hover effects to make the card feel alive.</li>
+            <li><strong>Best Practices:</strong> You've learned to write clean, semantic CSS and how to debug layout issues.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── 5. Challenge ───────────────────────────────────── */}
@@ -410,4 +509,4 @@ body {
 
     </article>
   );
-}
+};

@@ -2,28 +2,100 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 
-const EXPLORE_HTML = `<form>
+const EXPLORE_HTML = `
+<form>
   <label for="name">Your name:</label>
-  <input type="text" id="name" placeholder="e.g. Sokha">
+  <input type="text" id="name" placeholder="e.g. Sokha"><br/>
 
   <label for="email">Email:</label>
-  <input type="email" id="email" placeholder="you@example.com">
+  <input type="email" id="email" placeholder="you@example.com"><br/>
 
   <label for="topic">Topic:</label>
   <select id="topic">
     <option value="html">HTML</option>
     <option value="css">CSS</option>
     <option value="js">JavaScript</option>
-  </select>
+  </select><br/>
 
-  <label for="message">Message:</label>
-  <textarea id="message" rows="4"></textarea>
+  <label for="message">Message:</label><br/>
+  <textarea id="message" rows="4"></textarea><br/>
 
   <button type="submit">Send</button>
 </form>`;
+
+const ANNOTATED_HTML = `<!-- Table Example -->
+<table border="1" style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+  <thead>
+    <tr style="background: #f5f0e8;">
+      <th style="padding: 8px;">Name</th>
+      <th style="padding: 8px;">Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 8px;">Sokha</td>
+      <td style="padding: 8px; text-align: center;">95</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;">Dara</td>
+      <td style="padding: 8px; text-align: center;">88</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Form Example -->
+<form style="background: #fdf6ec; padding: 20px; border-radius: 8px;">
+  <label for="name">Full name:</label><br>
+  <input type="text" id="name" style="width: 100%; margin-bottom: 10px;"><br>
+
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" style="width: 100%; margin-bottom: 10px;"><br>
+
+  <label for="track">Track:</label><br>
+  <select id="track" style="width: 100%; margin-bottom: 10px;">
+    <option value="html">HTML</option>
+    <option value="css">CSS</option>
+  </select><br>
+
+  <button type="button" style="background: #c2622d; color: white; border: none; padding: 10px 20px; border-radius: 4px;">
+    Send Message
+  </button>
+</form>`;
+
+const ANNOTATED_INPUTS = `<!-- Checkboxes -->
+<label>
+  <input type="checkbox" name="subscribe" checked>
+  Subscribe to newsletter
+</label>
+
+<br><br>
+
+<!-- Radio buttons -->
+<p>Choose your level:</p>
+<label><input type="radio" name="level" value="beg"> Beginner</label><br>
+<label><input type="radio" name="level" value="adv"> Advanced</label>
+
+<br><br>
+
+<!-- Date picker -->
+<label for="birthday">Birthday:</label><br>
+<input type="date" id="birthday" name="birthday">
+
+<br><br>
+
+<!-- Range slider -->
+<label for="volume">Volume:</label><br>
+<input type="range" id="volume" name="volume" min="0" max="100">
+
+<br><br>
+
+<!-- File uploader -->
+<label for="avatar">Upload Avatar:</label><br>
+<input type="file" id="avatar" name="avatar">`;
 
 const CHALLENGE_STARTER = `<!-- Build a contact form here -->
 <!-- It needs: a text input with a label, an email input with a label,
@@ -133,55 +205,12 @@ export default function Module06TablesForms() {
           Below is a minimal table followed by a simple form. Read the inline comments — they explain every tag.
         </p>
 
-        <CodeBlock language="html" title="table-example.html">
-          {`<table>                       <!-- the outer wrapper -->
-  <thead>                     <!-- groups the header content -->
-    <tr>                      <!-- first row (header row) -->
-      <th>Name</th>           <!-- <th> = header cell, bold + centred -->
-      <th>Score</th>
-    </tr>
-  </thead>
-  <tbody>                     <!-- groups the body data -->
-    <tr>                      <!-- second row (data row) -->
-      <td>Sokha</td>          <!-- <td> = regular data cell -->
-      <td>95</td>
-    </tr>
-    <tr>
-      <td>Dara</td>
-      <td>88</td>
-    </tr>
-  </tbody>
-  <tfoot>                     <!-- groups the footer/summary content -->
-    <tr>
-      <td>Average</td>
-      <td>91.5</td>
-    </tr>
-  </tfoot>
-</table>`}
-        </CodeBlock>
-
-        <CodeBlock language="html" title="form-example.html">
-          {`<form action="/submit" method="POST">
-
-  <label for="name">Full name:</label>       <!-- label describes the input -->
-  <input type="text" id="name" name="name">  <!-- id links label → input -->
-
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email">  <!-- type="email" validates format -->
-
-  <label for="msg">Message:</label>
-  <textarea id="msg" name="msg" rows="4"></textarea>  <!-- multi-line text -->
-
-  <label for="track">Track:</label>
-  <select id="track" name="track">          <!-- dropdown -->
-    <option value="html">HTML</option>
-    <option value="css">CSS</option>
-  </select>
-
-  <button type="submit">Send</button>        <!-- submits the form -->
-
-</form>`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_HTML}
+          css=""
+          title="Tables and Forms"
+          height="520px"
+        />
 
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2"><span className="text-primary font-mono shrink-0">type="text"</span> plain text input</li>
@@ -207,30 +236,12 @@ export default function Module06TablesForms() {
           <div><span className="text-[#c2622d]">type="file"</span> — Allows the user to upload a file from their computer.</div>
         </div>
         
-        <CodeBlock language="html" title="advanced-inputs.html">
-          {`<!-- A checkbox for a simple yes/no or on/off -->
-<label>
-  <input type="checkbox" name="subscribe" checked>
-  Subscribe to newsletter
-</label>
-
-<!-- Radio buttons for mutually exclusive choices -->
-<p>Choose your level:</p>
-<label><input type="radio" name="level" value="beginner"> Beginner</label>
-<label><input type="radio" name="level" value="advanced"> Advanced</label>
-
-<!-- A date picker -->
-<label for="birthday">Birthday:</label>
-<input type="date" id="birthday" name="birthday">
-
-<!-- A range slider (from 0 to 100) -->
-<label for="volume">Volume:</label>
-<input type="range" id="volume" name="volume" min="0" max="100">
-
-<!-- A file uploader -->
-<label for="avatar">Upload Avatar:</label>
-<input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_INPUTS}
+          css=""
+          title="Advanced Input Types"
+          height="480px"
+        />
         <p className="text-base text-muted-foreground leading-relaxed">
           When using <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">checkbox</code> or <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">radio</code> inputs, you can wrap the input inside the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&lt;label&gt;</code> element directly. This means you do not strictly need the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">for</code> and <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">id</code> attributes to connect them!
         </p>

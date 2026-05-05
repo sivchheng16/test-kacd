@@ -4,6 +4,7 @@ import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 
 const EXPLORE_STARTER = {
   html: `<h1>Cambodian Dishes</h1>
@@ -73,6 +74,49 @@ const challenge = {
   },
 };
 
+const ANNOTATED_HTML = `<div id="hero">
+  <h1>Siem Reap</h1>
+  <p class="highlight">Gateway to Angkor <span>Archaeological</span> Park.</p>
+  <p>The city has a mix of colonial and Chinese-style architecture.</p>
+  <a href="#">Learn more</a>
+</div>`;
+
+const ANNOTATED_CSS = `/* Element — all paragraphs get a base style (score: 1) */
+p {
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Class — only .highlight elements (score: 10) */
+.highlight {
+  background-color: #fdf6ec;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* ID — exactly one element (score: 100) */
+#hero h1 {
+  font-size: 2rem;
+  color: #c2622d;
+  margin-top: 0;
+}
+
+/* Pseudo-class — hover state (score: 10) */
+a:hover {
+  color: #c2622d;
+  text-decoration: underline;
+}
+
+/* Combinator — targets spans inside .highlight (score: 11) */
+.highlight span {
+  color: #c2622d;
+  text-decoration: underline;
+}
+
+/* If both p and .highlight target the same element,
+   .highlight wins (10 > 1).                         */`;
+
 export default function Module02SelectorsSpecificity() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
@@ -95,8 +139,10 @@ export default function Module02SelectorsSpecificity() {
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#three-kinds-of-selector" className="text-primary hover:underline">→ Three kinds of selector</a></li>
+          <li><a href="#grouping-and-combinators" className="text-primary hover:underline">→ Grouping and Combinators</a></li>
           <li><a href="#annotated-example" className="text-primary hover:underline">→ Annotated example</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -164,40 +210,49 @@ export default function Module02SelectorsSpecificity() {
         </p>
       </section>
 
+      {/* ── 2.5 Combinators ────────────────────────────────── */}
+      <section id="grouping-and-combinators" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">Grouping and Combinators</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          Sometimes you want to target elements based on where they live in the document structure.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Grouping</h3>
+            <p className="text-sm text-muted-foreground">If multiple selectors share the same styles, group them with a comma to save time.</p>
+            <code className="block p-3 bg-stone-100 rounded text-xs font-mono">
+              h1, h2, p {"{"} <br />
+              &nbsp;&nbsp;color: darkblue;<br />
+              {"}"}
+            </code>
+          </div>
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Descendant</h3>
+            <p className="text-sm text-muted-foreground">A space targets elements <em>inside</em> another element.</p>
+            <code className="block p-3 bg-stone-100 rounded text-xs font-mono">
+              article p {"{"} <br />
+              &nbsp;&nbsp;margin-bottom: 1em;<br />
+              {"}"}
+            </code>
+          </div>
+        </div>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          More advanced combinators include <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">&gt;</code> for direct children only, and <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">+</code> for the element immediately following another.
+        </p>
+      </section>
+
       {/* ── 3. Example ─────────────────────────────────────── */}
       <section id="annotated-example" className="space-y-5">
         <h2 className="text-2xl font-serif text-foreground">Annotated example</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Four selector types, each doing a different job.
         </p>
-        <CodeBlock language="css" title="styles.css">
-          {`/* Element — all paragraphs get a base style (score: 1) */
-p {
-  font-size: 1rem;
-  color: #444;
-}
-
-/* Class — only .highlight elements (score: 10) */
-.highlight {
-  background-color: #fdf6ec;
-  font-weight: 600;
-}
-
-/* ID — exactly one element (score: 100) */
-#hero {
-  font-size: 2rem;
-  color: #c2622d;
-}
-
-/* Pseudo-class — hover state (score: 10) */
-a:hover {
-  color: #c2622d;
-  text-decoration: underline;
-}
-
-/* If both p and .highlight target the same element,
-   .highlight wins (10 > 1).                         */`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_HTML}
+          css={ANNOTATED_CSS}
+          title="Selectors in Action"
+          height="280px"
+        />
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
@@ -227,6 +282,21 @@ a:hover {
           starter={EXPLORE_STARTER}
           height="440px"
         />
+      </section>
+
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>In this module, you've mastered the targeting system of CSS:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Element selectors</strong> target all instances of a tag, <strong>Class selectors</strong> target reusable groups, and <strong>ID selectors</strong> target unique elements.</li>
+            <li><strong>Specificity</strong> is the scoring system that determines which style wins when rules conflict.</li>
+            <li><strong>Pseudo-classes</strong> (like <code>:hover</code>) let you style elements based on their state or position.</li>
+            <li><strong>Grouping</strong> allows you to apply the same styles to multiple selectors at once.</li>
+            <li><strong>Combinators</strong> allow you to target elements based on their relationship to other elements (like descendants).</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── 5. Challenge ───────────────────────────────────── */}

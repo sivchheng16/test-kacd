@@ -37,7 +37,7 @@ export default function Module04DataFetching() {
         </p>
         <div className="rounded-xl bg-[#1e1e1e] text-[#cdd6f4] font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-[#2a2a2a] text-[#6c7086] text-xs">app/posts/page.tsx</div>
-          <CodeBlock language="json">
+          <CodeBlock language="javascript">
           {`export default async function PostsPage() {
   const res = await fetch('https://api.example.com/posts');
   const posts = await res.json();
@@ -309,7 +309,7 @@ const [user, posts] = await Promise.all([
         <div className="space-y-4">
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-foreground">try/catch in a Server Component — graceful degradation</div>
-            <CodeBlock language="json">
+            <CodeBlock language="javascript">
           {`export default async function PostsPage() {
   try {
     const res = await fetch('https://api.example.com/posts');
@@ -326,7 +326,7 @@ const [user, posts] = await Promise.all([
 
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-foreground">error.tsx — route-level error boundary</div>
-            <CodeBlock language="json">
+            <CodeBlock language="javascript">
           {`'use client'; // error files must be Client Components
 
 export default function Error({
@@ -376,36 +376,18 @@ export default function Error({
         </div>
       </section>
 
-      {/* Summary */}
+      {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Summary</h2>
-        <div className="overflow-x-auto rounded-xl border border-border">
-          <table className="w-full text-sm">
-            <thead className="bg-stone-50 border-b border-border">
-              <tr>
-                <th className="text-left px-4 py-3 font-medium text-foreground">Concept</th>
-                <th className="text-left px-4 py-3 font-medium text-foreground">Key point</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              {[
-                ["async page()", "Mark any Server Component async and await data directly — no getServerSideProps."],
-                ["force-cache", "Cache forever — equivalent to the old getStaticProps."],
-                ["no-store", "Fresh on every request — equivalent to the old getServerSideProps."],
-                ["next: { revalidate: N }", "Serve cached data, refresh in background after N seconds (ISR)."],
-                ["Server Actions", "'use server' function — run mutations on the server, call from forms or buttons."],
-                ["Suspense streaming", "Wrap slow components in <Suspense> to stream partial UI while data loads."],
-                ["loading.tsx", "Auto-wraps page.tsx in Suspense — shows your skeleton while the page fetches."],
-                ["Promise.all", "Fetch independent data sources in parallel to avoid sequential latency."],
-                ["error.tsx", "Route-level error boundary — must be a Client Component, receives reset()."],
-              ].map(([concept, point]) => (
-                <tr key={concept} className="hover:bg-stone-50/50">
-                  <td className="px-4 py-3 font-mono text-xs text-foreground font-semibold">{concept}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{point}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Mastering data management in the modern Next.js App Router:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Async Server Components:</strong> Fetch data directly inside your component with <code>async/await</code>—no more <code>getStaticProps</code>.</li>
+            <li><strong>Caching Strategies:</strong> Use <code>force-cache</code> for static data, <code>no-store</code> for real-time data, and <code>revalidate</code> for incremental updates.</li>
+            <li><strong>Server Actions:</strong> Simplify mutations by calling server-side functions directly from forms or client code.</li>
+            <li><strong>Streaming and Suspense:</strong> Improve UX by sending partial UI immediately and streaming slow data in as it arrives.</li>
+            <li><strong>Error Handling:</strong> Use <code>error.tsx</code> for route-level failures and <code>try/catch</code> for graceful degradation within components.</li>
+          </ul>
         </div>
       </section>
 

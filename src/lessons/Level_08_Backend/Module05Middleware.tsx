@@ -26,6 +26,7 @@ export default function Module05Middleware() {
           <li><a href="#rate-limiting" className="text-primary hover:underline">→ Rate limiting</a></li>
           <li><a href="#helmet" className="text-primary hover:underline">→ Helmet</a></li>
           <li><a href="#request-logging-with-morgan" className="text-primary hover:underline">→ Request logging with Morgan</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -226,6 +227,21 @@ POST /api/v1/auth/login 401 3.210 ms - 31`}
         <p className="text-base text-muted-foreground leading-relaxed">
           Install with <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">npm install morgan</code>.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The power and versatility of middleware in Express applications:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>The Middleware Chain:</strong> Every request flows through a series of functions that can inspect, modify, or terminate the process using <code>next()</code>.</li>
+            <li><strong>Global vs Route-Specific:</strong> Choose between app-wide protection and granular, endpoint-specific logic like authentication.</li>
+            <li><strong>Data Integrity:</strong> Use tools like <strong>Zod</strong> to validate and sanitize incoming data, preventing common vulnerabilities.</li>
+            <li><strong>Essential Security:</strong> Protect your API with <strong>CORS</strong> for origin control and <strong>Helmet</strong> for essential security headers.</li>
+            <li><strong>Operational Visibility:</strong> Implement logging with <strong>Morgan</strong> to track request flow and performance in real-time.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

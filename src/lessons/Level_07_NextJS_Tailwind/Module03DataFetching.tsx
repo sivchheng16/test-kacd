@@ -31,6 +31,7 @@ export default function Module03DataFetching() {
           <li><a href="#caching-strategies" className="text-primary hover:underline">→ Caching Strategies</a></li>
           <li><a href="#loading-and-error-states" className="text-primary hover:underline">→ Loading and Error States</a></li>
           <li><a href="#dynamic-routes-data" className="text-primary hover:underline">→ Dynamic Routes + Data</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -43,7 +44,7 @@ export default function Module03DataFetching() {
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">app/products/page.tsx</div>
-          <CodeBlock language="json">
+          <CodeBlock language="javascript">
           {`async function getProducts() {
   const res = await fetch('https://fakestoreapi.com/products');
   if (!res.ok) throw new Error('Failed to fetch');
@@ -155,7 +156,7 @@ const res = await fetch('https://api.example.com/data');`}
           </div>
           <div className="rounded-xl border border-border overflow-hidden">
             <div className="px-4 py-2 bg-stone-50 border-b border-border text-xs font-medium text-muted-foreground">app/products/error.tsx</div>
-            <CodeBlock language="json">
+            <CodeBlock language="javascript">
           {`'use client'; // error files must be client
 
 export default function Error({
@@ -185,7 +186,7 @@ export default function Error({
         </p>
         <div className="rounded-xl bg-stone-900 text-stone-100 font-mono text-sm overflow-hidden">
           <div className="px-4 py-2 bg-stone-800 text-stone-400 text-xs">app/products/[id]/page.tsx</div>
-          <CodeBlock language="json">
+          <CodeBlock language="javascript">
           {`import { notFound } from 'next/navigation';
 
 async function getProduct(id: string) {
@@ -216,6 +217,20 @@ export default async function ProductPage({
   );
 }`}
         </CodeBlock>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The core mental models of Data Fetching in Next.js:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Server Components:</strong> Fetch data directly with <code>async/await</code> without client-side hooks.</li>
+            <li><strong>Caching Options:</strong> Control freshness using <code>cache: 'no-store'</code> (SSR) or <code>next: {'{'} revalidate: N {'}'}</code> (ISR).</li>
+            <li><strong>Loading & Error States:</strong> Use <code>loading.tsx</code> and <code>error.tsx</code> to handle state automatically while data resolves.</li>
+            <li><strong>Dynamic Segments:</strong> Extract URL params from the <code>params</code> object for targeted fetching.</li>
+          </ul>
         </div>
       </section>
 

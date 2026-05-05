@@ -4,6 +4,7 @@ import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 
 const EXPLORE_STARTER = {
   html: `<h1>Siem Reap Travel Guide</h1>
@@ -76,6 +77,39 @@ const challenge = {
   },
 };
 
+const ANNOTATED_HTML = `<h1>Siem Reap Travel Guide</h1>
+<p class="intro">Discover temples, food, and sunsets.</p>
+<p>Sunrise at Angkor Wat starts around 5:30 AM.
+   Bring insect repellent and a scarf.</p>
+<p>The night market opens at 5 PM and runs until midnight.</p>`;
+
+const ANNOTATED_CSS = `@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+
+body {
+  font-family: 'Lora', Georgia, serif;  /* font stack with fallbacks */
+  font-size: 1.05rem;                   /* slightly larger than browser default */
+  line-height: 1.75;                    /* roomy — great for long articles */
+  color: #2d2d2d;
+  background-color: hsl(36, 60%, 97%); /* warm near-white */
+  padding: 32px;
+}
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: hsl(20, 65%, 38%);            /* adjust lightness to darken/lighten */
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 0;
+}
+
+p.intro {
+  font-style: italic;
+  color: rgb(90, 70, 50);              /* warm brown for the lead paragraph */
+  text-align: center;
+}`;
+
 export default function Module03ColorsTypography() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
@@ -98,8 +132,10 @@ export default function Module03ColorsTypography() {
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#colors-and-type-properties" className="text-primary hover:underline">→ Colors and type properties</a></li>
+          <li><a href="#alignment-and-decoration" className="text-primary hover:underline">→ Alignment and Decoration</a></li>
           <li><a href="#annotated-example" className="text-primary hover:underline">→ Annotated example</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -156,21 +192,34 @@ export default function Module03ColorsTypography() {
             </span>
           </div>
         </div>
+      </section>
+
+      {/* ── 2.5 Alignment & Decoration ─────────────────────── */}
+      <section id="alignment-and-decoration" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">Alignment and Decoration</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
-          Google Fonts are free. Add an{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            @import
-          </code>{" "}
-          line at the top of your CSS, then reference the font name in{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            font-family
-          </code>
-          . Use a fallback after it:{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            'Lora', Georgia, serif
-          </code>
-          .
+          Beyond choosing a font, you need to control how text sits on the page and how it is decorated.
         </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Text Alignment</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground font-mono">
+              <li><span className="text-[#c2622d]">text-align: left;</span> (default)</li>
+              <li><span className="text-[#c2622d]">text-align: center;</span></li>
+              <li><span className="text-[#c2622d]">text-align: right;</span></li>
+              <li><span className="text-[#c2622d]">text-align: justify;</span></li>
+            </ul>
+          </div>
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Decoration & Case</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground font-mono">
+              <li><span className="text-[#c2622d]">text-decoration: underline;</span></li>
+              <li><span className="text-[#c2622d]">text-decoration: none;</span> (remove link underlines)</li>
+              <li><span className="text-[#c2622d]">text-transform: uppercase;</span></li>
+              <li><span className="text-[#c2622d]">letter-spacing: 1px;</span></li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       {/* ── 3. Example ─────────────────────────────────────── */}
@@ -179,44 +228,12 @@ export default function Module03ColorsTypography() {
         <p className="text-base text-muted-foreground leading-relaxed">
           A travel article styled with Google Fonts and HSL colors.
         </p>
-        <CodeBlock language="css" title="styles.css">
-          {`/* Pull in the font from Google Fonts CDN */
-@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
-
-body {
-  font-family: 'Lora', Georgia, serif;  /* font stack with fallbacks */
-  font-size: 1.05rem;                   /* slightly larger than browser default */
-  line-height: 1.75;                    /* roomy — great for long articles */
-  color: #2d2d2d;
-  background-color: hsl(36, 60%, 97%); /* warm near-white */
-  padding: 32px;
-}
-
-h1 {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: hsl(20, 65%, 38%);            /* adjust lightness to darken/lighten */
-}
-
-p.intro {
-  font-style: italic;
-  color: rgb(90, 70, 50);              /* warm brown for the lead paragraph */
-}`}
-        </CodeBlock>
-        <ul className="space-y-2 text-sm text-muted-foreground">
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">rem</span>
-            relative to the root font size — if a user zooms in, everything scales
-          </li>
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">HSL</span>
-            change only the third number (lightness) to make a color lighter or darker
-          </li>
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">1.75</span>
-            a unitless line-height multiplies by the element's own font-size automatically
-          </li>
-        </ul>
+        <CodeExample 
+          html={ANNOTATED_HTML}
+          css={ANNOTATED_CSS}
+          title="Typography & Color"
+          height="320px"
+        />
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
@@ -249,6 +266,21 @@ p.intro {
           starter={EXPLORE_STARTER}
           height="420px"
         />
+      </section>
+
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>You've learned how to bring life to your pages through color and type:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Color Formats:</strong> Use Hex, RGB, or HSL. HSL is often the most intuitive for making quick adjustments.</li>
+            <li><strong>Font Stacks:</strong> Always provide fallbacks (like <code>serif</code> or <code>sans-serif</code>) in case your primary font fails to load.</li>
+            <li><strong>Relative Units:</strong> Use <code>rem</code> for font sizes to ensure they scale correctly with browser settings.</li>
+            <li><strong>Readability:</strong> A <code>line-height</code> between 1.5 and 1.8 is usually ideal for long-form text.</li>
+            <li><strong>Alignment & Decoration:</strong> Use <code>text-align</code> for layout and <code>text-decoration</code> or <code>text-transform</code> for stylistic touches.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── 5. Challenge ───────────────────────────────────── */}

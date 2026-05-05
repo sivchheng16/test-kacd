@@ -73,7 +73,6 @@ export default function Module03FunctionsClasses() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -84,6 +83,7 @@ export default function Module03FunctionsClasses() {
           <li><a href="#typed-classes" className="text-primary hover:underline">→ Typed classes</a></li>
           <li><a href="#access-modifiers" className="text-primary hover:underline">→ Access modifiers</a></li>
           <li><a href="#constructor-parameter-shorthand" className="text-primary hover:underline">→ Constructor parameter shorthand</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -319,6 +319,21 @@ console.log(p.name);  // ✗ Error: 'name' is private`}
           The shorthand is idiomatic TypeScript. You will see it everywhere in
           React component classes and Angular services.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Applying TypeScript to functions and object-oriented patterns:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Typed Functions:</strong> Explicitly defining input parameters and return types for complete safety.</li>
+            <li><strong>Void:</strong> Using the <code>void</code> type for functions that do not return a value.</li>
+            <li><strong>Function Types:</strong> Defining the signature of callback functions.</li>
+            <li><strong>Access Modifiers:</strong> Controlling visibility with <code>public</code>, <code>private</code>, and <code>protected</code> in classes.</li>
+            <li><strong>Constructor Shorthand:</strong> A concise way to declare and initialize class properties directly in the constructor.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── 9. Challenge ─────────────────────────────────────── */}

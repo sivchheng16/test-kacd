@@ -34,6 +34,7 @@ export default function Module04FileManagement() {
           <li><a href="#file-permissions" className="text-primary hover:underline">→ File Permissions</a></li>
           <li><a href="#editing-files-in-the-terminal" className="text-primary hover:underline">→ Editing Files in the Terminal</a></li>
           <li><a href="#a-practical-workflow" className="text-primary hover:underline">→ A Practical Workflow</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -286,7 +287,20 @@ export default function Module04FileManagement() {
           </div>
         </div>
       </section>
-
+      {/* ── 9. Summary ──────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Effective file management is essential for every developer:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Moving & Copying:</strong> Use <code>cp</code> to duplicate files and <code>mv</code> to move or rename them.</li>
+            <li><strong>Finding:</strong> Use <code>find</code> to locate files by name and <code>grep</code> to search for text patterns inside files.</li>
+            <li><strong>Permissions:</strong> Every file has <code>rwx</code> permissions for the owner, group, and others. Use <code>chmod</code> to change them.</li>
+            <li><strong>Terminal Editors:</strong> <code>nano</code> is great for quick edits; <code>vim</code> is powerful but requires learning its modes.</li>
+            <li><strong>Safety First:</strong> Remember that <code>rm</code> is permanent — there's no trash bin in the terminal!</li>
+          </ul>
+        </div>
+      </section>
       {/* Knowledge check */}
       <section id="knowledge-check" className="space-y-6">
         <h2 className="text-xl font-semibold text-foreground">Knowledge Check</h2>

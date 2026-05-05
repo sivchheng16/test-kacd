@@ -20,7 +20,6 @@ export default function Module05Project() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -29,6 +28,7 @@ export default function Module05Project() {
           <li><a href="#step-3" className="text-primary hover:underline">→ Step 3</a></li>
           <li><a href="#step-4" className="text-primary hover:underline">→ Step 4</a></li>
           <li><a href="#complete-file" className="text-primary hover:underline">→ Complete file</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#what-you-built" className="text-primary hover:underline">→ What you built</a></li>
           <li><a href="#stretch-challenges" className="text-primary hover:underline">→ Stretch challenges</a></li>
         </ul>
@@ -226,6 +226,20 @@ console.log(posts[0].title);         // string ✓
 const post = await api.getPost(1);   // Post
 console.log(post.body);              // string ✓`}
         </CodeBlock>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key takeaways from building the Typed API Client project:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Upfront Data Modeling:</strong> Defining interfaces for API responses before implementation.</li>
+            <li><strong>Type-Safe API Calls:</strong> Using generics to bridge the gap between untyped <code>fetch</code> and your app's types.</li>
+            <li><strong>Centralized API Logic:</strong> Organizing all network requests in one place for better maintainability.</li>
+            <li><strong>Compile-Time Guarantees:</strong> Eliminating runtime errors by ensuring all data access is checked by TypeScript.</li>
+          </ul>
         </div>
       </section>
 

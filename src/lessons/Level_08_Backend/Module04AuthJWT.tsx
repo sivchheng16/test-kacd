@@ -25,6 +25,7 @@ export default function Module04AuthJWT() {
           <li><a href="#auth-middleware" className="text-primary hover:underline">→ Auth middleware</a></li>
           <li><a href="#refresh-tokens" className="text-primary hover:underline">→ Refresh tokens</a></li>
           <li><a href="#what-not-to-do" className="text-primary hover:underline">→ What NOT to do</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -229,6 +230,21 @@ app.post('/api/v1/posts', requireAuth, async (req, res) => {
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded mx-1">httpOnly; SameSite=Strict</code> cookie
           and keep the short-lived access token only in memory.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Essential practices for secure backend authentication:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Safe Password Storage:</strong> Always use <code>bcrypt</code> to hash passwords before saving them—never store plaintext.</li>
+            <li><strong>JWT Mechanics:</strong> Tokens are stateless, signed, and compact packages used to prove identity without repeated database lookups.</li>
+            <li><strong>Token Lifecycle:</strong> Use short-lived access tokens for daily requests and long-lived refresh tokens for persistent sessions.</li>
+            <li><strong>Middleware Integration:</strong> Centralize token verification to keep your route handlers clean and secure.</li>
+            <li><strong>Security Hygiene:</strong> Protect tokens from XSS by using <code>httpOnly</code> cookies and avoid storing sensitive data in JWT payloads.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

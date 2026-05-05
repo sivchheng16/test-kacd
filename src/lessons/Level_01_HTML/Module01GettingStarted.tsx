@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 
@@ -12,6 +13,18 @@ const EXPLORE_HTML = `<h1>Welcome to KOOMPI Academy</h1>
 const CHALLENGE_STARTER = `<!-- Write your HTML here -->
 <h1>My Page</h1>
 `;
+
+const ANNOTATED_HTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Page</title>
+</head>
+<body>
+  <h1>Hello, World!</h1>
+  <p>This is my first webpage.</p>
+</body>
+</html>`;
 
 function parseHtml(raw: string): Document {
   return new DOMParser().parseFromString(raw, "text/html");
@@ -61,6 +74,7 @@ export default function Module01GettingStarted() {
           <li><a href="#a-complete-page-annotated" className="text-primary hover:underline">→ A complete page, annotated</a></li>
           <li><a href="#the-html-tag-cheat-sheet" className="text-primary hover:underline">→ The HTML Tag Cheat Sheet</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -98,19 +112,12 @@ export default function Module01GettingStarted() {
         <p className="text-base text-muted-foreground leading-relaxed">
           Every HTML page shares the same skeleton. Here is the minimum:
         </p>
-        <CodeBlock language="html" title="index.html">
-          {`<!DOCTYPE html>          <!-- tells the browser: "this is HTML5" -->
-<html lang="en">         <!-- root element, lang sets the language -->
-  <head>                 <!-- invisible metadata -->
-    <meta charset="UTF-8">
-    <title>My Page</title>  <!-- appears in the browser tab -->
-  </head>
-  <body>                 <!-- everything visible goes here -->
-    <h1>Hello, World!</h1>
-    <p>This is my first webpage.</p>
-  </body>
-</html>`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_HTML}
+          css=""
+          title="Minimal HTML Skeleton"
+          height="280px"
+        />
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2"><span className="text-primary font-mono shrink-0">h1–h6</span> headings, h1 is the largest</li>
           <li className="flex gap-2"><span className="text-primary font-mono shrink-0">p</span> paragraph of text</li>
@@ -208,7 +215,20 @@ export default function Module01GettingStarted() {
           height="280px"
         />
       </section>
-
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>HTML is the foundation of every website on the planet:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Structure:</strong> HTML defines <em>what</em> content is (headings, paragraphs, lists).</li>
+            <li><strong>Tags:</strong> Most tags come in pairs: <code>&lt;tag&gt;content&lt;/tag&gt;</code>.</li>
+            <li><strong>The Skeleton:</strong> Every page needs a <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code>.</li>
+            <li><strong>Head vs Body:</strong> Head is for metadata (invisible); Body is for content (visible).</li>
+            <li><strong>Hierarchy:</strong> Use headings (h1-h6) to create a logical flow for users and search engines.</li>
+          </ul>
+        </div>
+      </section>
       {/* ── 5. Challenge ───────────────────────────────────── */}
       <section id="challenge" className="space-y-4">
         <div>

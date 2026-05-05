@@ -25,6 +25,7 @@ export default function Module02DevSetup() {
           <li><a href="#5-configure-vs-code" className="text-primary hover:underline">→ 5. Configure VS Code</a></li>
           <li><a href="#6-the-integrated-terminal" className="text-primary hover:underline">→ 6. The Integrated Terminal</a></li>
           <li><a href="#7-final-check" className="text-primary hover:underline">→ 7. Final Check</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -216,6 +217,20 @@ git --version`}
         </p>
       </section>
 
+      {/* ── 7.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Setting up your environment is the first step toward professional development:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>VS Code:</strong> Your primary workspace. Extensions like Prettier and ESLint make coding smoother.</li>
+            <li><strong>Node.js & npm:</strong> The engine that runs JavaScript on your machine and manages third-party libraries.</li>
+            <li><strong>Git:</strong> Your time machine — it tracks changes and allows you to collaborate safely.</li>
+            <li><strong>The Terminal:</strong> The control center of your machine. You'll use it to run commands and manage your projects.</li>
+            <li><strong>Configuration:</strong> Setting defaults like "Format on Save" ensures your code stays consistent and clean.</li>
+          </ul>
+        </div>
+      </section>
     </article>
   );
 }

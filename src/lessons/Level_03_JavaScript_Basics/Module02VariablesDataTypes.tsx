@@ -28,13 +28,13 @@ export default function Module02VariablesDataTypes() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#declaring-variables" className="text-primary hover:underline">→ Declaring variables</a></li>
           <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
           <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -166,6 +166,21 @@ let age = 20;
 document.write(\`Hello, I am \${name} and I am \${age} years old.\`);`,
           }}
         />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key takeaways from this module:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>const</strong> is for values that won't change (default choice).</li>
+            <li><strong>let</strong> is for values that will be reassigned (counters, toggles).</li>
+            <li>Basic data types include <strong>Strings</strong>, <strong>Numbers</strong>, and <strong>Booleans</strong>.</li>
+            <li><strong>Template literals</strong> (backticks) make it easy to embed variables in text.</li>
+            <li>Use <strong>typeof</strong> to check the data type of any value.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

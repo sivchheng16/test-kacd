@@ -29,13 +29,13 @@ export default function Module03StateEvents() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#usestate" className="text-primary hover:underline">→ useState</a></li>
           <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
           <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -182,6 +182,20 @@ function App() {
 }`,
           }}
         />
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Adding interactivity with state and event handlers:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>State:</strong> Internal component memory that triggers a re-render when changed.</li>
+            <li><strong>useState Hook:</strong> The standard way to add state to function components.</li>
+            <li><strong>Event Handlers:</strong> Functions called in response to user actions like <code>onClick</code> or <code>onChange</code>.</li>
+            <li><strong>Immutability:</strong> Always use the state setter function to update state; never mutate it directly.</li>
+          </ul>
+        </div>
       </section>
 
       {/* Challenge */}

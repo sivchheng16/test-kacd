@@ -26,6 +26,7 @@ export default function Module04SchemaDesign() {
           <li><a href="#timestamps-on-everything" className="text-primary hover:underline">→ Timestamps on everything</a></li>
           <li><a href="#soft-delete" className="text-primary hover:underline">→ Soft delete</a></li>
           <li><a href="#schema-smells-to-avoid" className="text-primary hover:underline">→ Schema smells to avoid</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -265,6 +266,21 @@ UPDATE posts SET deleted_at = NULL WHERE id = $1;`}
               <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key principles for designing robust and scalable database schemas:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Normalisation:</strong> Aim to store each fact exactly once to ensure data consistency and reduce update anomalies.</li>
+            <li><strong>Relationship Modeling:</strong> Use foreign keys for one-to-many links and join tables for many-to-many connections.</li>
+            <li><strong>Primary Key Strategy:</strong> Prefer UUIDs for public-facing or distributed tables to avoid information leakage and merge conflicts.</li>
+            <li><strong>Index Management:</strong> Always index foreign keys and columns used in filters or sorting to maintain query performance.</li>
+            <li><strong>Defensive Design:</strong> Use <code>NOT NULL</code> constraints, timestamps (<code>created_at</code>, <code>updated_at</code>), and soft deletes to protect your data's integrity.</li>
+          </ul>
         </div>
       </section>
 

@@ -4,6 +4,7 @@ import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 
 const EXPLORE_STARTER = {
   html: `<nav class="navbar">
@@ -135,6 +136,61 @@ const challenge = {
   },
 };
 
+const ANNOTATED_HTML = `<nav class="navbar">
+  <div class="logo">KOOMPI</div>
+  <ul class="nav-links">
+    <li>Home</li>
+    <li>Courses</li>
+    <li>About</li>
+  </ul>
+</nav>
+<div class="main-content">
+  <p>Resize the window to see the navbar stack!</p>
+</div>`;
+
+const ANNOTATED_CSS = `.navbar {
+  display: flex;
+  justify-content: space-between;  /* logo left, links right */
+  align-items: center;             /* vertically centered */
+  gap: 16px;
+  padding: 12px 24px;
+  background: #c2622d;
+  color: white;
+  border-radius: 8px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.nav-links {
+  display: flex;                   /* links also in a row */
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+}
+
+/* Mobile: stack navbar vertically below 600px */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;        /* row → column on small screens */
+    align-items: flex-start;
+  }
+  
+  .nav-links {
+    width: 100%;
+    justify-content: space-between;
+  }
+}`;
+
 export default function Module06FlexboxResponsive() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
@@ -158,8 +214,10 @@ export default function Module06FlexboxResponsive() {
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#flexbox-and-media-queries" className="text-primary hover:underline">→ Flexbox and media queries</a></li>
+          <li><a href="#advanced-flex-properties" className="text-primary hover:underline">→ Advanced Flex Properties</a></li>
           <li><a href="#annotated-example" className="text-primary hover:underline">→ Annotated example</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -180,50 +238,59 @@ export default function Module06FlexboxResponsive() {
           <div className="px-6 py-3">
             <span className="font-mono text-[#c2622d]">flex-direction</span>
             <span className="text-muted-foreground ml-3">
-              <code>row</code> (default, left→right) or{" "}
-              <code>column</code> (top→bottom)
+              <code>row</code> (default) or <code>column</code>
             </span>
           </div>
           <div className="px-6 py-3">
             <span className="font-mono text-[#c2622d]">justify-content</span>
             <span className="text-muted-foreground ml-3">
-              distributes space along the main axis:{" "}
-              <code>flex-start</code>, <code>center</code>,{" "}
-              <code>flex-end</code>, <code>space-between</code>,{" "}
-              <code>space-around</code>
+              horizontal alignment: <code>center</code>, <code>space-between</code>, etc.
             </span>
           </div>
           <div className="px-6 py-3">
             <span className="font-mono text-[#c2622d]">align-items</span>
             <span className="text-muted-foreground ml-3">
-              aligns items along the cross axis:{" "}
-              <code>stretch</code> (default), <code>center</code>,{" "}
-              <code>flex-start</code>, <code>flex-end</code>
-            </span>
-          </div>
-          <div className="px-6 py-3">
-            <span className="font-mono text-[#c2622d]">flex-wrap</span>
-            <span className="text-muted-foreground ml-3">
-              <code>nowrap</code> (default) or <code>wrap</code> — items
-              spill onto new rows instead of squishing
+              vertical alignment: <code>stretch</code>, <code>center</code>, etc.
             </span>
           </div>
           <div className="px-6 py-3">
             <span className="font-mono text-[#c2622d]">gap</span>
             <span className="text-muted-foreground ml-3">
-              space between flex items — cleaner than margins
+              space between items without using margins.
             </span>
           </div>
         </div>
+      </section>
+
+      {/* ── 2.5 Advanced Flex & Mobile First ───────────────── */}
+      <section id="advanced-flex-properties" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">Advanced Flex Properties</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
-          <strong className="text-foreground">Media queries</strong> apply
-          CSS only when a condition is met — usually the screen width.{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            @media (max-width: 768px) {"{ … }"}
-          </code>{" "}
-          fires only on screens narrower than 768px. Use this to switch a
-          horizontal flex layout to vertical on phones.
+          While the parent controls the overall layout, individual flex items can decide how they grow and shrink.
         </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">The Flex Shorthand</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Use <code>flex: grow shrink basis;</code> to control how an item fills space.
+            </p>
+            <code className="block p-3 bg-stone-100 rounded text-xs font-mono">
+              flex: 1 0 200px; <br />
+              /* grows to fill space, doesn't shrink below 200px */
+            </code>
+          </div>
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Mobile-First Design</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Best practice is to write styles for small screens first, then use <code>min-width</code> media queries for larger screens.
+            </p>
+            <code className="block p-3 bg-stone-100 rounded text-xs font-mono">
+              @media (min-width: 1024px) {"{"} <br />
+              &nbsp;&nbsp;/* Desktop styles here */ <br />
+              {"}"}
+            </code>
+          </div>
+        </div>
       </section>
 
       {/* ── 3. Example ─────────────────────────────────────── */}
@@ -233,43 +300,12 @@ export default function Module06FlexboxResponsive() {
           A navbar that sits horizontal on desktop and stacks vertically on
           mobile.
         </p>
-        <CodeBlock language="css" title="styles.css">
-          {`.navbar {
-  display: flex;
-  justify-content: space-between;  /* logo left, links right */
-  align-items: center;             /* vertically centered */
-  gap: 16px;
-  padding: 12px 24px;
-}
-
-.nav-links {
-  display: flex;                   /* links also in a row */
-  gap: 24px;
-  list-style: none;
-}
-
-/* Mobile: stack navbar vertically below 600px */
-@media (max-width: 600px) {
-  .navbar {
-    flex-direction: column;        /* row → column on small screens */
-    align-items: flex-start;
-  }
-}`}
-        </CodeBlock>
-        <ul className="space-y-2 text-sm text-muted-foreground">
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">space-between</span>
-            first item at start, last at end, equal gaps between the rest
-          </li>
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">flex-wrap: wrap</span>
-            use on card grids so items wrap to a new row instead of overflowing
-          </li>
-          <li className="flex gap-2">
-            <span className="text-primary font-mono shrink-0">@media</span>
-            write mobile styles inside — they override the defaults above the breakpoint
-          </li>
-        </ul>
+        <CodeExample 
+          html={ANNOTATED_HTML}
+          css={ANNOTATED_CSS}
+          title="Responsive Flex Navbar"
+          height="280px"
+        />
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
@@ -299,6 +335,21 @@ export default function Module06FlexboxResponsive() {
           starter={EXPLORE_STARTER}
           height="460px"
         />
+      </section>
+
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Flexbox and Media Queries are the tools for modern, responsive layouts:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Flexbox</strong> is a one-dimensional layout system that excels at aligning items in rows or columns.</li>
+            <li>Use <strong>justify-content</strong> for horizontal alignment and <strong>align-items</strong> for vertical alignment.</li>
+            <li>The <strong>gap</strong> property is the modern way to add space between flex items.</li>
+            <li><strong>Media Queries</strong> allow your design to adapt to different screen sizes.</li>
+            <li>A <strong>Mobile-First</strong> approach ensures your site works on phones before adding complexity for desktops.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── 5. Challenge ───────────────────────────────────── */}

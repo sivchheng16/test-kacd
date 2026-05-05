@@ -23,7 +23,7 @@ export default function Module03HowWebWorks() {
           <li><a href="#clients-amp-servers" className="text-primary hover:underline">→ Clients &amp; Servers</a></li>
           <li><a href="#http-methods" className="text-primary hover:underline">→ HTTP Methods</a></li>
           <li><a href="#http-status-codes" className="text-primary hover:underline">→ HTTP Status Codes</a></li>
-          <li><a href="#what-you-now-know" className="text-primary hover:underline">→ What you now know</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -213,15 +213,18 @@ export default function Module03HowWebWorks() {
       </section>
 
       {/* ── 9. Summary ──────────────────────────────────────── */}
-      <section id="what-you-now-know" className="rounded-2xl border border-border bg-stone-50 px-6 py-6 space-y-3">
-        <h2 className="text-base font-semibold text-foreground">What you now know</h2>
-        <ul className="space-y-2 text-sm text-muted-foreground">
-          <li className="flex gap-2"><span className="text-primary shrink-0">→</span> The internet is the physical network; the web is a service that runs on it.</li>
-          <li className="flex gap-2"><span className="text-primary shrink-0">→</span> Every device has an IP address; DNS translates human-readable names into those addresses.</li>
-          <li className="flex gap-2"><span className="text-primary shrink-0">→</span> Browsers (clients) send HTTP requests; servers respond with files; HTTPS encrypts the conversation.</li>
-          <li className="flex gap-2"><span className="text-primary shrink-0">→</span> The four HTTP methods — GET, POST, PUT, DELETE — map to read, create, update, and remove.</li>
-          <li className="flex gap-2"><span className="text-primary shrink-0">→</span> Status codes tell you whether the request succeeded (200), the page moved (301), was missing (404), or the server failed (500).</li>
-        </ul>
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The web is a giant conversation between clients and servers:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Internet vs Web:</strong> The internet is the physical infrastructure; the web is the system of linked documents.</li>
+            <li><strong>DNS:</strong> The phone book of the web that translates names (google.com) into IP addresses.</li>
+            <li><strong>HTTP(S):</strong> The protocol for requests and responses. HTTPS ensures this conversation is encrypted and secure.</li>
+            <li><strong>Methods:</strong> GET (Read), POST (Create), PUT (Update), and DELETE (Remove) are the four pillars of data interaction.</li>
+            <li><strong>Status Codes:</strong> 200 (Success), 404 (Not Found), and 500 (Server Error) are the most common signals you'll encounter.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

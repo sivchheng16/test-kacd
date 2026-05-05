@@ -31,6 +31,7 @@ export default function Module05Deployment() {
           <li><a href="#deploy-to-vercel" className="text-primary hover:underline">→ Deploy to Vercel</a></li>
           <li><a href="#environment-variables" className="text-primary hover:underline">→ Environment Variables</a></li>
           <li><a href="#docker-option" className="text-primary hover:underline">→ Docker Option</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -199,6 +200,21 @@ CMD ["node", "server.js"]`}
             <div><span className="text-green-400">$</span> docker build -t my-nextjs-app .</div>
             <div><span className="text-green-400">$</span> docker run -p 3000:3000 my-nextjs-app</div>
           </div>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Key concepts for shipping your Next.js application:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Production Builds:</strong> Always run <code>npm run build</code> locally to catch errors before deploying.</li>
+            <li><strong>Managed Platforms:</strong> Vercel provides the most seamless experience for deploying Next.js apps with automatic CI/CD.</li>
+            <li><strong>Environment Secrets:</strong> Use <code>.env.local</code> for development and dashboard settings for production. Use <code>NEXT_PUBLIC_</code> only for variables needed in the browser.</li>
+            <li><strong>Self-Hosting:</strong> Next.js supports Dockerized deployments via the <code>standalone</code> output mode for full control over your infrastructure.</li>
+            <li><strong>Continuous Deployment:</strong> Connecting your repository to a platform like Vercel ensures every push to main is automatically shipped to users.</li>
+          </ul>
         </div>
       </section>
 

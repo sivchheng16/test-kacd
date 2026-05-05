@@ -25,7 +25,7 @@ export default function Module05Project() {
           <li><a href="#step-4" className="text-primary hover:underline">→ Step 4</a></li>
           <li><a href="#step-5" className="text-primary hover:underline">→ Step 5</a></li>
           <li><a href="#stretch-challenges" className="text-primary hover:underline">→ Stretch challenges</a></li>
-          <li><a href="#what-you-just-built" className="text-primary hover:underline">→ What you just built</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -304,16 +304,19 @@ CREATE POLICY "post_tags: owner insert"
         </div>
       </section>
 
-      {/* ── Closing ──────────────────────────────────────────── */}
-      <section id="what-you-just-built" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">What you just built</h2>
-        <p className="text-base text-muted-foreground leading-relaxed">
-          You went from a plain-English requirement list to a production-ready PostgreSQL
-          schema: normalised tables, foreign keys, indexes, soft deletes, timestamps,
-          Row Level Security, and a set of queries the frontend can use directly.
-          The same process — requirements, entities, SQL, RLS, queries — applies to
-          every feature you will ever build.
-        </p>
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Congratulations on designing and implementing a production-ready database schema! Key takeaways:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Requirements to Reality:</strong> You've successfully translated high-level business requirements into a structured, relational data model.</li>
+            <li><strong>Robust Schema Design:</strong> Implementing normalization, foreign keys, and join tables to ensure data integrity and flexibility.</li>
+            <li><strong>Operational Excellence:</strong> Adding essential columns like timestamps and <code>deleted_at</code> to support auditing and soft-deletion workflows.</li>
+            <li><strong>Security First:</strong> Using Supabase Row Level Security (RLS) to enforce fine-grained access control directly at the database level.</li>
+            <li><strong>Efficient Querying:</strong> Writing optimized SQL and JavaScript client queries to fetch data with the correct filtering, sorting, and joins.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

@@ -23,10 +23,26 @@ export default function Module01WhatIsSoftware() {
           <li><a href="#what-developers-actually-do" className="text-primary hover:underline">→ What developers actually do</a></li>
           <li><a href="#the-two-kinds-of-software" className="text-primary hover:underline">→ The two kinds of software</a></li>
           <li><a href="#three-roles-you-will-hear-about-constantly" className="text-primary hover:underline">→ Three roles you will hear about constantly</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
       {/* ── 2. Concept ─────────────────────────────────────── */}
+...
+      {/* ── 7. Summary ─────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Software is the language of instructions that makes hardware useful:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Instructions:</strong> Software is a precise set of steps for the CPU to follow.</li>
+            <li><strong>Layers:</strong> From raw machine code to the websites you use daily, software exists in layers.</li>
+            <li><strong>Human-Readable:</strong> We write code in programming languages that tools translate for computers.</li>
+            <li><strong>Frontend vs Backend:</strong> Frontend is what you see (the dining room); Backend is where data lives (the kitchen).</li>
+            <li><strong>Full-Stack:</strong> Mastering both sides gives you the power to build complete products.</li>
+          </ul>
+        </div>
+      </section>
       <section id="what-software-actually-is" className="space-y-6">
         <h2 className="text-2xl font-serif text-foreground">What software actually is</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
@@ -162,27 +178,20 @@ export default function Module01WhatIsSoftware() {
         </div>
       </section>
 
-      {/* ── 7. Key Takeaways ───────────────────────────────── */}
-      <section>
-        <div className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-2">
-          <p className="font-semibold text-foreground text-sm">What you will be able to build</p>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            By the end of this curriculum you will be a full-stack web developer. You will be
-            able to design and build the pages users see (frontend), write the server logic
-            that stores and processes data (backend), and deploy it so anyone in the world
-            can use it. You will go from reading software to writing it — from the outside to
-            the inside of every app you have ever used.
-          </p>
-          <ul className="space-y-1 text-sm text-muted-foreground pt-1">
-            <li className="flex gap-2"><span className="text-foreground">—</span> Structure pages with HTML</li>
-            <li className="flex gap-2"><span className="text-foreground">—</span> Style them with CSS</li>
-            <li className="flex gap-2"><span className="text-foreground">—</span> Add behaviour with JavaScript</li>
-            <li className="flex gap-2"><span className="text-foreground">—</span> Build server APIs and databases</li>
-            <li className="flex gap-2"><span className="text-foreground">—</span> Ship it all with Docker and Linux</li>
+      {/* ── 7. Summary ─────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Software is the language of instructions that makes hardware useful:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Instructions:</strong> Software is a precise set of steps for the CPU to follow.</li>
+            <li><strong>Layers:</strong> From raw machine code to the websites you use daily, software exists in layers.</li>
+            <li><strong>Human-Readable:</strong> We write code in programming languages that tools translate for computers.</li>
+            <li><strong>Frontend vs Backend:</strong> Frontend is what you see (the dining room); Backend is where data lives (the kitchen).</li>
+            <li><strong>Full-Stack:</strong> Mastering both sides gives you the power to build complete products.</li>
           </ul>
         </div>
       </section>
-
     </article>
   );
 }

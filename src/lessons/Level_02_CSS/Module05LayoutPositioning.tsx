@@ -4,6 +4,7 @@ import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 
 const EXPLORE_STARTER = {
   html: `<div class="page">
@@ -133,6 +134,60 @@ const challenge = {
   },
 };
 
+const ANNOTATED_HTML = `<div class="container">
+  <div class="card">
+    <h3>Angkor Wat</h3>
+    <p>Discover the ancient temples.</p>
+    <span class="badge">Popular</span>
+  </div>
+  <p>Scroll down to see the sticky header...</p>
+  <div style="height: 400px;"></div>
+  <button class="back-to-top">↑</button>
+</div>`;
+
+const ANNOTATED_CSS = `.container {
+  padding: 20px;
+  background: #fdf6ec;
+}
+
+/* Relative — reference for the badge below */
+.card {
+  position: relative;
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #d4c8b4;
+  margin-bottom: 20px;
+}
+
+/* Absolute — corner of .card, not the page */
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #c2622d;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Fixed — same spot in the viewport, always */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #c2622d;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  cursor: pointer;
+}`;
+
 export default function Module05LayoutPositioning() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
@@ -155,8 +210,10 @@ export default function Module05LayoutPositioning() {
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
           <li><a href="#five-position-values" className="text-primary hover:underline">→ Five position values</a></li>
+          <li><a href="#z-index-and-stacking" className="text-primary hover:underline">→ Z-Index and Stacking</a></li>
           <li><a href="#annotated-example" className="text-primary hover:underline">→ Annotated example</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -203,38 +260,37 @@ export default function Module05LayoutPositioning() {
             </span>
           </div>
         </div>
+      </section>
+
+      {/* ── 2.5 Z-Index & Stacking ─────────────────────────── */}
+      <section id="z-index-and-stacking" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">Z-Index and Stacking</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
-          Once you set{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            position
-          </code>{" "}
-          to anything except{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            static
-          </code>
-          , you can use{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            top
-          </code>
-          ,{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            right
-          </code>
-          ,{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            bottom
-          </code>
-          ,{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            left
-          </code>{" "}
-          to place it. Use{" "}
-          <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-            z-index
-          </code>{" "}
-          to control which element appears on top when they overlap — higher
-          number wins.
+          When elements are positioned, they can overlap. The <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">z-index</code> property controls which element appears on top. Think of it as the "3D depth" of the page.
         </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">The Score System</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              A higher <code>z-index</code> value stacks on top of a lower one. Negative numbers are allowed.
+            </p>
+            <code className="block p-3 bg-stone-100 rounded text-xs font-mono">
+              .header {"{"} z-index: 100; {"}"} <br />
+              .modal {"{"} z-index: 1000; {"}"}
+            </code>
+          </div>
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Perfect Centering</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              To center an absolute element perfectly:
+            </p>
+            <code className="block p-3 bg-stone-100 rounded text-xs font-mono">
+              top: 50%; <br />
+              left: 50%; <br />
+              transform: translate(-50%, -50%);
+            </code>
+          </div>
+        </div>
       </section>
 
       {/* ── 3. Example ─────────────────────────────────────── */}
@@ -244,33 +300,12 @@ export default function Module05LayoutPositioning() {
           Three position values on one page: sticky header, absolute badge,
           fixed button.
         </p>
-        <CodeBlock language="css" title="styles.css">
-          {`/* Sticky — sticks to the top when you scroll */
-.site-header {
-  position: sticky;
-  top: 0;           /* sticks when it reaches 0px from viewport top */
-  z-index: 100;
-}
-
-/* Relative — reference for the badge below */
-.card {
-  position: relative;
-}
-
-/* Absolute — corner of .card, not the page */
-.badge {
-  position: absolute;
-  top: 12px;        /* 12px from .card's top edge */
-  right: 12px;      /* 12px from .card's right edge */
-}
-
-/* Fixed — same spot in the viewport, always */
-.back-to-top {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-}`}
-        </CodeBlock>
+        <CodeExample 
+          html={ANNOTATED_HTML}
+          css={ANNOTATED_CSS}
+          title="Positioning Types"
+          height="320px"
+        />
       </section>
 
       {/* ── 4. Try it ──────────────────────────────────────── */}
@@ -299,6 +334,21 @@ export default function Module05LayoutPositioning() {
           starter={EXPLORE_STARTER}
           height="460px"
         />
+      </section>
+
+      {/* ── 4.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Positioning allows you to move elements outside the normal flow:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Relative:</strong> Use for nudging elements or setting a reference for absolute children.</li>
+            <li><strong>Absolute:</strong> Positioned relative to the nearest <code>relative</code> or <code>absolute</code> ancestor.</li>
+            <li><strong>Fixed:</strong> Positioned relative to the browser window. It doesn't move when you scroll.</li>
+            <li><strong>Sticky:</strong> Stays in view once you scroll to it, then moves with the page again at the bottom of its container.</li>
+            <li><strong>Z-Index:</strong> Controls the stacking order. Elements with a higher <code>z-index</code> appear on top.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── 5. Challenge ───────────────────────────────────── */}

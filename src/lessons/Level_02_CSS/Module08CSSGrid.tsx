@@ -4,6 +4,7 @@ import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 
 const EXPLORE_STARTER = {
   html: `<div class="page">
@@ -96,6 +97,66 @@ const challenge = {
   },
 };
 
+const GRID_BASIC_HTML = `<div class="container">
+  <div class="item">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+  <div class="item">4</div>
+  <div class="item">5</div>
+  <div class="item">6</div>
+</div>`;
+
+const GRID_BASIC_CSS = `.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;  /* 3 equal columns */
+  gap: 16px;                           /* gutter between cells */
+  background: #fdf6ec;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.item {
+  background: #c2622d;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 4px;
+  font-weight: bold;
+}`;
+
+const GRID_AREAS_HTML = `<div class="page">
+  <header class="header">Header</header>
+  <aside class="sidebar">Sidebar</aside>
+  <main class="content">Main Content</main>
+  <footer class="footer">Footer</footer>
+</div>`;
+
+const GRID_AREAS_CSS = `.page {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  grid-template-areas:
+    "header  header"
+    "sidebar content"
+    "footer  footer";
+  gap: 10px;
+  background: #fdf6ec;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.header  { grid-area: header;  background: #c2622d; color: white; }
+.sidebar { grid-area: sidebar; background: #d4c8b4; }
+.content { grid-area: content; background: white; min-height: 100px; }
+.footer  { grid-area: footer;  background: #c2622d; color: white; }
+
+.header, .sidebar, .content, .footer {
+  padding: 15px;
+  text-align: center;
+  border-radius: 4px;
+  font-family: sans-serif;
+  font-weight: bold;
+}`;
+
 export default function Module08CSSGrid() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
@@ -119,8 +180,10 @@ export default function Module08CSSGrid() {
         <ul className="space-y-1.5 text-sm">
           <li><a href="#the-mental-model" className="text-primary hover:underline">→ The mental model</a></li>
           <li><a href="#key-concepts" className="text-primary hover:underline">→ Key concepts</a></li>
+          <li><a href="#grid-sizing-and-alignment" className="text-primary hover:underline">→ Sizing and Alignment</a></li>
           <li><a href="#grid-vs-flexbox" className="text-primary hover:underline">→ Grid vs Flexbox</a></li>
           <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
         </ul>
       </section>
@@ -135,14 +198,12 @@ export default function Module08CSSGrid() {
           elements are placed into the resulting cells — automatically, or
           exactly where you tell them to go.
         </p>
-        <CodeBlock language="javascript" title="styles.css — basic 3-column grid">
-          {`.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;  /* 3 equal columns */
-  grid-template-rows: auto;            /* rows size to content */
-  gap: 16px;                           /* gutter between cells */
-}`}
-        </CodeBlock>
+        <CodeExample 
+          html={GRID_BASIC_HTML}
+          css={GRID_BASIC_CSS}
+          title="Basic 3-Column Grid"
+          height="240px"
+        />
       </section>
 
       {/* ── 3. Key concepts ────────────────────────────────── */}
@@ -184,31 +245,6 @@ export default function Module08CSSGrid() {
           </p>
         </div>
 
-        {/* auto-fit + minmax */}
-        <div className="space-y-3">
-          <h3 className="text-lg font-semibold text-foreground">
-            Responsive grids without media queries
-          </h3>
-          <p className="text-base text-muted-foreground leading-relaxed">
-            Combine{" "}
-            <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-              auto-fit
-            </code>{" "}
-            with{" "}
-            <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">
-              minmax()
-            </code>{" "}
-            and the grid adapts to the viewport with zero media queries:
-          </p>
-          <div className="rounded-xl border border-border overflow-hidden">
-            <CodeBlock language="javascript">
-          {`grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-/* Each column is at least 200px wide. As the viewport
-   shrinks, columns drop to a new row automatically. */`}
-        </CodeBlock>
-          </div>
-        </div>
-
         {/* Placing items */}
         <div className="space-y-3">
           <h3 className="text-lg font-semibold text-foreground">Placing items precisely</h3>
@@ -232,12 +268,6 @@ export default function Module08CSSGrid() {
               </span>
             </div>
             <div className="px-6 py-3">
-              <span className="font-mono text-[#c2622d]">grid-column: span 2</span>
-              <span className="text-muted-foreground ml-3">
-                shorthand — span 2 columns from wherever the item lands
-              </span>
-            </div>
-            <div className="px-6 py-3">
               <span className="font-mono text-[#c2622d]">grid-row: 1 / 3</span>
               <span className="text-muted-foreground ml-3">
                 span 2 rows (useful for a tall sidebar)
@@ -258,23 +288,39 @@ export default function Module08CSSGrid() {
             Instead of juggling line numbers, name regions directly in the CSS.
             The ASCII diagram <em>is</em> the layout:
           </p>
-          <div className="rounded-xl border border-border overflow-hidden">
-            <CodeBlock language="json">
-          {`.page {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  grid-template-areas:
-    "header  header"
-    "sidebar content"
-    "footer  footer";
-  gap: 12px;
-}
+          <CodeExample 
+            html={GRID_AREAS_HTML}
+            css={GRID_AREAS_CSS}
+            title="Grid Template Areas"
+            height="280px"
+          />
+        </div>
+      </section>
 
-.header  { grid-area: header; }
-.sidebar { grid-area: sidebar; }
-.content { grid-area: content; }
-.footer  { grid-area: footer; }`}
-        </CodeBlock>
+      {/* ── 3.5 Sizing & Alignment ────────────────────────── */}
+      <section id="grid-sizing-and-alignment" className="space-y-6">
+        <h2 className="text-2xl font-serif text-foreground">Grid Sizing and Alignment</h2>
+        <p className="text-base text-muted-foreground leading-relaxed">
+          Grid provides powerful tools for creating fluid layouts and aligning items within their cells.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Advanced Sizing</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Use <code>minmax()</code> to ensure a column never gets too small or too large.
+            </p>
+            <code className="block p-3 bg-stone-100 rounded text-xs font-mono">
+              grid-template-columns: <br />
+              &nbsp;&nbsp;repeat(auto-fit, minmax(200px, 1fr));
+            </code>
+          </div>
+          <div className="rounded-xl bg-stone-50 border border-border p-5 space-y-3">
+            <h3 className="text-lg font-serif text-foreground">Grid Alignment</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground font-mono">
+              <li><span className="text-[#c2622d]">justify-items: center;</span> (horizontal in cell)</li>
+              <li><span className="text-[#c2622d]">align-items: center;</span> (vertical in cell)</li>
+              <li><span className="text-[#c2622d]">place-items: center;</span> (shorthand for both)</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -296,10 +342,6 @@ export default function Module08CSSGrid() {
             </span>
           </div>
         </div>
-        <p className="text-base text-muted-foreground leading-relaxed">
-          They work together. A Grid defines the page skeleton; Flexbox
-          arranges content <em>inside</em> each cell.
-        </p>
       </section>
 
       {/* ── 5. Try it ──────────────────────────────────────── */}
@@ -327,6 +369,21 @@ export default function Module08CSSGrid() {
           starter={EXPLORE_STARTER}
           height="420px"
         />
+      </section>
+
+      {/* ── 5.5 Summary ────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>CSS Grid is the ultimate tool for complex web layouts:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Two-Dimensional:</strong> Grid controls both rows and columns simultaneously.</li>
+            <li><strong>Fractional Units (fr):</strong> A flexible way to distribute remaining space in a grid.</li>
+            <li><strong>Repeat & Sizing:</strong> Use <code>repeat()</code> and <code>minmax()</code> for clean, responsive definitions.</li>
+            <li><strong>Named Areas:</strong> <code>grid-template-areas</code> allows you to visualize your layout directly in your CSS code.</li>
+            <li><strong>Alignment:</strong> Grid offers granular control over how items sit within their cells using <code>place-items</code>.</li>
+          </ul>
+        </div>
       </section>
 
       {/* ── 6. Challenge ───────────────────────────────────── */}

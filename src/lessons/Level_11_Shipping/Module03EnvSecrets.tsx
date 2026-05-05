@@ -25,6 +25,7 @@ export default function Module03EnvSecrets() {
           <li><a href="#next_public_" className="text-primary hover:underline">→ NEXT_PUBLIC_</a></li>
           <li><a href="#detecting-leaks-before-they-hit-github" className="text-primary hover:underline">→ Detecting leaks before they hit GitHub</a></li>
           <li><a href="#rotating-secrets" className="text-primary hover:underline">→ Rotating secrets</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -189,6 +190,21 @@ gitleaks protect --staged`}
           deploy (the app picks up the new value), verify the app works, then revoke the
           old secret. Never revoke before deploying — that creates downtime.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The essential practices for managing configuration and protecting secrets:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Environment Isolation:</strong> Always separate runtime configuration from code using environment variables to maintain security and flexibility.</li>
+            <li><strong>The .env Standard:</strong> Never commit <code>.env</code> files; instead, use <code>.env.example</code> to document required variables for other developers.</li>
+            <li><strong>Robust Validation:</strong> Use Zod or similar libraries to validate environment variables at startup, ensuring clear errors over silent failures.</li>
+            <li><strong>Client vs. Server:</strong> Understanding that <code>NEXT_PUBLIC_</code> variables are exposed to the browser and must never contain sensitive secrets.</li>
+            <li><strong>Proactive Protection:</strong> Implementing leak detection tools like Gitleaks and GitGuardian to catch accidental credential exposures early.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { CodePlayground } from "../../components/playground/CodePlayground";
 import { CodeBlock } from "../../components/ui/CodeBlock";
+import { CodeExample } from "../../components/playground/CodeExample";
 import { CheckCircle2 } from "lucide-react";
 import { useProgress } from "../../context/ProgressContext";
 
@@ -33,6 +34,41 @@ const EXPLORE_HTML = `<!-- Try editing this full page structure -->
 </footer>
 </body>
 `;
+
+const ANNOTATED_HTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Portfolio</title>
+</head>
+<body>
+  <header>
+    <h1>Sokha's Portfolio</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Projects</h2>
+      <article>
+        <h3>Weather App</h3>
+        <p>Built with HTML, CSS, and JavaScript.</p>
+      </article>
+    </section>
+
+    <aside>
+      <p>Currently open to work.</p>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sokha. All rights reserved.</p>
+  </footer>
+</body>
+</html>`;
 
 const CHALLENGE_STARTER = `<!-- Build the three core sections of a page. Add a <header> with an <h1> inside it, a <main> with a <p> inside it, and a <footer>. -->
 `;
@@ -164,7 +200,7 @@ export default function Module02DocumentStructure() {
           Before building a full page, it is important to understand how to organize your files. As your website grows, keeping all files in one folder gets messy. Best practice is to create dedicated subfolders for your assets, like an <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">images</code> or <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">css</code> folder.
         </p>
         <div className="p-4 rounded-xl bg-stone-100 border border-border font-mono text-sm whitespace-pre">
-{`my-website/
+          {`my-website/
 ├── index.html
 ├── about.html
 ├── images/
@@ -192,44 +228,12 @@ export default function Module02DocumentStructure() {
           Here is a complete, working HTML document. This is what you will type every time you start a new project.
         </p>
 
-        <CodeBlock language="html" title="index.html">
-          {`<!DOCTYPE html>              <!-- always the very first line -->
-<html lang="en">             <!-- "en" tells screen readers the language -->
-<head>
-  <meta charset="UTF-8">    <!-- supports all characters including Khmer -->
-  <title>My Portfolio</title>  <!-- text in the browser tab -->
-</head>
-<body>
-
-  <header>                   <!-- top of the page -->
-    <h1>Sokha's Portfolio</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
-
-  <main>                     <!-- one per page — the core content -->
-    <section>
-      <h2>Projects</h2>
-      <article>
-        <h3>Weather App</h3>
-        <p>Built with HTML, CSS, and JavaScript.</p>
-      </article>
-    </section>
-
-    <aside>
-      <p>Currently open to work.</p>
-    </aside>
-  </main>
-
-  <footer>                   <!-- bottom of the page -->
-    <p>&copy; 2025 Sokha. All rights reserved.</p>
-  </footer>
-
-</body>
-</html>`}
-        </CodeBlock>
+        <CodeExample
+          html={ANNOTATED_HTML}
+          css=""
+          title="Full Page Structure"
+          height="420px"
+        />
 
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex gap-2">

@@ -27,6 +27,7 @@ export default function Module01Debugging() {
           <li><a href="#the-debugger-statement" className="text-primary hover:underline">→ The debugger statement</a></li>
           <li><a href="#common-bug-patterns" className="text-primary hover:underline">→ Common bug patterns</a></li>
           <li><a href="#when-to-ask-for-help" className="text-primary hover:underline">→ When to ask for help</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -265,6 +266,21 @@ export default function Module01Debugging() {
           Half the time, writing that explanation causes you to find the answer yourself
           before you finish writing it. This is called rubber duck debugging, and it works.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>The systematic mindset and toolkit for solving software puzzles effectively:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Analyze First:</strong> Always read the full error message and stack trace before attempting any fixes.</li>
+            <li><strong>Scientific Method:</strong> Approach debugging with a cycle of observation, hypothesis, prediction, and isolated testing.</li>
+            <li><strong>Isolation & Reproduction:</strong> Create minimal reproductions to strip away noise and confirm the exact cause of a failure.</li>
+            <li><strong>Leverage Your Tools:</strong> Use Browser DevTools for breakpoints and inspection, supplemented by strategic <code>console.log</code> tracking.</li>
+            <li><strong>Structured Communication:</strong> Practice rubber duck debugging by clearly explaining your problem, hypothesis, and attempted solutions.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

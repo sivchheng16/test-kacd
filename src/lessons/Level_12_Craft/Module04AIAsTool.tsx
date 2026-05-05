@@ -27,6 +27,7 @@ export default function Module04AIAsTool() {
           <li><a href="#the-dependency-trap" className="text-primary hover:underline">→ The dependency trap</a></li>
           <li><a href="#current-tools-20242025" className="text-primary hover:underline">→ Current tools (2024–2025)</a></li>
           <li><a href="#the-senior-engineer-posture" className="text-primary hover:underline">→ The senior engineer posture</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
         </ul>
       </section>
 
@@ -239,6 +240,21 @@ when the component renders."}`}
           of the most powerful tools you will ever have. Used as a replacement for
           thinking, it is how you ship subtle bugs to production with complete confidence.
         </p>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Strategies for integrating AI into your engineering workflow responsibly and effectively:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>The Human-in-the-Loop:</strong> AI is a powerful assistant, but the engineer remains responsible for every line of code shipped.</li>
+            <li><strong>Strengths and Limits:</strong> Use AI for boilerplate, first drafts, and explanations, but remain vigilant about its tendency to hallucinate and ignore business context.</li>
+            <li><strong>The Verification Rule:</strong> Never ship code you don't fully understand; use AI to amplify your knowledge, not replace it.</li>
+            <li><strong>Effective Prompting:</strong> Provide specific context and existing patterns to receive high-quality, relevant code suggestions.</li>
+            <li><strong>Lifelong Learning:</strong> Avoid the dependency trap by using AI as a tireless tutor to fill knowledge gaps and deepen your fundamental understanding.</li>
+          </ul>
+        </div>
       </section>
 
     </article>

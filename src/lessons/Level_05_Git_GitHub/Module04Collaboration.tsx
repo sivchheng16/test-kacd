@@ -35,7 +35,6 @@ export default function Module04Collaboration() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
       <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
         <ul className="space-y-1.5 text-sm">
@@ -46,6 +45,7 @@ export default function Module04Collaboration() {
           <li><a href="#merge-conflicts" className="text-primary hover:underline">→ Merge Conflicts</a></li>
           <li><a href="#team-workflow" className="text-primary hover:underline">→ Team Workflow</a></li>
           <li><a href="#quick-reference" className="text-primary hover:underline">→ Quick Reference</a></li>
+          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
           <li><a href="#knowledge-check" className="text-primary hover:underline">→ Knowledge Check</a></li>
         </ul>
       </section>
@@ -257,6 +257,21 @@ git branch -d feature/contact-form   # delete local branch`}
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* ── Summary ───────────────────────────────────────── */}
+      <section id="summary" className="space-y-4">
+        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
+          <p>Working effectively as a team using branches and PRs:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Branches</strong> allow you to work on new features without breaking the <code>main</code> code.</li>
+            <li><strong>git checkout -b:</strong> Create and switch to a new branch in one step.</li>
+            <li><strong>Pull Requests (PRs):</strong> The standard process for code review before merging changes.</li>
+            <li><strong>Merging:</strong> Combining the history of your feature branch back into <code>main</code>.</li>
+            <li><strong>Merge Conflicts:</strong> Resolving differences manually when Git can't do it automatically.</li>
+          </ul>
         </div>
       </section>
 
