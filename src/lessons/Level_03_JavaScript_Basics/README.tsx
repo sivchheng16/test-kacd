@@ -34,6 +34,7 @@ export default function Introduction() {
             <li>Functions</li>
             <li>Arrays &amp; Loops</li>
             <li>DOM Manipulation</li>
+            <li>Module & npm</li>
             <li>Project: Interactive Quiz</li>
           </ul>
         </div>
@@ -119,6 +120,11 @@ export default function Introduction() {
               </TableRow>
               <TableRow>
                 <TableCell>08</TableCell>
+                <TableCell>Module & npm</TableCell>
+                <TableCell>Modules, imports, exports, npm packages</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>09</TableCell>
                 <TableCell>Project</TableCell>
                 <TableCell>Interactive Quiz Application</TableCell>
               </TableRow>
@@ -183,7 +189,7 @@ button.addEventListener('click', function() {
             To complete Track 03:
           </Typography>
           <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
-            <li>All 7 modules studied</li>
+            <li>All 8 modules studied</li>
             <li>All exercises completed</li>
             <li>Interactive Quiz built and working</li>
             <li>Quiz has multiple questions, scoring, and results</li>

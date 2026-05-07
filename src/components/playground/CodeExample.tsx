@@ -98,7 +98,7 @@ export function CodeExample({
           srcDoc={previewDoc}
           title="Preview"
           className="w-full h-full border-0"
-          sandbox="allow-scripts"
+          sandbox="allow-scripts allow-modals"
         />
       </div>
 
