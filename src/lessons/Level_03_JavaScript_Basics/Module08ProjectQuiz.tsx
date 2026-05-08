@@ -11,26 +11,23 @@ export default function Module07ProjectQuiz() {
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
-      {/* Hook */}
+      {/* Header */}
       <section className="space-y-4">
-        <div className="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold tracking-wide uppercase">
-          Module 07 — Capstone Project
-        </div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
           Project: Multiple-Choice Quiz App
         </h1>
-        <p className="text-lg text-muted-foreground leading-relaxed">
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           You've learned variables, conditions, functions, arrays, and DOM
           manipulation. Now you'll combine all of them into one working app — a
           multiple-choice quiz. This is the kind of project you can put in your
           portfolio and show to anyone.
         </p>
 
-        <div className="rounded-xl border border-amber-200 bg-amber-50 px-5 py-4">
-          <p className="text-sm font-semibold text-amber-800 mb-2">What you'll build</p>
-          <ul className="space-y-1 text-sm text-amber-900">
+        <div className="rounded-2xl border border-amber-200 bg-amber-50/50 px-6 py-5">
+          <p className="text-sm font-semibold text-amber-800 mb-3">What you'll build</p>
+          <ul className="space-y-2 text-sm text-amber-900">
             {[
               "At least 2 questions shown on the page",
               "A Submit button to check answers",
@@ -46,21 +43,26 @@ export default function Module07ProjectQuiz() {
         </div>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#how-a-quiz-app-works" className="text-primary hover:underline">→ How a quiz app works</a></li>
-          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
-          <li><a href="#customise-it" className="text-primary hover:underline">→ Customise it</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
-          <li><a href="#you-completed-javascript-basics" className="text-primary hover:underline">→ You completed JavaScript Basics</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#how-a-quiz-app-works" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ How a quiz app works</a></li>
+            <li><a href="#live-example" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Live example</a></li>
+            <li><a href="#customise-it" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Customise it</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#challenge" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Challenge</a></li>
+            <li><a href="#wrap-up" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Wrap up</a></li>
+          </ul>
+        </div>
       </section>
 
       {/* Concept */}
       <section id="how-a-quiz-app-works" className="space-y-6">
-        <h2 className="text-xl font-semibold text-foreground">How a quiz app works</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">How a quiz app works</h2>
         <p className="text-muted-foreground leading-relaxed">
           The logic is simpler than it looks. You store your questions in an array
           of objects. When the user clicks Submit, you loop through the answers,
@@ -98,7 +100,7 @@ document.querySelector("#submit").addEventListener("click", () => {
 });`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">Rendering questions from data</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground pt-4">Rendering questions from data</h2>
         <p className="text-muted-foreground leading-relaxed">
           Instead of hardcoding HTML for every question, use{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">.map()</code> to generate it from the array.
@@ -124,7 +126,7 @@ document.querySelector("#quiz").innerHTML = quizHTML;`}
 
       {/* Example */}
       <section id="live-example" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Live example — full working quiz</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Live example — full working quiz</h2>
         <p className="text-sm text-muted-foreground">
           This is a complete quiz. Read through every line — you know all the
           concepts involved. Then try changing the questions or adding a fourth one.
@@ -197,7 +199,7 @@ document.querySelector("#submit").addEventListener("click", () => {
 
       {/* Try it */}
       <section id="customise-it" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Customise it</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Customise it</h2>
         <p className="text-sm text-muted-foreground">
           Fork the example above and make it your own. Ideas: change the questions
           to Cambodia history, add a 4th question, change colours, or show which
@@ -258,7 +260,7 @@ document.querySelector("#submit").addEventListener("click", () => {
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
         <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
           <p>By completing this project, you have demonstrated mastery of:</p>
           <ul className="list-disc pl-5 space-y-1">
@@ -272,7 +274,7 @@ document.querySelector("#submit").addEventListener("click", () => {
 
       {/* Challenge */}
       <section id="challenge" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Build a quiz app with at least 2 questions, a Submit button, a{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">score</code> variable in JavaScript, and
@@ -380,8 +382,8 @@ document.querySelector("#submit").addEventListener("click", () => {
       </section>
 
       {/* Wrap up */}
-      <section id="you-completed-javascript-basics" className="space-y-3 border-t border-border pt-10">
-        <h2 className="text-xl font-semibold text-foreground">You completed JavaScript Basics</h2>
+      <section id="wrap-up" className="space-y-3 border-t border-border pt-10">
+        <h2 className="text-3xl font-serif font-medium text-foreground">You completed JavaScript Basics</h2>
         <p className="text-muted-foreground leading-relaxed">
           In this track you learned variables, data types, conditions, functions,
           arrays, DOM manipulation, and you shipped a real app. The next track —

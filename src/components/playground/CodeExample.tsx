@@ -6,15 +6,17 @@ import { Copy, Check, ExternalLink, Code2, Monitor, RotateCcw } from "lucide-rea
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface CodeExampleProps {
-  html: string;
-  css: string;
+  html?: string;
+  css?: string;
+  js?: string;
   title?: string;
   height?: string;
 }
 
 export function CodeExample({
-  html,
-  css,
+  html = "",
+  css = "",
+  js = "",
   title,
   height = "300px",
 }: CodeExampleProps) {
@@ -47,17 +49,24 @@ export function CodeExample({
     </head>
     <body>
       ${html}
+      <script>
+        ${js}
+      </script>
     </body>
     </html>
   `;
 
-  const handleCopy = (content: string) => {
+  const showCss = css && css.trim().length > 0;
+  const showJs = js && js.trim().length > 0;
+
+  const [activeTab, setActiveTab] = useState(showJs ? "js" : showCss ? "css" : "html");
+
+  const handleCopy = () => {
+    const content = activeTab === "js" ? js : activeTab === "css" ? css : html;
     navigator.clipboard.writeText(content);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
-  const showCss = css && css.trim().length > 0;
 
   return (
     <div className="my-10 rounded-2xl border border-border overflow-hidden bg-white shadow-xl group/example">
@@ -104,9 +113,17 @@ export function CodeExample({
 
       {/* Code Section */}
       <div className="border-t border-border bg-[#fdf6e3]">
-        <Tabs defaultValue={showCss ? "css" : "html"} className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="flex items-center justify-between px-4 border-b border-[#eee8d5] bg-[#eee8d5]/30">
             <TabsList className="bg-transparent border-0 h-10 gap-4">
+              {showJs && (
+                <TabsTrigger 
+                  value="js" 
+                  className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-[#c2622d] rounded-none px-1 text-xs font-mono font-bold text-[#586e75]"
+                >
+                  script.js
+                </TabsTrigger>
+              )}
               {showCss && (
                 <TabsTrigger 
                   value="css" 
@@ -125,7 +142,7 @@ export function CodeExample({
             
             <div className="flex items-center gap-2">
               <button
-                onClick={() => handleCopy(showCss ? css : html)}
+                onClick={handleCopy}
                 className="p-1.5 rounded-md text-[#586e75] hover:bg-[#eee8d5] transition-colors"
                 title="Copy code"
               >
@@ -133,6 +150,27 @@ export function CodeExample({
               </button>
             </div>
           </div>
+
+          {showJs && (
+            <TabsContent value="js" className="m-0">
+              <div className="max-h-[300px] overflow-auto custom-scrollbar">
+                <SyntaxHighlighter
+                  language="javascript"
+                  style={solarizedlight}
+                  customStyle={{
+                    margin: 0,
+                    padding: "1.25rem",
+                    fontSize: "0.85rem",
+                    lineHeight: "1.6",
+                    background: "transparent",
+                    fontFamily: "var(--font-mono, JetBrains Mono, monospace)",
+                  }}
+                >
+                  {js.trim()}
+                </SyntaxHighlighter>
+              </div>
+            </TabsContent>
+          )}
 
           {showCss && (
             <TabsContent value="css" className="m-0">

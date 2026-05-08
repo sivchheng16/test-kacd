@@ -11,37 +11,56 @@ export default function Module05ArraysLoops() {
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
-      {/* Hook */}
+      {/* Header */}
       <section className="space-y-4">
-        <div className="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold tracking-wide uppercase">
-          Module 05 — JavaScript Basics
-        </div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
           Arrays &amp; Loops
         </h1>
-        <p className="text-lg text-muted-foreground leading-relaxed">
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           A market in Phnom Penh sells hundreds of items. You don't store each price
           in a separate variable — you put them in a list. That list is an array.
           And to do something with every item, you use a loop.
         </p>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#creating-arrays" className="text-primary hover:underline">→ Creating arrays</a></li>
-          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
-          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#string-methods" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ String methods</a></li>
+            <li><a href="#creating-arrays" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Creating arrays</a></li>
+            <li><a href="#modifying-arrays" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Modifying arrays</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#loops" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Loops and iteration</a></li>
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#challenge" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Challenge</a></li>
+          </ul>
+        </div>
+      </section>
+
+      {/* String Methods */}
+      <section id="string-methods" className="space-y-6">
+        <h2 className="text-3xl font-serif font-medium text-foreground">Basic String Methods</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          Strings in JavaScript are not just text — they come with built-in tools to change or search them.
+        </p>
+        <CodeBlock language="javascript">
+          {`const text = "  Learn JavaScript  ";
+
+console.log(text.trim());        // "Learn JavaScript" (removes spaces)
+console.log(text.toUpperCase()); // "LEARN JAVASCRIPT"
+console.log(text.includes("JS")); // false (case sensitive!)
+console.log(text.substring(2, 7)); // "Learn"`}
+        </CodeBlock>
       </section>
 
       {/* Concept */}
       <section id="creating-arrays" className="space-y-6">
-        <h2 className="text-xl font-semibold text-foreground">Creating arrays</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Creating arrays</h2>
         <CodeBlock language="javascript">
           {`// Array literal — the most common way
 const foods = ["banh mi", "lok lak", "amok", "kuy teav"];
@@ -57,7 +76,7 @@ document.write(foods.length); // 4
 document.write(foods[foods.length - 1]); // "kuy teav"`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">Modifying arrays</h2>
+        <h2 id="modifying-arrays" className="text-3xl font-serif font-medium text-foreground pt-4">Modifying arrays</h2>
         <CodeBlock language="javascript">
           {`const items = ["rice", "fish"];
 
@@ -67,7 +86,7 @@ items.unshift("bread");   // add to front→ ["bread","rice","fish"]
 items.shift();            // remove first→ ["rice","fish"]`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">The for loop</h2>
+        <h2 id="loops" className="text-3xl font-serif font-medium text-foreground pt-4">The for loop</h2>
         <CodeBlock language="javascript">
           {`const prices = [1000, 2500, 4000, 8000];
 
@@ -80,7 +99,7 @@ for (let i = 0; i < prices.length; i++) {
 // 8000 ៛`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">forEach — cleaner iteration</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground pt-4">forEach — cleaner iteration</h2>
         <CodeBlock language="javascript">
           {`const cities = ["Phnom Penh", "Siem Reap", "Battambang"];
 
@@ -89,7 +108,7 @@ cities.forEach((city) => {
 });`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">map — transform every item</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground pt-4">map — transform every item</h2>
         <p className="text-muted-foreground leading-relaxed">
           <code className="font-mono bg-stone-100 px-1 rounded">.map()</code> creates a <em>new</em> array by running
           a function on every item. The original is unchanged.
@@ -103,7 +122,7 @@ const pricesUSD = pricesKHR.map((khr) => (khr / 4100).toFixed(2));
 document.write(pricesUSD.join(", ")); // "0.98, 1.95, 2.93"`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">filter — keep only what matches</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground pt-4">filter — keep only what matches</h2>
         <CodeBlock language="javascript">
           {`const scores = [45, 78, 62, 90, 55, 88];
 
@@ -114,7 +133,7 @@ document.write(passing.join(", ")); // 78, 62, 90, 88`}
 
       {/* Example */}
       <section id="live-example" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Live example — market menu with map</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Live example — market menu with map</h2>
         <p className="text-sm text-muted-foreground">
           Watch how <code className="font-mono bg-stone-100 px-1 rounded">.map()</code> turns a plain array into
           formatted HTML.
@@ -140,7 +159,7 @@ document.write(rows.join(""));`,
 
       {/* Try it */}
       <section id="try-it-yourself" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Create an array of at least 4 province names. Use{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">forEach</code> to write each one to the page as a
@@ -162,21 +181,33 @@ document.write("</ul>");`,
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
-        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
-          <p>Managing lists of data is essential for any app:</p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><strong>Arrays</strong> store multiple values in a single variable, indexed starting at 0.</li>
-            <li>Use <strong>.push()</strong> and <strong>.pop()</strong> to add or remove items from the end.</li>
-            <li><strong>for loops</strong> and <strong>forEach</strong> allow you to iterate over every item in an array.</li>
-            <li><strong>.map()</strong> transforms an array into a new one, while <strong>.filter()</strong> keeps only specific items.</li>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
+        <div className="p-8 rounded-2xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-4 text-base leading-relaxed shadow-inner">
+          <p className="font-semibold">In this module, you've learned:</p>
+          <ul className="space-y-3">
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**String methods** like `.trim()` and `.toUpperCase()` help clean and format text.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Arrays** store collections of data in a specific order (indexed from 0).</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Loops** (`for`, `forEach`) allow you to repeat actions on every list item.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Transforming arrays** is possible with powerful methods like `.map()` and `.filter()`.</span>
+            </li>
           </ul>
         </div>
       </section>
 
       {/* Challenge */}
       <section id="challenge" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Create an array with at least 3 numbers. Use{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">.map()</code> to transform each number (multiply,

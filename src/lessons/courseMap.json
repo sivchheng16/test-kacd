@@ -118,22 +118,22 @@
     "modules": [
       {
         "id": "README",
-        "title": "Introduction",
+        "title": "01. Introduction",
         "path": "/level_03_javascript_basics/readme"
       },
       {
         "id": "Module01Introduction",
-        "title": "02. Introduction",
+        "title": "02. Introduction to JS",
         "path": "/level_03_javascript_basics/module01introduction"
       },
       {
         "id": "Module02VariablesDataTypes",
-        "title": "03. Variables DataTypes",
+        "title": "03. Variables & Data Types",
         "path": "/level_03_javascript_basics/module02variablesdatatypes"
       },
       {
         "id": "Module03OperatorsConditions",
-        "title": "04. Operators Conditions",
+        "title": "04. Operators & Conditions",
         "path": "/level_03_javascript_basics/module03operatorsconditions"
       },
       {
@@ -143,18 +143,23 @@
       },
       {
         "id": "Module05ArraysLoops",
-        "title": "06. Arrays Loops",
+        "title": "06. Arrays & Loops",
         "path": "/level_03_javascript_basics/module05arraysloops"
       },
       {
-        "id": "Module06DOMManipulation",
-        "title": "07. DOM Manipulation",
-        "path": "/level_03_javascript_basics/module06dommanipulation"
+        "id": "Module06ObjectsBasics",
+        "title": "07. Objects Basics",
+        "path": "/level_03_javascript_basics/module06objectsbasics"
       },
       {
-        "id": "Module07ProjectQuiz",
-        "title": "08. Project Quiz",
-        "path": "/level_03_javascript_basics/module07projectquiz"
+        "id": "Module07DOMManipulation",
+        "title": "08. DOM Manipulation",
+        "path": "/level_03_javascript_basics/module07dommanipulation"
+      },
+      {
+        "id": "Module08ProjectQuiz",
+        "title": "09. Project Quiz",
+        "path": "/level_03_javascript_basics/module08projectquiz"
       }
     ]
   },
@@ -164,33 +169,58 @@
     "modules": [
       {
         "id": "README",
-        "title": "Introduction",
+        "title": "01. Introduction",
         "path": "/level_04_javascript_advanced/readme"
       },
       {
-        "id": "Module01ES6Features",
-        "title": "02. ES6 Features",
-        "path": "/level_04_javascript_advanced/module01es6features"
+        "id": "Module01HowJSWorks",
+        "title": "02. How JS Works",
+        "path": "/level_04_javascript_advanced/module01howjsworks"
       },
       {
-        "id": "Module02AsyncJavaScript",
-        "title": "03. Async JavaScript",
-        "path": "/level_04_javascript_advanced/module02asyncjavascript"
+        "id": "Module02ES6Features",
+        "title": "03. ES6+ Features",
+        "path": "/level_04_javascript_advanced/module02es6features"
       },
       {
-        "id": "Module03WorkingAPIs",
-        "title": "04. Working APIs",
-        "path": "/level_04_javascript_advanced/module03workingapis"
+        "id": "Module03FunctionalProgramming",
+        "title": "04. Functional Programming",
+        "path": "/level_04_javascript_advanced/module03functionalprogramming"
       },
       {
-        "id": "Module04ErrorHandling",
-        "title": "05. Error Handling",
-        "path": "/level_04_javascript_advanced/module04errorhandling"
+        "id": "Module04AsyncJavaScript",
+        "title": "05. Async JavaScript",
+        "path": "/level_04_javascript_advanced/module04asyncjavascript"
       },
       {
-        "id": "Module05ProjectWeather",
-        "title": "06. Project Weather",
-        "path": "/level_04_javascript_advanced/module05projectweather"
+        "id": "Module05WorkingAPIs",
+        "title": "06. Working with APIs",
+        "path": "/level_04_javascript_advanced/module05workingapis"
+      },
+      {
+        "id": "Module06ClassesOOP",
+        "title": "07. Classes & OOP",
+        "path": "/level_04_javascript_advanced/module06classesoop"
+      },
+      {
+        "id": "Module07AdvancedDOM",
+        "title": "08. Advanced DOM",
+        "path": "/level_04_javascript_advanced/module07advanceddom"
+      },
+      {
+        "id": "Module08ModulesNPM",
+        "title": "09. Modules & npm",
+        "path": "/level_04_javascript_advanced/module08modulesnpm"
+      },
+      {
+        "id": "Module09ErrorHandling",
+        "title": "10. Error Handling",
+        "path": "/level_04_javascript_advanced/module09errorhandling"
+      },
+      {
+        "id": "Module10ProjectWeather",
+        "title": "11. Project: Weather App",
+        "path": "/level_04_javascript_advanced/module10projectweather"
       }
     ]
   },

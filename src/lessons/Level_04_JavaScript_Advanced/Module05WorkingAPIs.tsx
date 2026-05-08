@@ -69,43 +69,46 @@ const challenge = {
   },
 };
 
-export default function Module03WorkingAPIs() {
+export default function Module05WorkingAPIs() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
       {/* Header */}
-      <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary/60">
-          Track 04 · JavaScript Advanced
-        </p>
-        <h1 className="text-4xl font-serif text-foreground">Working with APIs</h1>
-        <p className="text-base text-muted-foreground leading-relaxed">
+      <section className="space-y-4">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
+          Working with APIs
+        </h1>
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           APIs are how web apps talk to servers. You will learn the browser's built-in{" "}
           <code className="font-mono text-sm">fetch</code> function, how JSON data flows, and
           the conventions of REST — the design style behind almost every modern web API.
         </p>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#what-is-an-api" className="text-primary hover:underline">→ What is an API?</a></li>
-          <li><a href="#http-basics" className="text-primary hover:underline">→ HTTP Basics</a></li>
-          <li><a href="#the-fetch-api" className="text-primary hover:underline">→ The Fetch API</a></li>
-          <li><a href="#json" className="text-primary hover:underline">→ JSON</a></li>
-          <li><a href="#sending-data" className="text-primary hover:underline">→ Sending Data</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#what-is-an-api" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ What is an API?</a></li>
+            <li><a href="#http-basics" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ HTTP Basics</a></li>
+            <li><a href="#the-fetch-api" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ The Fetch API</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#json" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ JSON</a></li>
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#challenge" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Challenge</a></li>
+          </ul>
+        </div>
       </section>
 
       {/* What is an API */}
       <section id="what-is-an-api" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">What is an API?</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">What is an API?</h2>
         <p className="text-base text-muted-foreground">
           An <strong>API</strong> (Application Programming Interface) is a contract between two
           programs. A web API exposes data and actions over HTTP so a browser (or any client)
@@ -135,7 +138,7 @@ export default function Module03WorkingAPIs() {
 
       {/* HTTP basics */}
       <section id="http-basics" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">HTTP Basics</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">HTTP Basics</h2>
         <p className="text-base text-muted-foreground">
           Every API call is an HTTP request. The <em>method</em> tells the server what action to
           take; the <em>status code</em> in the response tells you whether it worked.
@@ -198,7 +201,7 @@ export default function Module03WorkingAPIs() {
 
       {/* Fetch API */}
       <section id="the-fetch-api" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">The Fetch API</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">The Fetch API</h2>
         <p className="text-base text-muted-foreground">
           <code className="font-mono text-sm">fetch(url)</code> is built into every modern
           browser. It returns a Promise that resolves to a <code className="font-mono text-sm">Response</code>{" "}
@@ -232,7 +235,7 @@ export default function Module03WorkingAPIs() {
 
       {/* JSON */}
       <section id="json" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">JSON</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">JSON</h2>
         <p className="text-base text-muted-foreground">
           JSON (JavaScript Object Notation) is the universal data format for web APIs. It looks
           like a JavaScript object literal but it is always a <em>string</em> when sent over the
@@ -262,7 +265,7 @@ console.log(JSON.stringify(obj, null, 2));`}
 
       {/* POST, PUT, DELETE */}
       <section id="sending-data" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Sending Data</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Sending Data</h2>
         <p className="text-base text-muted-foreground">
           For POST, PUT, and PATCH requests you pass an options object to{" "}
           <code className="font-mono text-sm">fetch</code> with the method, headers, and a JSON-encoded body.
@@ -291,7 +294,7 @@ console.log(newPost); // includes id assigned by server`}
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
         <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
           <p>Connecting your app to the world via APIs:</p>
           <ul className="list-disc pl-5 space-y-1">
@@ -306,7 +309,7 @@ console.log(newPost); // includes id assigned by server`}
 
       {/* Challenge */}
       <section id="challenge" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Challenge</h2>
         <p className="text-base text-muted-foreground">
           Fetch the todo at{" "}
           <code className="font-mono text-sm">https://jsonplaceholder.typicode.com/todos/1</code>{" "}

@@ -95,44 +95,46 @@ const challenge = {
   },
 };
 
-export default function Module04ErrorHandling() {
+export default function Module10ErrorHandling() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
       {/* Header */}
-      <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary/60">
-          Track 04 · JavaScript Advanced
-        </p>
-        <h1 className="text-4xl font-serif text-foreground">Error Handling</h1>
-        <p className="text-base text-muted-foreground leading-relaxed">
+      <section className="space-y-4">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
+          Error Handling
+        </h1>
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           Things go wrong. Networks fail, users type invalid input, third-party APIs return
           unexpected shapes. Robust code anticipates these situations and fails gracefully
-          rather than crashing silently. This lesson covers try/catch/finally, the Error object,
-          custom error classes, and async error patterns.
+          rather than crashing silently.
         </p>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#types-of-errors" className="text-primary hover:underline">→ Types of Errors</a></li>
-          <li><a href="#try-catch-finally" className="text-primary hover:underline">→ try / catch / finally</a></li>
-          <li><a href="#throwing-errors" className="text-primary hover:underline">→ Throwing Errors</a></li>
-          <li><a href="#custom-error-classes" className="text-primary hover:underline">→ Custom Error Classes</a></li>
-          <li><a href="#async-error-handling" className="text-primary hover:underline">→ Async Error Handling</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#types-of-errors" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Types of Errors</a></li>
+            <li><a href="#try-catch-finally" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ try / catch / finally</a></li>
+            <li><a href="#throwing-errors" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Throwing Errors</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#async-error-handling" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Async Error Handling</a></li>
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#challenge" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Challenge</a></li>
+          </ul>
+        </div>
       </section>
 
       {/* Types of errors */}
       <section id="types-of-errors" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Types of Errors</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Types of Errors</h2>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <table className="w-full text-sm">
@@ -165,7 +167,7 @@ export default function Module04ErrorHandling() {
 
       {/* try/catch/finally */}
       <section id="try-catch-finally" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">try / catch / finally</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">try / catch / finally</h2>
         <p className="text-base text-muted-foreground">
           Wrap risky code in a <code className="font-mono text-sm">try</code> block. If anything
           inside it throws, control jumps immediately to <code className="font-mono text-sm">catch</code>.
@@ -198,7 +200,7 @@ export default function Module04ErrorHandling() {
 
       {/* Throwing errors */}
       <section id="throwing-errors" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Throwing Errors</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Throwing Errors</h2>
         <p className="text-base text-muted-foreground">
           Use <code className="font-mono text-sm">throw</code> to signal a problem intentionally.
           Always throw an <code className="font-mono text-sm">Error</code> object (or a subclass) — never a
@@ -233,7 +235,7 @@ try {
 
       {/* Custom errors */}
       <section id="custom-error-classes" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Custom Error Classes</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Custom Error Classes</h2>
         <p className="text-base text-muted-foreground">
           Extend the built-in <code className="font-mono text-sm">Error</code> class to create
           domain-specific errors that carry extra fields. Callers can then use{" "}
@@ -245,7 +247,7 @@ try {
 
       {/* Async error handling */}
       <section id="async-error-handling" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Async Error Handling</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Async Error Handling</h2>
         <p className="text-base text-muted-foreground">
           Async functions throw errors the same way sync functions do — just use{" "}
           <code className="font-mono text-sm">try/catch</code> around your <code className="font-mono text-sm">await</code> calls.
@@ -279,7 +281,7 @@ const users = await safeGet("/api/users", []); // empty array if it fails`}
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
         <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
           <p>Writing resilient code that handles the unexpected:</p>
           <ul className="list-disc pl-5 space-y-1">
@@ -294,7 +296,7 @@ const users = await safeGet("/api/users", []); // empty array if it fails`}
 
       {/* Challenge */}
       <section id="challenge" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Challenge</h2>
         <p className="text-base text-muted-foreground">
           Write a function <code className="font-mono text-sm">checkPositive(n)</code> that throws a
           new <code className="font-mono text-sm">Error</code> if <code className="font-mono text-sm">n</code> is

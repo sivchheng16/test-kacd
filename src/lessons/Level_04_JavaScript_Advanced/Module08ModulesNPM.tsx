@@ -3,17 +3,14 @@ import { CodeBlock } from "../../components/ui/CodeBlock";
 
 export default function Module08ModulesNPM() {
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
-      {/* ── 1. Hook ────────────────────────────────────────── */}
+      {/* Header */}
       <section className="space-y-4">
-        <div className="inline-block px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 text-xs font-semibold tracking-wide uppercase">
-          Module 08 — Modules &amp; npm
-        </div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
           Modules &amp; npm
         </h1>
-        <p className="text-xl md:text-2xl text-foreground leading-relaxed font-serif">
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           Imagine a single JavaScript file with 5,000 lines. Nobody wants to work in that.
           Modules let you split code into focused files that import from each other — and npm
           gives you access to two million ready-made packages so you never have to write
@@ -21,27 +18,25 @@ export default function Module08ModulesNPM() {
         </p>
       </section>
 
-      {/* ── Overview ───────────────────────────────────────── */}
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#why-modules-exist" className="text-primary hover:underline">→ Why modules exist</a></li>
-          <li><a href="#es-modules-named-exports" className="text-primary hover:underline">→ ES Modules: named exports</a></li>
-          <li><a href="#default-exports" className="text-primary hover:underline">→ Default exports</a></li>
-          <li><a href="#barrel-files-re-exports" className="text-primary hover:underline">→ Barrel files (re-exports)</a></li>
-          <li><a href="#the-rules-of-esm" className="text-primary hover:underline">→ The rules of ESM</a></li>
-          <li><a href="#npm-the-worlds-package-registry" className="text-primary hover:underline">→ npm: the world's package registry</a></li>
-          <li><a href="#installing-packages" className="text-primary hover:underline">→ Installing packages</a></li>
-          <li><a href="#npm-scripts" className="text-primary hover:underline">→ npm scripts</a></li>
-          <li><a href="#node_modules" className="text-primary hover:underline">→ node_modules</a></li>
-          <li><a href="#commonjs-vs-esm" className="text-primary hover:underline">→ CommonJS vs ESM</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#why-modules-exist" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Why modules exist</a></li>
+            <li><a href="#es-modules-named-exports" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Named exports</a></li>
+            <li><a href="#default-exports" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Default exports</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#npm-the-worlds-package-registry" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ The world of npm</a></li>
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+          </ul>
+        </div>
       </section>
 
-      {/* ── 2. Why Modules? ────────────────────────────────── */}
+      {/* Why modules exist */}
       <section id="why-modules-exist" className="space-y-6">
-        <h2 className="text-2xl font-serif text-foreground">Why modules exist</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Why modules exist</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Before modules, every JavaScript file shared the same global scope. Drop two
           libraries on a page and they could overwrite each other's variables. Functions named
@@ -64,9 +59,9 @@ export default function Module08ModulesNPM() {
         </p>
       </section>
 
-      {/* ── 3. ES Modules — Named exports ──────────────────── */}
+      {/* ES Modules — Named exports */}
       <section id="es-modules-named-exports" className="space-y-6">
-        <h2 className="text-2xl font-serif text-foreground">ES Modules: named exports</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">ES Modules: named exports</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Modern JavaScript uses <strong className="text-foreground">ES Modules</strong> (ESM).
           You mark things you want to share with the <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">export</code> keyword.
@@ -92,9 +87,9 @@ console.log(PI);              // 3.14159`}
         </CodeBlock>
       </section>
 
-      {/* ── 4. Default exports ─────────────────────────────── */}
+      {/* Default exports */}
       <section id="default-exports" className="space-y-6">
-        <h2 className="text-2xl font-serif text-foreground">Default exports</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Default exports</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A file can also have one <strong className="text-foreground">default export</strong> — the main thing that
           file provides. React components are almost always default exports.
@@ -114,9 +109,9 @@ import MyApp from './App.js'; // same thing, different local name`}
         </p>
       </section>
 
-      {/* ── 5. Barrel files ────────────────────────────────── */}
+      {/* Barrel files */}
       <section id="barrel-files-re-exports" className="space-y-6">
-        <h2 className="text-2xl font-serif text-foreground">Barrel files (re-exports)</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Barrel files (re-exports)</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           As a project grows you might have dozens of utility files. A <strong className="text-foreground">barrel file</strong> — usually
           named <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">index.js</code> — re-exports everything
@@ -133,9 +128,9 @@ import { add, formatDate, fetchUser } from './utils';`}
         </CodeBlock>
       </section>
 
-      {/* ── 6. ESM rules ───────────────────────────────────── */}
+      {/* ESM rules */}
       <section id="the-rules-of-esm" className="space-y-6">
-        <h2 className="text-2xl font-serif text-foreground">The rules of ESM</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">The rules of ESM</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           ES Modules are <strong className="text-foreground">static</strong>. The browser (or Node) figures out all
           imports before any code runs. This means:
@@ -160,9 +155,9 @@ import { add, formatDate, fetchUser } from './utils';`}
         </ul>
       </section>
 
-      {/* ── 7. npm ─────────────────────────────────────────── */}
+      {/* npm */}
       <section id="npm-the-worlds-package-registry" className="space-y-6">
-        <h2 className="text-2xl font-serif text-foreground">npm: the world's package registry</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">npm: the world's package registry</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           <strong className="text-foreground">npm</strong> (Node Package Manager) hosts over two million open-source packages.
           Need date formatting? Validation? A full React framework? Someone already wrote it.
@@ -190,9 +185,9 @@ import { add, formatDate, fetchUser } from './utils';`}
         </CodeBlock>
       </section>
 
-      {/* ── 8. Installing packages ─────────────────────────── */}
+      {/* Installing packages */}
       <section id="installing-packages" className="space-y-6">
-        <h2 className="text-2xl font-serif text-foreground">Installing packages</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Installing packages</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">npm install</code> downloads a package into
           <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded mx-1">node_modules/</code> and adds it to
@@ -218,9 +213,9 @@ npm install`}
         </div>
       </section>
 
-      {/* ── 9. Scripts ─────────────────────────────────────── */}
+      {/* Scripts */}
       <section id="npm-scripts" className="space-y-6">
-        <h2 className="text-2xl font-serif text-foreground">npm scripts</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">npm scripts</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           The <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">scripts</code> field in package.json lets you
           define shortcuts for long commands. <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">npm run dev</code> runs
@@ -237,9 +232,9 @@ npm run lint     # checks code style`}
         </p>
       </section>
 
-      {/* ── 10. node_modules ───────────────────────────────── */}
+      {/* node_modules */}
       <section id="node_modules" className="space-y-6">
-        <h2 className="text-2xl font-serif text-foreground">node_modules — never commit it</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">node_modules — never commit it</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           When you install packages, npm creates a <code className="text-sm bg-stone-100 px-1.5 py-0.5 rounded">node_modules/</code> folder
           that can easily contain hundreds of megabytes. You <strong className="text-foreground">never commit this to git</strong>.
@@ -254,9 +249,9 @@ node_modules/`}
         </p>
       </section>
 
-      {/* ── 11. CommonJS vs ESM ────────────────────────────── */}
+      {/* CommonJS vs ESM */}
       <section id="commonjs-vs-esm" className="space-y-6">
-        <h2 className="text-2xl font-serif text-foreground">CommonJS vs ESM</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">CommonJS vs ESM</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           You'll encounter two module systems in the wild. <strong className="text-foreground">CommonJS</strong> (CJS) is
           the older Node.js format. <strong className="text-foreground">ES Modules</strong> (ESM) is the modern standard
@@ -297,7 +292,7 @@ export { myFn };`}
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
         <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
           <p>Key takeaways from this module:</p>
           <ul className="list-disc pl-5 space-y-1">

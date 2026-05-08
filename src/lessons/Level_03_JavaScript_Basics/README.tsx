@@ -5,15 +5,17 @@ import { CodeBlock } from '../../components/ui/CodeBlock';
 import { Table, TableHead, TableBody, TableHeader, TableRow, TableCell } from '../../components/ui/table';
 export default function Introduction() {
   return (
-    <article className="max-w-3xl mx-auto font-sans space-y-10">
-      <div>
-        <div>
-          <Typography variant="h1">Introduction: JavaScript Basics</Typography>
-          <Typography variant="lead">
-            Adding interactivity, dynamic data, and logic to transform static pages into web apps.
-          </Typography>
-        </div>
-      </div>
+    <article className="max-w-3xl mx-auto font-sans space-y-14 py-8">
+      {/* Header */}
+      <section className="space-y-4">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
+          JavaScript Basics
+        </h1>
+        <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl font-light">
+          Adding interactivity, dynamic data, and logic to transform static pages into web apps. 
+          Master the fundamentals of the most popular language on the web.
+        </p>
+      </section>
 
       <div>
         <div>
@@ -27,16 +29,16 @@ export default function Introduction() {
           <Typography>
             Modules in this Level:
           </Typography>
-          <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
-            <li>Introduction to JavaScript</li>
-            <li>Variables &amp; Data Types</li>
-            <li>Operators &amp; Conditions</li>
-            <li>Functions</li>
-            <li>Arrays &amp; Loops</li>
-            <li>DOM Manipulation</li>
-            <li>Module & npm</li>
-            <li>Project: Interactive Quiz</li>
-          </ul>
+            <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
+              <li>Introduction to JavaScript</li>
+              <li>Variables &amp; Data Types</li>
+              <li>Operators &amp; Conditions</li>
+              <li>Functions Basics</li>
+              <li>Data Structures: Arrays &amp; Strings</li>
+              <li>Objects Basics</li>
+              <li>DOM Manipulation</li>
+              <li>Project: Interactive Quiz</li>
+            </ul>
         </div>
       </div>
       <div>
@@ -69,67 +71,6 @@ export default function Introduction() {
             <li>Score: 2/2 correct</li>
             <li>[ NEXT QUESTION → ]</li>
           </ul>
-        </div>
-      </div>
-      <div>
-        <div>
-          <Typography variant="h2">Module Index</Typography>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Module</TableHead>
-                <TableHead>Topic</TableHead>
-                <TableHead>Key Concepts</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>01</TableCell>
-                <TableCell>Introduction</TableCell>
-                <TableCell>Level overview, objectives, and prerequisites</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>02</TableCell>
-                <TableCell>Introduction to JavaScript</TableCell>
-                <TableCell>What JS is, console, first script</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>03</TableCell>
-                <TableCell>Variables &amp; Data Types</TableCell>
-                <TableCell>let, const, strings, numbers, booleans</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>04</TableCell>
-                <TableCell>Operators &amp; Conditions</TableCell>
-                <TableCell>Math, comparisons, if/else</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>05</TableCell>
-                <TableCell>Functions</TableCell>
-                <TableCell>Creating and using functions</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>06</TableCell>
-                <TableCell>Arrays &amp; Loops</TableCell>
-                <TableCell>Collections, for loops, array methods</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>07</TableCell>
-                <TableCell>DOM Manipulation</TableCell>
-                <TableCell>Selecting, changing, events</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>08</TableCell>
-                <TableCell>Module & npm</TableCell>
-                <TableCell>Modules, imports, exports, npm packages</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>09</TableCell>
-                <TableCell>Project</TableCell>
-                <TableCell>Interactive Quiz Application</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
         </div>
       </div>
       <div>
@@ -181,6 +122,114 @@ button.addEventListener('click', function() {
             </TableBody>
           </Table>
         </div>
+        <div>
+          <Typography variant="h2">Module Index</Typography>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Module</TableHead>
+                <TableHead>Topic</TableHead>
+                <TableHead>Key Concepts</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>01</TableCell>
+                <TableCell>Introduction</TableCell>
+                <TableCell>Level overview, environment setup, and first script</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>02</TableCell>
+                <TableCell>Variables &amp; Data Types</TableCell>
+                <TableCell>let, const, naming conventions, and core types</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>03</TableCell>
+                <TableCell>Operators &amp; Conditions</TableCell>
+                <TableCell>Math, nested conditions, and nullish coalescing</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>04</TableCell>
+                <TableCell>Functions Basics</TableCell>
+                <TableCell>Declarations, arrow functions, and basic scope</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>05</TableCell>
+                <TableCell>Data Structures: Arrays &amp; Strings</TableCell>
+                <TableCell>Iterating and manipulating text and collections</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>06</TableCell>
+                <TableCell>Objects Basics</TableCell>
+                <TableCell>Properties, methods, and shorthand syntax</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>07</TableCell>
+                <TableCell>DOM Manipulation</TableCell>
+                <TableCell>Selecting elements and updating content</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>08</TableCell>
+                <TableCell>Project</TableCell>
+                <TableCell>Interactive Quiz Application</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+      <div>
+        <div>
+          <Typography variant="h2">Key Concepts</Typography>
+          
+          <Typography variant="h3">Variables &amp; Data Types</Typography>
+          <CodeBlock language="javascript">{`// Declaring variables
+const name = "KOOMPI"; // Immutable
+let score = 0;        // Mutable
+
+// Core Data Types
+const string = "Hello";
+const number = 42;
+const boolean = true;
+const array = [1, 2, 3];
+const object = { key: "value" };`}</CodeBlock>
+          
+          <Typography variant="h3">Conditions &amp; Loops</Typography>
+          <CodeBlock language="javascript">{`// If-Else condition
+if (score >= 50) {
+  console.log("You passed!");
+} else {
+  console.log("Try again!");
+}
+
+// For loop
+for (let i = 0; i < 5; i++) {
+  console.log("Iteration:", i);
+}`}</CodeBlock>
+
+          <Typography variant="h3">Functions Basics</Typography>
+          <CodeBlock language="javascript">{`// Basic function declaration
+function greet(user) {
+  return "Hello " + user;
+}
+
+// Arrow function (Modern)
+const add = (a, b) => a + b;
+
+console.log(greet("Apprentice")); // Hello Apprentice`}</CodeBlock>
+
+          <Typography variant="h3">DOM Manipulation</Typography>
+          <CodeBlock language="javascript">{`// Selecting an element
+const title = document.querySelector('h1');
+
+// Changing content
+title.textContent = "New Title";
+
+// Handling events
+const btn = document.querySelector('#btn');
+btn.addEventListener('click', () => {
+  alert('Button clicked!');
+});`}</CodeBlock>
+        </div>
       </div>
       <div>
         <div>
@@ -205,7 +254,7 @@ button.addEventListener('click', function() {
             Time to make your websites interactive!
           </Typography>
           <Typography>
-            Start with Module 02: Introduction to JavaScript
+            Start with Module 01: Introduction to JavaScript
           </Typography>
         </div>
       </div>

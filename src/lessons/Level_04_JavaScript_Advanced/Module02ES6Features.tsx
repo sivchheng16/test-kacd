@@ -82,43 +82,46 @@ const challenge = {
   },
 };
 
-export default function Module01ES6Features() {
+export default function Module02ES6Features() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
       {/* Header */}
-      <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary/60">
-          Track 04 · JavaScript Advanced
-        </p>
-        <h1 className="text-4xl font-serif text-foreground">ES6+ Modern Features</h1>
-        <p className="text-base text-muted-foreground leading-relaxed">
+      <section className="space-y-4">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
+          ES6+ Modern Features
+        </h1>
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           Modern JavaScript (ES6 and beyond) gives you cleaner syntax for common tasks.
-          In this lesson you will master destructuring, spread/rest, template literals,
-          optional chaining, and nullish coalescing — features used in every real-world codebase.
+          Master destructuring, spread/rest, template literals, and defensive operators used 
+          in every real-world codebase.
         </p>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#destructuring" className="text-primary hover:underline">→ Destructuring</a></li>
-          <li><a href="#spread-amp-rest" className="text-primary hover:underline">→ Spread &amp; Rest</a></li>
-          <li><a href="#template-literals" className="text-primary hover:underline">→ Template Literals</a></li>
-          <li><a href="#optional-chaining-amp-nullish-coalescing" className="text-primary hover:underline">→ Optional Chaining &amp; Nullish Coalescing</a></li>
-          <li><a href="#try-it" className="text-primary hover:underline">→ Try it</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#destructuring" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Destructuring</a></li>
+            <li><a href="#spread-amp-rest" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Spread & Rest</a></li>
+            <li><a href="#template-literals" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Template Literals</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#optional-chaining-amp-nullish-coalescing" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Optional Chaining & Nullish</a></li>
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#challenge" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Challenge</a></li>
+          </ul>
+        </div>
       </section>
 
       {/* Destructuring */}
       <section id="destructuring" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Destructuring</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Destructuring</h2>
         <p className="text-base text-muted-foreground">
           Destructuring extracts values from objects or arrays into named variables without
           repeated property access.
@@ -167,11 +170,29 @@ console.log(a, b); // 2 1`}
 
       {/* Spread & Rest */}
       <section id="spread-amp-rest" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Spread &amp; Rest</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Spread &amp; Rest</h2>
         <p className="text-base text-muted-foreground">
           The same <code className="font-mono text-sm">...</code> syntax plays two roles: <em>spread</em> expands
           an iterable into individual items; <em>rest</em> collects remaining items into an array.
         </p>
+
+        <div className="rounded-2xl border border-border overflow-hidden">
+          <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
+            Shallow Copy vs Deep Copy
+          </div>
+          <CodeBlock language="javascript">
+          {`// Shallow Copy (using spread)
+const original = { name: "Dara", stats: { hp: 100 } };
+const shallow = { ...original };
+
+shallow.name = "Sokha";       // original.name stays "Dara"
+shallow.stats.hp = 50;        // original.stats.hp ALSO becomes 50! (Shared reference)
+
+// Deep Copy (modern way)
+const deep = structuredClone(original);
+deep.stats.hp = 0;            // original.stats.hp stays 50! (Independent copy)`}
+        </CodeBlock>
+        </div>
 
         <div className="rounded-2xl border border-border overflow-hidden">
           <div className="px-5 py-3 bg-stone-50 border-b border-border text-xs font-mono text-muted-foreground">
@@ -223,7 +244,7 @@ const { name, ...rest } = { name: "Sokha", age: 22, city: "PP" };
 
       {/* Template literals */}
       <section id="template-literals" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Template Literals</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Template Literals</h2>
         <p className="text-base text-muted-foreground">
           Backtick strings support multi-line content and embed any JavaScript expression with{" "}
           <code className="font-mono text-sm">{"${...}"}</code>.
@@ -259,7 +280,7 @@ const html = \`
 
       {/* Optional chaining & nullish */}
       <section id="optional-chaining-amp-nullish-coalescing" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Optional Chaining &amp; Nullish Coalescing</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Optional Chaining &amp; Nullish Coalescing</h2>
         <p className="text-base text-muted-foreground">
           These two operators make defensive code much shorter.
         </p>
@@ -290,7 +311,7 @@ name ?? "Anonymous"; // ""  — empty string is intentional`}
 
       {/* Try it */}
       <section id="try-it" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Try it</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Try it</h2>
         <p className="text-base text-muted-foreground">
           Experiment with all three features. Open the console tab in the playground to see output.
         </p>
@@ -301,22 +322,33 @@ name ?? "Anonymous"; // ""  — empty string is intentional`}
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
-        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
-          <p>Modern JavaScript features make your code cleaner and safer:</p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><strong>Destructuring</strong> lets you extract values from objects and arrays into variables in one line.</li>
-            <li>The <strong>Spread operator (...)</strong> expands iterables, while the <strong>Rest operator</strong> collects remaining items.</li>
-            <li><strong>Template literals</strong> allow multi-line strings and easy expression embedding.</li>
-            <li><strong>Optional chaining (?.)</strong> prevents errors when accessing properties of null/undefined.</li>
-            <li><strong>Nullish coalescing (??)</strong> provides a default value only when a variable is null or undefined.</li>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
+        <div className="p-8 rounded-2xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-4 text-base leading-relaxed shadow-inner">
+          <p className="font-semibold">In this module, you've learned:</p>
+          <ul className="space-y-3">
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Destructuring** extracts values from arrays and objects elegantly.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Spread (...)** creates shallow copies, while **structuredClone()** creates deep copies.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Optional Chaining (?.)** and **Nullish Coalescing (??)** provide safety for missing data.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Template Literals** enable multi-line strings and easy expression embedding.</span>
+            </li>
           </ul>
         </div>
       </section>
 
       {/* Challenge */}
       <section id="challenge" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Challenge</h2>
         <p className="text-base text-muted-foreground">
           Destructure at least 3 keys from <code className="font-mono text-sm">product</code> and
           use the spread operator to merge <code className="font-mono text-sm">product</code> with{" "}

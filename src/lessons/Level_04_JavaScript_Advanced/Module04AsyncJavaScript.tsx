@@ -75,43 +75,46 @@ const challenge = {
   },
 };
 
-export default function Module02AsyncJavaScript() {
+export default function Module04AsyncJavaScript() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
       {/* Header */}
-      <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary/60">
-          Track 04 · JavaScript Advanced
-        </p>
-        <h1 className="text-4xl font-serif text-foreground">Asynchronous JavaScript</h1>
-        <p className="text-base text-muted-foreground leading-relaxed">
-          Almost everything that makes a web app interesting — fetching data, waiting for a user,
-          reading a file — is asynchronous. This lesson walks you through the event loop,
-          Promises, and the <code className="font-mono text-sm">async/await</code> syntax that makes
-          async code as readable as synchronous code.
+      <section className="space-y-4">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
+          Asynchronous JavaScript
+        </h1>
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+          Almost everything that makes a web app interesting — fetching data, waiting for a user, 
+          reading a file — is asynchronous. This lesson walks you through the event loop, Promises, and the async/await syntax 
+          that makes async code as readable as synchronous code.
         </p>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#why-async-exists" className="text-primary hover:underline">→ Why Async Exists</a></li>
-          <li><a href="#callbacks-brief" className="text-primary hover:underline">→ Callbacks (Brief)</a></li>
-          <li><a href="#promises" className="text-primary hover:underline">→ Promises</a></li>
-          <li><a href="#async-await" className="text-primary hover:underline">→ async / await</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#why-async-exists" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Why Async Exists</a></li>
+            <li><a href="#callbacks-brief" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Callbacks (Brief)</a></li>
+            <li><a href="#promises" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Promises</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#async-await" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ async / await</a></li>
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#challenge" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Challenge</a></li>
+          </ul>
+        </div>
       </section>
 
       {/* The Event Loop */}
       <section id="why-async-exists" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Why Async Exists</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Why Async Exists</h2>
         <p className="text-base text-muted-foreground">
           JavaScript runs on a single thread. Without async, any slow operation — a network
           request, a timer, a large computation — would freeze the entire page. The <em>event
@@ -142,7 +145,7 @@ console.log("C");
 
       {/* Callbacks */}
       <section id="callbacks-brief" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Callbacks (Brief)</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Callbacks (Brief)</h2>
         <p className="text-base text-muted-foreground">
           The original async pattern: pass a function to be called later. Simple for single
           operations, but deeply nested callbacks become unreadable — the so-called
@@ -172,7 +175,7 @@ console.log("C");
 
       {/* Promises */}
       <section id="promises" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Promises</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Promises</h2>
         <p className="text-base text-muted-foreground">
           A Promise is an object that represents a value which may arrive now, later, or never.
           It has three states: <em>pending</em>, <em>fulfilled</em>, or <em>rejected</em>.
@@ -215,7 +218,7 @@ Promise.all([fetchUser(1), fetchUser(2), fetchUser(3)])
 
       {/* Async/await */}
       <section id="async-await" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">async / await</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">async / await</h2>
         <p className="text-base text-muted-foreground">
           The <code className="font-mono text-sm">async</code> keyword makes a function return a
           Promise. Inside it, <code className="font-mono text-sm">await</code> pauses execution
@@ -269,7 +272,7 @@ async function parallel() {
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
         <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
           <p>Asynchronous programming is key to a smooth web experience:</p>
           <ul className="list-disc pl-5 space-y-1">
@@ -284,7 +287,7 @@ async function parallel() {
 
       {/* Challenge */}
       <section id="challenge" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Challenge</h2>
         <p className="text-base text-muted-foreground">
           Write an async function called <code className="font-mono text-sm">wait</code> that
           creates a real 1-second delay using{" "}

@@ -133,38 +133,39 @@ export default function Module06ClassesOOP() {
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
       {/* Header */}
-      <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary/60">
-          Track 04 · JavaScript Advanced
-        </p>
-        <h1 className="text-4xl font-serif text-foreground">Classes &amp; OOP</h1>
-        <p className="text-xl md:text-2xl text-foreground leading-relaxed font-serif">
+      <section className="space-y-4">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
+          Classes &amp; OOP
+        </h1>
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           Objects hold data and behaviour together. A class is a blueprint — define the shape once,
           stamp out as many instances as you need.
         </p>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#you-already-know-object-literals" className="text-primary hover:underline">→ You already know object literals</a></li>
-          <li><a href="#the-class-blueprint" className="text-primary hover:underline">→ The class blueprint</a></li>
-          <li><a href="#inheritance-with-extends" className="text-primary hover:underline">→ Inheritance with extends</a></li>
-          <li><a href="#private-fields-with" className="text-primary hover:underline">→ Private fields with #</a></li>
-          <li><a href="#static-methods-amp-properties" className="text-primary hover:underline">→ Static methods &amp; properties</a></li>
-          <li><a href="#the-this-problem-in-callbacks" className="text-primary hover:underline">→ The this problem in callbacks</a></li>
-          <li><a href="#when-to-use-classes" className="text-primary hover:underline">→ When to use classes</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#the-class-blueprint" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ The class blueprint</a></li>
+            <li><a href="#inheritance-with-extends" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Inheritance with extends</a></li>
+            <li><a href="#private-fields" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Private fields with #</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#static-methods" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Static methods</a></li>
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#challenge" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Challenge</a></li>
+          </ul>
+        </div>
       </section>
 
       {/* Object literals recap */}
       <section id="you-already-know-object-literals" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">You already know object literals</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">You already know object literals</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A plain object bundles related values and functions under one name. You have been writing
           these since the fundamentals track.
@@ -193,7 +194,7 @@ console.log(user.greet()); // "Hi, I'm Alice"`}
 
       {/* Class syntax */}
       <section id="the-class-blueprint" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">The class blueprint</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">The class blueprint</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A class defines the constructor (runs once when you call <code className="font-mono text-sm">new</code>)
           and the methods shared by every instance.
@@ -240,7 +241,7 @@ cat.speak(); // "Luna says Meow"`}
 
       {/* Inheritance */}
       <section id="inheritance-with-extends" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Inheritance with <code className="font-mono">extends</code></h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Inheritance with <code className="font-mono">extends</code></h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A subclass inherits every method from its parent and can add or override its own.
           Call <code className="font-mono text-sm">super()</code> first in the constructor to
@@ -270,8 +271,8 @@ rex.fetch("ball");  // own method → "Rex fetches the ball!"`}
       </section>
 
       {/* Private fields */}
-      <section id="private-fields-with" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Private fields with <code className="font-mono">#</code></h2>
+      <section id="private-fields" className="space-y-4">
+        <h2 className="text-3xl font-serif font-medium text-foreground">Private fields with <code className="font-mono">#</code></h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Prefix a field name with <code className="font-mono text-sm">#</code> and it becomes
           truly private — readable and writable only from inside the class body. Any access from
@@ -286,8 +287,8 @@ rex.fetch("ball");  // own method → "Rex fetches the ball!"`}
       </section>
 
       {/* Static methods */}
-      <section id="static-methods-amp-properties" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Static methods &amp; properties</h2>
+      <section id="static-methods" className="space-y-4">
+        <h2 className="text-3xl font-serif font-medium text-foreground">Static methods &amp; properties</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           A <code className="font-mono text-sm">static</code> member belongs to the class itself,
           not to any instance. Call it directly on the class name — no <code className="font-mono text-sm">new</code> needed.
@@ -298,7 +299,7 @@ rex.fetch("ball");  // own method → "Rex fetches the ball!"`}
 
       {/* The this problem */}
       <section id="the-this-problem-in-callbacks" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">The <code className="font-mono">this</code> problem in callbacks</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">The <code className="font-mono">this</code> problem in callbacks</h2>
         <p className="text-base text-muted-foreground leading-relaxed">
           Inside a regular method, <code className="font-mono text-sm">this</code> is the instance.
           But the moment you pass that method as a callback, <code className="font-mono text-sm">this</code>{" "}
@@ -340,7 +341,7 @@ new Timer("Pomodoro").startFixed(); // "Pomodoro"`}
 
       {/* When to use */}
       <section id="when-to-use-classes" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">When to use classes</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">When to use classes</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="rounded-2xl border border-border px-5 py-4 space-y-2">
             <p className="text-sm font-semibold text-foreground">Reach for a class when…</p>
@@ -369,7 +370,7 @@ new Timer("Pomodoro").startFixed(); // "Pomodoro"`}
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
         <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
           <p>Object-Oriented Programming provides structure for complex data:</p>
           <ul className="list-disc pl-5 space-y-1">
@@ -385,7 +386,7 @@ new Timer("Pomodoro").startFixed(); // "Pomodoro"`}
       {/* Challenge */}
       <section id="challenge" className="space-y-4">
         <div>
-          <h2 className="text-2xl font-serif text-foreground">Challenge</h2>
+          <h2 className="text-3xl font-serif font-medium text-foreground">Challenge</h2>
           <p className="text-base text-muted-foreground mt-1">
             Create a <code className="font-mono text-sm">Rectangle</code> class. The constructor takes{" "}
             <code className="font-mono text-sm">width</code> and{" "}

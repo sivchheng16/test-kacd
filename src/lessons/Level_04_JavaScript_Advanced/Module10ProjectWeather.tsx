@@ -64,41 +64,45 @@ const challenge = {
   },
 };
 
-export default function Module05ProjectWeather() {
+export default function Module09ProjectWeather() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { notifyChallengePassed, isLessonUnlocked } = useProgress();
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
       {/* Header */}
-      <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary/60">
-          Track 04 · JavaScript Advanced · Capstone
-        </p>
-        <h1 className="text-4xl font-serif text-foreground">Project: Weather App</h1>
-        <p className="text-base text-muted-foreground leading-relaxed">
+      <section className="space-y-4">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
+          Project: Weather App
+        </h1>
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           Put everything together — async/await, fetch, error handling, and DOM manipulation —
           to build a working weather display that calls a real API with no API key required.
         </p>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#what-you-will-build" className="text-primary hover:underline">→ What You Will Build</a></li>
-          <li><a href="#the-open-meteo-api" className="text-primary hover:underline">→ The Open-Meteo API</a></li>
-          <li><a href="#build-steps" className="text-primary hover:underline">→ Build Steps</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-          <li><a href="#try-it-build-it" className="text-primary hover:underline">→ Try it / Build it</a></li>
-          <li><a href="#take-it-further" className="text-primary hover:underline">→ Take It Further</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#what-you-will-build" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ What You Will Build</a></li>
+            <li><a href="#the-open-meteo-api" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ The Open-Meteo API</a></li>
+            <li><a href="#build-steps" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Build Steps</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#try-it-build-it" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Try it / Build it</a></li>
+            <li><a href="#take-it-further" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Take It Further</a></li>
+          </ul>
+        </div>
       </section>
 
       {/* What you will build */}
       <section id="what-you-will-build" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">What You Will Build</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">What You Will Build</h2>
         <p className="text-base text-muted-foreground">
           A small web page with latitude/longitude inputs. When the user clicks Go, you fetch
           current weather from the{" "}
@@ -130,7 +134,7 @@ export default function Module05ProjectWeather() {
 
       {/* The API */}
       <section id="the-open-meteo-api" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">The Open-Meteo API</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">The Open-Meteo API</h2>
         <p className="text-base text-muted-foreground">
           Open-Meteo is a free, open-source weather API. The endpoint below returns current
           weather for any latitude/longitude — no API key, no account.
@@ -167,7 +171,7 @@ export default function Module05ProjectWeather() {
 
       {/* Build steps */}
       <section id="build-steps" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Build Steps</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Build Steps</h2>
 
         <ol className="space-y-3 text-sm text-muted-foreground list-decimal list-inside">
           <li>Add a <code className="font-mono">div#result</code> to display the fetched data.</li>
@@ -181,7 +185,7 @@ export default function Module05ProjectWeather() {
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
         <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
           <p>This capstone project integrates all the core skills of modern JS:</p>
           <ul className="list-disc pl-5 space-y-1">
@@ -195,7 +199,7 @@ export default function Module05ProjectWeather() {
 
       {/* Playground */}
       <section id="try-it-build-it" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Try it / Build it</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Try it / Build it</h2>
         <p className="text-base text-muted-foreground">
           A working starter is provided below. Click <strong>Go</strong> in the preview to see
           Phnom Penh's live weather. Then extend the code — add a loading state, show the
@@ -212,7 +216,7 @@ export default function Module05ProjectWeather() {
 
       {/* Extensions */}
       <section id="take-it-further" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Take It Further</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Take It Further</h2>
         <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
           <li>Add a loading spinner while the request is in-flight.</li>
           <li>Map the <code className="font-mono">weathercode</code> integer to a description (e.g. 0 = Clear sky).</li>

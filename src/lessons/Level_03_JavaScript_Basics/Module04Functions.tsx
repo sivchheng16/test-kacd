@@ -11,17 +11,14 @@ export default function Module04Functions() {
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
-      {/* Hook */}
+      {/* Header */}
       <section className="space-y-4">
-        <div className="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold tracking-wide uppercase">
-          Module 04 — JavaScript Basics
-        </div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
           Functions
         </h1>
-        <p className="text-lg text-muted-foreground leading-relaxed">
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           Imagine you need to calculate a tuk-tuk fare ten different places in your
           app. You don't paste the same math ten times — you write it once inside a
           function and call it whenever you need it. Functions are reusable blocks
@@ -29,20 +26,26 @@ export default function Module04Functions() {
         </p>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#function-declaration" className="text-primary hover:underline">→ Function declaration</a></li>
-          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
-          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#function-declaration" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Function declaration</a></li>
+            <li><a href="#arrow-functions" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Arrow functions</a></li>
+            <li><a href="#parameters" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Parameters vs Arguments</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#scope" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Scope (Global vs Local)</a></li>
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#challenge" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Challenge</a></li>
+          </ul>
+        </div>
       </section>
 
       {/* Concept */}
       <section id="function-declaration" className="space-y-6">
-        <h2 className="text-xl font-semibold text-foreground">Function declaration</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Function declaration</h2>
         <CodeBlock language="javascript">
           {`function greet(name) {
   return "Hello, " + name + "!";
@@ -57,7 +60,7 @@ document.write(message); // Hello, Sokha!`}
           a value back to whoever called the function.
         </p>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">Arrow functions</h2>
+        <h2 id="arrow-functions" className="text-3xl font-serif font-medium text-foreground pt-4">Arrow functions</h2>
         <p className="text-muted-foreground leading-relaxed">
           Modern JavaScript uses arrow functions — shorter syntax, same idea:
         </p>
@@ -78,7 +81,7 @@ const addShort = (a, b) => a + b;
 document.write(addShort(3, 4)); // 7`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">Parameters vs arguments</h2>
+        <h2 id="parameters" className="text-3xl font-serif font-medium text-foreground pt-4">Parameters vs arguments</h2>
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div className="rounded-xl border border-border bg-stone-50 px-4 py-3">
             <p className="font-semibold text-foreground mb-1">Parameter</p>
@@ -94,7 +97,7 @@ document.write(addShort(3, 4)); // 7`}
           </div>
         </div>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">Default parameters</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground pt-4">Default parameters</h2>
         <CodeBlock language="javascript">
           {`const greet = (name = "friend") => \`Hello, \${name}!\`;
 
@@ -103,23 +106,50 @@ document.write("<br>");
 document.write(greet());        // Hello, friend!`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">Scope — where variables live</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground pt-4">Function Expressions</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          You can also store a function inside a variable. This is called a **Function Expression**.
+        </p>
         <CodeBlock language="javascript">
-          {`const city = "Phnom Penh"; // global — visible everywhere
+          {`// Function stored in a variable
+const sayHi = function(name) {
+  return "Hi, " + name;
+};
+
+console.log(sayHi("Dara")); // "Hi, Dara"`}
+        </CodeBlock>
+
+        <h2 className="text-3xl font-serif font-medium text-foreground pt-4">Anonymous Functions</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          A function without a name is an **Anonymous Function**. These are often used as "callbacks" — functions passed into other functions (like event listeners).
+        </p>
+        <CodeBlock language="javascript">
+          {`// The function inside addEventListener has no name!
+button.addEventListener("click", function() {
+  console.log("Button clicked!");
+});`}
+        </CodeBlock>
+
+        <h2 id="scope" className="text-3xl font-serif font-medium text-foreground pt-4">Scope — where variables live</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          Variables created inside a function are **Local**. Variables created outside are **Global**.
+        </p>
+        <CodeBlock language="javascript">
+          {`const city = "Phnom Penh"; // Global — visible everywhere
 
 function showCity() {
-  const district = "Chamkarmon"; // local — only inside here
-  document.write(city + ", " + district);
+  const district = "Chamkarmon"; // Local — only inside here
+  console.log(city + ", " + district);
 }
 
 showCity();
-// document.write(district); // Error — district is local to the function`}
+// console.log(district); // Error! district is local to the function.`}
         </CodeBlock>
       </section>
 
       {/* Example */}
       <section id="live-example" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Live example — fare calculator function</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Live example — fare calculator function</h2>
         <p className="text-sm text-muted-foreground">
           The function takes a distance, applies the rate, and returns the fare.
           Call it multiple times with different arguments.
@@ -140,7 +170,7 @@ document.write("15 km (premium 3500/km): " + calcFare(15, 3500) + " ៛");`,
 
       {/* Try it */}
       <section id="try-it-yourself" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Write an arrow function called <code className="font-mono bg-stone-100 px-1 rounded">square</code> that takes
           a number and returns its square. Then call it a few times and write the
@@ -162,22 +192,33 @@ document.write(square(7));          // should be 49`,
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
-        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
-          <p>Functions are the building blocks of reuse. Remember:</p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><strong>Functions</strong> are reusable blocks of code that perform a specific task.</li>
-            <li><strong>Parameters</strong> are the variables in the function definition, while <strong>arguments</strong> are the values passed during a call.</li>
-            <li><strong>Arrow functions</strong> offer a modern, concise syntax for writing functions.</li>
-            <li>Use the <strong>return</strong> keyword to send a value back from a function.</li>
-            <li><strong>Scope</strong> determines where variables are accessible (Global vs. Local).</li>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
+        <div className="p-8 rounded-2xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-4 text-base leading-relaxed shadow-inner">
+          <p className="font-semibold">In this module, you've learned:</p>
+          <ul className="space-y-3">
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Function declarations** allow you to create reusable blocks of code.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Arrow functions** and **expressions** offer modern ways to define logic.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Parameters** are placeholders, and **Arguments** are real values.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Scope** determines if a variable is accessible (Global vs Local).</span>
+            </li>
           </ul>
         </div>
       </section>
 
       {/* Challenge */}
       <section id="challenge" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Write an arrow function called <code className="font-mono bg-stone-100 px-1 rounded">greet</code> that accepts
           a <code className="font-mono bg-stone-100 px-1 rounded">name</code> parameter and{" "}

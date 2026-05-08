@@ -1,19 +1,21 @@
-
+  
 import React from 'react';
 import { Typography } from '../../components/ui/Typography';
 import { CodeBlock } from '../../components/ui/CodeBlock';
 import { Table, TableHead, TableBody, TableHeader, TableRow, TableCell } from '../../components/ui/table';
 export default function Introduction() {
   return (
-    <article className="max-w-3xl mx-auto font-sans space-y-10">
-      <div>
-        <div>
-          <Typography variant="h1">Introduction: JavaScript Advanced</Typography>
-          <Typography variant="lead">
-            Mastering modern ES6+ features, asynchronous programming, and external APIs.
-          </Typography>
-        </div>
-      </div>
+    <article className="max-w-3xl mx-auto font-sans space-y-14 py-8">
+      {/* Header */}
+      <section className="space-y-4">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
+          JavaScript Advanced
+        </h1>
+        <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl font-light">
+          Master modern ES6+ features, asynchronous programming, and complex DOM interactions 
+          that power real-world web applications.
+        </p>
+      </section>
       
       <div>
         <div>
@@ -27,13 +29,18 @@ export default function Introduction() {
           <Typography>
             Modules in this Level:
           </Typography>
-          <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
-            <li>ES6+ Modern Features</li>
-            <li>Asynchronous JavaScript</li>
-            <li>Working with APIs</li>
-            <li>Error Handling &amp; Debugging</li>
-            <li>Project: Weather Dashboard</li>
-          </ul>
+            <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
+              <li>How JavaScript Works (Engine)</li>
+              <li>ES6+ Modern Features</li>
+              <li>Functional Programming</li>
+              <li>Asynchronous JavaScript</li>
+              <li>Working with APIs</li>
+              <li>Classes &amp; OOP</li>
+              <li>Advanced DOM (Bubbling, Delegation)</li>
+              <li>Modules &amp; npm</li>
+              <li>Error Handling &amp; Debugging</li>
+              <li>Project: Weather Dashboard</li>
+            </ul>
         </div>
       </div>
       <div>
@@ -79,33 +86,53 @@ export default function Introduction() {
             <TableBody>
               <TableRow>
                 <TableCell>01</TableCell>
-                <TableCell>Introduction</TableCell>
-                <TableCell>Level overview, objectives, and prerequisites</TableCell>
+                <TableCell>How JS Works</TableCell>
+                <TableCell>Execution context, hoisting, and closures</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>02</TableCell>
                 <TableCell>ES6+ Features</TableCell>
-                <TableCell>Destructuring, spread, modules</TableCell>
+                <TableCell>Destructuring, spread, and modern syntax</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>03</TableCell>
-                <TableCell>Async JavaScript</TableCell>
-                <TableCell>Promises, async/await, callbacks</TableCell>
+                <TableCell>Functional Programming</TableCell>
+                <TableCell>Map, Filter, Reduce, and Higher-Order Functions</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>04</TableCell>
-                <TableCell>Working with APIs</TableCell>
-                <TableCell>Fetch, JSON, REST APIs</TableCell>
+                <TableCell>Async JavaScript</TableCell>
+                <TableCell>Promises, async/await, and event loop</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>05</TableCell>
-                <TableCell>Error Handling</TableCell>
-                <TableCell>Try/catch, debugging strategies</TableCell>
+                <TableCell>Working with APIs</TableCell>
+                <TableCell>Fetch API, REST, and JSON</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>06</TableCell>
+                <TableCell>Classes &amp; OOP</TableCell>
+                <TableCell>this keyword, prototypes, and inheritance</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>07</TableCell>
+                <TableCell>Advanced DOM</TableCell>
+                <TableCell>Bubbling, capturing, and delegation</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>08</TableCell>
+                <TableCell>Modules &amp; npm</TableCell>
+                <TableCell>ES Modules and package management</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>09</TableCell>
+                <TableCell>Error Handling</TableCell>
+                <TableCell>Try/catch and debugging strategies</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>10</TableCell>
                 <TableCell>Project</TableCell>
-                <TableCell>Weather Dashboard</TableCell>
+                <TableCell>Weather Dashboard Application</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -147,7 +174,7 @@ const add = (a, b) => a + b;`}</CodeBlock>
             To complete Track 04:
           </Typography>
           <ul className="list-disc pl-8 mb-6 space-y-2 text-text-secondary">
-            <li>All 5 modules studied</li>
+            <li>All 10 modules studied</li>
             <li>Understand async/await</li>
             <li>Can fetch data from APIs</li>
             <li>Weather Dashboard working</li>
@@ -162,7 +189,7 @@ const add = (a, b) => a + b;`}</CodeBlock>
             Real apps need real data!
           </Typography>
           <Typography>
-            Start with Module 02: ES6+ Features
+            Start with Module 01: How JS Works
           </Typography>
         </div>
       </div>

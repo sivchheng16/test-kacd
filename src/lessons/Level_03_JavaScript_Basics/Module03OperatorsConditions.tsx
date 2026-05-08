@@ -11,17 +11,14 @@ export default function Module03OperatorsConditions() {
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
-      {/* Hook */}
+      {/* Header */}
       <section className="space-y-4">
-        <div className="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold tracking-wide uppercase">
-          Module 03 — JavaScript Basics
-        </div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
           Operators &amp; Conditions
         </h1>
-        <p className="text-lg text-muted-foreground leading-relaxed">
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           Real apps make decisions. "Is the user logged in? Show the dashboard,
           otherwise show the login page." Conditions are how JavaScript chooses one
           path over another. Operators are the tools you use to describe those
@@ -29,20 +26,26 @@ export default function Module03OperatorsConditions() {
         </p>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#arithmetic-operators" className="text-primary hover:underline">→ Arithmetic operators</a></li>
-          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
-          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#arithmetic-operators" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Arithmetic operators</a></li>
+            <li><a href="#comparison-operators" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Comparison operators</a></li>
+            <li><a href="#logical-operators" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Logical operators</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#if-else" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ if / else</a></li>
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#challenge" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Challenge</a></li>
+          </ul>
+        </div>
       </section>
 
       {/* Concept */}
       <section id="arithmetic-operators" className="space-y-6">
-        <h2 className="text-xl font-semibold text-foreground">Arithmetic operators</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Arithmetic operators</h2>
         <CodeBlock language="javascript">
           {`let price = 10000; // KHR
 let qty   = 3;
@@ -54,7 +57,7 @@ document.write(price / 4000);      // 2.5    — divide (USD)
 document.write(10 % 3);            // 1      — remainder (modulo)`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">Comparison operators</h2>
+        <h2 id="comparison-operators" className="text-3xl font-serif font-medium text-foreground pt-4">Comparison operators</h2>
         <p className="text-muted-foreground leading-relaxed">
           These always return <code className="font-mono bg-stone-100 px-1 rounded">true</code> or{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">false</code>.
@@ -89,7 +92,7 @@ document.write(10 % 3);            // 1      — remainder (modulo)`}
           </table>
         </div>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">Logical operators</h2>
+        <h2 id="logical-operators" className="text-3xl font-serif font-medium text-foreground pt-4">Logical operators</h2>
         <CodeBlock language="javascript">
           {`const age = 20;
 const hasTicket = true;
@@ -113,7 +116,7 @@ if (!isLoggedIn) {
 }`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">if / else</h2>
+        <h2 id="if-else" className="text-3xl font-serif font-medium text-foreground pt-4">if / else</h2>
         <CodeBlock language="javascript">
           {`const score = 75;
 
@@ -126,17 +129,45 @@ if (score >= 80) {
 }`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">Ternary — one-line if/else</h2>
-        <CodeBlock language="json">
+        <h2 className="text-3xl font-serif font-medium text-foreground pt-4">Ternary — one-line if/else</h2>
+        <CodeBlock language="javascript">
           {`const hour = 14;
 const greeting = hour < 12 ? "Good morning" : "Good afternoon";
-document.write(greeting); // Good afternoon`}
+console.log(greeting); // Good afternoon`}
+        </CodeBlock>
+
+        <h2 className="text-3xl font-serif font-medium text-foreground pt-4">Nullish Coalescing (??)</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          The <code className="font-mono bg-stone-100 px-1 rounded">??</code> operator provides a default value when something is <code className="font-mono bg-stone-100 px-1 rounded">null</code> or <code className="font-mono bg-stone-100 px-1 rounded">undefined</code>.
+        </p>
+        <CodeBlock language="javascript">
+          {`let username = null;
+let displayName = username ?? "Guest User";
+
+console.log(displayName); // "Guest User"`}
+        </CodeBlock>
+
+        <h2 className="text-3xl font-serif font-medium text-foreground pt-4">Nested Conditionals</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          You can put an <code className="font-mono bg-stone-100 px-1 rounded">if</code> inside another <code className="font-mono bg-stone-100 px-1 rounded">if</code> to check for multiple layers of logic.
+        </p>
+        <CodeBlock language="javascript">
+          {`const isRainy = true;
+const hasUmbrella = false;
+
+if (isRainy) {
+  if (hasUmbrella) {
+    console.log("Walk outside safely.");
+  } else {
+    console.log("Stay inside, you'll get wet!");
+  }
+}`}
         </CodeBlock>
       </section>
 
       {/* Example */}
       <section id="live-example" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Live example — tuk-tuk fare calculator</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Live example — tuk-tuk fare calculator</h2>
         <p className="text-sm text-muted-foreground">
           Change the distance and see the fare logic branch differently.
         </p>
@@ -164,7 +195,7 @@ document.write(message);`,
 
       {/* Try it */}
       <section id="try-it-yourself" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Write an if/else that checks whether a temperature is hot (&gt; 35°C),
           comfortable (20–35°C), or cool (&lt; 20°C) and writes a message.
@@ -182,22 +213,33 @@ document.write(message);`,
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
-        <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
-          <p>Important points to remember about decision making in JS:</p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><strong>Arithmetic operators</strong> (+, -, *, /, %) perform math calculations.</li>
-            <li><strong>Comparison operators</strong> (===, !==, &gt;, &lt;) return booleans.</li>
-            <li><strong>Logical operators</strong> (&&, ||, !) combine or flip conditions.</li>
-            <li><strong>if / else if / else</strong> blocks let you run different code based on conditions.</li>
-            <li>The <strong>ternary operator</strong> is a shorthand for simple if/else decisions.</li>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
+        <div className="p-8 rounded-2xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-4 text-base leading-relaxed shadow-inner">
+          <p className="font-semibold">In this module, you've learned:</p>
+          <ul className="space-y-3">
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Comparison operators** (===, !==, &gt;, &lt;) return booleans.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**Logical operators** (&&, ||, !) combine or flip conditions.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**if/else** blocks allow for complex branching logic.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
+              <span>**?? (Nullish Coalescing)** provides a safe default for missing values.</span>
+            </li>
           </ul>
         </div>
       </section>
 
       {/* Challenge */}
       <section id="challenge" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Declare a number variable. Write an{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">if</code> /{" "}

@@ -11,37 +11,40 @@ export default function Module02VariablesDataTypes() {
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
-      {/* Hook */}
+      {/* Header */}
       <section className="space-y-4">
-        <div className="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold tracking-wide uppercase">
-          Module 02 — JavaScript Basics
-        </div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
           Variables &amp; Data Types
         </h1>
-        <p className="text-lg text-muted-foreground leading-relaxed">
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           Every app stores information — a user's name, a price in riel, a score in
           a game. Variables are how JavaScript remembers things. Get this right and
           you'll have the foundation for everything else.
         </p>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <ul className="space-y-1.5 text-sm">
-          <li><a href="#declaring-variables" className="text-primary hover:underline">→ Declaring variables</a></li>
-          <li><a href="#live-example" className="text-primary hover:underline">→ Live example</a></li>
-          <li><a href="#try-it-yourself" className="text-primary hover:underline">→ Try it yourself</a></li>
-          <li><a href="#summary" className="text-primary hover:underline">→ Summary</a></li>
-          <li><a href="#challenge" className="text-primary hover:underline">→ Challenge</a></li>
-        </ul>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#declaring-variables" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Declaring variables</a></li>
+            <li><a href="#naming-conventions" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Naming Conventions</a></li>
+            <li><a href="#data-types" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Basic Data Types</a></li>
+          </ul>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#template-literals" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Template Literals</a></li>
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#challenge" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Challenge</a></li>
+          </ul>
+        </div>
       </section>
 
       {/* Concept */}
       <section id="declaring-variables" className="space-y-6">
-        <h2 className="text-xl font-semibold text-foreground">Declaring variables</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Declaring variables</h2>
         <p className="text-muted-foreground leading-relaxed">
           There are three keywords. In modern JavaScript you only need two of them:
         </p>
@@ -81,7 +84,26 @@ let score = 0;               // will change as user plays
 score = score + 10;          // ✅ fine — let can change`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">The four basic data types</h2>
+        <h2 id="naming-conventions" className="text-3xl font-serif font-medium text-foreground pt-4">Variable Naming Conventions</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          How you name your variables matters. Good names make code readable and help you avoid errors.
+        </p>
+        <ul className="space-y-3 text-sm text-muted-foreground list-none pl-0">
+          <li className="flex gap-3 p-3 bg-stone-50 rounded-lg border">
+            <span className="text-green-600 font-bold shrink-0">✓</span>
+            <span><strong>camelCase</strong>: This is the JS standard. Start with lowercase, then capitalize each new word (e.g., <code>userName</code>, <code>totalPrice</code>).</span>
+          </li>
+          <li className="flex gap-3 p-3 bg-stone-50 rounded-lg border">
+            <span className="text-green-600 font-bold shrink-0">✓</span>
+            <span><strong>Descriptive Names</strong>: Choose names that explain the data. Use <code>priceInRiel</code> instead of just <code>p</code>.</span>
+          </li>
+          <li className="flex gap-3 p-3 bg-stone-50 rounded-lg border">
+            <span className="text-red-500 font-bold shrink-0">✗</span>
+            <span><strong>Reserved Keywords</strong>: You cannot use words that JS already uses for logic, like <code>let</code>, <code>const</code>, or <code>function</code>.</span>
+          </li>
+        </ul>
+
+        <h2 id="data-types" className="text-3xl font-serif font-medium text-foreground pt-4">The four basic data types</h2>
         <div className="grid grid-cols-2 gap-4">
           {[
             { type: "String", example: `"Hello"  'Sokha'`, desc: "Text — always in quotes" },
@@ -97,7 +119,7 @@ score = score + 10;          // ✅ fine — let can change`}
           ))}
         </div>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">Template literals</h2>
+        <h2 id="template-literals" className="text-3xl font-serif font-medium text-foreground pt-4">Template literals</h2>
         <p className="text-muted-foreground leading-relaxed">
           Use backticks (<code className="font-mono bg-stone-100 px-1 rounded">` `</code>) instead of quotes and embed
           variables with <code className="font-mono bg-stone-100 px-1 rounded">{`\${}`}</code>. Much cleaner than string
@@ -115,7 +137,7 @@ console.log(\`Hello \${name}, price is \${price} ៛\`);
 // → Hello Dara, price is 4000 ៛`}
         </CodeBlock>
 
-        <h2 className="text-xl font-semibold text-foreground pt-4">Checking types with typeof</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground pt-4">Checking types with typeof</h2>
         <CodeBlock language="javascript">
           {`console.log(typeof "hello");   // "string"
 console.log(typeof 42);        // "number"
@@ -126,7 +148,7 @@ console.log(typeof undefined); // "undefined"`}
 
       {/* Example */}
       <section id="live-example" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Live example — a Cambodian market price tag</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Live example — a Cambodian market price tag</h2>
         <p className="text-sm text-muted-foreground">
           Read the code, then tweak the values and watch the preview update.
         </p>
@@ -150,7 +172,7 @@ document.write("<pre>" + tag + "</pre>");`,
 
       {/* Try it */}
       <section id="try-it-yourself" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Try it yourself</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Try it yourself</h2>
         <p className="text-sm text-muted-foreground">
           Declare some variables about yourself — your name, your age, your hometown — and
           use a template literal to display them on the page.
@@ -170,7 +192,7 @@ document.write(\`Hello, I am \${name} and I am \${age} years old.\`);`,
 
       {/* ── Summary ───────────────────────────────────────── */}
       <section id="summary" className="space-y-4">
-        <h2 className="text-2xl font-serif text-foreground">Summary</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Summary</h2>
         <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-100 text-blue-900 space-y-3 text-base leading-relaxed">
           <p>Key takeaways from this module:</p>
           <ul className="list-disc pl-5 space-y-1">
@@ -185,7 +207,7 @@ document.write(\`Hello, I am \${name} and I am \${age} years old.\`);`,
 
       {/* Challenge */}
       <section id="challenge" className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Challenge</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Challenge</h2>
         <p className="text-sm text-muted-foreground">
           Declare a <code className="font-mono bg-stone-100 px-1 rounded">const</code> for a name (string) and a{" "}
           <code className="font-mono bg-stone-100 px-1 rounded">let</code> for an age (number), then write a template

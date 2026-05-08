@@ -11,67 +11,47 @@ export default function Module01Introduction() {
   const unlocked = isLessonUnlocked(moduleId ?? "");
 
   return (
-    <article className="max-w-3xl mx-auto space-y-14 font-sans">
+    <article className="max-w-3xl mx-auto space-y-14 font-sans py-8">
 
-      {/* Hook */}
+      {/* Header */}
       <section className="space-y-4">
-        <div className="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold tracking-wide uppercase">
-          Module 01 — JavaScript Basics
-        </div>
-        <h1 className="text-4xl font-bold tracking-tight text-foreground">
+        <h1 className="text-5xl font-serif font-medium tracking-tight text-foreground">
           Introduction to JavaScript
         </h1>
-        <p className="text-lg text-muted-foreground leading-relaxed italic">
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl italic">
           "HTML gives a page its bones, CSS gives it a face, and JavaScript gives
           it a brain."
         </p>
-        <p className="text-lg text-muted-foreground leading-relaxed">
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           Every interactive feature you've ever used on the web —
           a live search box, a chat bubble, a button that does something —
           is powered by JavaScript. In this lesson you'll write your very first
           JavaScript and see results right in the browser.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-          {[
-            { label: "HTML", desc: "Structure — The Bones", color: "bg-orange-50 border-orange-100 text-orange-900" },
-            { label: "CSS", desc: "Style — The Skin", color: "bg-blue-50 border-blue-100 text-blue-900" },
-            { label: "JavaScript", desc: "Behaviour — The Brain", color: "bg-amber-50 border-amber-100 text-amber-900" },
-          ].map(({ label, desc, color }) => (
-            <div
-              key={label}
-              className={`rounded-2xl border px-5 py-4 text-center transition-all hover:shadow-md ${color}`}
-            >
-              <p className="font-mono font-bold text-lg">{label}</p>
-              <p className="text-xs opacity-80 mt-1">{desc}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
-      <section className="rounded-xl bg-stone-50 border border-border px-6 py-5 space-y-3">
-        <p className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">In this module</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
-          <ul className="space-y-2 text-sm">
-            <li><a href="#adding-js" className="text-primary hover:underline">→ Adding JS to a page</a></li>
-            <li><a href="#connecting-files" className="text-primary hover:underline">→ Connecting Files</a></li>
-            <li><a href="#viewing-console" className="text-primary hover:underline">→ Viewing the Console</a></li>
-            <li><a href="#alert-dialog" className="text-primary hover:underline">→ The Alert Dialog</a></li>
-            <li><a href="#inner-html" className="text-primary hover:underline">→ Updating the Page</a></li>
+      {/* Navigation Box */}
+      <section className="rounded-[2.5rem] bg-stone-50/50 border border-stone-200/60 p-10 space-y-5">
+        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-stone-400">In this module</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#adding-js" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Adding JS to a page</a></li>
+            <li><a href="#connecting-files" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Connecting Files</a></li>
+            <li><a href="#viewing-console" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Viewing the Console</a></li>
+            <li><a href="#alert-dialog" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ The Alert Dialog</a></li>
           </ul>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#output-methods" className="text-primary hover:underline">→ Output Methods</a></li>
-            <li><a href="#live-example" className="text-primary hover:underline flex items-center gap-2">→ Live Example</a></li>
-            <li><a href="#challenge" className="text-primary hover:underline flex items-center gap-2">→ Final Challenge</a></li>
+          <ul className="space-y-3 text-[15px] font-medium">
+            <li><a href="#inner-html" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Updating the Page</a></li>
+            <li><a href="#output-methods" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Output Methods</a></li>
+            <li><a href="#summary" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Summary</a></li>
+            <li><a href="#challenge" className="text-orange-500 hover:text-orange-600 flex items-center gap-2">→ Challenge</a></li>
           </ul>
         </div>
       </section>
 
       {/* Adding JS */}
       <section id="adding-js" className="space-y-6">
-        <div className="flex items-center gap-3">
-
-          <h2 className="text-2xl font-bold text-foreground">Adding JS to a page</h2>
-        </div>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Adding JS to a page</h2>
         <p className="text-muted-foreground leading-relaxed">
           The most common way to start is putting a <code className="font-mono bg-stone-100 px-1 rounded">&lt;script&gt;</code> tag
           at the bottom of your <code className="font-mono bg-stone-100 px-1 rounded">&lt;body&gt;</code>. This ensures that the browser has finished reading your HTML before the JavaScript starts running.
@@ -103,10 +83,7 @@ export default function Module01Introduction() {
 
       {/* Connecting Files */}
       <section id="connecting-files" className="space-y-6 pt-6 border-t border-border/50">
-        <div className="flex items-center gap-3">
-
-          <h2 className="text-2xl font-bold text-foreground">Connecting External Files</h2>
-        </div>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Connecting External Files</h2>
         <p className="text-muted-foreground leading-relaxed">
           As your project grows, putting all your code in one HTML file becomes messy. Instead, we create a separate <code className="font-mono bg-stone-100 px-1 rounded">.js</code> file and link it.
         </p>
@@ -155,10 +132,7 @@ console.log("Connected successfully!");`}
 
       {/* Viewing the Console */}
       <section id="viewing-console" className="space-y-6 pt-6 border-t border-border/50">
-        <div className="flex items-center gap-3">
-
-          <h2 className="text-2xl font-bold text-foreground">Viewing the Console</h2>
-        </div>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Viewing the Console</h2>
         <p className="text-muted-foreground leading-relaxed">
           The <strong>Console</strong> is a hidden panel in your browser used by developers to see "behind the scenes" messages. It's the most important tool for debugging.
         </p>
@@ -195,10 +169,7 @@ console.log("Connected successfully!");`}
 
       {/* The Alert Dialog */}
       <section id="alert-dialog" className="space-y-6 pt-6 border-t border-border/50">
-        <div className="flex items-center gap-3">
-
-          <h2 className="text-2xl font-bold text-foreground">The Alert Dialog</h2>
-        </div>
+        <h2 className="text-3xl font-serif font-medium text-foreground">The Alert Dialog</h2>
         <p className="text-muted-foreground leading-relaxed">
           The <code>alert()</code> function is used to show a message to the user in a small popup window. It stops everything else on the page until the user clicks "OK".
         </p>
@@ -232,10 +203,7 @@ console.log("Connected successfully!");`}
 
       {/* Updating the Page */}
       <section id="inner-html" className="space-y-6 pt-6 border-t border-border/50">
-        <div className="flex items-center gap-3">
-
-          <h2 className="text-2xl font-bold text-foreground">Updating the Page (innerHTML)</h2>
-        </div>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Updating the Page (innerHTML)</h2>
         <p className="text-muted-foreground leading-relaxed">
           The most powerful way to use JavaScript is changing the HTML content of your page while the user is looking at it. We use the <code>.innerHTML</code> property to do this.
         </p>
@@ -307,7 +275,7 @@ console.log("Connected successfully!");`}
 
       {/* Example */}
       <section id="live-example" className="space-y-4 pt-6 border-t border-border/50">
-        <h2 className="text-2xl font-bold text-foreground">Live Example — Try all methods</h2>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Live Example — Try all methods</h2>
         <p className="text-muted-foreground leading-relaxed">
           Look at the code below. We are using different ways to output text. In this playground, <code>console.log</code> will show up in your real browser console (press F12)!
         </p>
@@ -371,10 +339,7 @@ btn.addEventListener("click", function() {
 
       {/* Challenge */}
       <section id="challenge" className="space-y-4">
-        <div className="flex items-center gap-3">
-
-          <h2 className="text-2xl font-bold text-foreground">Final Challenge</h2>
-        </div>
+        <h2 className="text-3xl font-serif font-medium text-foreground">Final Challenge</h2>
         <p className="text-muted-foreground leading-relaxed">
           Write code that uses <strong>two different output methods</strong>. First, log a message to the console, then change the text of the body using <code>innerHTML</code>.
         </p>
